@@ -1,0 +1,56 @@
+apply plugin: 'com.android.model.library'
+
+model {
+    android {
+        compileSdkVersion = 24
+        buildToolsVersion = '25.0.1'
+
+        defaultConfig {
+            minSdkVersion.apiLevel    = 15
+            targetSdkVersion.apiLevel = 24
+        }
+
+        ndk {
+            platformVersion = 9
+            moduleName ='native-ui'
+            toolchain = 'gcc'
+            stl = 'gnustl_static'
+            cppFlags.addAll(['-std=c++11', '-fexceptions'])
+            ldLibs.addAll(['log', 'android', 'EGL', 'GLESv1_CM'])
+        }
+
+        buildTypes {
+            release {
+                minifyEnabled = false
+                proguardFiles.add(file('proguard-rules.txt'))
+            }
+        }
+
+        sources {
+            main {
+                manifest {
+                    source.srcDir '.'
+                }
+                java {
+                    source {
+                        srcDir 'src/android/java'
+                    }
+                }
+                jni {
+                    source {
+                        srcDirs 'include'
+                        srcDirs 'src/android'
+                        srcDirs 'src/common'
+                    }
+                    dependencies {
+                        project ':core' linkage 'static'
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: "libs", include: ["*.jar"])
+}

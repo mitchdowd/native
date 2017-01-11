@@ -1,0 +1,7 @@
+include ':core'
+include ':ui'
+include ':todo'
+
+project(':core').projectDir = new File('src', 'core')
+project(':ui').projectDir   = new File('src', 'ui')
+project(':todo').projectDir = new File('samples', 'todo')
