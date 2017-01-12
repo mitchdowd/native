@@ -4,7 +4,7 @@
 /**
 	The main application creation class.
  */
-class App : public Native::UI::App
+class App : public native::ui::App
 {
 };
 

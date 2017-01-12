@@ -1,9 +1,8 @@
+// System Dependencies
+#include <jni.h>
+
 // Module Dependencies
 #include "../../include/app.h"
-
-
-
-#include <jni.h>
 
 static const char* _message = 0;
 
@@ -12,9 +11,9 @@ extern "C" jstring Java_libnative_ui_MainActivity_stringFromJNI(JNIEnv *env, job
 	return env->NewStringUTF(_message);
 }
 
-namespace Native
+namespace native
 {
-	namespace UI
+	namespace ui
 	{
 		App::App()
 		{

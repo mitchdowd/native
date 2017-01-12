@@ -3,9 +3,9 @@
 // Module Dependencies
 #include "../../include/app.h"
 
-namespace Native
+namespace native
 {
-	namespace UI
+	namespace ui
 	{
 		App::App()
 		{

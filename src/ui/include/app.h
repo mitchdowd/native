@@ -4,15 +4,18 @@
 // Core Dependencies
 #include "../../core/include/platform.h"
 
-namespace Native
+// Module Dependencies
+#include "window.h"
+
+namespace native
 {
-	namespace UI
+	namespace ui
 	{
 		/**
 			Provides the entry point and overall application management functions
 			for a UI-based application.
 		 */
-		class App
+		class App : public Window
 		{
 		public:
 			/** TEMPORARY ONLY - Cross platform function test. */
