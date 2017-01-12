@@ -8,8 +8,14 @@ namespace native
 {
 	namespace ui
 	{
+		/**
+			A top-level Component.
+		 */
 		class Window : public LayoutComponent
 		{
+		public:
+			/** Default constructor. */
+			Window();
 		};
 	}
 }

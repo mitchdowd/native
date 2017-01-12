@@ -2,6 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\win32\app.cpp" />
+    <ClCompile Include="src\common\component.cpp" />
+    <ClCompile Include="src\win32\componentadapter.cpp" />
+    <ClCompile Include="src\win32\windowadapter.cpp" />
+    <ClCompile Include="src\common\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ui.h" />
@@ -9,5 +13,8 @@
     <ClInclude Include="include\window.h" />
     <ClInclude Include="include\component.h" />
     <ClInclude Include="include\layoutcomponent.h" />
+    <ClInclude Include="include\componentadapter.h" />
+    <ClInclude Include="src\win32\componentadapterproperties.h" />
+    <ClInclude Include="include\windowadapter.h" />
   </ItemGroup>
 </Project>

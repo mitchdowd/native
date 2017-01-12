@@ -3,6 +3,7 @@
 
 #include "app.h"
 #include "component.h"
+#include "componentadapter.h"
 #include "layoutcomponent.h"
 #include "window.h"
 

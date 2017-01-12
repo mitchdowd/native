@@ -8,8 +8,13 @@ namespace native
 {
 	namespace ui
 	{
+		/**
+			A Component whose purpose is to contain other child Components.
+		 */
 		class LayoutComponent : public Component
 		{
+		protected:
+			LayoutComponent(ComponentAdapter* adapter) : Component(adapter) {}
 		};
 	}
 }
