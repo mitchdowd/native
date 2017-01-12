@@ -116,7 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\win32\app.cpp" />
-    <ClCompile Include="src\common\dummy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
