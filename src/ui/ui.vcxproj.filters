@@ -2,5 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\common\dummy.cpp" />
+    <ClCompile Include="src\win32\app.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\ui.h" />
+    <ClInclude Include="include\app.h" />
   </ItemGroup>
 </Project>

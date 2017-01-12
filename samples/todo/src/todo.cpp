@@ -1,17 +1,7 @@
-#ifdef _WIN32
+#include "../../../include/native.h"
 
-int main()
+class App : public Native::UI::App
 {
-	return 0;
-}
+};
 
-#else
-
-#include <jni.h>
-
-extern "C" jstring Java_libnative_ui_MainActivity_stringFromJNI(JNIEnv *env, jobject /* this */)
-{
-    return env->NewStringUTF("Hello from C++");
-}
-
-#endif
+NATIVE_UI_APP(App)

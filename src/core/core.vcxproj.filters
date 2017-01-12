@@ -3,4 +3,8 @@
   <ItemGroup>
     <ClCompile Include="src\common\dummy.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\core.h" />
+    <ClInclude Include="include\platform.h" />
+  </ItemGroup>
 </Project>

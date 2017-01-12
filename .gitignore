@@ -254,11 +254,14 @@ paket-files/
 # Android Studio
 *.iml
 .gradle
+gradle
+gradlew
+gradlew.bat
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
+*/**/build
+build
 /captures
 .externalNativeBuild
-/samples/todo/build
