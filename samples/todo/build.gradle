@@ -16,7 +16,7 @@ model {
             moduleName      = 'todo'
             toolchain       = 'gcc'
             stl             = 'gnustl_static'
-            cppFlags.addAll(['-std=c++11', '-fexceptions'])
+            cppFlags.addAll(['-std=c++11', '-fexceptions', '-I' + file('../../include').absolutePath])
             ldLibs.addAll(['log', 'android', 'EGL', 'GLESv1_CM'])
         }
 
