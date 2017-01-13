@@ -20,9 +20,23 @@ namespace native
 	};
 
 	/**
+		There are not enough system resources to perform the given operation.
+	 */
+	class InsufficientResourcesException : public Exception
+	{
+	};
+
+	/**
 		A provided function argument was not valid.
 	 */
 	class InvalidArgumentException : public Exception
+	{
+	};
+
+	/**
+		The object is in an invalid state to execute this function.
+	 */
+	class InvalidStateException : public Exception
 	{
 	};
 

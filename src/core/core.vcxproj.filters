@@ -20,5 +20,6 @@
     <ClInclude Include="include\memory.h" />
     <ClInclude Include="include\spinlock.h" />
     <ClInclude Include="include\thread.h" />
+    <ClInclude Include="include\function.h" />
   </ItemGroup>
 </Project>
