@@ -3,6 +3,8 @@
   <ItemGroup>
     <ClCompile Include="src\win32\atomic.cpp" />
     <ClCompile Include="src\common\exception.cpp" />
+    <ClCompile Include="src\common\convert.cpp" />
+    <ClCompile Include="src\common\hash.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core.h" />
@@ -10,5 +12,7 @@
     <ClInclude Include="include\exception.h" />
     <ClInclude Include="include\atomic.h" />
     <ClInclude Include="include\types.h" />
+    <ClInclude Include="include\convert.h" />
+    <ClInclude Include="include\hash.h" />
   </ItemGroup>
 </Project>

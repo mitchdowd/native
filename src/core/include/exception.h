@@ -20,6 +20,13 @@ namespace native
 	};
 
 	/**
+		A provided function argument was not valid.
+	 */
+	class InvalidArgumentException : public Exception
+	{
+	};
+
+	/**
 		The given function has not yet been implemented.
 	 */
 	class NotImplementedException : public Exception
