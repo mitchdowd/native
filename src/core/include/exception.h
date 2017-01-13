@@ -20,6 +20,13 @@ namespace native
 	};
 
 	/**
+		The supplied index to an Array is out of bounds.
+	 */
+	class ArrayIndexException : public Exception
+	{
+	};
+
+	/**
 		There are not enough system resources to perform the given operation.
 	 */
 	class InsufficientResourcesException : public Exception

@@ -8,6 +8,7 @@
     <ClCompile Include="src\common\memory.cpp" />
     <ClCompile Include="src\common\spinlock.cpp" />
     <ClCompile Include="src\win32\thread.cpp" />
+    <ClCompile Include="src\common\array.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core.h" />
@@ -21,5 +22,8 @@
     <ClInclude Include="include\spinlock.h" />
     <ClInclude Include="include\thread.h" />
     <ClInclude Include="include\function.h" />
+    <ClInclude Include="include\math.h" />
+    <ClInclude Include="src\common\math.h" />
+    <ClInclude Include="include\array.h" />
   </ItemGroup>
 </Project>
