@@ -110,10 +110,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\common\dummy.cpp" />
+    <ClCompile Include="src\common\exception.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core.h" />
+    <ClInclude Include="include\exception.h" />
     <ClInclude Include="include\platform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
