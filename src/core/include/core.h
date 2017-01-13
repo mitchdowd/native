@@ -5,6 +5,7 @@
 #include "convert.h"
 #include "exception.h"
 #include "hash.h"
+#include "memory.h"
 #include "platform.h"
 #include "types.h"
 

@@ -5,6 +5,9 @@
     <ClCompile Include="src\common\exception.cpp" />
     <ClCompile Include="src\common\convert.cpp" />
     <ClCompile Include="src\common\hash.cpp" />
+    <ClCompile Include="src\common\memory.cpp" />
+    <ClCompile Include="src\common\spinlock.cpp" />
+    <ClCompile Include="src\win32\thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core.h" />
@@ -14,5 +17,8 @@
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\convert.h" />
     <ClInclude Include="include\hash.h" />
+    <ClInclude Include="include\memory.h" />
+    <ClInclude Include="include\spinlock.h" />
+    <ClInclude Include="include\thread.h" />
   </ItemGroup>
 </Project>

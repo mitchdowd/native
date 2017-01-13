@@ -113,7 +113,10 @@
     <ClCompile Include="src\common\convert.cpp" />
     <ClCompile Include="src\common\exception.cpp" />
     <ClCompile Include="src\common\hash.cpp" />
+    <ClCompile Include="src\common\memory.cpp" />
+    <ClCompile Include="src\common\spinlock.cpp" />
     <ClCompile Include="src\win32\atomic.cpp" />
+    <ClCompile Include="src\win32\thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\atomic.h" />
@@ -121,7 +124,10 @@
     <ClInclude Include="include\core.h" />
     <ClInclude Include="include\exception.h" />
     <ClInclude Include="include\hash.h" />
+    <ClInclude Include="include\memory.h" />
     <ClInclude Include="include\platform.h" />
+    <ClInclude Include="include\spinlock.h" />
+    <ClInclude Include="include\thread.h" />
     <ClInclude Include="include\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
