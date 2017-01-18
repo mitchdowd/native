@@ -8,7 +8,6 @@
     <ClCompile Include="src\common\window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ui.h" />
     <ClInclude Include="include\app.h" />
     <ClInclude Include="include\window.h" />
     <ClInclude Include="include\component.h" />
@@ -16,5 +15,6 @@
     <ClInclude Include="include\componentadapter.h" />
     <ClInclude Include="src\win32\componentadapterproperties.h" />
     <ClInclude Include="include\windowadapter.h" />
+    <ClInclude Include="..\..\include\ui.h" />
   </ItemGroup>
 </Project>

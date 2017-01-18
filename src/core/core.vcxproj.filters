@@ -11,7 +11,6 @@
     <ClCompile Include="src\common\array.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\core.h" />
     <ClInclude Include="include\platform.h" />
     <ClInclude Include="include\exception.h" />
     <ClInclude Include="include\atomic.h" />
@@ -33,5 +32,6 @@
     <ClInclude Include="include\set.h" />
     <ClInclude Include="include\queue.h" />
     <ClInclude Include="include\stack.h" />
+    <ClInclude Include="..\..\include\core.h" />
   </ItemGroup>
 </Project>

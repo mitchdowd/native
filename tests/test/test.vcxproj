@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5774511E-219C-4E6B-83BC-B928A918E724}</ProjectGuid>
-    <RootNamespace>ui</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectGuid>{2B733AD9-5C22-43BD-8643-43635FD75638}</ProjectGuid>
+    <RootNamespace>test</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -69,14 +69,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -110,26 +110,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\core\core.vcxproj">
-      <Project>{2ede4b51-9297-4bbc-b8ab-77114cdbd65f}</Project>
-    </ProjectReference>
+    <ClInclude Include="..\..\include\test.h" />
+    <ClInclude Include="include\log.h" />
+    <ClInclude Include="include\testregistry.h" />
+    <ClInclude Include="include\unittest.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\common\component.cpp" />
-    <ClCompile Include="src\common\window.cpp" />
-    <ClCompile Include="src\win32\app.cpp" />
-    <ClCompile Include="src\win32\componentadapter.cpp" />
-    <ClCompile Include="src\win32\windowadapter.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\include\ui.h" />
-    <ClInclude Include="include\app.h" />
-    <ClInclude Include="include\component.h" />
-    <ClInclude Include="include\componentadapter.h" />
-    <ClInclude Include="include\layoutcomponent.h" />
-    <ClInclude Include="include\window.h" />
-    <ClInclude Include="include\windowadapter.h" />
-    <ClInclude Include="src\win32\componentadapterproperties.h" />
+    <ClCompile Include="src\common\testregistry.cpp" />
+    <ClCompile Include="src\common\unittest.cpp" />
+    <ClCompile Include="src\win32\log.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@
 // Module Dependencies
 #include "linkedlist.h"
 
-namespace Native
+namespace native
 {
 	/**
 		A first-in-first-out list where values are "pushed" onto the Queue, and
