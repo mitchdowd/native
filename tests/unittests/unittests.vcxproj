@@ -125,7 +125,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\array.cpp" />
     <ClCompile Include="src\core\atomic.cpp" />
+    <ClCompile Include="src\core\convert.cpp" />
+    <ClCompile Include="src\core\function.cpp" />
+    <ClCompile Include="src\core\hash.cpp" />
+    <ClCompile Include="src\core\linkedlist.cpp" />
+    <ClCompile Include="src\core\list.cpp" />
+    <ClCompile Include="src\core\map.cpp" />
+    <ClCompile Include="src\core\math.cpp" />
+    <ClCompile Include="src\core\queue.cpp" />
+    <ClCompile Include="src\core\set.cpp" />
+    <ClCompile Include="src\core\stack.cpp" />
+    <ClCompile Include="src\core\thread.cpp" />
+    <ClCompile Include="src\core\types.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

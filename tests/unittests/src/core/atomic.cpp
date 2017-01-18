@@ -4,7 +4,6 @@
 
 // Namespace Usage
 using namespace native;
-using namespace native::test;
 
 TEST(Atomic_increment)
 {

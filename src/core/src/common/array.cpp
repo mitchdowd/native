@@ -85,7 +85,7 @@ namespace native
 		return result;
 	}
 
-	namespace Internal
+	namespace internal
 	{
 		void raiseInvalidArgumentException()
 		{

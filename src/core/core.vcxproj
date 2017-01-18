@@ -114,6 +114,7 @@
     <ClCompile Include="src\common\convert.cpp" />
     <ClCompile Include="src\common\exception.cpp" />
     <ClCompile Include="src\common\hash.cpp" />
+    <ClCompile Include="src\common\math.cpp" />
     <ClCompile Include="src\common\memory.cpp" />
     <ClCompile Include="src\common\spinlock.cpp" />
     <ClCompile Include="src\win32\atomic.cpp" />
