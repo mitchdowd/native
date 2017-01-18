@@ -25,5 +25,13 @@
     <ClInclude Include="include\math.h" />
     <ClInclude Include="src\common\math.h" />
     <ClInclude Include="include\array.h" />
+    <ClInclude Include="include\iterator.h" />
+    <ClInclude Include="include\collection.h" />
+    <ClInclude Include="include\linkedlist.h" />
+    <ClInclude Include="include\list.h" />
+    <ClInclude Include="include\map.h" />
+    <ClInclude Include="include\set.h" />
+    <ClInclude Include="include\queue.h" />
+    <ClInclude Include="include\stack.h" />
   </ItemGroup>
 </Project>
