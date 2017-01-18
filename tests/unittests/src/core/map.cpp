@@ -1,4 +1,4 @@
-// Testing Dependencies
+// External Dependencies
 #include <test.h>
 #include <core.h>
 
@@ -10,7 +10,7 @@ static int getSum(Map<int, int>& map)
 {
 	int sum = 0;
 
-	for (auto pair : map)
+	for (auto& pair : map)
 		sum += pair.key + pair.value;
 
 	return sum;

@@ -1,4 +1,4 @@
-// Testing Dependencies
+// External Dependencies
 #include <test.h>
 #include <core.h>
 
@@ -44,7 +44,7 @@ TEST(Atomic_exchange)
 	ASSERT(Atomic::exchange(i16, 0) == 1);
 	ASSERT(Atomic::exchange(i32, 0) == 1);
 	ASSERT(Atomic::exchange(i64, 0) == 1);
-	ASSERT(Atomic::exchange(ptr, nullptr) == &i64);
+	ASSERT(Atomic::exchange(ptr, nullptr) == (void*) &i64);
 
 	ASSERT(i16 == 0);
 	ASSERT(i32 == 0);

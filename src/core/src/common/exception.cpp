@@ -3,7 +3,7 @@
 
 namespace native
 {
-	const char* Exception::what() const
+	const char* Exception::what() const noexcept
 	{
 		static const char temp[] = "Error";
 

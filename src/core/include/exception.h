@@ -16,7 +16,7 @@ namespace native
 			Provides a message concerning the Exception.
 			\return An Exception message with more information.
 		 */
-		virtual const char* what() const override;
+		virtual const char* what() const noexcept override;
 	};
 
 	/**

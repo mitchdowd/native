@@ -1,9 +1,11 @@
 include ':core'
 include ':ui'
 include ':test'
+include ':unittests'
 include ':todo'
 
 project(':core').projectDir = new File('src', 'core')
 project(':ui').projectDir   = new File('src', 'ui')
 project(':test').projectDir = new File('tests', 'test')
+project(':unittests').projectDir = new File('tests', 'unittests')
 project(':todo').projectDir = new File('samples', 'todo')

@@ -1,4 +1,4 @@
-// Testing Dependencies
+// External Dependencies
 #include <test.h>
 #include <core.h>
 
@@ -41,4 +41,4 @@ TEST(Function_member)
 	Function<int> plusOne(helper, &FunctionHelper::memberFunc);
 
 	ASSERT(plusOne() == value + 1);
-}\
+}

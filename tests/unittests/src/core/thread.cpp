@@ -1,4 +1,4 @@
-// Module Dependencies
+// External Dependencies
 #include <test.h>
 #include <core.h>
 

@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 // Module Dependencies
-#include "../../include/exceptions.h"
+#include "../../include/exception.h"
 #include "../../include/thread.h"
 
 namespace native
@@ -15,7 +15,7 @@ namespace native
         pthread_t id;
 
         if (::pthread_create(&id, nullptr, start_routine_t(&entryPoint), this) != 0)
-            throw InsufficientResourcesException(L"Could not create Thread.");
+            throw InsufficientResourcesException();
 
         _handle = (handle_t) id;
     }

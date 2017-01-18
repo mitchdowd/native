@@ -19,6 +19,8 @@
 # define NATIVE_ARCH_ARM 1
 #elif defined(__aarch64__)
 # define NATIVE_ARCH_ARM64 1
+#elif defined(__mips__) && (__mips__ < 5)
+# define NATIVE_ARCH_MIPS 1
 #else
 # error No supported processor architecture detected.
 #endif // NATIVE_ARCH_*

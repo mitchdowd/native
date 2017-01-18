@@ -1,4 +1,5 @@
 // Standard Dependencies
+#include <cstdlib>
 #include <cwchar>
 
 // Module Dependencies
