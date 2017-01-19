@@ -110,19 +110,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\stringcodec.h" />
     <ClCompile Include="src\common\array.cpp" />
+    <ClCompile Include="src\common\asciicodec.cpp" />
     <ClCompile Include="src\common\convert.cpp" />
     <ClCompile Include="src\common\exception.cpp" />
     <ClCompile Include="src\common\hash.cpp" />
+    <ClCompile Include="src\common\latin1codec.cpp" />
     <ClCompile Include="src\common\math.cpp" />
     <ClCompile Include="src\common\memory.cpp" />
+    <ClCompile Include="src\common\singleton.cpp" />
     <ClCompile Include="src\common\spinlock.cpp" />
+    <ClCompile Include="src\common\string.cpp" />
+    <ClCompile Include="src\common\stringcodec.cpp" />
+    <ClCompile Include="src\common\utf8codec.cpp" />
     <ClCompile Include="src\win32\atomic.cpp" />
+    <ClCompile Include="src\win32\system.cpp" />
     <ClCompile Include="src\win32\thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\core.h" />
     <ClInclude Include="include\array.h" />
+    <ClInclude Include="include\asciicodec.h" />
     <ClInclude Include="include\atomic.h" />
     <ClInclude Include="include\collection.h" />
     <ClInclude Include="include\convert.h" />
@@ -130,6 +139,7 @@
     <ClInclude Include="include\function.h" />
     <ClInclude Include="include\hash.h" />
     <ClInclude Include="include\iterator.h" />
+    <ClInclude Include="include\latin1codec.h" />
     <ClInclude Include="include\linkedlist.h" />
     <ClInclude Include="include\list.h" />
     <ClInclude Include="include\map.h" />
@@ -138,11 +148,14 @@
     <ClInclude Include="include\platform.h" />
     <ClInclude Include="include\queue.h" />
     <ClInclude Include="include\set.h" />
+    <ClInclude Include="include\singleton.h" />
     <ClInclude Include="include\spinlock.h" />
     <ClInclude Include="include\stack.h" />
+    <ClInclude Include="include\string.h" />
+    <ClInclude Include="include\system.h" />
     <ClInclude Include="include\thread.h" />
     <ClInclude Include="include\types.h" />
-    <ClInclude Include="src\common\math.h" />
+    <ClInclude Include="include\utf8codec.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

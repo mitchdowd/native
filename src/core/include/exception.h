@@ -27,6 +27,13 @@ namespace native
 	};
 
 	/**
+		An input was in the incorrect format.
+	 */
+	class FormatException : public Exception
+	{
+	};
+
+	/**
 		There are not enough system resources to perform the given operation.
 	 */
 	class InsufficientResourcesException : public Exception

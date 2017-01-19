@@ -2,6 +2,7 @@
 #define _NATIVE_MAP_H_ 1
 
 // Module Dependencies
+#include "array.h"
 #include "collection.h"
 #include "exception.h"
 #include "hash.h"

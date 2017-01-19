@@ -10,6 +10,14 @@
     <ClCompile Include="src\win32\thread.cpp" />
     <ClCompile Include="src\common\array.cpp" />
     <ClCompile Include="src\common\math.cpp" />
+    <ClCompile Include="src\common\string.cpp" />
+    <ClCompile Include="include\stringcodec.h" />
+    <ClCompile Include="src\common\asciicodec.cpp" />
+    <ClCompile Include="src\common\latin1codec.cpp" />
+    <ClCompile Include="src\common\stringcodec.cpp" />
+    <ClCompile Include="src\common\utf8codec.cpp" />
+    <ClCompile Include="src\common\singleton.cpp" />
+    <ClCompile Include="src\win32\system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\platform.h" />
@@ -23,7 +31,6 @@
     <ClInclude Include="include\thread.h" />
     <ClInclude Include="include\function.h" />
     <ClInclude Include="include\math.h" />
-    <ClInclude Include="src\common\math.h" />
     <ClInclude Include="include\array.h" />
     <ClInclude Include="include\iterator.h" />
     <ClInclude Include="include\collection.h" />
@@ -34,5 +41,11 @@
     <ClInclude Include="include\queue.h" />
     <ClInclude Include="include\stack.h" />
     <ClInclude Include="..\..\include\core.h" />
+    <ClInclude Include="include\string.h" />
+    <ClInclude Include="include\utf8codec.h" />
+    <ClInclude Include="include\latin1codec.h" />
+    <ClInclude Include="include\asciicodec.h" />
+    <ClInclude Include="include\singleton.h" />
+    <ClInclude Include="include\system.h" />
   </ItemGroup>
 </Project>
