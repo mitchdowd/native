@@ -4,6 +4,9 @@
 // Standard Dependencies
 #include <exception>
 
+// Module Dependencies
+#include "string.h"
+
 namespace native
 {
 	/**
@@ -13,10 +16,27 @@ namespace native
 	{
 	public:
 		/**
+			Creates an Exception with a (hopefully) helpful error message.
+			\param message The error message.
+		 */
+		Exception(String message) : _message(message.toUtf8()) {}
+
+		/**
 			Provides a message concerning the Exception.
 			\return An Exception message with more information.
 		 */
-		virtual const char* what() const noexcept override;
+		String getMessage() const { return String(_message); }
+
+		/**
+			Provides a message concerning the Exception, exposed in the format
+			used by std::exception.
+			\return An Exception message with more information.
+		 */
+		virtual const char* what() const noexcept override { return _message; }
+
+	private:
+		// Instance Variables
+		ByteArray _message;
 	};
 
 	/**
@@ -24,6 +44,8 @@ namespace native
 	 */
 	class ArrayIndexException : public Exception
 	{
+	public:
+		ArrayIndexException(const char* message = "Array index out of bounds") : Exception(message) {}
 	};
 
 	/**
@@ -31,6 +53,8 @@ namespace native
 	 */
 	class FormatException : public Exception
 	{
+	public:
+		FormatException(const char* message = "Invalid input format") : Exception(message) {}
 	};
 
 	/**
@@ -38,6 +62,8 @@ namespace native
 	 */
 	class InsufficientResourcesException : public Exception
 	{
+	public:
+		InsufficientResourcesException(const char* message = "Insufficient resources") : Exception(message) {}
 	};
 
 	/**
@@ -45,6 +71,8 @@ namespace native
 	 */
 	class InvalidArgumentException : public Exception
 	{
+	public:
+		InvalidArgumentException(const char* message = "Invalid argument") : Exception(message) {}
 	};
 
 	/**
@@ -52,6 +80,8 @@ namespace native
 	 */
 	class InvalidStateException : public Exception
 	{
+	public:
+		InvalidStateException(const char* message = "Invalid object state") : Exception(message) {}
 	};
 
 	/**
@@ -59,6 +89,8 @@ namespace native
 	 */
 	class NotImplementedException : public Exception
 	{
+	public:
+		NotImplementedException(const char* message = "Function not implemented") : Exception(message) {}
 	};
 }
 

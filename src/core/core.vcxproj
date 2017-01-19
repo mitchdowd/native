@@ -114,7 +114,6 @@
     <ClCompile Include="src\common\array.cpp" />
     <ClCompile Include="src\common\asciicodec.cpp" />
     <ClCompile Include="src\common\convert.cpp" />
-    <ClCompile Include="src\common\exception.cpp" />
     <ClCompile Include="src\common\hash.cpp" />
     <ClCompile Include="src\common\latin1codec.cpp" />
     <ClCompile Include="src\common\math.cpp" />
