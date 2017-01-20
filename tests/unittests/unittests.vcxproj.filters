@@ -49,5 +49,14 @@
     <ClCompile Include="src\core\types.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\asciicodec.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\utf8codec.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\string.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
