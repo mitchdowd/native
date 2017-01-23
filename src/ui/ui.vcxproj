@@ -125,6 +125,7 @@
     <ClInclude Include="include\app.h" />
     <ClInclude Include="include\component.h" />
     <ClInclude Include="include\componentadapter.h" />
+    <ClInclude Include="include\icomponentadapter.h" />
     <ClInclude Include="include\layoutcomponent.h" />
     <ClInclude Include="include\window.h" />
     <ClInclude Include="src\win32\componentadapterproperties.h" />

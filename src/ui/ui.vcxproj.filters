@@ -14,5 +14,6 @@
     <ClInclude Include="include\componentadapter.h" />
     <ClInclude Include="src\win32\componentadapterproperties.h" />
     <ClInclude Include="..\..\include\ui.h" />
+    <ClInclude Include="include\icomponentadapter.h" />
   </ItemGroup>
 </Project>

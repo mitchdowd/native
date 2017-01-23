@@ -1,8 +1,8 @@
 #ifndef _NATIVE_UI_COMPONENT_ADAPTER_H_
 #define _NATIVE_UI_COMPONENT_ADAPTER_H_ 1
 
-// External Dependencies
-#include "../../core/include/string.h"
+// Module Dependencies
+#include "icomponentadapter.h"
 
 namespace native
 {
@@ -18,7 +18,7 @@ namespace native
 			a platform-independent wrapper around the platform-specific details
 			of each native system component type.
 		 */
-		class ComponentAdapter
+		class ComponentAdapter : public IComponentAdapter
 		{
 		public:
 			/**
@@ -32,7 +32,7 @@ namespace native
 				Sets the component's text, for those that support text.
 				\param text The text to set.
 			 */
-			void setText(const String& text);
+			virtual void setText(const String& text) override;
 		};
 
 		/**

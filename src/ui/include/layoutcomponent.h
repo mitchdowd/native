@@ -14,7 +14,7 @@ namespace native
 		class LayoutComponent : public Component
 		{
 		protected:
-			LayoutComponent(ComponentAdapter* adapter) : Component(adapter) {}
+			LayoutComponent(IComponentAdapter* adapter) : Component(adapter) {}
 		};
 	}
 }

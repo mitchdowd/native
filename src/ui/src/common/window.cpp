@@ -12,7 +12,7 @@ namespace native
 
 		void Window::setTitle(const String& title)
 		{
-			ComponentAdapter* adapter = getAdapter();
+			IComponentAdapter* adapter = getAdapter();
 
 			if (adapter)
 				adapter->setText(title);

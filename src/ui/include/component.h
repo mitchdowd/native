@@ -2,7 +2,7 @@
 #define _NATIVE_UI_COMPONENT_H_ 1
 
 // Module Dependencies
-#include "componentadapter.h"
+#include "icomponentadapter.h"
 
 namespace native
 {
@@ -27,17 +27,17 @@ namespace native
 				Creates a Component with a particular native component adatper.
 				\param adapter The adapter, giving native Component behavior.
 			 */
-			Component(ComponentAdapter* adapter);
+			Component(IComponentAdapter* adapter);
 
 			/**
 				Gets this Component's adapter, if it has one.
 				\return The adapter this Component was created with.
 			 */
-			ComponentAdapter* getAdapter() const noexcept { return _adapter; }
+			IComponentAdapter* getAdapter() const noexcept { return _adapter; }
 
 		private:
 			// Instance Variables
-			ComponentAdapter* _adapter;
+			IComponentAdapter* _adapter;
 		};
 	}
 }

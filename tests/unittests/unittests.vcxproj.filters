@@ -68,4 +68,9 @@
       <Filter>ui</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ui\mockcomponentadapter.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

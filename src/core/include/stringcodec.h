@@ -94,6 +94,8 @@ namespace native
 	 */
 	class CodecException : public Exception
 	{
+	public:
+		CodecException(const char* message = "String transcoding error") : Exception(message) {}
 	};
 }
 

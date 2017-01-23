@@ -9,7 +9,7 @@ namespace native
 		{
 		}
 
-		Component::Component(ComponentAdapter* adapter) : _adapter(adapter)
+		Component::Component(IComponentAdapter* adapter) : _adapter(adapter)
 		{
 		}
 
