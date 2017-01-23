@@ -1,3 +1,6 @@
+// System Dependencies
+#include <Windows.h>
+
 // Module Dependencies
 #include "../../include/componentadapter.h"
 
@@ -8,9 +11,17 @@ namespace native
 {
 	namespace ui
 	{
-		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& properties)
+		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props)
 		{
-			// TODO
+		}
+
+		void ComponentAdapter::setText(const String& text)
+		{
+
+		}
+
+		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
+		{
 		}
 	}
 }

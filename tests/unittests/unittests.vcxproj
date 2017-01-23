@@ -143,6 +143,8 @@
     <ClCompile Include="src\core\thread.cpp" />
     <ClCompile Include="src\core\types.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ui\component.cpp" />
+    <ClCompile Include="src\ui\window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

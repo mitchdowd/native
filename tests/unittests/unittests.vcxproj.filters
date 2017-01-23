@@ -4,6 +4,9 @@
     <Filter Include="core">
       <UniqueIdentifier>{d285f05f-27fc-45fc-a6f8-b29c651103ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{6054ccaf-cee8-4b24-ac1c-66ce64bc453a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -57,6 +60,12 @@
     </ClCompile>
     <ClCompile Include="src\core\string.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\component.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\window.cpp">
+      <Filter>ui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,9 +5,13 @@ namespace native
 {
 	namespace ui
 	{
+		/**
+			Any properties required to create different types of Android
+			Views.
+		 */
 		struct ComponentAdapterProperties
 		{
-			// TODO
+			const wchar_t* className;
 		};
 	}
 }

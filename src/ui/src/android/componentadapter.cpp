@@ -1,6 +1,9 @@
 // Module Dependencies
 #include "../../include/componentadapter.h"
 
+// Local Dependencies
+#include "componentadapterproperties.h"
+
 namespace native
 {
 	namespace ui
@@ -8,6 +11,10 @@ namespace native
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& properties)
 		{
 			// TODO
+		}
+
+		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
+		{
 		}
 	}
 }

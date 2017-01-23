@@ -4,7 +4,6 @@
     <ClCompile Include="src\win32\app.cpp" />
     <ClCompile Include="src\common\component.cpp" />
     <ClCompile Include="src\win32\componentadapter.cpp" />
-    <ClCompile Include="src\win32\windowadapter.cpp" />
     <ClCompile Include="src\common\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -14,7 +13,6 @@
     <ClInclude Include="include\layoutcomponent.h" />
     <ClInclude Include="include\componentadapter.h" />
     <ClInclude Include="src\win32\componentadapterproperties.h" />
-    <ClInclude Include="include\windowadapter.h" />
     <ClInclude Include="..\..\include\ui.h" />
   </ItemGroup>
 </Project>

@@ -66,7 +66,7 @@ struct _JNIEnv;
 	}
 
 #else
-# error "Current platform not supported for Native::UI."
+# error "Current platform not supported for native::ui."
 #endif // NATIVE_PLATFORM_*
 
 #endif // _NATIVE_UI_APP_H_

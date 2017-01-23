@@ -1,6 +1,9 @@
 #ifndef _NATIVE_UI_COMPONENT_ADAPTER_H_
 #define _NATIVE_UI_COMPONENT_ADAPTER_H_ 1
 
+// External Dependencies
+#include "../../core/include/string.h"
+
 namespace native
 {
 	namespace ui
@@ -24,6 +27,22 @@ namespace native
 				\param properties A set of platform-specific inputs.
 			 */
 			ComponentAdapter(const ComponentAdapterProperties& properties);
+
+			/**
+				Sets the component's text, for those that support text.
+				\param text The text to set.
+			 */
+			void setText(const String& text);
+		};
+
+		/**
+			A subclassed adapter for Window-specific functionality.
+		 */
+		class WindowAdapter : public ComponentAdapter
+		{
+		public:
+			/** Default constructor. */
+			WindowAdapter();
 		};
 	}
 }
