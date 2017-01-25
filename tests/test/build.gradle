@@ -1,4 +1,4 @@
-apply plugin: 'com.android.model.native'
+apply plugin: 'com.android.model.library'
 
 model {
     android {
@@ -28,6 +28,14 @@ model {
 
         sources {
             main {
+                manifest {
+                    source.srcDir '.'
+                }
+                java {
+                    source {
+                        srcDir 'src/android/java'
+                    }
+                }
                 jni {
                     source {
                         srcDirs 'include'

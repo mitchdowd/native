@@ -13,6 +13,11 @@ namespace native
 			// TODO
 		}
 
+		void ComponentAdapter::setText(const String& text)
+		{
+
+		}
+
 		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
 		{
 		}

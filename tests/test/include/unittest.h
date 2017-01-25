@@ -115,13 +115,30 @@ namespace native
 		return;									\
 	}}
 
-/**
-	A convenience macro to help define the main() function
-	needed to run the unit tests.
- */
+#if defined(_WIN32)
+
 #define NATIVE_TEST_MAIN()									\
 	int main() {											\
 		return native::test::TestRegistry::runAllTests();	\
 	}
+
+#elif defined(__ANDROID__)
+
+// Forward Declarations
+class _jobject;
+struct _JNIEnv;
+
+#define NATIVE_TEST_MAIN()									\
+	extern "C" void 										\
+	Java_libnative_test_TestActivity_onCreate(				\
+		_JNIEnv* env,										\
+		_jobject* activity									\
+	) {														\
+		native::test::TestRegistry::runAllTests();			\
+	}
+
+#else
+# error "Unknown testing platform."
+#endif
 
 #endif // _NATIVE_TEST_UNIT_TEST_H_
