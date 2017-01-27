@@ -130,6 +130,7 @@
     <ClInclude Include="include\layoutcomponent.h" />
     <ClInclude Include="include\window.h" />
     <ClInclude Include="src\win32\componentadapterproperties.h" />
+    <ClInclude Include="src\win32\componentevent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

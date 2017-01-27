@@ -39,6 +39,10 @@ namespace native
 				\param text The text to set.
 			 */
 			virtual void setText(const String& text) override;
+
+		private:
+			// Instance Variables
+			handle_t _handle;
 		};
 
 		/**

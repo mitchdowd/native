@@ -48,3 +48,16 @@ TEST(LayoutComponent_addChildRemovesFromPreviousParent)
 	ASSERT(firstParent.getChildren().getLength() == 0);
 }
 
+TEST(LayoutComponent_destructorRemovesChildren)
+{
+	Component child;
+
+	{
+		LayoutComponent parent;
+
+		parent.addChild(child);
+	}
+
+	ASSERT(child.getParent() == nullptr);
+}
+

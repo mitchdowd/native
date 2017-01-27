@@ -26,6 +26,9 @@ namespace native
 			 */
 			LayoutComponent(IComponentAdapter* adapter) : Component(adapter) {}
 
+			/** Destructor. */
+			~LayoutComponent();
+
 			/**
 				Adds a Component as a child component of this LayoutComponent.
 			 	\param child The child to add.

@@ -8,6 +8,11 @@ namespace native
 {
 	namespace ui
 	{
+		/**
+			A pure virtual interface for interacting with native UI components.
+			An adapter gets attached to a Component, giving the Component native
+			functionality.
+		 */
 		class IComponentAdapter
 		{
 		public:

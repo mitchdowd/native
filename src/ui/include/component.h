@@ -1,6 +1,9 @@
 #ifndef _NATIVE_UI_COMPONENT_H_
 #define _NATIVE_UI_COMPONENT_H_ 1
 
+// External Dependencies
+#include "../../core/include/exception.h"
+
 // Module Dependencies
 #include "icomponentadapter.h"
 
@@ -61,6 +64,13 @@ namespace native
 			// Instance Variables
 			IComponentAdapter* _adapter;
 			LayoutComponent*   _parent;
+		};
+
+		/**
+			Thrown when a user interface operation fails.
+		 */
+		class UserInterfaceException : public Exception
+		{
 		};
 	}
 }

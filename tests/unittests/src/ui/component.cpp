@@ -47,6 +47,20 @@ TEST(Component_setParentToNull)
 	child.setParent(nullptr);
 
 	ASSERT(childAdapter->getParent() == nullptr);
-	ASSERT_THROWS(childWithoutAdapter.setParent(nullptr), native::InvalidArgumentException);
+	ASSERT_THROWS(childWithoutAdapter.setParent(nullptr), native::InvalidStateException);
+}
+
+TEST(Component_destructorRemovesFromParent)
+{
+	
+	LayoutComponent parent;
+
+	{
+		Component child;
+
+		parent.addChild(child);
+	}
+
+	ASSERT(parent.getChildren().getLength() == 0);
 }
 

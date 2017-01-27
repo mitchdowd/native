@@ -8,6 +8,12 @@ namespace native
 {
     namespace ui
     {
+		LayoutComponent::~LayoutComponent()
+		{
+			for (auto child : _children)
+				child->_parent = nullptr;
+		}
+
 		void LayoutComponent::insertChild(size_t index, Component* child)
 		{
 			if (child == nullptr)

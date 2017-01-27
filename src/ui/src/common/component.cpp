@@ -23,6 +23,9 @@ namespace native
 
 		Component::~Component()
 		{
+			if (_parent)
+				_parent->removeChild(this);
+
 			delete _adapter;
 		}
 
@@ -43,7 +46,7 @@ namespace native
 				}
 				else {
 					// Can't pop up a Component without an adapter.
-					throw InvalidArgumentException();
+					throw InvalidStateException();
 				}
 			}
 		}
