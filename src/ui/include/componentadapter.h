@@ -29,6 +29,12 @@ namespace native
 			ComponentAdapter(const ComponentAdapterProperties& properties);
 
 			/**
+				Sets the native parent of this native component.
+				\param parent The parent component adapter.
+			 */
+			virtual void setParent(IComponentAdapter* parent) override;
+
+			/**
 				Sets the component's text, for those that support text.
 				\param text The text to set.
 			 */

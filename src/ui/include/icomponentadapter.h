@@ -15,6 +15,14 @@ namespace native
 			virtual ~IComponentAdapter() {}
 
 			/**
+				Sets the native parent of this native component. The parent should
+				be of the same concrete type as this instance (i.e. Don't mix native
+				components with mock components, etc).
+				\param parent The parent component adapter.
+			 */
+			virtual void setParent(IComponentAdapter* parent) = 0;
+
+			/**
 				Sets the component's text, for those that support text.
 				\param text The text to set.
 			 */

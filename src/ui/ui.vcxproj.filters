@@ -5,6 +5,7 @@
     <ClCompile Include="src\common\component.cpp" />
     <ClCompile Include="src\win32\componentadapter.cpp" />
     <ClCompile Include="src\common\window.cpp" />
+    <ClCompile Include="src\common\layoutcomponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />

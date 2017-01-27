@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\common\component.cpp" />
+    <ClCompile Include="src\common\layoutcomponent.cpp" />
     <ClCompile Include="src\common\window.cpp" />
     <ClCompile Include="src\win32\app.cpp" />
     <ClCompile Include="src\win32\componentadapter.cpp" />

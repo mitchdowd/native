@@ -15,6 +15,13 @@ namespace native
 		{
 		}
 
+		void ComponentAdapter::setParent(IComponentAdapter* parent_)
+		{
+			ComponentAdapter* parent = (ComponentAdapter*) parent_;
+
+			// TODO
+		}
+
 		void ComponentAdapter::setText(const String& text)
 		{
 
