@@ -1,4 +1,5 @@
 // External Dependencies
+#include <core.h>
 #include <test.h>
 #include <ui.h>
 
@@ -6,6 +7,7 @@
 #include "mockcomponentadapter.h"
 
 // Namespace Usage
+using namespace native::test;
 using namespace native::ui;
 
 TEST(Component_setParent)
@@ -26,5 +28,25 @@ TEST(Component_setParentAddsToChildren)
 	child.setParent(parent);
 
 	ASSERT(parent.getChildren()[0] == &child);
+}
+
+TEST(Component_setParentToNull)
+{
+	MockComponentAdapter* parentAdapter = new MockComponentAdapter();
+	MockComponentAdapter* childAdapter = new MockComponentAdapter();
+
+	LayoutComponent parent(parentAdapter);
+	Component child(childAdapter);
+	Component childWithoutAdapter;
+
+	parent.addChild(child);
+	parent.addChild(childWithoutAdapter);
+
+	ASSERT(childAdapter->getParent() == parentAdapter);
+
+	child.setParent(nullptr);
+
+	ASSERT(childAdapter->getParent() == nullptr);
+	ASSERT_THROWS(childWithoutAdapter.setParent(nullptr), native::InvalidArgumentException);
 }
 
