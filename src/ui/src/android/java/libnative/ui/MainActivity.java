@@ -20,15 +20,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         loadNativeLibrary();
         onCreate();
-
-        // Temporary implementation below...
-        TextView view = new TextView(this);
-        view.setText(stringFromJNI());
-        setContentView(view);
     }
 
     private native void onCreate();
-    private native String stringFromJNI();
 
     private void loadNativeLibrary()
     {

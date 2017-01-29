@@ -3,6 +3,7 @@
 
 // Local Dependencies
 #include "componentadapterproperties.h"
+#include "../../../core/include/exception.h"
 
 namespace native
 {
@@ -13,16 +14,34 @@ namespace native
 			// TODO
 		}
 
+		ComponentAdapter::~ComponentAdapter()
+		{
+			// TODO
+		}
+
 		void ComponentAdapter::setParent(IComponentAdapter* parent_)
 		{
-			ComponentAdapter* parent = (ComponentAdapter*)parent_;
+			throw NotImplementedException();
+		}
 
-			// TODO
+		void ComponentAdapter::setVisible(bool visible)
+		{
+			throw NotImplementedException();
+		}
+
+		bool ComponentAdapter::isVisible() const
+		{
+			throw NotImplementedException();
 		}
 
 		void ComponentAdapter::setText(const String& text)
 		{
+			throw NotImplementedException();
+		}
 
+		void ComponentAdapter::onEvent(ComponentEvent& event)
+		{
+			throw NotImplementedException();
 		}
 
 		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
