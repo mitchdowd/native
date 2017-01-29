@@ -51,6 +51,29 @@ namespace native
 			}
 		}
 
+		void Component::setVisible(bool visible)
+		{
+			if (_adapter)
+				_adapter->setVisible(visible);
+
+			_visibility = visible ? Show : Hide;
+		}
+
+		bool Component::isVisible() const
+		{
+			if (_adapter)
+				return _adapter->isVisible();
+
+			if (_visibility == Inherit)
+			{
+				// Inherit visibility from the parent.
+				const Component* parent = getParent();
+				return parent ? parent->isVisible() : false;
+			}
+
+			return _visibility == Show;
+		}
+
 		void Component::setParentAdapter(IComponentAdapter* parent)
 		{
 			if (_adapter)

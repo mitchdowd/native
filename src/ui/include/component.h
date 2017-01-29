@@ -48,6 +48,21 @@ namespace native
 			LayoutComponent* getParent() const noexcept { return _parent; }
 
 			/**
+				Shows or hides the Component, according to the parameter. A
+				Component is visible by default, but will be hidden if its
+				parent is hidden. Top-level Components are the exception, and
+				are hidden by default.
+				\param visible Set `true` to show, `false` to hide.
+			 */
+			void setVisible(bool visible);
+
+			/**
+				Determines whether the Component is currently visible or not.
+				\return true if visible, false if not.
+			 */
+			bool isVisible() const;
+
+			/**
 				Gets this Component's adapter, if it has one.
 				\return The adapter this Component was created with.
 			 */
@@ -61,9 +76,13 @@ namespace native
 			// Class Friendships
 			friend class LayoutComponent;
 
+			// Private Types
+			enum Visibility { Inherit, Show, Hide };
+
 			// Instance Variables
 			IComponentAdapter* _adapter;
 			LayoutComponent*   _parent;
+			Visibility		   _visibility;
 		};
 
 		/**

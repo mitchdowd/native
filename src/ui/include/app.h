@@ -44,12 +44,10 @@ struct HINSTANCE__;
 		char* lpCmdLine,							\
 		int nCmdShow								\
 	) {												\
-		(new TApp())->run();						\
-		return 0;									\
+		return (new TApp())->run();					\
 	}												\
 	int main(int argc, char** argv) {				\
-		(new TApp())->run();						\
-		return 0;									\
+		return (new TApp())->run();					\
 	}
 
 
@@ -66,7 +64,7 @@ struct _JNIEnv;
 		_JNIEnv* env,								\
 		_jobject* activity							\
 	) {												\
-		(new TApp())->setMessage("Hello World");	\
+		new TApp();									\
 	}
 
 #else

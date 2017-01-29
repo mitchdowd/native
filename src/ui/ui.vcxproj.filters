@@ -6,6 +6,7 @@
     <ClCompile Include="src\win32\componentadapter.cpp" />
     <ClCompile Include="src\common\window.cpp" />
     <ClCompile Include="src\common\layoutcomponent.cpp" />
+    <ClCompile Include="src\win32\eventqueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
@@ -17,5 +18,6 @@
     <ClInclude Include="..\..\include\ui.h" />
     <ClInclude Include="include\icomponentadapter.h" />
     <ClInclude Include="src\win32\componentevent.h" />
+    <ClInclude Include="include\eventqueue.h" />
   </ItemGroup>
 </Project>

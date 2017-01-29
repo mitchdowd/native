@@ -80,11 +80,19 @@ namespace native
 			::SetWindowLongPtr(HWND(_handle), GWLP_USERDATA, LONG_PTR(this));
 		}
 
-		void ComponentAdapter::setParent(IComponentAdapter* parent_)
+		void ComponentAdapter::setParent(IComponentAdapter* parent)
 		{
-			ComponentAdapter* parent = (ComponentAdapter*) parent_;
+			DWORD style = ::GetWindowLong(HWND(_handle), GWL_STYLE);
 
-			// TODO
+			if (parent)
+				style = (style | WS_CHILD) & ~WS_POPUP;
+			else
+				style = (style | WS_POPUP) & ~WS_CHILD;
+
+			::SetWindowLong(HWND(_handle), GWL_STYLE, style);
+
+			if (::SetParent(HWND(_handle), HWND(parent ? ((ComponentAdapter*) parent)->_handle : NULL)) == NULL)
+				throw UserInterfaceException("SetParent()");
 		}
 
 		ComponentAdapter::~ComponentAdapter()
@@ -92,9 +100,19 @@ namespace native
 			::DestroyWindow(HWND(_handle));
 		}
 
+		void ComponentAdapter::setVisible(bool visible)
+		{
+			::ShowWindow(HWND(_handle), visible ? SW_SHOW : SW_HIDE);
+		}
+
+		bool ComponentAdapter::isVisible() const
+		{
+			return ::IsWindowVisible(HWND(_handle)) != FALSE;
+		}
+
 		void ComponentAdapter::setText(const String& text)
 		{
-
+			::SetWindowText(HWND(_handle), text.toArray());
 		}
 
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)

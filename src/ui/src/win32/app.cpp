@@ -2,6 +2,7 @@
 
 // Module Dependencies
 #include "../../include/app.h"
+#include "../../include/eventqueue.h"
 
 namespace native
 {
@@ -13,15 +14,12 @@ namespace native
 
 		int App::run()
 		{
-			throw NotImplementedException();
-			/*
 			setVisible(true);
 
 			while (isVisible() && EventQueue::handleEvent())
 				;	// No-op.
 
 			return EventQueue::getExitCode();
-			*/
 		}
 	}
 }

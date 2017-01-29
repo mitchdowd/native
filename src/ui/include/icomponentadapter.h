@@ -31,6 +31,18 @@ namespace native
 			virtual void setParent(IComponentAdapter* parent) = 0;
 
 			/**
+				Shows or hides the Component, according to the parameter.
+				\param visible Set `true` to show, `false` to hide.
+			*/
+			virtual void setVisible(bool visible) = 0;
+
+			/**
+				Determines whether the Component is currently visible or not.
+				\return true if visible, false if not.
+			 */
+			virtual bool isVisible() const = 0;
+
+			/**
 				Sets the component's text, for those that support text.
 				\param text The text to set.
 			 */
