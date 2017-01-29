@@ -6,6 +6,7 @@
 
 // External Dependencies
 #include "../../../core/include/spinlock.h"
+#include "../../../core/include/system.h"
 
 // Module Dependencies
 #include "../../include/component.h"
@@ -43,11 +44,40 @@ namespace native
 		 */
 		void ensureApiRegistered();
 
+		/**
+			A child Window must have a parent. In order to still have a default
+			constructor for class Component, we create a default HWND to hold those
+			orphaned children.
+		 */
+		HWND getDefaultParent();
+
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props)
 		{
 			ensureApiRegistered();
 
-			throw NotImplementedException();
+			// Create the Window handle.
+			_handle = ::CreateWindowEx(props.exStyle, props.className ? props.className : NATIVE_WINDOW_CLASS_NAME,
+				L"", props.style, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+				(props.style & WS_CHILD) ? getDefaultParent() : NULL, NULL, ::GetModuleHandle(0), NULL);
+
+			if (_handle == NULL)
+				throw UserInterfaceException("CreateWindowEx");
+
+			// Intercept messages that do not have our WindowProc specified.
+			if (::GetClassLongPtr(HWND(_handle), GCLP_WNDPROC) != LONG_PTR(ComponentEvent::WindowProc))
+				::SetWindowLongPtr(HWND(_handle), GWLP_WNDPROC, LONG_PTR(ComponentEvent::WindowProc));
+
+			// Set the default GUI font.
+			// ::SendMessage(HWND(_handle), WM_SETFONT, WPARAM(Font::getDefault().getAuxHandle()), TRUE);
+
+			if (_isTouchReady)
+			{
+				// Register as a touch window.
+				::RegisterTouchWindow(HWND(_handle), TWF_WANTPALM);
+			}
+
+			// Allow access of the adapter via its handle.
+			::SetWindowLongPtr(HWND(_handle), GWLP_USERDATA, LONG_PTR(this));
 		}
 
 		void ComponentAdapter::setParent(IComponentAdapter* parent_)
@@ -57,14 +87,49 @@ namespace native
 			// TODO
 		}
 
+		ComponentAdapter::~ComponentAdapter()
+		{
+			::DestroyWindow(HWND(_handle));
+		}
+
 		void ComponentAdapter::setText(const String& text)
 		{
 
 		}
 
-		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
+		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
+		{
+			return (ComponentAdapter*) ::GetWindowLongPtr(HWND(handle), GWLP_USERDATA);
+		}
+
+		WindowAdapter::WindowAdapter() : ComponentAdapter({ nullptr, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN, 0 })
 		{
 		}
+
+		void ComponentAdapter::onEvent(ComponentEvent& event)
+		{
+			LONG_PTR baseProc = ::GetClassLongPtr(event.hwnd, GCLP_WNDPROC);
+
+			switch (event.msg)
+			{
+			case WM_DESTROY:
+				_handle = nullptr;
+				break;
+			}
+
+			// Check for inherited window proc.
+			if (baseProc != LONG_PTR(ComponentEvent::WindowProc)) {
+				event.result = ::CallWindowProc(WNDPROC(baseProc), event.hwnd, event.msg, event.wparam, event.lparam);
+				return;
+			}
+
+			// Everything else...  not handled.
+			event.result = ::DefWindowProc(event.hwnd, event.msg, event.wparam, event.lparam);
+		}
+
+		/*
+			Local Functions
+		 */
 
 		static void ensureApiRegistered()
 		{
@@ -107,9 +172,36 @@ namespace native
 			lock.release();
 		}
 
+		static HWND getDefaultParent()
+		{
+			static HWND hwnd = NULL;
+			static SpinLock lock;
+
+			if (!hwnd)
+			{
+				lock.lock();
+
+				if (!hwnd)
+				{
+					ensureApiRegistered();
+
+					// Create a top-level HWND to hold orphan children.
+					HWND handle = hwnd = ::CreateWindowEx(0, NATIVE_WINDOW_CLASS_NAME, L"", 0, 0, 0, 0, 0, NULL, NULL, ::GetModuleHandle(0), NULL);
+					System::onExit([=]() { ::DestroyWindow(hwnd); });
+				}
+
+				lock.release();
+			}
+
+			if (!hwnd)
+				throw UserInterfaceException("Could not create default HWND");
+
+			return hwnd;
+		}
+
 		LRESULT CALLBACK ComponentEvent::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		{
-			throw NotImplementedException();
+			return ::DefWindowProc(hwnd, msg, wparam, lparam);
 		}
 	}
 }

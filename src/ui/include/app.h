@@ -18,8 +18,12 @@ namespace native
 		class App : public Window
 		{
 		public:
-			/** TEMPORARY ONLY - Cross platform function test. */
-			void setMessage(const char* message);
+			/**
+				Enters an event loop centered on this Window. The event loop will
+				continue until either a quit message is posted, or this Window is
+				closed.
+			 */
+			int run();
 
 		protected:
 			/** Default constructor. */
@@ -40,11 +44,11 @@ struct HINSTANCE__;
 		char* lpCmdLine,							\
 		int nCmdShow								\
 	) {												\
-		(new TApp())->setMessage("Hello World");	\
+		(new TApp())->run();						\
 		return 0;									\
 	}												\
 	int main(int argc, char** argv) {				\
-		(new TApp())->setMessage("Hello World");	\
+		(new TApp())->run();						\
 		return 0;									\
 	}
 

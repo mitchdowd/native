@@ -11,9 +11,17 @@ namespace native
 		{
 		}
 
-		void App::setMessage(const char* message)
+		int App::run()
 		{
-			std::cout << message << std::endl;
+			throw NotImplementedException();
+			/*
+			setVisible(true);
+
+			while (isVisible() && EventQueue::handleEvent())
+				;	// No-op.
+
+			return EventQueue::getExitCode();
+			*/
 		}
 	}
 }

@@ -28,6 +28,9 @@ namespace native
 			 */
 			ComponentAdapter(const ComponentAdapterProperties& properties);
 
+			/** Destructor. */
+			~ComponentAdapter();
+
 			/**
 				Sets the native parent of this native component.
 				\param parent The parent component adapter.
@@ -39,6 +42,26 @@ namespace native
 				\param text The text to set.
 			 */
 			virtual void setText(const String& text) override;
+
+			/**
+				Gets the handle to system resources for this ComponentAdapter.
+				\return The system resource handle.
+			 */
+			handle_t getHandle() const noexcept { return _handle; }
+
+			/**
+				Gets an adapter via its system resource handle.
+				\param handle The system resource handle.
+				\return The associated adapter, or nullptr if not found.
+			 */
+			static ComponentAdapter* fromHandle(handle_t handle);
+
+			/**
+				Base event handler for all Component-based events passed in
+				by the operating system.
+				\param event A platform-specific event structure.
+			 */
+			virtual void onEvent(ComponentEvent& event);
 
 		private:
 			// Instance Variables

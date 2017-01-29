@@ -8,6 +8,9 @@ namespace native
 {
 	namespace ui
 	{
+		// Forward Declarations
+		struct ComponentEvent;
+
 		/**
 			A pure virtual interface for interacting with native UI components.
 			An adapter gets attached to a Component, giving the Component native

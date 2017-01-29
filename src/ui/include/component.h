@@ -71,6 +71,8 @@ namespace native
 		 */
 		class UserInterfaceException : public Exception
 		{
+		public:
+			UserInterfaceException(const char* message = "User interface error occurred") : Exception(message) {}
 		};
 	}
 }
