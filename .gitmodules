@@ -1,0 +1,3 @@
+[submodule "lib/jnipp"]
+	path = lib/jnipp
+	url = https://github.com/mitchdowd/jnipp
