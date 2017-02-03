@@ -11,7 +11,7 @@ namespace native
 		 */
 		struct ComponentAdapterProperties
 		{
-			const wchar_t* className;
+			const char* className;
 		};
 	}
 }

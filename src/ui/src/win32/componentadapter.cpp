@@ -120,10 +120,6 @@ namespace native
 			return (ComponentAdapter*) ::GetWindowLongPtr(HWND(handle), GWLP_USERDATA);
 		}
 
-		WindowAdapter::WindowAdapter() : ComponentAdapter({ nullptr, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN, 0 })
-		{
-		}
-
 		void ComponentAdapter::onEvent(ComponentEvent& event)
 		{
 			LONG_PTR baseProc = ::GetClassLongPtr(event.hwnd, GCLP_WNDPROC);
@@ -143,6 +139,19 @@ namespace native
 
 			// Everything else...  not handled.
 			event.result = ::DefWindowProc(event.hwnd, event.msg, event.wparam, event.lparam);
+		}
+
+		/*
+			WindowAdapter Functions
+		*/
+
+		WindowAdapter::WindowAdapter() : ComponentAdapter({ nullptr, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN, 0 })
+		{
+		}
+
+		void WindowAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
 		}
 
 		/*

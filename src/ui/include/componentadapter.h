@@ -88,6 +88,12 @@ namespace native
 		public:
 			/** Default constructor. */
 			WindowAdapter();
+
+			/**
+				Sets the title text of the Window.
+			 	\param text The text to set.
+			 */
+			virtual void setText(const String& text) override;
 		};
 	}
 }

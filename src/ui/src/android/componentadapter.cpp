@@ -1,15 +1,19 @@
+// External Dependencies
+#include "../../../../lib/jnipp/jnipp.h"
+#include "../../../core/include/exception.h"
+
 // Module Dependencies
+#include "../../include/app.h"
 #include "../../include/componentadapter.h"
 
 // Local Dependencies
 #include "componentadapterproperties.h"
-#include "../../../core/include/exception.h"
 
 namespace native
 {
 	namespace ui
 	{
-		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& properties)
+		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props)
 		{
 			// TODO
 		}
@@ -39,6 +43,11 @@ namespace native
 			throw NotImplementedException();
 		}
 
+		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
+		{
+			throw NotImplementedException();
+		}
+
 		void ComponentAdapter::onEvent(ComponentEvent& event)
 		{
 			throw NotImplementedException();
@@ -46,6 +55,13 @@ namespace native
 
 		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
 		{
+		}
+
+		void WindowAdapter::setText(const String& text)
+		{
+			jni::Object activity(jni::jobject(App::getAppHandle()));
+
+			activity.call<void>("setTitle(Ljava/lang/CharSequence;)V", text);
 		}
 	}
 }

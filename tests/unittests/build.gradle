@@ -41,6 +41,7 @@ model {
                         project ':ui' linkage 'static'
                         project ':core' linkage 'static'
                         project ':test' linkage 'static'
+                        project ':jnipp' linkage 'static'
                     }
                  }
             }
