@@ -7,6 +7,7 @@
 #include "../src/ui/include/eventqueue.h"
 #include "../src/ui/include/icomponentadapter.h"
 #include "../src/ui/include/layoutcomponent.h"
+#include "../src/ui/include/textcomponent.h"
 #include "../src/ui/include/window.h"
 
 #endif // _NATIVE_UI_H_

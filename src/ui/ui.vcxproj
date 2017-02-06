@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="src\common\component.cpp" />
     <ClCompile Include="src\common\layoutcomponent.cpp" />
+    <ClCompile Include="src\common\textcomponent.cpp" />
     <ClCompile Include="src\common\window.cpp" />
     <ClCompile Include="src\common\app.cpp" />
     <ClCompile Include="src\win32\componentadapter.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="include\eventqueue.h" />
     <ClInclude Include="include\icomponentadapter.h" />
     <ClInclude Include="include\layoutcomponent.h" />
+    <ClInclude Include="include\textcomponent.h" />
     <ClInclude Include="include\window.h" />
     <ClInclude Include="src\win32\componentadapterproperties.h" />
     <ClInclude Include="src\win32\componentevent.h" />

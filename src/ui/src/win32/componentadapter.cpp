@@ -155,6 +155,14 @@ namespace native
 		}
 
 		/*
+			TextComponentAdapter Functions
+		*/
+
+		TextComponentAdapter::TextComponentAdapter() : ComponentAdapter({ nullptr, 0, 0 })
+		{
+		}
+
+		/*
 			Local Functions
 		 */
 

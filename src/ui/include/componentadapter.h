@@ -95,6 +95,16 @@ namespace native
 			 */
 			virtual void setText(const String& text) override;
 		};
+
+		/**
+			A subclassed adapter for TextComponents.
+		 */
+		class TextComponentAdapter : public ComponentAdapter
+		{
+		public:
+			/** Default constructor. */
+			TextComponentAdapter();
+		};
 	}
 }
 

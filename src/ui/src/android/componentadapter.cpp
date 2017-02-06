@@ -13,6 +13,10 @@ namespace native
 {
 	namespace ui
 	{
+		/*
+			ComponentAdapter Functions
+		 */
+
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props)
 		{
 			// TODO
@@ -53,6 +57,10 @@ namespace native
 			throw NotImplementedException();
 		}
 
+		/*
+			WindowAdapter Functions
+		 */
+
 		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
 		{
 		}
@@ -62,6 +70,14 @@ namespace native
 			jni::Object activity(jni::jobject(App::getAppHandle()));
 
 			activity.call<void>("setTitle(Ljava/lang/CharSequence;)V", text);
+		}
+
+		/*
+			TextComponentAdapter Functions
+		 */
+		
+		TextComponentAdapter::TextComponentAdapter() : ComponentAdapter({ /* todo */ })
+		{
 		}
 	}
 }
