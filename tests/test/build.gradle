@@ -1,4 +1,4 @@
-apply plugin: 'com.android.model.native'
+apply plugin: 'com.android.model.library'
 
 model {
     android {
@@ -12,9 +12,9 @@ model {
 
         ndk {
             platformVersion = 9
-            moduleName ='native-test'
-            toolchain = 'gcc'
-            stl = 'gnustl_static'
+            moduleName      = 'native-test'
+            toolchain       = 'gcc'
+            stl             = 'gnustl_static'
             cppFlags.addAll(['-std=c++11', '-fexceptions'])
             ldLibs.addAll(['log', 'android', 'EGL', 'GLESv1_CM'])
         }
@@ -28,6 +28,14 @@ model {
 
         sources {
             main {
+                manifest {
+                    source.srcDir '.'
+                }
+                java {
+                    source {
+                        srcDir 'src/android/java'
+                    }
+                }
                 jni {
                     source {
                         srcDirs 'include'

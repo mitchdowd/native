@@ -116,19 +116,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\common\component.cpp" />
+    <ClCompile Include="src\common\layoutcomponent.cpp" />
+    <ClCompile Include="src\common\textcomponent.cpp" />
     <ClCompile Include="src\common\window.cpp" />
-    <ClCompile Include="src\win32\app.cpp" />
+    <ClCompile Include="src\common\app.cpp" />
+    <ClCompile Include="src\win32\brush.cpp" />
+    <ClCompile Include="src\win32\canvas.cpp" />
     <ClCompile Include="src\win32\componentadapter.cpp" />
+    <ClCompile Include="src\win32\eventqueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
     <ClInclude Include="include\app.h" />
+    <ClInclude Include="include\brush.h" />
+    <ClInclude Include="include\canvas.h" />
+    <ClInclude Include="include\color.h" />
     <ClInclude Include="include\component.h" />
     <ClInclude Include="include\componentadapter.h" />
+    <ClInclude Include="include\eventqueue.h" />
     <ClInclude Include="include\icomponentadapter.h" />
     <ClInclude Include="include\layoutcomponent.h" />
+    <ClInclude Include="include\textcomponent.h" />
     <ClInclude Include="include\window.h" />
     <ClInclude Include="src\win32\componentadapterproperties.h" />
+    <ClInclude Include="src\win32\componentevent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,6 +21,14 @@ namespace native
 			Window();
 
 			/**
+				Creates a Window with a different adapter. Usually best to just
+				use the default constructor. This is good for inserting a mock
+				adapter for testing purposes though.
+				\param adapter The component adapter.
+			 */
+			Window(IComponentAdapter* adapter);
+
+			/**
 				Sets the title to display at the top of the Window.
 				\param title The title text to display.
 			 */

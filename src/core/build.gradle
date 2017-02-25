@@ -12,9 +12,9 @@ model {
 
         ndk {
             platformVersion = 9
-            moduleName ='native-core'
-            toolchain = 'gcc'
-            stl = 'gnustl_static'
+            moduleName      = 'native-core'
+            toolchain       = 'gcc'
+            stl             = 'gnustl_static'
             cppFlags.addAll(['-std=c++11', '-fexceptions'])
             ldLibs.addAll(['log', 'android', 'EGL', 'GLESv1_CM'])
         }

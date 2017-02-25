@@ -6,7 +6,7 @@ model {
         buildToolsVersion = '25.0.1'
 
         defaultConfig {
-            applicationId = 'libnative.tests.unittests'
+            applicationId             = 'libnative.test.unittests'
             minSdkVersion.apiLevel    = 15
             targetSdkVersion.apiLevel = 24
         }
@@ -26,6 +26,7 @@ model {
                 proguardFiles.add(file('proguard-rules.txt'))
             }
         }
+
         sources {
              main {
                  manifest {
@@ -40,6 +41,7 @@ model {
                         project ':ui' linkage 'static'
                         project ':core' linkage 'static'
                         project ':test' linkage 'static'
+                        project ':jnipp' linkage 'static'
                     }
                  }
             }
@@ -49,4 +51,5 @@ model {
 
 dependencies {
     compile project(':ui')
+    compile project(':test')
 }

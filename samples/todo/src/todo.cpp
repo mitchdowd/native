@@ -6,6 +6,11 @@
  */
 class App : public native::ui::App
 {
+public:
+    App()
+    {
+        setTitle("To-Do List");
+    }
 };
 
 // Entry Point

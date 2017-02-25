@@ -1,19 +1,15 @@
-package libnative.ui;
+package libnative.test;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.TextView;
 
-/**
- * The main activity which serves as the link into the Java-based Android application from the
- * C++ portion of the framework.
- */
-public class MainActivity extends Activity {
+
+public class TestActivity extends Activity {
     // Static Variables
     private static boolean _libIsLoaded = false;
-    private static final String META_LIB_NAME = "libnative.ui.lib_name";
+    private static final String META_LIB_NAME = "libnative.test.lib_name";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -28,7 +28,7 @@ namespace native
 				for (UnitTest& test : *tests)
 				{
 					int result = test.run();
-					log("Executing test %-40s => %s.\n", test.getName(), result ? "Failed" : "Success");
+					log("Executing test %-50s => %s.\n", test.getName(), result ? "Failed" : "Success");
 
 					if (result)
 						failures.push_back(test);

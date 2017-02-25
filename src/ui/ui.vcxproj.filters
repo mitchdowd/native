@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\win32\app.cpp" />
     <ClCompile Include="src\common\component.cpp" />
     <ClCompile Include="src\win32\componentadapter.cpp" />
     <ClCompile Include="src\common\window.cpp" />
+    <ClCompile Include="src\common\layoutcomponent.cpp" />
+    <ClCompile Include="src\win32\eventqueue.cpp" />
+    <ClCompile Include="src\common\app.cpp" />
+    <ClCompile Include="src\common\textcomponent.cpp" />
+    <ClCompile Include="src\win32\brush.cpp" />
+    <ClCompile Include="src\win32\canvas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
@@ -15,5 +20,11 @@
     <ClInclude Include="src\win32\componentadapterproperties.h" />
     <ClInclude Include="..\..\include\ui.h" />
     <ClInclude Include="include\icomponentadapter.h" />
+    <ClInclude Include="src\win32\componentevent.h" />
+    <ClInclude Include="include\eventqueue.h" />
+    <ClInclude Include="include\textcomponent.h" />
+    <ClInclude Include="include\color.h" />
+    <ClInclude Include="include\brush.h" />
+    <ClInclude Include="include\canvas.h" />
   </ItemGroup>
 </Project>

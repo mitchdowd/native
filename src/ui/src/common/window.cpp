@@ -6,7 +6,11 @@ namespace native
 {
 	namespace ui
 	{
-		Window::Window() : LayoutComponent(new WindowAdapter())	// TODO - Inject
+		Window::Window() : LayoutComponent(new WindowAdapter())
+		{
+		}
+
+		Window::Window(IComponentAdapter* adapter) : LayoutComponent(adapter)
 		{
 		}
 

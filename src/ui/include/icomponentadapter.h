@@ -8,11 +8,39 @@ namespace native
 {
 	namespace ui
 	{
+		// Forward Declarations
+		struct ComponentEvent;
+
+		/**
+			A pure virtual interface for interacting with native UI components.
+			An adapter gets attached to a Component, giving the Component native
+			functionality.
+		 */
 		class IComponentAdapter
 		{
 		public:
 			/** Virtual destructor. */
 			virtual ~IComponentAdapter() {}
+
+			/**
+				Sets the native parent of this native component. The parent should
+				be of the same concrete type as this instance (i.e. Don't mix native
+				components with mock components, etc).
+				\param parent The parent component adapter.
+			 */
+			virtual void setParent(IComponentAdapter* parent) = 0;
+
+			/**
+				Shows or hides the Component, according to the parameter.
+				\param visible Set `true` to show, `false` to hide.
+			*/
+			virtual void setVisible(bool visible) = 0;
+
+			/**
+				Determines whether the Component is currently visible or not.
+				\return true if visible, false if not.
+			 */
+			virtual bool isVisible() const = 0;
 
 			/**
 				Sets the component's text, for those that support text.
