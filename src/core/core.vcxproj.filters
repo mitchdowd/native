@@ -10,7 +10,6 @@
     <ClCompile Include="src\common\array.cpp" />
     <ClCompile Include="src\common\math.cpp" />
     <ClCompile Include="src\common\string.cpp" />
-    <ClCompile Include="include\stringcodec.h" />
     <ClCompile Include="src\common\asciicodec.cpp" />
     <ClCompile Include="src\common\latin1codec.cpp" />
     <ClCompile Include="src\common\stringcodec.cpp" />
@@ -46,5 +45,6 @@
     <ClInclude Include="include\asciicodec.h" />
     <ClInclude Include="include\singleton.h" />
     <ClInclude Include="include\system.h" />
+    <ClInclude Include="include\stringcodec.h" />
   </ItemGroup>
 </Project>
