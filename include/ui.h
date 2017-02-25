@@ -2,6 +2,9 @@
 #define _NATIVE_UI_H_ 1
 
 #include "../src/ui/include/app.h"
+#include "../src/ui/include/brush.h"
+#include "../src/ui/include/canvas.h"
+#include "../src/ui/include/color.h"
 #include "../src/ui/include/component.h"
 #include "../src/ui/include/componentadapter.h"
 #include "../src/ui/include/eventqueue.h"

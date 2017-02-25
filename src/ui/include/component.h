@@ -5,6 +5,8 @@
 #include "../../core/include/exception.h"
 
 // Module Dependencies
+#include "brush.h"
+#include "canvas.h"
 #include "icomponentadapter.h"
 
 namespace native
@@ -63,12 +65,32 @@ namespace native
 			bool isVisible() const;
 
 			/**
+				Sets the Brush used to paint this Component's background.
+				\param background The background Brush.
+			 */
+			void setBackground(const Brush& background);
+
+			/**
+				Gets the Brush currently used to paint the background.
+				\return The background brush.
+			 */
+			Brush getBackground() const;
+
+			/**
 				Gets this Component's adapter, if it has one.
 				\return The adapter this Component was created with.
 			 */
 			IComponentAdapter* getAdapter() const noexcept { return _adapter; }
 
 		protected:
+			/**
+				This is where the painting of the Component occurs. Override to
+				do your own custom painting. By default, this paints the background
+				on the entire Component's content area.
+				\param canvas The Canvas with which to paint.
+			 */
+			virtual void onPaint(Canvas& canvas);
+
 			/** For internal use only. */
 			virtual void setParentAdapter(IComponentAdapter* parent);
 
@@ -83,6 +105,7 @@ namespace native
 			IComponentAdapter* _adapter;
 			LayoutComponent*   _parent;
 			Visibility		   _visibility;
+			Brush              _background;
 		};
 
 		/**

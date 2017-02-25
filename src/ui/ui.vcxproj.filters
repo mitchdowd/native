@@ -8,6 +8,8 @@
     <ClCompile Include="src\win32\eventqueue.cpp" />
     <ClCompile Include="src\common\app.cpp" />
     <ClCompile Include="src\common\textcomponent.cpp" />
+    <ClCompile Include="src\win32\brush.cpp" />
+    <ClCompile Include="src\win32\canvas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
@@ -21,5 +23,8 @@
     <ClInclude Include="src\win32\componentevent.h" />
     <ClInclude Include="include\eventqueue.h" />
     <ClInclude Include="include\textcomponent.h" />
+    <ClInclude Include="include\color.h" />
+    <ClInclude Include="include\brush.h" />
+    <ClInclude Include="include\canvas.h" />
   </ItemGroup>
 </Project>

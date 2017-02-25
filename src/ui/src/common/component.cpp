@@ -74,6 +74,21 @@ namespace native
 			return _visibility == Show;
 		}
 
+		void Component::setBackground(const Brush& background)
+		{
+			_background = background;
+		}
+
+		Brush Component::getBackground() const
+		{
+			return _background;
+		}
+
+		void Component::onPaint(Canvas& canvas)
+		{
+			// TODO: Paint the background.
+		}
+
 		void Component::setParentAdapter(IComponentAdapter* parent)
 		{
 			if (_adapter)
