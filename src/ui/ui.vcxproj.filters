@@ -10,6 +10,7 @@
     <ClCompile Include="src\common\textcomponent.cpp" />
     <ClCompile Include="src\win32\brush.cpp" />
     <ClCompile Include="src\win32\canvas.cpp" />
+    <ClCompile Include="include\rectangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />

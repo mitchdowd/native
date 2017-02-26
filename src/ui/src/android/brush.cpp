@@ -8,19 +8,14 @@ namespace native
 {
 	namespace ui
 	{
-		Brush::Brush()
+		Brush::BrushHandle::~BrushHandle()
 		{
 			// TODO
 		}
 
-		Brush::Brush(const Color& color)
+		Brush::Brush(const Color& color) : _shared(nullptr)
 		{
 			throw NotImplementedException();
-		}
-
-		Brush::~Brush()
-		{
-			// TODO
 		}
 	}
 }

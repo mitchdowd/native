@@ -46,5 +46,6 @@
     <ClInclude Include="include\singleton.h" />
     <ClInclude Include="include\system.h" />
     <ClInclude Include="include\stringcodec.h" />
+    <ClInclude Include="include\shared.h" />
   </ItemGroup>
 </Project>

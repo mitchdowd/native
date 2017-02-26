@@ -10,6 +10,7 @@
 #include "../src/ui/include/eventqueue.h"
 #include "../src/ui/include/icomponentadapter.h"
 #include "../src/ui/include/layoutcomponent.h"
+#include "../src/ui/include/rectangle.h"
 #include "../src/ui/include/textcomponent.h"
 #include "../src/ui/include/window.h"
 

@@ -15,10 +15,19 @@ namespace native
 		{
 		public:
 			// Public Properties
-			byte_t red;
-			byte_t green;
-			byte_t blue;
-			byte_t alpha;
+			byte_t red;				///< Red component of the color.
+			byte_t green;			///< Green component of the color.
+			byte_t blue;			///< Blue component of the color.
+			byte_t alpha;			///< Opacity of the color.
+
+			/**
+				Creates a Color from its RGB components. It will have no
+				transparency.
+				\param r The red component.
+				\param g The green component.
+				\param b The blue component.
+			 */
+			Color(byte_t r, byte_t g, byte_t b) : red(r), green(g), blue(b), alpha(0xFF) {}
 		};
 	}
 }

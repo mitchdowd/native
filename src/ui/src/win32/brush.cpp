@@ -1,3 +1,7 @@
+// System Dependencies
+#include <windows.h>
+#include <gdiplus.h>
+
 // External Dependencies
 #include "../../../core/include/exception.h"
 
@@ -8,19 +12,14 @@ namespace native
 {
 	namespace ui
 	{
-		Brush::Brush()
+		Brush::BrushHandle::~BrushHandle()
 		{
-			// TODO
+			delete (Gdiplus::Brush*) handle;
 		}
 
-		Brush::Brush(const Color& color)
+		Brush::Brush(const Color& color) : _shared(nullptr)
 		{
-			throw NotImplementedException();
-		}
-
-		Brush::~Brush()
-		{
-			// TODO
+			_shared->handle = new Gdiplus::SolidBrush(Gdiplus::Color(color.alpha, color.red, color.green, color.blue));
 		}
 	}
 }
