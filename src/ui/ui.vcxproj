@@ -143,6 +143,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="common\color.cpp" />
     <ClCompile Include="include\rectangle.h" />
     <ClCompile Include="common\component.cpp" />
     <ClCompile Include="common\layoutcomponent.cpp" />

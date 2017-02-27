@@ -1,4 +1,7 @@
 // External Dependencies
+#include "../../../lib/jnipp/jnipp.h"
+
+// External Dependencies
 #include "../../core/include/exception.h"
 
 // Module Dependencies
@@ -10,12 +13,16 @@ namespace native
 	{
 		Brush::BrushHandle::~BrushHandle()
 		{
-			// TODO
+			delete (jni::Object*) handle;
 		}
 
 		Brush::Brush(const Color& color) : _shared(nullptr)
 		{
-			throw NotImplementedException();
+			jni::Object paint = jni::Class("android/graphics/Paint").newInstance();
+
+			paint.call<void>("setColor", int(color.toArgb()));
+
+			_shared->handle = new jni::Object(paint);
 		}
 	}
 }

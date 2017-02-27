@@ -2,7 +2,7 @@
 #define _NATIVE_UI_COMPONENT_EVENT_H_ 1
 
 // External Dependencies
-#include "../../../core/include/types.h"
+#include "../../core/include/types.h"
 
 namespace native
 {

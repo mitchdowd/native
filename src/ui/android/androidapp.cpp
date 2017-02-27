@@ -8,11 +8,12 @@ namespace native
 {
     namespace ui
     {
-        void init(_JNIEnv* env, _jobject* activity)
+        void init(_JNIEnv* env, jni::jobject activity)
         {
             jni::init(env);
 
-            App::setAppHandle(activity);
+            App::setAppHandle(new jni::Object(activity));
         }
     }
 }
+

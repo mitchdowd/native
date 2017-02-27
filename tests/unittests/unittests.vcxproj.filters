@@ -75,6 +75,7 @@
     </ClCompile>
     <ClCompile Include="src\ui\size.cpp" />
     <ClCompile Include="src\ui\point.cpp" />
+    <ClCompile Include="src\ui\color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\mockcomponentadapter.h">
