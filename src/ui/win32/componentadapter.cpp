@@ -190,12 +190,11 @@ namespace native
 					RECT rect;
 
 					::GetWindowRect(HWND(_handle), &rect);
+					Size size = { rect.right - rect.left, rect.bottom - rect.top };
 
 					// Ensure the new size is properly reflected in the Component.
-					Rectangle area = _component->getArea();
-					area.setSize({ rect.right - rect.left, rect.bottom - rect.top });
-
-					_component->updateArea(area);
+					_component->_area.setSize(size);
+					_component->onSize(size);
 				}
 				break;
 			}

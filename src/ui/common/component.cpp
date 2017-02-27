@@ -112,11 +112,6 @@ namespace native
 			return _background;
 		}
 
-		void Component::dispatchPaintEvent(Canvas& canvas)
-		{
-			onPaint(canvas);
-		}
-
 		void Component::onPaint(Canvas& canvas)
 		{
 			if (_adapter)
@@ -125,10 +120,20 @@ namespace native
 				canvas.fillRectangle(getContentArea().getSize(), _background);
 		}
 
+		void Component::onSize(const Size& size)
+		{
+			// TODO?
+		}
+
 		void Component::setParentAdapter(IComponentAdapter* parent)
 		{
 			if (_adapter)
 				_adapter->setParent(parent);
+		}
+
+		void Component::dispatchPaintEvent(Canvas& canvas)
+		{
+			onPaint(canvas);
 		}
 	}
 }

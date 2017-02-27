@@ -15,6 +15,7 @@ namespace native
 	namespace ui
 	{
 		// Forward Declarations
+		class ComponentAdapter;
 		class LayoutComponent;
 
 		/** Maskable alignments. */
@@ -146,19 +147,6 @@ namespace native
 			 */
 			IComponentAdapter* getAdapter() const noexcept { return _adapter; }
 
-			/**
-				For internal use only in triggering the repaint sequence.
-				\param canvas The canvas to paint with.
-			 */
-			virtual void dispatchPaintEvent(Canvas& canvas);
-
-			/**
-				For internal use only. Updates the Rectangle's area in response
-				to user input (e.g. Resizing a Window).
-				\param area The new area.
-			 */
-			void updateArea(const Rectangle& area) { _area = area; }
-
 		protected:
 			/**
 				This is where the painting of the Component occurs. Override to
@@ -168,11 +156,26 @@ namespace native
 			 */
 			virtual void onPaint(Canvas& canvas);
 
+			/**
+				Called when the geometric size of the Component changes. This is
+				where child Components have their positions adjusted to fit into
+				the new dimensions.
+				\param size The new size.
+			 */
+			virtual void onSize(const Size& size);
+
 			/** For internal use only. */
 			virtual void setParentAdapter(IComponentAdapter* parent);
 
+			/**
+				For internal use only in triggering the repaint sequence.
+				\param canvas The canvas to paint with.
+			 */
+			virtual void dispatchPaintEvent(Canvas& canvas);
+
 		private:
 			// Class Friendships
+			friend class ComponentAdapter;
 			friend class LayoutComponent;
 
 			// Private Types
