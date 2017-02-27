@@ -11,8 +11,16 @@ public:
     {
         setTitle("To-Do List");
 
-		setBackground(native::ui::Color(0xFF, 0, 0));
+		setBackground(native::ui::Color(0, 0xFF, 0));
+
+		addChild(_child);
+
+		_child.setBackground(native::ui::Color(0xFF, 0, 0));
     }
+
+private:
+	// Instance Variables
+	LayoutComponent _child;
 };
 
 // Entry Point

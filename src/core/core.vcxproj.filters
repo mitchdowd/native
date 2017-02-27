@@ -47,5 +47,6 @@
     <ClInclude Include="include\system.h" />
     <ClInclude Include="include\stringcodec.h" />
     <ClInclude Include="include\shared.h" />
+    <ClInclude Include="include\flags.h" />
   </ItemGroup>
 </Project>

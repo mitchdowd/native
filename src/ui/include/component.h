@@ -3,6 +3,7 @@
 
 // External Dependencies
 #include "../../core/include/exception.h"
+#include "../../core/include/flags.h"
 
 // Module Dependencies
 #include "brush.h"
@@ -15,6 +16,33 @@ namespace native
 	{
 		// Forward Declarations
 		class LayoutComponent;
+
+		/** Maskable alignments. */
+		ENUM_FLAGS(Alignment)
+		{
+			None = 0,
+
+			// Horizontal Alignments
+			Left    = 1,
+			Right   = 2,
+			HCenter = 4,
+			HFill   = 8,
+
+			// Vertical Alignments
+			Top     = 16,
+			Bottom  = 32,
+			VCenter = 64,
+			VFill   = 128,
+
+			// Combinations
+			Fill       = HFill   | VFill,
+			Center     = HCenter | VCenter,
+			Horizontal = Left | Right  | HCenter | HFill,
+			Vertical   = Top  | Bottom | VCenter | VFill
+		};
+
+		/** Shorthand for `Alignment`. */
+		typedef Alignment Align;
 
 		/**
 			The base class for user interface elements.
@@ -86,6 +114,19 @@ namespace native
 				\return The content area.
 			 */
 			Rectangle getContentArea() const;
+			
+			/**
+				Sets the alignment of this Component within its allocated area.
+				Different types of Component have a different default Alignment.
+				\param alignment A set of `Alignment` flags to set.
+			 */
+			void setAlignment(Flags<Alignment> alignment) { _alignment = alignment; }
+
+			/**
+				Gets the current Alignment flags for this Component.
+				\return The current Alignment.
+			 */
+			Flags<Alignment> getAlignment() const { return _alignment; }
 
 			/**
 				Sets the Brush used to paint this Component's background.
@@ -143,6 +184,7 @@ namespace native
 			Visibility		   _visibility;
 			Rectangle		   _area;
 			Brush              _background;
+			Flags<Alignment>   _alignment;
 		};
 
 		/**

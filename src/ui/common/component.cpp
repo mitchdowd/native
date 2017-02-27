@@ -23,12 +23,14 @@ namespace native
 		Component::Component()
 			: _adapter(nullptr)
 			, _parent(nullptr)
+			, _alignment(Align::Top | Align::Left)
 		{
 		}
 
 		Component::Component(IComponentAdapter* adapter)
 			: _adapter(adapter)
 			, _parent(nullptr)
+			, _alignment(Align::Top | Align::Left)
 		{
 		}
 

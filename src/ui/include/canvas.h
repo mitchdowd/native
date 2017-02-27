@@ -48,6 +48,12 @@ namespace native
 			void fillRectangle(const Rectangle& area, const Brush& brush);
 
 			/**
+				Offsets future drawing operations by the given amount.
+				\param offset Distances to offset by.
+			 */
+			void offset(const Point& offset) { _offset.x += offset.x; _offset.y += offset.y; }
+
+			/**
 				Gets the system resource handle for this Canvas.
 				\return System resource handle.
 			 */
@@ -64,6 +70,7 @@ namespace native
 			handle_t _handle;
 			handle_t _auxHandle;
 			bool     _needsDelete;
+			Point    _offset;
 		};
 
 		/**
