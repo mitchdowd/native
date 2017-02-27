@@ -109,9 +109,9 @@ namespace native
 
                     case ComponentEvent::onSize:
                         {
-                            Rectangle area = _component->getArea();
-                            area.setSize(*(Size*) event.arg);
-                            _component->updateArea(area);
+							Size* size = (Size*) event.arg;
+                            _component->_area.setSize(*size);
+							_component->onSize(*size);
                             break;
                         }
                 }
