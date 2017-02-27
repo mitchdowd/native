@@ -11,6 +11,8 @@
     <ClCompile Include="src\win32\brush.cpp" />
     <ClCompile Include="src\win32\canvas.cpp" />
     <ClCompile Include="include\rectangle.h" />
+    <ClCompile Include="src\common\rectangle.cpp" />
+    <ClCompile Include="src\common\size.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
@@ -27,5 +29,6 @@
     <ClInclude Include="include\color.h" />
     <ClInclude Include="include\brush.h" />
     <ClInclude Include="include\canvas.h" />
+    <ClInclude Include="include\size.h" />
   </ItemGroup>
 </Project>

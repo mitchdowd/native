@@ -1,6 +1,9 @@
 #ifndef _NATIVE_UI_CANVAS_H_
 #define _NATIVE_UI_CANVAS_H_ 1
 
+// External Dependencies
+#include "../../core/include/exception.h"
+
 // Local Dependencies
 #include "brush.h"
 #include "rectangle.h"
@@ -60,6 +63,20 @@ namespace native
 			// Instance Variables
 			handle_t _handle;
 			handle_t _auxHandle;
+			bool     _needsDelete;
+		};
+
+		/**
+			An error occurred in a graphics/drawing operation.
+		 */
+		class GraphicsException : public Exception
+		{
+		public:
+			/**
+				Creates a GraphicsException with an error message.
+				\param message Error message.
+			 */
+			GraphicsException(const char* message) : Exception(message) {}
 		};
 	}
 }

@@ -4,6 +4,7 @@
 
 // External Dependencies
 #include "../../../core/include/spinlock.h"
+#include "../../../core/include/system.h"
 
 // Local Dependencies
 #include "../../include/canvas.h"
@@ -46,9 +47,15 @@ namespace native
 		// Static Constants
 		static const GraphicsInitializer initializer;
 
-		Canvas::Canvas(handle_t handle, handle_t auxHandle)
+		static Gdiplus::Rect toGdiRect(const Rectangle& rectangle)
 		{
-			// TODO
+			return Gdiplus::Rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+		}
+
+		Canvas::Canvas(handle_t handle, handle_t auxHandle) : _handle(handle), _auxHandle(auxHandle), _needsDelete(false)
+		{
+			if (auxHandle == nullptr)
+				throw InvalidArgumentException();
 		}
 
 		Canvas::Canvas(Component& component)
@@ -58,12 +65,20 @@ namespace native
 
 		Canvas::~Canvas()
 		{
-			// TODO
+			if (_needsDelete)
+			{
+				delete (Gdiplus::Graphics*) _handle;
+				::ReleaseDC(NULL, HDC(_auxHandle));
+			}
 		}
 
 		void Canvas::fillRectangle(const Rectangle& area, const Brush& brush)
 		{
-			throw NotImplementedException();
+			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
+			Gdiplus::Brush*    gdiBrush = (Gdiplus::Brush*) brush.getHandle();
+
+			if (graphics->FillRectangle(gdiBrush, toGdiRect(area.scale(System::getDisplayScale()))) != Gdiplus::Ok)
+				throw GraphicsException("Graphics::FillRectangle()");
 		}
 	}
 }

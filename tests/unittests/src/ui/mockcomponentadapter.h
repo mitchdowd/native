@@ -21,6 +21,8 @@ namespace native
 
 			virtual bool isVisible() const override { return _visible; }
 
+			virtual ui::Rectangle getContentArea() const override { return _area.getSize(); }
+
 			virtual void setText(const String& text) override {}
 
 			virtual void doPaint(ui::Canvas& canvas) override {}
@@ -29,6 +31,7 @@ namespace native
 			// Instance Variables
 			ui::IComponentAdapter* _parent;
 			bool _visible;
+			ui::Rectangle _area;
 		};
 	}
 }

@@ -65,6 +65,21 @@ namespace native
 			bool isVisible() const;
 
 			/**
+				Gets the current area, relative to the parent Component.
+				\return The current Area.
+			 */
+			Rectangle getArea() const { return _area; }
+
+			/**
+				Gets the usable portion of this Component's area, relative to
+				the Component's top-left corner. For many Components this will
+				simply be the size of the Component, located at the origin, but
+				things such as borders will shrink the usable content area.
+				\return The content area.
+			 */
+			Rectangle getContentArea() const;
+
+			/**
 				Sets the Brush used to paint this Component's background.
 				\param background The background Brush.
 			 */
@@ -87,6 +102,13 @@ namespace native
 				\param canvas The canvas to paint with.
 			 */
 			virtual void dispatchPaintEvent(Canvas& canvas);
+
+			/**
+				For internal use only. Updates the Rectangle's area in response
+				to user input (e.g. Resizing a Window).
+				\param area The new area.
+			 */
+			void updateArea(const Rectangle& area) { _area = area; }
 
 		protected:
 			/**
@@ -111,6 +133,7 @@ namespace native
 			IComponentAdapter* _adapter;
 			LayoutComponent*   _parent;
 			Visibility		   _visibility;
+			Rectangle		   _area;
 			Brush              _background;
 		};
 

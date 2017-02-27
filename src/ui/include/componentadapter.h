@@ -51,6 +51,13 @@ namespace native
 			virtual bool isVisible() const override;
 
 			/**
+				Gets the content area of the Component, relative to its non-content
+				area.
+				\return The content area.
+			 */
+			virtual Rectangle getContentArea() const override;
+
+			/**
 				Sets the component's text, for those that support text.
 				\param text The text to set.
 			 */

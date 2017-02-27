@@ -10,6 +10,8 @@ public:
     App()
     {
         setTitle("To-Do List");
+
+		setBackground(native::ui::Color(0xFF, 0, 0));
     }
 };
 

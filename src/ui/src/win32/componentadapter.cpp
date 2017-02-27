@@ -112,6 +112,18 @@ namespace native
 			return ::IsWindowVisible(HWND(_handle)) != FALSE;
 		}
 
+		Rectangle ComponentAdapter::getContentArea() const
+		{
+			RECT client, window;
+
+			::GetClientRect(HWND(_handle), &client);
+			::GetWindowRect(HWND(_handle), &window);
+			::MapWindowPoints(HWND(_handle), NULL, LPPOINT(&client), sizeof(RECT) / sizeof(POINT));
+			::OffsetRect(&client, -window.left, -window.top);
+
+			return { client.left, client.top, client.right - client.left, client.bottom - client.top };
+		}
+
 		void ComponentAdapter::setText(const String& text)
 		{
 			::SetWindowText(HWND(_handle), text.toArray());
@@ -126,12 +138,10 @@ namespace native
 				// Call paint process of the native control.
 				::CallWindowProc(WNDPROC(baseProc), HWND(_handle), WM_PRINTCLIENT, WPARAM(canvas.getAuxHandle()), 0);
 			}
-			/*
-			else if (_component->_background)
+			else if (_component->getBackground().getHandle())
 			{
-				canvas.fillRectangle(_component->getContentArea().getSize(), *_component->_background);
+				canvas.fillRectangle(_component->getContentArea().getSize(), _component->getBackground());
 			}
-			*/
 		}
 
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
@@ -167,6 +177,20 @@ namespace native
 					::EndPaint(event.hwnd, &ps);
 					event.result = 0;
 					return;
+				}
+				break;
+
+			case WM_SIZE:
+				{
+					RECT rect;
+
+					::GetWindowRect(HWND(_handle), &rect);
+
+					// Ensure the new size is properly reflected in the Component.
+					Rectangle area = _component->getArea();
+					area.setSize({ rect.right - rect.left, rect.bottom - rect.top });
+
+					_component->updateArea(area);
 				}
 				break;
 			}

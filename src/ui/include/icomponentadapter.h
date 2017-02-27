@@ -4,6 +4,9 @@
 // External Dependencies
 #include "../../core/include/string.h"
 
+// Module Dependencies
+#include "rectangle.h"
+
 namespace native
 {
 	namespace ui
@@ -42,6 +45,13 @@ namespace native
 				\return true if visible, false if not.
 			 */
 			virtual bool isVisible() const = 0;
+
+			/**
+				Gets the content area of the Component, relative to its non-content
+				area.
+				\return The content area.
+			 */
+			virtual Rectangle getContentArea() const = 0;
 
 			/**
 				Sets the component's text, for those that support text.

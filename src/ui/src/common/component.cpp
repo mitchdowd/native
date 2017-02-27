@@ -1,5 +1,6 @@
 // External Dependencies
 #include "../../../core/include/exception.h"
+#include "../../../core/include/system.h"
 
 // Module Dependencies
 #include "../../include/component.h"
@@ -74,6 +75,11 @@ namespace native
 			return _visibility == Show;
 		}
 
+		Rectangle Component::getContentArea() const
+		{
+			return _adapter ? _adapter->getContentArea().scale(1 / System::getDisplayScale()) : _area.getSize();
+		}
+
 		void Component::setBackground(const Brush& background)
 		{
 			_background = background;
@@ -93,10 +99,8 @@ namespace native
 		{
 			if (_adapter)
 				_adapter->doPaint(canvas);
-			/*
-			else if (_background)
+			else if (_background.getHandle())
 				canvas.fillRectangle(getContentArea().getSize(), _background);
-			*/
 		}
 
 		void Component::setParentAdapter(IComponentAdapter* parent)
