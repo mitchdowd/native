@@ -10,6 +10,7 @@ namespace native
 	{
 		// Forward Declarations
 		class Component;
+		class Window;
 		struct ComponentAdapterProperties;
 
 		/**
@@ -56,6 +57,12 @@ namespace native
 			virtual void setText(const String& text) override;
 
 			/**
+				Paints the component however the system usually would.
+				\param canvas The Canvas to paint with.
+			 */
+			virtual void doPaint(Canvas& canvas) override;
+
+			/**
 				Gets the handle to system resources for this ComponentAdapter.
 				\return The system resource handle.
 			 */
@@ -77,7 +84,8 @@ namespace native
 
 		private:
 			// Instance Variables
-			handle_t _handle;
+			handle_t   _handle;
+			Component* _component;
 		};
 
 		/**
@@ -86,8 +94,11 @@ namespace native
 		class WindowAdapter : public ComponentAdapter
 		{
 		public:
-			/** Default constructor. */
-			WindowAdapter();
+			/** 
+				Creates a WindowAdapter.
+				\param window The Window to bind to.
+			 */
+			WindowAdapter(Window* window);
 
 			/**
 				Sets the title text of the Window.

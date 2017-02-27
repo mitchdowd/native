@@ -46,6 +46,11 @@ namespace native
 		// Static Constants
 		static const GraphicsInitializer initializer;
 
+		Canvas::Canvas(handle_t handle, handle_t auxHandle)
+		{
+			// TODO
+		}
+
 		Canvas::Canvas(Component& component)
 		{
 			throw NotImplementedException();

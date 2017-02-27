@@ -9,6 +9,7 @@ namespace native
 	namespace ui
 	{
 		// Forward Declarations
+		class Canvas;
 		struct ComponentEvent;
 
 		/**
@@ -47,6 +48,12 @@ namespace native
 				\param text The text to set.
 			 */
 			virtual void setText(const String& text) = 0;
+
+			/**
+				Paints the component however the system usually would.
+				\param canvas The Canvas to paint with.
+			 */
+			virtual void doPaint(Canvas& canvas) = 0;
 		};
 	}
 }

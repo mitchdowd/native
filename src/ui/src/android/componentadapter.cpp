@@ -47,6 +47,11 @@ namespace native
 			throw NotImplementedException();
 		}
 
+		void ComponentAdapter::doPaint(Canvas& canvas)
+		{
+			// TODO
+		}
+
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
 		{
 			throw NotImplementedException();
@@ -61,7 +66,7 @@ namespace native
 			WindowAdapter Functions
 		 */
 
-		WindowAdapter::WindowAdapter() : ComponentAdapter({ /* todo */ })
+		WindowAdapter::WindowAdapter(Window* window) : ComponentAdapter({ /* todo */ })
 		{
 		}
 

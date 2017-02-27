@@ -82,6 +82,12 @@ namespace native
 			 */
 			IComponentAdapter* getAdapter() const noexcept { return _adapter; }
 
+			/**
+				For internal use only in triggering the repaint sequence.
+				\param canvas The canvas to paint with.
+			 */
+			virtual void dispatchPaintEvent(Canvas& canvas);
+
 		protected:
 			/**
 				This is where the painting of the Component occurs. Override to

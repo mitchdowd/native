@@ -9,8 +9,10 @@
 #include "../../../core/include/system.h"
 
 // Module Dependencies
+#include "../../include/canvas.h"
 #include "../../include/component.h"
 #include "../../include/componentadapter.h"
+#include "../../include/window.h"
 
 // Local Dependencies
 #include "componentadapterproperties.h"
@@ -51,7 +53,7 @@ namespace native
 		 */
 		HWND getDefaultParent();
 
-		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props)
+		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props) : _component(props.component)
 		{
 			ensureApiRegistered();
 
@@ -115,6 +117,23 @@ namespace native
 			::SetWindowText(HWND(_handle), text.toArray());
 		}
 
+		void ComponentAdapter::doPaint(Canvas& canvas)
+		{
+			LONG_PTR baseProc = ::GetClassLongPtr(HWND(_handle), GCLP_WNDPROC);
+
+			if (baseProc != LONG_PTR(ComponentEvent::WindowProc))
+			{
+				// Call paint process of the native control.
+				::CallWindowProc(WNDPROC(baseProc), HWND(_handle), WM_PRINTCLIENT, WPARAM(canvas.getAuxHandle()), 0);
+			}
+			/*
+			else if (_component->_background)
+			{
+				canvas.fillRectangle(_component->getContentArea().getSize(), *_component->_background);
+			}
+			*/
+		}
+
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
 		{
 			return (ComponentAdapter*) ::GetWindowLongPtr(HWND(handle), GWLP_USERDATA);
@@ -128,6 +147,27 @@ namespace native
 			{
 			case WM_DESTROY:
 				_handle = nullptr;
+				break;
+
+			case WM_PAINT:
+				if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)
+				{
+					PAINTSTRUCT ps = { 0 };
+
+					HDC hdc = ::BeginPaint(event.hwnd, &ps);
+
+					{
+						// TODO: Dispatch the paint messages.
+						Gdiplus::Graphics graphics = hdc;
+						Canvas canvas(&graphics, hdc);
+
+						_component->dispatchPaintEvent(canvas);
+					}
+
+					::EndPaint(event.hwnd, &ps);
+					event.result = 0;
+					return;
+				}
 				break;
 			}
 
@@ -145,7 +185,7 @@ namespace native
 			WindowAdapter Functions
 		*/
 
-		WindowAdapter::WindowAdapter() : ComponentAdapter({ nullptr, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN, 0 })
+		WindowAdapter::WindowAdapter(Window* window) : ComponentAdapter({ window, nullptr, WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN, 0 })
 		{
 		}
 
@@ -185,15 +225,14 @@ namespace native
 				::InitCommonControlsEx(&icc);
 
 				// Register the main window class.
-				wc.cbSize        = sizeof(wc);
-				wc.lpfnWndProc   = ComponentEvent::WindowProc;
+				wc.cbSize        =   sizeof(wc);
+				wc.lpfnWndProc   =   ComponentEvent::WindowProc;
 				wc.hInstance     = ::GetModuleHandle(0);
 				wc.hIcon         = ::LoadIcon(0, IDI_APPLICATION);
 				wc.hCursor       = ::LoadCursor(0, IDC_ARROW);
-				wc.lpszClassName = NATIVE_WINDOW_CLASS_NAME;
+				wc.lpszClassName =   NATIVE_WINDOW_CLASS_NAME;
 				wc.hIconSm       = ::LoadIcon(0, IDI_APPLICATION);
-				wc.style         = CS_HREDRAW | CS_VREDRAW;
-				wc.hbrBackground = HBRUSH(COLOR_WINDOW + 1);
+				wc.style         =   CS_HREDRAW | CS_VREDRAW;
 
 				::RegisterClassEx(&wc);
 
@@ -236,6 +275,21 @@ namespace native
 
 		LRESULT CALLBACK ComponentEvent::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 		{
+			ComponentAdapter* adapter = ComponentAdapter::fromHandle(hwnd);
+
+			if (adapter)
+			{
+				ComponentEvent event = { hwnd, msg, wparam, lparam, 0 };
+
+				adapter->onEvent(event);
+				return event.result;
+			}
+
+			// Check for inherited window proc.
+			LONG_PTR baseProc = ::GetClassLongPtr(hwnd, GCLP_WNDPROC);
+			if (baseProc != LONG_PTR(ComponentEvent::WindowProc))
+				return ::CallWindowProc(WNDPROC(baseProc), hwnd, msg, wparam, lparam);
+
 			return ::DefWindowProc(hwnd, msg, wparam, lparam);
 		}
 	}

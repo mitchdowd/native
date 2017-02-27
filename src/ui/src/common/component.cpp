@@ -84,9 +84,19 @@ namespace native
 			return _background;
 		}
 
+		void Component::dispatchPaintEvent(Canvas& canvas)
+		{
+			onPaint(canvas);
+		}
+
 		void Component::onPaint(Canvas& canvas)
 		{
-			// TODO: Paint the background.
+			if (_adapter)
+				_adapter->doPaint(canvas);
+			/*
+			else if (_background)
+				canvas.fillRectangle(getContentArea().getSize(), _background);
+			*/
 		}
 
 		void Component::setParentAdapter(IComponentAdapter* parent)

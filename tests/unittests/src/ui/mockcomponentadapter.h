@@ -23,6 +23,8 @@ namespace native
 
 			virtual void setText(const String& text) override {}
 
+			virtual void doPaint(ui::Canvas& canvas) override {}
+
 		private:
 			// Instance Variables
 			ui::IComponentAdapter* _parent;
