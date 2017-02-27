@@ -21,6 +21,8 @@ namespace native
 
 			virtual bool isVisible() const override { return _visible; }
 
+			virtual void setArea(const ui::Rectangle& area) override { _area = area; }
+
 			virtual ui::Rectangle getContentArea() const override { return _area.getSize(); }
 
 			virtual void setText(const String& text) override {}

@@ -61,6 +61,11 @@ namespace native
 			throw NotImplementedException();
 		}
 
+		void ComponentAdapter::setArea(const Rectangle& area)
+		{
+			HANDLE_OBJ->call<void>("setArea", area.x, area.y, area.width, area.height);
+		}
+
 		Rectangle ComponentAdapter::getContentArea() const
 		{
             return _component->getArea().getSize();

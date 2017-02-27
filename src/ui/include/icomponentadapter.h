@@ -47,6 +47,13 @@ namespace native
 			virtual bool isVisible() const = 0;
 
 			/**
+				Sets the area occupied by this adapter, relative to its parent
+				adapter (not necessarily the parent Component).
+				\param area The area to set.
+			 */
+			virtual void setArea(const Rectangle& area) = 0;
+
+			/**
 				Gets the content area of the Component, relative to its non-content
 				area.
 				\return The content area.

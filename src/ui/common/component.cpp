@@ -10,6 +10,16 @@ namespace native
 {
 	namespace ui
 	{
+		static Rectangle toSystemArea(const Component* component, const Rectangle& area_)
+		{
+			Rectangle area = area_;
+
+			for (const Component* i = component->getParent(); i && !i->getAdapter(); i = i->getParent())
+				area = area.offset(i->getArea().getPosition());
+
+			return area;
+		}
+
 		Component::Component()
 			: _adapter(nullptr)
 			, _parent(nullptr)
@@ -73,6 +83,16 @@ namespace native
 			}
 
 			return _visibility == Show;
+		}
+
+		void Component::setArea(const Rectangle& area)
+		{
+			Rectangle oldArea = _area;
+
+			if (_adapter)
+				_adapter->setArea(toSystemArea(this, area).scale(System::getDisplayScale()));
+
+			_area = area;
 		}
 
 		Rectangle Component::getContentArea() const

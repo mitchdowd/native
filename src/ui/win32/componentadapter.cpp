@@ -112,6 +112,12 @@ namespace native
 			return ::IsWindowVisible(HWND(_handle)) != FALSE;
 		}
 
+		void ComponentAdapter::setArea(const Rectangle& area)
+		{
+			if (::SetWindowPos(HWND(_handle), NULL, area.x, area.y, area.width, area.height, SWP_NOZORDER) == 0)
+				throw UserInterfaceException("SetWindowPos() failed");
+		}
+
 		Rectangle ComponentAdapter::getContentArea() const
 		{
 			RECT client, window;
@@ -175,7 +181,6 @@ namespace native
 					}
 
 					::EndPaint(event.hwnd, &ps);
-					event.result = 0;
 					return;
 				}
 				break;

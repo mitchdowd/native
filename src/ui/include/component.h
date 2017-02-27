@@ -65,6 +65,14 @@ namespace native
 			bool isVisible() const;
 
 			/**
+				Sets tha are used by this Component, relative to the top-left
+				co-ordinates of its parent Component. This does not take things
+				such as margins or alignment into account.
+				\param area The new area to set.
+			 */
+			void setArea(const Rectangle& area);
+
+			/**
 				Gets the current area, relative to the parent Component.
 				\return The current Area.
 			 */
