@@ -13,6 +13,7 @@
     <ClCompile Include="include\rectangle.h" />
     <ClCompile Include="src\common\rectangle.cpp" />
     <ClCompile Include="src\common\size.cpp" />
+    <ClCompile Include="src\common\point.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
@@ -30,5 +31,6 @@
     <ClInclude Include="include\brush.h" />
     <ClInclude Include="include\canvas.h" />
     <ClInclude Include="include\size.h" />
+    <ClInclude Include="include\point.h" />
   </ItemGroup>
 </Project>

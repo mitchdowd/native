@@ -70,6 +70,11 @@
     <ClCompile Include="src\ui\layoutcomponent.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\rectangle.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\size.cpp" />
+    <ClCompile Include="src\ui\point.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\mockcomponentadapter.h">

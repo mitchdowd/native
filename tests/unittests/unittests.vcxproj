@@ -157,6 +157,9 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ui\component.cpp" />
     <ClCompile Include="src\ui\layoutcomponent.cpp" />
+    <ClCompile Include="src\ui\point.cpp" />
+    <ClCompile Include="src\ui\rectangle.cpp" />
+    <ClCompile Include="src\ui\size.cpp" />
     <ClCompile Include="src\ui\window.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -146,6 +146,7 @@
     <ClCompile Include="include\rectangle.h" />
     <ClCompile Include="src\common\component.cpp" />
     <ClCompile Include="src\common\layoutcomponent.cpp" />
+    <ClCompile Include="src\common\point.cpp" />
     <ClCompile Include="src\common\rectangle.cpp" />
     <ClCompile Include="src\common\size.cpp" />
     <ClCompile Include="src\common\textcomponent.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="include\eventqueue.h" />
     <ClInclude Include="include\icomponentadapter.h" />
     <ClInclude Include="include\layoutcomponent.h" />
+    <ClInclude Include="include\point.h" />
     <ClInclude Include="include\size.h" />
     <ClInclude Include="include\textcomponent.h" />
     <ClInclude Include="include\window.h" />
