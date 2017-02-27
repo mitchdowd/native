@@ -33,14 +33,14 @@ model {
                 }
                 java {
                     source {
-                        srcDir 'src/android/java'
+                        srcDir 'android/java'
                     }
                 }
                 jni {
                     source {
                         srcDirs 'include'
-                        srcDirs 'src/android'
-                        srcDirs 'src/common'
+                        srcDirs 'android'
+                        srcDirs 'common'
                     }
                     dependencies {
                         project ':core' linkage 'static'

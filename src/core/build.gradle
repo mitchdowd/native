@@ -31,8 +31,8 @@ model {
                 jni {
                     source {
                         srcDirs 'include'
-                        srcDirs 'src/android'
-                        srcDirs 'src/common'
+                        srcDirs 'android'
+                        srcDirs 'common'
                     }
                 }
             }

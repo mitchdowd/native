@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\win32\atomic.cpp" />
-    <ClCompile Include="src\common\convert.cpp" />
-    <ClCompile Include="src\common\hash.cpp" />
-    <ClCompile Include="src\common\memory.cpp" />
-    <ClCompile Include="src\common\spinlock.cpp" />
-    <ClCompile Include="src\win32\thread.cpp" />
-    <ClCompile Include="src\common\array.cpp" />
-    <ClCompile Include="src\common\math.cpp" />
-    <ClCompile Include="src\common\string.cpp" />
-    <ClCompile Include="src\common\asciicodec.cpp" />
-    <ClCompile Include="src\common\latin1codec.cpp" />
-    <ClCompile Include="src\common\stringcodec.cpp" />
-    <ClCompile Include="src\common\utf8codec.cpp" />
-    <ClCompile Include="src\common\singleton.cpp" />
-    <ClCompile Include="src\win32\system.cpp" />
+    <ClCompile Include="win32\atomic.cpp" />
+    <ClCompile Include="common\convert.cpp" />
+    <ClCompile Include="common\hash.cpp" />
+    <ClCompile Include="common\memory.cpp" />
+    <ClCompile Include="common\spinlock.cpp" />
+    <ClCompile Include="win32\thread.cpp" />
+    <ClCompile Include="common\array.cpp" />
+    <ClCompile Include="common\math.cpp" />
+    <ClCompile Include="common\string.cpp" />
+    <ClCompile Include="common\asciicodec.cpp" />
+    <ClCompile Include="common\latin1codec.cpp" />
+    <ClCompile Include="common\stringcodec.cpp" />
+    <ClCompile Include="common\utf8codec.cpp" />
+    <ClCompile Include="common\singleton.cpp" />
+    <ClCompile Include="win32\system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\platform.h" />
