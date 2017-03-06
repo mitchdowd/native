@@ -24,6 +24,7 @@ namespace native
 			: _adapter(nullptr)
 			, _parent(nullptr)
 			, _alignment(Align::Top | Align::Left)
+			, _margins({ 0, 0, 0, 0 })
 		{
 		}
 
@@ -31,6 +32,7 @@ namespace native
 			: _adapter(adapter)
 			, _parent(nullptr)
 			, _alignment(Align::Top | Align::Left)
+			, _margins({ 0, 0, 0, 0 })
 		{
 		}
 
@@ -95,6 +97,21 @@ namespace native
 				_adapter->setArea(toSystemArea(this, area).scale(System::getDisplayScale()));
 
 			_area = area;
+		}
+
+		void Component::allocateArea(const Rectangle& area)
+		{
+			Rectangle selection = area;
+
+			// Take margins into account.
+			selection.x += _margins.left;
+			selection.y += _margins.top;
+			selection.width  -= _margins.left + _margins.right;
+			selection.height -= _margins.top  + _margins.bottom;
+
+			// TODO: Alignment
+
+			setArea(selection);
 		}
 
 		Rectangle Component::getContentArea() const

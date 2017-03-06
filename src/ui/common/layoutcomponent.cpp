@@ -40,6 +40,12 @@ namespace native
 				child->setParentAdapter(tmp ? tmp->_adapter : nullptr);
 		}
 
+		void LayoutComponent::onSize(const Size& size)
+		{
+			for (auto child : _children)
+				child->allocateArea(size);
+		}
+
 		void LayoutComponent::setParentAdapter(IComponentAdapter* parent)
 		{
 			IComponentAdapter* adapter = getAdapter();

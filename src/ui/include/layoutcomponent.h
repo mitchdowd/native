@@ -52,6 +52,13 @@ namespace native
 			const List<Component*>& getChildren() const noexcept { return _children; }
 
 		protected:
+			/**
+				Called when the geometric size of the Component changes. This will
+				allocate the entire content area to each child by default.
+				\param size The new size.
+			 */
+			virtual void onSize(const Size& size) override;
+
 			/** For internal use only. */
 			virtual void setParentAdapter(IComponentAdapter* parent) override;
 

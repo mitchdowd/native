@@ -46,6 +46,16 @@ namespace native
 		typedef Alignment Align;
 
 		/**
+			Margins to place around a Component.
+		 */
+		struct Margins {
+			coord_t top;
+			coord_t right;
+			coord_t bottom;
+			coord_t left;
+		};
+
+		/**
 			The base class for user interface elements.
 		 */
 		class Component
@@ -93,6 +103,7 @@ namespace native
 			 */
 			bool isVisible() const;
 
+
 			/**
 				Sets tha are used by this Component, relative to the top-left
 				co-ordinates of its parent Component. This does not take things
@@ -106,6 +117,14 @@ namespace native
 				\return The current Area.
 			 */
 			Rectangle getArea() const { return _area; }
+
+			/**
+				Allocates a given area to the Rectangle. This area includes the
+				margins, borders and any alignment values, which may result in
+				a smaller subset of the area finally being set.
+				\param area The area to allocate.
+			 */
+			virtual void allocateArea(const Rectangle& area);
 
 			/**
 				Gets the usable portion of this Component's area, relative to
@@ -128,6 +147,20 @@ namespace native
 				\return The current Alignment.
 			 */
 			Flags<Alignment> getAlignment() const { return _alignment; }
+
+			/**
+				Sets the margins to reserve around the Component when allocating
+				area to it.
+				\param margins The margins to set.
+			 */
+			void setMargins(const Margins& margins) { _margins = margins; }
+
+			/**
+				Gets the currently-set margins on this Component.
+				\return The current margins.
+			 */
+			Margins& getMargins() noexcept { return _margins; }
+			const Margins& getMargins() const noexcept { return _margins; }
 
 			/**
 				Sets the Brush used to paint this Component's background.
@@ -188,6 +221,7 @@ namespace native
 			Rectangle		   _area;
 			Brush              _background;
 			Flags<Alignment>   _alignment;
+			Margins            _margins;
 		};
 
 		/**

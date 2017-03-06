@@ -92,6 +92,15 @@ namespace native
 	public:
 		NotImplementedException(const char* message = "Function not implemented") : Exception(message) {}
 	};
+
+	/**
+		The given operation is not supported on the current platform.
+	 */
+	class NotSupportedException : public Exception
+	{
+	public:
+		NotSupportedException(const char* message = "Operation not supported") : Exception(message) {}
+	};
 }
 
 #endif // _NATIVE_EXCEPTION_H_

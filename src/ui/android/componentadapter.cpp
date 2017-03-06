@@ -72,8 +72,8 @@ namespace native
 		}
 
 		void ComponentAdapter::setText(const String& text)
-		{
-			throw NotImplementedException();
+        {
+			throw NotSupportedException("Only text Components can have their text set.");
 		}
 
 		void ComponentAdapter::doPaint(Canvas& canvas)

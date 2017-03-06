@@ -15,6 +15,7 @@ public:
 
 		addChild(_child);
 
+		_child.setMargins({ 20, 20, 20, 20 });
 		_child.setBackground(native::ui::Color(0xFF, 0, 0));
     }
 
