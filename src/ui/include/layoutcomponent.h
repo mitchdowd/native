@@ -65,6 +65,9 @@ namespace native
 			/** For internal use only. */
 			void removeChild(Component* child);
 
+			/** For internal use. */
+			virtual void dispatchPaintEvent(Canvas& canvas) override;
+
 		private:
 			// Class Friendships
 			friend class Component;

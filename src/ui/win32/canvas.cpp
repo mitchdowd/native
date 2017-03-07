@@ -77,7 +77,7 @@ namespace native
 			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
 			Gdiplus::Brush*    gdiBrush = (Gdiplus::Brush*) brush.getHandle();
 
-			if (graphics->FillRectangle(gdiBrush, toGdiRect(area.scale(System::getDisplayScale()))) != Gdiplus::Ok)
+			if (graphics->FillRectangle(gdiBrush, toGdiRect(area.offset(_offset).scale(System::getDisplayScale()))) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::FillRectangle()");
 		}
 	}

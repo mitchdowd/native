@@ -32,7 +32,7 @@ namespace native
 
 		void Canvas::fillRectangle(const Rectangle& rect, const Brush& brush)
 		{
-            Rectangle area = rect.scale(System::getDisplayScale());
+            Rectangle area = rect.offset(_offset).scale(System::getDisplayScale());
             HANDLE_OBJ->call<void>("drawRect(FFFFLandroid/graphics/Paint;)V", float(area.x), float(area.y), float(area.x + area.width), float(area.y + area.height), (jni::Object*) brush.getHandle());
 		}
 	}

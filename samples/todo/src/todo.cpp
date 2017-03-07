@@ -11,17 +11,22 @@ public:
     {
         setTitle("To-Do List");
 
-		setBackground(native::ui::Color(0, 0xFF, 0));
+		setBackground(native::ui::Color(0x49, 0x4B, 0x54));
 
 		addChild(_child);
 
-		_child.setMargins({ 20, 20, 20, 20 });
-		_child.setBackground(native::ui::Color(0xFF, 0, 0));
+		_child.setMargin(20);
+		_child.setBackground(native::ui::Color(0x42, 0x44, 0x4C));
+
+		_child.addChild(_inner);
+
+		_inner.setMargin(100);
+		_inner.setBackground(native::ui::Color(0x49, 0x4B, 0x54));
     }
 
 private:
 	// Instance Variables
-	LayoutComponent _child;
+	LayoutComponent _child, _inner;
 };
 
 // Entry Point

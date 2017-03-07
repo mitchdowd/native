@@ -70,6 +70,29 @@ namespace native
 				}
 			}
 		}
+
+		void LayoutComponent::dispatchPaintEvent(Canvas& canvas)
+		{
+			// Paint our own background.
+			onPaint(canvas);
+
+			// Repaint the children.
+			for (auto child : _children)
+			{
+				if (!child->_adapter)
+				{
+					// Offset the canvas to the child's content area.
+					Point offset = child->getArea().getPosition();
+					Rectangle content = child->getContentArea();
+					offset.x += content.x;
+					offset.y += content.y;
+
+					canvas.offset(offset);
+					child->dispatchPaintEvent(canvas);
+					canvas.offset(offset.inverse());
+				}
+			}
+		}
     }
 }
 

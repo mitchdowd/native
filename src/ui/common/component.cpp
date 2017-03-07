@@ -97,6 +97,10 @@ namespace native
 				_adapter->setArea(toSystemArea(this, area).scale(System::getDisplayScale()));
 
 			_area = area;
+
+			// Trigger the onSize() callback.
+			if (!_adapter && area.getSize() != oldArea.getSize())
+				onSize(area.getSize());
 		}
 
 		void Component::allocateArea(const Rectangle& area)

@@ -156,6 +156,12 @@ namespace native
 			void setMargins(const Margins& margins) { _margins = margins; }
 
 			/**
+				Sets the same margin on all 4 sides of this Component.
+				\param margin The margin to set.
+			 */
+			void setMargin(coord_t margin) { setMargins({ margin, margin, margin, margin }); }
+
+			/**
 				Gets the currently-set margins on this Component.
 				\return The current margins.
 			 */
