@@ -137,9 +137,17 @@ namespace native
 			TextComponentAdapter Functions
 		 */
 		
-		TextComponentAdapter::TextComponentAdapter() : ComponentAdapter({ /* todo */ })
+		TextComponentAdapter::TextComponentAdapter(TextComponent* component) : ComponentAdapter({ /* todo */ })
 		{
 		}
+
+        /*
+            ButtonAdapter Functions
+         */
+
+        ButtonAdapter::ButtonAdapter(Button* button) : ComponentAdapter({ /* todo */ })
+        {
+        }
 	}
 }
 

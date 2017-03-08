@@ -3,6 +3,7 @@
 
 #include "../src/ui/include/app.h"
 #include "../src/ui/include/brush.h"
+#include "../src/ui/include/button.h"
 #include "../src/ui/include/canvas.h"
 #include "../src/ui/include/color.h"
 #include "../src/ui/include/component.h"

@@ -9,9 +9,11 @@
 #include "../../core/include/system.h"
 
 // Module Dependencies
+#include "../include/button.h"
 #include "../include/canvas.h"
 #include "../include/component.h"
 #include "../include/componentadapter.h"
+#include "../include/textcomponent.h"
 #include "../include/window.h"
 
 // Local Dependencies
@@ -225,7 +227,17 @@ namespace native
 			TextComponentAdapter Functions
 		*/
 
-		TextComponentAdapter::TextComponentAdapter() : ComponentAdapter({ nullptr, 0, 0 })
+		TextComponentAdapter::TextComponentAdapter(TextComponent* component) 
+			: ComponentAdapter({ component, nullptr, WS_CHILD | WS_VISIBLE, 0 })
+		{
+		}
+
+		/*
+			ButtonAdapter Functions
+		 */
+
+		ButtonAdapter::ButtonAdapter(Button* button) 
+			: ComponentAdapter({ button, L"BUTTON", WS_CHILD | WS_VISIBLE, 0 })
 		{
 		}
 

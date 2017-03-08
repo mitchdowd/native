@@ -6,7 +6,7 @@ namespace native
 {
 	namespace ui
 	{
-		TextComponent::TextComponent() : Component(new TextComponentAdapter())
+		TextComponent::TextComponent() : Component(new TextComponentAdapter(this))
 		{
 		}
 

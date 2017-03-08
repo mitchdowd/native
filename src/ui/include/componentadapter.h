@@ -102,6 +102,10 @@ namespace native
 			Component* _component;
 		};
 
+		// Forward Declarations
+		class Button;
+		class TextComponent;
+
 		/**
 			A subclassed adapter for Window-specific functionality.
 		 */
@@ -127,8 +131,24 @@ namespace native
 		class TextComponentAdapter : public ComponentAdapter
 		{
 		public:
-			/** Default constructor. */
-			TextComponentAdapter();
+			/** 
+				Creates an adapter for a basic TextComponent.
+				\param component The TextComponent for the adapter.
+			 */
+			TextComponentAdapter(TextComponent* component);
+		};
+
+		/**
+			A subclassed adapter for Buttons.
+		 */
+		class ButtonAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given Button.
+				\param button The Button for this adapter.
+			 */
+			ButtonAdapter(Button* button);
 		};
 	}
 }

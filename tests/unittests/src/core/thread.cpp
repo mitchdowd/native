@@ -6,7 +6,7 @@
 using namespace native;
 
 // Constants
-#define THREAD_WAIT_TIME 10
+#define THREAD_WAIT_TIME 100
 
 // Static Variables
 static bool hasUpdated = false;
