@@ -241,6 +241,11 @@ namespace native
 		{
 		}
 
+		void ButtonAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
+		}
+
 		/*
 			Local Functions
 		 */

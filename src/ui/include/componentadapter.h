@@ -149,6 +149,12 @@ namespace native
 				\param button The Button for this adapter.
 			 */
 			ButtonAdapter(Button* button);
+
+            /**
+                Sets the button text.
+                \param text The new button text.
+             */
+			virtual void setText(const String& text) override;
 		};
 	}
 }

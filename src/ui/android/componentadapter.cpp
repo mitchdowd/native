@@ -4,6 +4,7 @@
 
 // Module Dependencies
 #include "../include/app.h"
+#include "../include/button.h"
 #include "../include/componentadapter.h"
 
 // Local Dependencies
@@ -11,7 +12,7 @@
 #include "componentevent.h"
 
 /** Just a shortcut so I don't have to keep doing those casts. */
-#define HANDLE_OBJ ((jni::Object*) _handle)
+#define HANDLE_OBJ ((jni::Object*) getHandle())
 
 namespace native
 {
@@ -48,7 +49,11 @@ namespace native
 
 		void ComponentAdapter::setParent(IComponentAdapter* parent)
 		{
-			throw NotImplementedException();
+            if (parent == nullptr)
+                throw new InvalidArgumentException();
+
+            jni::Object* ph = (jni::Object*) ((ComponentAdapter*) parent)->getHandle();
+            ph->call<void>("addView(Landroid/view/View;)V", HANDLE_OBJ);
 		}
 
 		void ComponentAdapter::setVisible(bool visible)
@@ -145,8 +150,13 @@ namespace native
             ButtonAdapter Functions
          */
 
-        ButtonAdapter::ButtonAdapter(Button* button) : ComponentAdapter({ /* todo */ })
+        ButtonAdapter::ButtonAdapter(Button* button) : ComponentAdapter({ button, "libnative/ui/Button" })
         {
+        }
+
+        void ButtonAdapter::setText(const String& text)
+        {
+            HANDLE_OBJ->call<void>("setText(Ljava/lang/CharSequence;)V", text.toArray());
         }
 	}
 }
