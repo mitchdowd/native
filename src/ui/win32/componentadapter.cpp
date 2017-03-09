@@ -3,6 +3,7 @@
 #include <windowsx.h>
 #include <commctrl.h>
 #include <gdiplus.h>
+#include <versionhelpers.h>
 
 // External Dependencies
 #include "../../core/include/spinlock.h"
@@ -55,6 +56,11 @@ namespace native
 		 */
 		HWND getDefaultParent();
 
+		/**
+			Gets the default UI font to apply to Components.
+		 */
+		HFONT getDefaultFont();
+
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props) : _component(props.component)
 		{
 			ensureApiRegistered();
@@ -72,7 +78,7 @@ namespace native
 				::SetWindowLongPtr(HWND(_handle), GWLP_WNDPROC, LONG_PTR(ComponentEvent::WindowProc));
 
 			// Set the default GUI font.
-			// ::SendMessage(HWND(_handle), WM_SETFONT, WPARAM(Font::getDefault().getAuxHandle()), TRUE);
+			::SendMessage(HWND(_handle), WM_SETFONT, WPARAM(getDefaultFont()), TRUE);
 
 			if (_isTouchReady)
 			{
@@ -315,6 +321,33 @@ namespace native
 				throw UserInterfaceException("Could not create default HWND");
 
 			return hwnd;
+		}
+
+		static HFONT getDefaultFont()
+		{
+			static HFONT font = NULL;
+			static SpinLock lock;
+
+			lock.lock();
+
+			if (font == NULL)
+			{
+				NONCLIENTMETRICS metrics;
+
+				metrics.cbSize = sizeof(metrics);
+
+				if (!::IsWindowsVistaOrGreater())
+					metrics.cbSize -= sizeof(metrics.iPaddedBorderWidth);
+
+				// Read/create the default font from the system.
+				::SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(metrics), &metrics, 0);
+
+				font = ::CreateFontIndirect(&metrics.lfMessageFont);
+			}
+
+			lock.release();
+
+			return font;
 		}
 
 		LRESULT CALLBACK ComponentEvent::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
