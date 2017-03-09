@@ -36,6 +36,9 @@
 // Local Constants
 #define NATIVE_WINDOW_CLASS_NAME	L"native::ui::Component"
 
+// Local Macros
+#define IS_TOUCH_EVENT() ((::GetMessageExtraInfo() & 0xFF515700) == 0xFF515700)
+
 namespace native
 {
 	namespace ui
@@ -167,11 +170,39 @@ namespace native
 		{
 			LONG_PTR baseProc = ::GetClassLongPtr(event.hwnd, GCLP_WNDPROC);
 
+			if (_component == nullptr)
+				throw InvalidStateException("Adapter without a Component.");
+
 			switch (event.msg)
 			{
 			case WM_DESTROY:
 				_handle = nullptr;
 				break;
+
+			case WM_LBUTTONDOWN:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Press, InputEvent::LeftButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
+
+			case WM_LBUTTONUP:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Release, InputEvent::LeftButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
+
+			case WM_MBUTTONDOWN:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Press, InputEvent::MiddleButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
+
+			case WM_MBUTTONUP:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Release, InputEvent::MiddleButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
+
+			case WM_MOUSEMOVE:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Motion, InputEvent::Mouse, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
 
 			case WM_PAINT:
 				if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)
@@ -193,6 +224,16 @@ namespace native
 				}
 				break;
 
+			case WM_RBUTTONDOWN:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Press, InputEvent::RightButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
+
+			case WM_RBUTTONUP:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Release, InputEvent::RightButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
+
 			case WM_SIZE:
 				{
 					RECT rect;
@@ -204,6 +245,51 @@ namespace native
 					_component->onSize({ GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam) });
 				}
 				break;
+
+			case WM_TOUCH:
+			{
+				uint16_t    count = LOWORD(event.wparam);
+				HTOUCHINPUT hinput = HTOUCHINPUT(event.lparam);
+				TOUCHINPUT  inputs[MAX_TOUCH_COUNT];
+
+				// Get information on the current "touch".
+				if (!::GetTouchInputInfo(hinput, count, inputs, sizeof(TOUCHINPUT)))
+					break;
+
+				for (int i = 0; i < count; ++i)
+				{
+					if ((inputs[i].dwFlags & TOUCHEVENTF_PRIMARY) == 0)
+						continue;
+
+					InputEvent::Action action;
+
+					if (inputs[i].dwFlags & TOUCHEVENTF_MOVE)
+						action = InputEvent::Motion;
+					else if (inputs[i].dwFlags & TOUCHEVENTF_DOWN)
+						action = InputEvent::Press;
+					else if (inputs[i].dwFlags & TOUCHEVENTF_UP)
+						action = InputEvent::Release;
+					else
+						continue;
+
+					POINT pt = { inputs[i].x / 100, inputs[i].y / 100 };
+					::ScreenToClient(event.hwnd, &pt);
+					_component->dispatchInputEvent({ action, InputEvent::Touch, pt.x, pt.y });
+				}
+
+				::CloseTouchInputHandle(hinput);
+				return;
+			}
+
+			case WM_XBUTTONDOWN:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Press, HIWORD(event.wparam) == XBUTTON1 ? InputEvent::BackButton : InputEvent::ForwardButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
+
+			case WM_XBUTTONUP:
+				if (!IS_TOUCH_EVENT())
+					_component->dispatchInputEvent({ InputEvent::Release, HIWORD(event.wparam) == XBUTTON1 ? InputEvent::BackButton : InputEvent::ForwardButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+				return;
 			}
 
 			// Check for inherited window proc.

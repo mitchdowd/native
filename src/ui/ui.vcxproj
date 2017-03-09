@@ -170,6 +170,7 @@
     <ClInclude Include="include\componentadapter.h" />
     <ClInclude Include="include\eventqueue.h" />
     <ClInclude Include="include\icomponentadapter.h" />
+    <ClInclude Include="include\inputevent.h" />
     <ClInclude Include="include\layoutcomponent.h" />
     <ClInclude Include="include\point.h" />
     <ClInclude Include="include\size.h" />

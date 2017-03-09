@@ -6,6 +6,7 @@
 #include "../include/app.h"
 #include "../include/button.h"
 #include "../include/componentadapter.h"
+#include "../include/inputevent.h"
 
 // Local Dependencies
 #include "componentadapterproperties.h"
@@ -68,7 +69,9 @@ namespace native
 
 		void ComponentAdapter::setArea(const Rectangle& area)
 		{
-			HANDLE_OBJ->call<void>("setArea", area.x, area.y, area.width, area.height);
+            jni::Class("libnative/ui/ViewExtensions").call<void>("setArea(Landroid/view/View;IIII)V", HANDLE_OBJ, area.x, area.y, area.width, area.height);
+
+		//	HANDLE_OBJ->call<void>("setArea", area.x, area.y, area.width, area.height);
 		}
 
 		Rectangle ComponentAdapter::getContentArea() const
@@ -105,20 +108,51 @@ namespace native
             {
                 switch (event.id)
                 {
-                    case ComponentEvent::onPaint:
+                case ComponentEvent::onInput:
+                    {
+                        jni::Object motionEvent = jni::jobject(event.arg);
+                        InputEvent inputEvent;
+
+                        switch (motionEvent.call<int>("getActionMasked"))
                         {
-                            Canvas canvas = jni::jobject(event.arg);
-                            _component->dispatchPaintEvent(canvas);
-                            break;
+                            case 0: inputEvent.action = InputEvent::Press;   break;
+                            case 1: inputEvent.action = InputEvent::Release; break;
+                            case 2: inputEvent.action = InputEvent::Motion;  break;
+                            default:
+                                throw InvalidArgumentException("Unsupported input event");
                         }
 
-                    case ComponentEvent::onSize:
-                        {
-							Size* size = (Size*) event.arg;
-                            _component->_area.setSize(*size);
-							_component->onSize(*size);
-                            break;
+                        // Check if it is a mouse event.
+                        if (motionEvent.call<int>("getToolType", 0) == 3) {
+                            if (inputEvent.action == InputEvent::Motion)
+                                inputEvent.source = InputEvent::Mouse;
+                            else
+                                inputEvent.source = InputEvent::LeftButton;	// Android only handles left button clicks.
                         }
+                        else {
+                            inputEvent.source = InputEvent::Touch;
+                        }
+
+                        inputEvent.x = (coord_t) motionEvent.call<float>("getX");
+                        inputEvent.y = (coord_t) motionEvent.call<float>("getY");
+                        inputEvent.nativeEvent = &event;
+                        _component->dispatchInputEvent(inputEvent);
+                        break;
+                    }
+                case ComponentEvent::onPaint:
+                    {
+                        Canvas canvas = jni::jobject(event.arg);
+                        _component->dispatchPaintEvent(canvas);
+                        break;
+                    }
+
+                case ComponentEvent::onSize:
+                    {
+                        Size* size = (Size*) event.arg;
+                        _component->_area.setSize(*size);
+                        _component->onSize(*size);
+                        break;
+                    }
                 }
             }
 		}
@@ -167,6 +201,15 @@ using namespace native::ui;
 
 extern "C"
 {
+    uint8_t Java_libnative_ui_ViewExtensions_onInput(_JNIEnv*, jni::jobject, jni::jobject view, jni::jobject motionEvent) {
+        ComponentEvent event = { ComponentEvent::onInput, motionEvent };
+        ComponentAdapter* adapter = ComponentAdapter::fromHandle(view);
+
+        if (adapter)
+            adapter->onEvent(event);
+        return 1;
+    }
+
     void Java_libnative_ui_ViewExtensions_onPaint(_JNIEnv*, jni::jobject, jni::jobject view, jni::jobject canvas)
     {
         ComponentEvent    event   = { ComponentEvent::onPaint, canvas };

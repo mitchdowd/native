@@ -133,6 +133,11 @@ namespace native
 			return _background;
 		}
 
+        void Component::onInput(const InputEvent& event)
+        {
+			// TODO
+        }
+
 		void Component::onPaint(Canvas& canvas)
 		{
 			if (_adapter)
@@ -155,6 +160,13 @@ namespace native
 		void Component::dispatchPaintEvent(Canvas& canvas)
 		{
 			onPaint(canvas);
+		}
+
+		void Component::dispatchInputEvent(const InputEvent& event)
+		{
+			// TODO: Check for mouse capture?
+
+            onInput(event);
 		}
 	}
 }

@@ -9,6 +9,7 @@
 #include "brush.h"
 #include "canvas.h"
 #include "icomponentadapter.h"
+#include "inputevent.h"
 
 namespace native
 {
@@ -187,6 +188,8 @@ namespace native
 			IComponentAdapter* getAdapter() const noexcept { return _adapter; }
 
 		protected:
+            virtual void onInput(const InputEvent& event);
+
 			/**
 				This is where the painting of the Component occurs. Override to
 				do your own custom painting. By default, this paints the background
@@ -211,6 +214,12 @@ namespace native
 				\param canvas The canvas to paint with.
 			 */
 			virtual void dispatchPaintEvent(Canvas& canvas);
+
+			/**
+				For internal use only in sending input events.
+			    \
+			 */
+            virtual void dispatchInputEvent(const InputEvent& event);
 
 		private:
 			// Class Friendships

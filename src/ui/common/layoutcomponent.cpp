@@ -71,6 +71,27 @@ namespace native
 			}
 		}
 
+		void LayoutComponent::dispatchInputEvent(const InputEvent& event)
+		{
+			// TODO: Check for mouse capture.
+
+			// Check for a hit on a child Component.
+			for (auto child : _children)
+			{
+				if (child->_adapter == nullptr)
+				{
+					Rectangle area = child->getArea();
+
+					if (area.containsPoint(event.x, event.y)) {
+						child->dispatchInputEvent({ event.action, event.source, event.x - area.x, event.y - area.y });
+						return;
+					}
+				}
+			}
+
+			Component::dispatchInputEvent(event);
+		}
+
 		void LayoutComponent::dispatchPaintEvent(Canvas& canvas)
 		{
 			// Paint our own background.

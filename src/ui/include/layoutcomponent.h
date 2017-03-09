@@ -66,6 +66,9 @@ namespace native
 			void removeChild(Component* child);
 
 			/** For internal use. */
+			virtual void dispatchInputEvent(const InputEvent& event) override;
+
+			/** For internal use. */
 			virtual void dispatchPaintEvent(Canvas& canvas) override;
 
 		private:

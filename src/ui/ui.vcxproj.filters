@@ -35,5 +35,6 @@
     <ClInclude Include="include\size.h" />
     <ClInclude Include="include\point.h" />
     <ClInclude Include="include\button.h" />
+    <ClInclude Include="include\inputevent.h" />
   </ItemGroup>
 </Project>
