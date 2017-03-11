@@ -23,6 +23,13 @@ namespace native
 
 			/** Signal emitted when the Button is clicked. */
 			Signal<> onClicked;
+
+		protected:
+			/**
+				Triggers the onClicked Signal.
+				\param event Ignored.
+			 */
+			virtual void onClick(const InputEvent& event) override { onClicked(); }
         };
     }
 }

@@ -149,6 +149,20 @@ namespace native
 			::SetWindowText(HWND(_handle), text.toArray());
 		}
 
+		void ComponentAdapter::doInput(const InputEvent& event)
+		{
+			if (!event.nativeEvent)
+				return;
+
+			LONG_PTR baseProc = ::GetClassLongPtr(HWND(_handle), GCLP_WNDPROC);
+
+			if (baseProc != LONG_PTR(ComponentEvent::WindowProc))
+			{
+				// Call paint process of the native control.
+				::CallWindowProc(WNDPROC(baseProc), HWND(_handle), event.nativeEvent->msg, event.nativeEvent->wparam, event.nativeEvent->lparam);
+			}
+		}
+
 		void ComponentAdapter::doPaint(Canvas& canvas)
 		{
 			LONG_PTR baseProc = ::GetClassLongPtr(HWND(_handle), GCLP_WNDPROC);
@@ -221,6 +235,18 @@ namespace native
 				if (!IS_TOUCH_EVENT())
 					_component->dispatchInputEvent({ InputEvent::Motion, InputEvent::Mouse, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
 				return;
+
+			case WM_MOVE:
+				if (!_component->getParent())
+				{
+					RECT rect;
+
+					::GetWindowRect(HWND(_handle), &rect);
+
+					// Ensure the new position is properly reflected in the Component.
+					_component->_area.setPosition({ rect.left, rect.top });
+				}
+				break;
 
 			case WM_PAINT:
 				if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)

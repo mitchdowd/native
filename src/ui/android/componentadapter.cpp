@@ -84,6 +84,17 @@ namespace native
 			throw NotSupportedException("Only text Components can have their text set.");
 		}
 
+		void ComponentAdapter::doInput(const InputEvent& event)
+		{
+			if (!event.nativeEvent)
+				return;
+
+			// Call super.onTouchEvent().
+			jni::Class super = jni::Class(HANDLE_OBJ->getClass()).getParent();
+			auto method = super.getMethod("onTouchEvent", "(Landroid/view/MotionEvent;)Z");
+			super.call<bool>(HANDLE_OBJ, method, jni::jobject(event.nativeEvent->arg));
+		}
+
 		void ComponentAdapter::doPaint(Canvas& canvas)
 		{
             if (_component->getBackground().getHandle())

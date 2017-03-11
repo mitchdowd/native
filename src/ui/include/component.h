@@ -195,6 +195,27 @@ namespace native
 			IComponentAdapter* getAdapter() const noexcept { return _adapter; }
 
 		protected:
+			/**
+				Called by onInput() when a press and release sequence indicates
+				a normal click action. This is like a "tap" on touch devices, or
+				a "left click" with a mouse.
+				\param event Details about the click which occurred.
+			 */
+			virtual void onClick(const InputEvent& event) {}
+
+			/**
+				Called by onInput() when a press and release sequence indicates
+				a "context" click action. This is either a long press on touch
+				devices, or a right click with a mouse.
+				\param event Contains information on the long click.
+			 */
+			virtual void onContextClick(const InputEvent& event) {}
+
+			/**
+				Occurs when a pointing-type input device performs an action on
+				this Component. By default, this will
+				\param event Details on the input event.
+			 */
             virtual void onInput(const InputEvent& event);
 
 			/**
