@@ -97,7 +97,7 @@ namespace native
 
 		void ComponentAdapter::invokeAsync(const Function<void>& func)
 		{
-			throw NotImplementedException();
+            ((jni::Object*) App::getAppHandle())->call<void>("invokeAsync", int64_t(new Function<void>(func)));
 		}
 
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
@@ -232,5 +232,15 @@ extern "C"
 
         if (adapter)
             adapter->onEvent(event);
+    }
+
+    void Java_libnative_ui_NativeRunnable_onRun(_JNIEnv*, jni::jobject, int64_t funcPtr)
+    {
+        if (funcPtr)
+        {
+            Function<void>* function = (Function<void>*) funcPtr;
+            function->invoke();
+            delete function;
+        }
     }
 }

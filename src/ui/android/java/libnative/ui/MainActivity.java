@@ -22,6 +22,10 @@ public class MainActivity extends Activity {
         onCreate();
     }
 
+    public void invokeAsync(long funcPtr) {
+        this.runOnUiThread(new NativeRunnable(funcPtr));
+    }
+
     private native void onCreate();
 
     private void loadNativeLibrary()
