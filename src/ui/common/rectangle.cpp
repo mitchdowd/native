@@ -62,11 +62,6 @@ namespace native
 			return Rectangle(x + x_, y + y_, width, height);
 		}
 
-		Point Rectangle::getPosition() const noexcept
-		{
-			return Point(x, y);
-		}
-
 		bool Rectangle::containsPoint(const Point& point) const noexcept
 		{
 			return point.x >= x && point.x < x + width && point.y >= y && point.y < y + height;

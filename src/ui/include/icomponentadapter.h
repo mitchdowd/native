@@ -2,6 +2,7 @@
 #define _NATIVE_UI_ICOMPONENT_ADAPTER_H_ 1
 
 // External Dependencies
+#include "../../core/include/function.h"
 #include "../../core/include/string.h"
 
 // Module Dependencies
@@ -71,6 +72,13 @@ namespace native
 				\param canvas The Canvas to paint with.
 			 */
 			virtual void doPaint(Canvas& canvas) = 0;
+
+			/**
+				Adds the given Function to the message queue to be called during
+				the main UI event loop.
+				\param func The Function to add to the message queue.
+			 */
+			virtual void invokeAsync(const Function<void>& func) = 0;
 		};
 	}
 }

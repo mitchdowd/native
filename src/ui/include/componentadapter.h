@@ -77,6 +77,13 @@ namespace native
 			virtual void doPaint(Canvas& canvas) override;
 
 			/**
+				Adds the given Function to the message queue to be called during
+				the main UI event loop.
+				\param func The Function to add to the message queue.
+			 */
+			virtual void invokeAsync(const Function<void>& func) override;
+
+			/**
 				Gets the handle to system resources for this ComponentAdapter.
 				\return The system resource handle.
 			 */

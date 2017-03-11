@@ -133,6 +133,19 @@ namespace native
 			return _background;
 		}
 
+		void Component::invokeAsync(const Function<void>& func)
+		{
+			Component* tmp = this;
+
+			while (tmp && !tmp->_adapter)
+				tmp = tmp->_parent;
+
+			if (!tmp)
+				throw InvalidStateException("Cannot invoke on unbound Component");
+
+			tmp->_adapter->invokeAsync(func);
+		}
+
         void Component::onInput(const InputEvent& event)
         {
 			// TODO

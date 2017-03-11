@@ -182,6 +182,13 @@ namespace native
 			Brush getBackground() const;
 
 			/**
+				Executes the given Function asynchronously by posting it as an
+				event on the UI thread's message queue.
+				\param func The Function to execute.
+			 */
+			void invokeAsync(const Function<void>& func);
+
+			/**
 				Gets this Component's adapter, if it has one.
 				\return The adapter this Component was created with.
 			 */

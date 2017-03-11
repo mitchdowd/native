@@ -36,6 +36,9 @@
 // Local Constants
 #define NATIVE_WINDOW_CLASS_NAME	L"native::ui::Component"
 
+// Custom Messages
+#define WM_INVOKE_ASYNC WM_USER
+
 // Local Macros
 #define IS_TOUCH_EVENT() ((::GetMessageExtraInfo() & 0xFF515700) == 0xFF515700)
 
@@ -161,6 +164,11 @@ namespace native
 			}
 		}
 
+		void ComponentAdapter::invokeAsync(const Function<void>& func)
+		{
+			::PostMessage(HWND(_handle), WM_INVOKE_ASYNC, 0, (LPARAM) new Function<void>(func));
+		}
+
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
 		{
 			return (ComponentAdapter*) ::GetWindowLongPtr(HWND(handle), GWLP_USERDATA);
@@ -177,6 +185,16 @@ namespace native
 			{
 			case WM_DESTROY:
 				_handle = nullptr;
+				break;
+
+			case WM_INVOKE_ASYNC:	// WM_USER
+				if (event.lparam)
+				{
+					Function<void>* func = (Function<void>*) event.lparam;
+
+					func->invoke();
+					delete func;
+				}
 				break;
 
 			case WM_LBUTTONDOWN:

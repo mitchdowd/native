@@ -95,6 +95,11 @@ namespace native
             super.call<void>(HANDLE_OBJ, method, (jni::Object*) canvas.getHandle());
 		}
 
+		void ComponentAdapter::invokeAsync(const Function<void>& func)
+		{
+			throw NotImplementedException();
+		}
+
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
 		{
             jni::Object view = jni::jobject(handle);

@@ -118,7 +118,7 @@ namespace native
 				Gets the current position of the top-left corner of this Rectangle.
 				\return The current position.
 			 */
-			Point getPosition() const noexcept;
+			Point getPosition() const noexcept { return Point(x, y); }
 
 			/**
 				Tells whether the given point resides within the Rectangle.

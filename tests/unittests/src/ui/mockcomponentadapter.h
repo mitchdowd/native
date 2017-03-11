@@ -29,6 +29,8 @@ namespace native
 
 			virtual void doPaint(ui::Canvas& canvas) override {}
 
+			virtual void invokeAsync(const Function<void>& func) override { func(); }
+
 		private:
 			// Instance Variables
 			ui::IComponentAdapter* _parent;
