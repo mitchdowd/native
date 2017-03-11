@@ -28,6 +28,7 @@
 #include "../src/core/include/string.h"
 #include "../src/core/include/stringcodec.h"
 #include "../src/core/include/system.h"
+#include "../src/core/include/task.h"
 #include "../src/core/include/thread.h"
 #include "../src/core/include/types.h"
 #include "../src/core/include/utf8codec.h"

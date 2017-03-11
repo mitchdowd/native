@@ -159,6 +159,7 @@
     <ClInclude Include="include\stack.h" />
     <ClInclude Include="include\string.h" />
     <ClInclude Include="include\system.h" />
+    <ClInclude Include="include\task.h" />
     <ClInclude Include="include\thread.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\utf8codec.h" />

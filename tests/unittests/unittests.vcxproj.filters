@@ -82,6 +82,9 @@
     <ClCompile Include="src\ui\size.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\task.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\mockcomponentadapter.h">

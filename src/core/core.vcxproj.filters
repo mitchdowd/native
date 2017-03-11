@@ -49,5 +49,6 @@
     <ClInclude Include="include\shared.h" />
     <ClInclude Include="include\flags.h" />
     <ClInclude Include="include\signal.h" />
+    <ClInclude Include="include\task.h" />
   </ItemGroup>
 </Project>

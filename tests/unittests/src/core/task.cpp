@@ -13,22 +13,34 @@ static thread_local bool tlHasUpdated = false;
 static void doUpdate() { hasUpdated = true; }
 static void doUpdateTl() { tlHasUpdated = true; }
 
-TEST(Thread_start)
+TEST(Task_start)
 {
 	hasUpdated = false;
 
-	Thread thread(&doUpdate);
-	thread.join();
+	Task<void> task(&doUpdate);
+
+	task.join();
 
 	ASSERT(hasUpdated);
 }
 
-TEST(Thread_assertIsOwnThread)
+TEST(Task_assertIsOwnThread)
 {
 	tlHasUpdated = false;
 
-	Thread thread(&doUpdateTl);
-	thread.join();
+	Task<void> task(&doUpdateTl);
+	task.join();
 
 	ASSERT(!tlHasUpdated);
 }
+
+TEST(Task_generatesResult)
+{
+	Task<int> task([]() { 
+		Thread::sleep(10); 
+		return 100; 
+	});
+
+	ASSERT(task.getResult() == 100);
+}
+
