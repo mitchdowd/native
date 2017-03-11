@@ -114,12 +114,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\clock.h" />
     <ClInclude Include="include\flags.h" />
     <ClInclude Include="include\shared.h" />
     <ClInclude Include="include\signal.h" />
     <ClInclude Include="include\stringcodec.h" />
     <ClCompile Include="common\array.cpp" />
     <ClCompile Include="common\asciicodec.cpp" />
+    <ClCompile Include="common\clock.cpp" />
     <ClCompile Include="common\convert.cpp" />
     <ClCompile Include="common\hash.cpp" />
     <ClCompile Include="common\latin1codec.cpp" />

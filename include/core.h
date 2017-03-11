@@ -4,6 +4,7 @@
 #include "../src/core/include/array.h"
 #include "../src/core/include/asciicodec.h"
 #include "../src/core/include/atomic.h"
+#include "../src/core/include/clock.h"
 #include "../src/core/include/collection.h"
 #include "../src/core/include/convert.h"
 #include "../src/core/include/exception.h"
