@@ -16,6 +16,7 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         loadNativeLibrary();
         onCreate();
+        finish();
     }
 
     private native void onCreate();

@@ -1,10 +1,16 @@
 // External Dependencies
+#include "../../core/include/clock.h"
 #include "../../core/include/exception.h"
 #include "../../core/include/system.h"
+#include "../../core/include/task.h"
 
 // Module Dependencies
 #include "../include/component.h"
 #include "../include/layoutcomponent.h"
+
+// Local Constants
+#define LONG_CLICK_DURATION			750
+#define CLICK_DISTANCE_THRESHOLD	 20
 
 namespace native
 {
@@ -146,10 +152,72 @@ namespace native
 			tmp->_adapter->invokeAsync(func);
 		}
 
-        void Component::onInput(const InputEvent& event)
-        {
-			// TODO
-        }
+		void Component::onInput(const InputEvent& event)
+		{
+			// TODO: Multi-touch will have an array of pressed items.
+			static struct {
+				Component*    component;
+				Clock::tick_t time;
+				InputEvent    event;
+				uint32_t      counter;
+			} pressed;
+
+			if (_adapter)
+				_adapter->doInput(event);
+
+			switch (event.action)
+			{
+			case InputEvent::Press:
+				// Prepare first half of click action.
+				pressed.component = this;
+				pressed.time      = Clock::tick();
+				pressed.event     = event;
+
+				if (event.source == InputEvent::Touch)
+				{
+					uint32_t count = ++pressed.counter;
+
+					Task<void>([=]() {
+						Thread::sleep(LONG_CLICK_DURATION);
+
+						if (count == pressed.counter && Atomic::compareExchange((volatile void*&) pressed.component, nullptr, this) == this)
+						{
+							Clock::tick_t duration = Clock::tick() - pressed.time;
+
+							if (Clock::toMilliSeconds(duration) >= LONG_CLICK_DURATION)
+								invokeAsync([this]() {
+									onContextClick({ InputEvent::ContextClick, InputEvent::Touch, pressed.event.x, pressed.event.y, nullptr });
+								});
+						}
+					});
+				}
+				break;
+
+			case InputEvent::Release:
+				// Check for end of click.
+				if (Atomic::compareExchange((volatile void*&) pressed.component, nullptr, this) == this && event.source == pressed.event.source)
+				{
+					Clock::tick_t duration = Clock::tick() - pressed.time;
+
+					// Check for various types of clicks.
+					if (pressed.event.source == InputEvent::LeftButton) 
+						onClick({ InputEvent::Click, InputEvent::Mouse, event.x, event.y, nullptr });
+					if (pressed.event.source == InputEvent::Touch && Clock::toMilliSeconds(duration) < LONG_CLICK_DURATION)
+						onClick({ InputEvent::Click, InputEvent::Touch, event.x, event.y, nullptr });
+					else if (pressed.event.source == InputEvent::RightButton)
+						onContextClick({ InputEvent::ContextClick, InputEvent::Mouse, event.x, event.y, nullptr });
+				}
+				break;
+
+			case InputEvent::Motion:
+				// Check if we should cancel the current click.
+				if (pressed.component && event.source == InputEvent::Touch)
+					if (Point(pressed.event.x, pressed.event.y).distanceFrom({ event.x, event.y }) > CLICK_DISTANCE_THRESHOLD)
+						pressed.component = nullptr;
+
+				break;
+			}
+		}
 
 		void Component::onPaint(Canvas& canvas)
 		{

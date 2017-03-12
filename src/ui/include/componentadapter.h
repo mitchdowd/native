@@ -71,6 +71,13 @@ namespace native
 			virtual void setText(const String& text) override;
 
 			/**
+				Performs default processing of an input event.
+				\param event The event to process.
+			 */
+			virtual void doInput(const InputEvent& event) override;
+
+
+			/**
 				Paints the component however the system usually would.
 				\param canvas The Canvas to paint with.
 			 */

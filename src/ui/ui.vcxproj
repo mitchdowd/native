@@ -145,7 +145,7 @@
   <ItemGroup>
     <ClCompile Include="common\button.cpp" />
     <ClCompile Include="common\color.cpp" />
-    <ClCompile Include="include\rectangle.h" />
+    <ClInclude Include="include\rectangle.h" />
     <ClCompile Include="common\component.cpp" />
     <ClCompile Include="common\layoutcomponent.cpp" />
     <ClCompile Include="common\point.cpp" />

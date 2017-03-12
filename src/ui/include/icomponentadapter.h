@@ -14,6 +14,7 @@ namespace native
 	{
 		// Forward Declarations
 		class Canvas;
+		struct InputEvent;
 		struct ComponentEvent;
 
 		/**
@@ -66,6 +67,13 @@ namespace native
 				\param text The text to set.
 			 */
 			virtual void setText(const String& text) = 0;
+
+			/**
+				Performs default processing of an input event.
+				\param event The event to process.
+			 */
+			virtual void doInput(const InputEvent& event) = 0;
+
 
 			/**
 				Paints the component however the system usually would.

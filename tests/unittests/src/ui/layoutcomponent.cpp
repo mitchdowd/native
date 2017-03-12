@@ -61,3 +61,17 @@ TEST(LayoutComponent_destructorRemovesChildren)
 	ASSERT(child.getParent() == nullptr);
 }
 
+TEST(LayoutComponent_childGetsFullContentArea)
+{
+	LayoutComponent parent;
+	Component child;
+
+	parent.addChild(child);
+	parent.setArea({ 0, 0, 100, 100 });
+
+	Rectangle area = child.getArea();
+
+	ASSERT(area.width == 100 && area.height == 100);
+	ASSERT(area.x == 0 && area.y == 0);
+}
+
