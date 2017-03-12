@@ -66,6 +66,7 @@ TEST(LayoutComponent_childGetsFullContentArea)
 	LayoutComponent parent;
 	Component child;
 
+	child.setAlignment(Align::Fill);
 	parent.addChild(child);
 	parent.setArea({ 0, 0, 100, 100 });
 

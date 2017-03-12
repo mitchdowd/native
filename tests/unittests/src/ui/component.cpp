@@ -75,7 +75,7 @@ TEST(Component_allocateAreaChecksMargin)
 	Component component;
 
 	component.setMargins({ 10, 20, 30, 40 });
-	
+	component.setAlignment(Align::Fill);
 	component.allocateArea({ 100, 100, 100, 100 });
 	Rectangle area = component.getArea();
 

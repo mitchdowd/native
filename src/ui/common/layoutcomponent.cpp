@@ -8,6 +8,16 @@ namespace native
 {
     namespace ui
     {
+		LayoutComponent::LayoutComponent() : Component()
+		{
+			setAlignment(Align::Fill);
+		}
+
+		LayoutComponent::LayoutComponent(IComponentAdapter* adapter) : Component(adapter)
+		{
+			setAlignment(Align::Fill);
+		}
+
 		LayoutComponent::~LayoutComponent()
 		{
 			for (auto child : _children)

@@ -1,6 +1,7 @@
 // External Dependencies
 #include "../../core/include/clock.h"
 #include "../../core/include/exception.h"
+#include "../../core/include/math.h"
 #include "../../core/include/system.h"
 #include "../../core/include/task.h"
 
@@ -29,6 +30,7 @@ namespace native
 		Component::Component()
 			: _adapter(nullptr)
 			, _parent(nullptr)
+			, _area({ 0, 0, -1, -1 })
 			, _alignment(Align::Top | Align::Left)
 			, _margins({ 0, 0, 0, 0 })
 		{
@@ -37,6 +39,7 @@ namespace native
 		Component::Component(IComponentAdapter* adapter)
 			: _adapter(adapter)
 			, _parent(nullptr)
+			, _area({ 0, 0, -1, -1 })
 			, _alignment(Align::Top | Align::Left)
 			, _margins({ 0, 0, 0, 0 })
 		{
@@ -109,19 +112,52 @@ namespace native
 				onSize(area.getSize());
 		}
 
-		void Component::allocateArea(const Rectangle& area)
+		void Component::allocateArea(const Rectangle& area_)
 		{
-			Rectangle selection = area;
+			Rectangle area = area_;
 
 			// Take margins into account.
-			selection.x += _margins.left;
-			selection.y += _margins.top;
-			selection.width  -= _margins.left + _margins.right;
-			selection.height -= _margins.top  + _margins.bottom;
+			area.x += _margins.left;
+			area.y += _margins.top;
+			area.width -= _margins.left + _margins.right;
+			area.height -= _margins.top + _margins.bottom;
 
-			// TODO: Alignment
+			Rectangle allocation = area;
 
-			setArea(selection);
+			if (!_alignment.isSet(Align::Fill))
+			{
+				// Take preferred sizing into account.
+				Size size = getSize();
+
+				if (size.width < 0 || size.height < 0)
+				{
+					Size preferred = getPreferredSize();
+
+					if (size.width < 0)
+						size.width = preferred.width;
+					if (size.height < 0)
+						size.height = preferred.height;
+				}
+
+				if (!_alignment.isSet(Align::HFill))
+					allocation.width = size.width;
+				if (!_alignment.isSet(Align::VFill))
+					allocation.height = size.height;
+			}
+
+			// Handle horizontal Alignments.
+			if (_alignment.isSet(Align::Right))
+				allocation.x = area.x + area.width - allocation.width;
+			else if (_alignment.isSet(Align::HCenter))
+				allocation.x = area.x + ((area.width - allocation.width) / 2);
+
+			// Handle vertical Alignments.
+			if (_alignment.isSet(Align::Bottom))
+				allocation.y = area.y + area.height - allocation.height;
+			else if (_alignment.isSet(Align::VCenter))
+				allocation.y = area.y + ((area.height - allocation.height) / 2);
+
+			setArea(allocation);
 		}
 
 		Rectangle Component::getContentArea() const

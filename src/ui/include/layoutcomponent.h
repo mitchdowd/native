@@ -18,13 +18,13 @@ namespace native
 		{
 		public:
 			/** Default constructor. */
-			LayoutComponent() : Component() {}
+			LayoutComponent();
 
 			/**
 				Creates a LayoutComponent with the given native adapter.
 			 	\param adapter The adapter for this component.
 			 */
-			LayoutComponent(IComponentAdapter* adapter) : Component(adapter) {}
+			LayoutComponent(IComponentAdapter* adapter);
 
 			/** Destructor. */
 			~LayoutComponent();

@@ -24,6 +24,12 @@ namespace native
 			/** Signal emitted when the Button is clicked. */
 			Signal<> onClicked;
 
+			/**
+				Calculates the preferred size of this Button based upon its contents.
+				\return The preferred size.
+			 */
+			virtual Size getPreferredSize() const override { return Size(80, 30); /* TODO */ }
+
 		protected:
 			/**
 				Triggers the onClicked Signal.

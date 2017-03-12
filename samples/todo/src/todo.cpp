@@ -29,6 +29,8 @@ public:
 		_inner.addChild(_btn);
 		_btn.setMargin(20);
 
+		_btn.setAlignment(Align::Center);
+
 		_btn.onClicked.connect([&]() { 
 			Dialogs::messageBox(this, "Button clicked.", "Alert"); 
 		});

@@ -117,7 +117,21 @@ namespace native
 				Gets the current area, relative to the parent Component.
 				\return The current Area.
 			 */
-			Rectangle getArea() const { return _area; }
+			Rectangle getArea() const noexcept { return _area; }
+
+			/**
+				Gets the geometric size of this Component.
+				\return The Component's size.
+			 */
+			Size getSize() const noexcept { return _area.getSize(); }
+
+			/**
+				Gets the preferred size of this Component based upon its current
+				contents. This should be overridden by inherited types in order
+				to properly reflect the desired Component behavior.
+				\return The preferred size.
+			 */
+			virtual Size getPreferredSize() const { return Size(0, 0); }
 
 			/**
 				Allocates a given area to the Rectangle. This area includes the
