@@ -52,7 +52,6 @@ TEST(Component_setParentToNull)
 
 TEST(Component_destructorRemovesFromParent)
 {
-	
 	LayoutComponent parent;
 
 	{
@@ -69,5 +68,35 @@ TEST(Component_defaultConstructorHasNoAdapter)
 	Component component;
 
 	ASSERT(component.getAdapter() == nullptr);
+}
+
+TEST(Component_allocateAreaChecksMargin)
+{
+	Component component;
+
+	component.setMargins({ 10, 20, 30, 40 });
+	
+	component.allocateArea({ 100, 100, 100, 100 });
+	Rectangle area = component.getArea();
+
+	ASSERT(area.x == 140);
+	ASSERT(area.y == 110);
+	ASSERT(area.width == 40);
+	ASSERT(area.height == 60);
+}
+
+TEST(Component_setAreaIgnoresMargin)
+{
+	Component component;
+
+	component.setMargins({ 10, 20, 30, 40 });
+
+	component.setArea({ 100, 100, 100, 100 });
+	Rectangle area = component.getArea();
+
+	ASSERT(area.x == 100);
+	ASSERT(area.y == 100);
+	ASSERT(area.width == 100);
+	ASSERT(area.height == 100);
 }
 
