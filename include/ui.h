@@ -8,6 +8,7 @@
 #include "../src/ui/include/color.h"
 #include "../src/ui/include/component.h"
 #include "../src/ui/include/componentadapter.h"
+#include "../src/ui/include/dialogs.h"
 #include "../src/ui/include/eventqueue.h"
 #include "../src/ui/include/icomponentadapter.h"
 #include "../src/ui/include/inputevent.h"

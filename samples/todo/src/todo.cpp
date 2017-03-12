@@ -22,12 +22,16 @@ public:
 
 		_child.addChild(_inner);
 
-		_inner.setMargin(100);
+		_inner.setMargin(20);
 		_inner.setBackground(Color(0x49, 0x4B, 0x54));
 
 		_btn.setText("Click me!");
 		_inner.addChild(_btn);
-		_btn.setMargin(100);
+		_btn.setMargin(20);
+
+		_btn.onClicked.connect([&]() { 
+			Dialogs::messageBox(this, "Button clicked.", "Alert"); 
+		});
     }
 
 private:

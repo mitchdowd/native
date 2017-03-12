@@ -10,12 +10,12 @@
     <ClCompile Include="common\textcomponent.cpp" />
     <ClCompile Include="win32\brush.cpp" />
     <ClCompile Include="win32\canvas.cpp" />
-    <ClCompile Include="include\rectangle.h" />
     <ClCompile Include="common\rectangle.cpp" />
     <ClCompile Include="common\size.cpp" />
     <ClCompile Include="common\point.cpp" />
     <ClCompile Include="common\color.cpp" />
     <ClCompile Include="common\button.cpp" />
+    <ClCompile Include="win32\dialogs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
@@ -36,5 +36,7 @@
     <ClInclude Include="include\point.h" />
     <ClInclude Include="include\button.h" />
     <ClInclude Include="include\inputevent.h" />
+    <ClInclude Include="include\rectangle.h" />
+    <ClInclude Include="include\dialogs.h" />
   </ItemGroup>
 </Project>

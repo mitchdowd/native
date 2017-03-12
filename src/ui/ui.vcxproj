@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="common\button.cpp" />
     <ClCompile Include="common\color.cpp" />
+    <ClInclude Include="include\dialogs.h" />
     <ClInclude Include="include\rectangle.h" />
     <ClCompile Include="common\component.cpp" />
     <ClCompile Include="common\layoutcomponent.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="win32\brush.cpp" />
     <ClCompile Include="win32\canvas.cpp" />
     <ClCompile Include="win32\componentadapter.cpp" />
+    <ClCompile Include="win32\dialogs.cpp" />
     <ClCompile Include="win32\eventqueue.cpp" />
   </ItemGroup>
   <ItemGroup>

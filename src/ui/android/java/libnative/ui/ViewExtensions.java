@@ -1,5 +1,8 @@
 package libnative.ui;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +37,21 @@ class ViewExtensions {
             // Notify the layout manager of the change.
             view.post(new ReLayoutRunnable(view));
         }
+    }
+
+    public static void messageBox(Context owner, String message, String title)
+    {
+        AlertDialog.Builder alert  = new AlertDialog.Builder(owner);
+
+        alert.setMessage(message);
+        alert.setTitle(title);
+
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        alert.create().show();
     }
 
     public native static boolean onInput(View view, MotionEvent event);
