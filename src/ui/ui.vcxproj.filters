@@ -16,6 +16,7 @@
     <ClCompile Include="common\color.cpp" />
     <ClCompile Include="common\button.cpp" />
     <ClCompile Include="win32\dialogs.cpp" />
+    <ClCompile Include="win32\pen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />
@@ -38,5 +39,6 @@
     <ClInclude Include="include\inputevent.h" />
     <ClInclude Include="include\rectangle.h" />
     <ClInclude Include="include\dialogs.h" />
+    <ClInclude Include="include\pen.h" />
   </ItemGroup>
 </Project>
