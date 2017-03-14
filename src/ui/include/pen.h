@@ -18,7 +18,7 @@ namespace native
 		{
 		public:
 			/** Create an invalid Pen handle. */
-			Pen() : _shared(nullptr) {}
+			Pen() : _shared(nullptr), _thickness(0) {}
 
 			/**
 				Creates a Pen which is a solid single color.
@@ -26,6 +26,12 @@ namespace native
 				\param width The width of the pen stroke.
 			 */
 			Pen(const Color& color, float width = 1.0f);
+
+			/**
+				Gets the thickness of the Pen's drawing line, in pixels.
+				\return The Pen's thickness.
+			 */
+			float getThickness() const noexcept { return _thickness; }
 
 			/**
 				Gets the system resource handle.
@@ -47,6 +53,7 @@ namespace native
 
 			// Instance Variables
 			Shared<PenHandle> _shared;
+			float _thickness;
 		};
 	}
 }

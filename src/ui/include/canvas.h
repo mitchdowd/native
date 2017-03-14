@@ -6,6 +6,7 @@
 
 // Local Dependencies
 #include "brush.h"
+#include "pen.h"
 #include "rectangle.h"
 
 namespace native
@@ -41,11 +42,20 @@ namespace native
 			~Canvas();
 
 			/**
+				Draws a Rectangle outline within the given rectangle. The outer
+				edge of the drawn rectangle's line will sit on the specified
+				Rectangle co-ordinates.
+				\param rect The outer edge of the Rectangle to draw.
+				\param pen The pen to draw the line with.
+			 */
+			void drawRectangle(const Rectangle& rect, const Pen& pen);
+
+			/**
 				Fills the specified Rectangle with the given Brush.
-				\param area The area to fill.
+				\param rect The rectangle to fill.
 				\param brush The Brush to paint the area with.
 			 */
-			void fillRectangle(const Rectangle& area, const Brush& brush);
+			void fillRectangle(const Rectangle& rect, const Brush& brush);
 
 			/**
 				Offsets future drawing operations by the given amount.

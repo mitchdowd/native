@@ -72,12 +72,22 @@ namespace native
 			}
 		}
 
-		void Canvas::fillRectangle(const Rectangle& area, const Brush& brush)
+		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
+		{
+			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
+			Gdiplus::Pen* gdiPen = (Gdiplus::Pen*) pen.getHandle();
+
+			// Perform the draw operation.
+			if (graphics->DrawRectangle(gdiPen, toGdiRect(rect.offset(_offset).deflate(pen.getThickness() / 2).scale(System::getDisplayScale()))) != Gdiplus::Ok)
+				throw GraphicsException("Graphics::DrawRectangle()");
+		}
+
+		void Canvas::fillRectangle(const Rectangle& rect, const Brush& brush)
 		{
 			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
 			Gdiplus::Brush*    gdiBrush = (Gdiplus::Brush*) brush.getHandle();
 
-			if (graphics->FillRectangle(gdiBrush, toGdiRect(area.offset(_offset).scale(System::getDisplayScale()))) != Gdiplus::Ok)
+			if (graphics->FillRectangle(gdiBrush, toGdiRect(rect.offset(_offset).scale(System::getDisplayScale()))) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::FillRectangle()");
 		}
 	}

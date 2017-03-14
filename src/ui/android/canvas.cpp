@@ -27,7 +27,14 @@ namespace native
 
 		Canvas::~Canvas()
 		{
-			// TODO
+			// TODO?
+
+			delete (jni::Object*) _handle;
+		}
+
+		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
+		{
+			throw NotImplementedException();
 		}
 
 		void Canvas::fillRectangle(const Rectangle& rect, const Brush& brush)

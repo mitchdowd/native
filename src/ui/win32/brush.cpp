@@ -2,9 +2,6 @@
 #include <windows.h>
 #include <gdiplus.h>
 
-// External Dependencies
-#include "../../core/include/exception.h"
-
 // Module Dependencies
 #include "../include/brush.h"
 
