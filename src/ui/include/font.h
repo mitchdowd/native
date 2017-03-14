@@ -3,6 +3,7 @@
 
 // External Dependencies
 #include "../../core/include/shared.h"
+#include "../../core/include/string.h"
 
 namespace native
 {
@@ -15,7 +16,19 @@ namespace native
 		{
 		public:
 			/** Create an invalid Font handle. */
-			Font() : _shared(nullptr) {}
+			Font() : _shared(nullptr), _size(0) {}
+
+			/**
+				Creates a Font of the given font family and text size.
+				\param family The name of the font family.
+				\param size The font size, in pixels.
+			 */
+			Font(const String& family, float size);
+
+			/**
+				Gets the size of the Font, in pixels.
+			 */
+			float getSize() const noexcept { return _size; }
 
 			/**
 				Gets the system resource handle.
@@ -37,6 +50,7 @@ namespace native
 
 			// Instance Variables
 			Shared<FontHandle> _shared;
+			float _size;
 
 		};
 	}

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="win32\eventqueue.cpp" />
     <ClCompile Include="win32\canvas.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -50,10 +49,12 @@
     <ClCompile Include="win32\font.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="win32\eventqueue.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
-    <ClInclude Include="include\eventqueue.h" />
     <ClInclude Include="include\canvas.h">
       <Filter>Graphics</Filter>
     </ClInclude>
@@ -96,9 +97,6 @@
     <ClInclude Include="include\icomponentadapter.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="include\inputevent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="include\layoutcomponent.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -114,6 +112,12 @@
     <ClInclude Include="include\font.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\eventqueue.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\inputevent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -121,6 +125,9 @@
     </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{1641c7bd-78ab-4508-8b00-21dc66dba904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{5692e783-632c-4281-9f7c-cf828ed13acc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

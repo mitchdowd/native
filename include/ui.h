@@ -10,6 +10,7 @@
 #include "../src/ui/include/componentadapter.h"
 #include "../src/ui/include/dialogs.h"
 #include "../src/ui/include/eventqueue.h"
+#include "../src/ui/include/font.h"
 #include "../src/ui/include/icomponentadapter.h"
 #include "../src/ui/include/inputevent.h"
 #include "../src/ui/include/layoutcomponent.h"

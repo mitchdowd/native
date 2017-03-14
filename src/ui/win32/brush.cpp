@@ -4,6 +4,7 @@
 
 // Module Dependencies
 #include "../include/brush.h"
+#include "../include/canvas.h"
 
 namespace native
 {
@@ -16,7 +17,15 @@ namespace native
 
 		Brush::Brush(const Color& color) : _shared(nullptr)
 		{
-			_shared->handle = new Gdiplus::SolidBrush(Gdiplus::Color(color.alpha, color.red, color.green, color.blue));
+			Gdiplus::Brush* brush = new Gdiplus::SolidBrush(Gdiplus::Color(color.alpha, color.red, color.green, color.blue));
+
+			if (brush->GetLastStatus() != Gdiplus::Ok)
+			{
+				delete brush;
+				throw GraphicsException("Brush::Brush");
+			}
+
+			_shared->handle = brush;
 		}
 	}
 }
