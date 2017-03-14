@@ -27,14 +27,15 @@ namespace native
 
 		Canvas::~Canvas()
 		{
-			// TODO?
-
 			delete (jni::Object*) _handle;
 		}
 
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{
-			throw NotImplementedException();
+			jni::Object* penObj = (jni::Object*) pen.getHandle();
+			Rectangle area = rect.offset(_offset).deflate(pen.getThickness() / 2).scale(System::getDisplayScale());
+
+			HANDLE_OBJ->call<void>("drawRect(FFFFLandroid/graphics/Paint;)V", float(area.x), float(area.y), float(area.x + area.width), float(area.y + area.height), penObj);
 		}
 
 		void Canvas::fillRectangle(const Rectangle& rect, const Brush& brush)
