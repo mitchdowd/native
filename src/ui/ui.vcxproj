@@ -145,8 +145,10 @@
   <ItemGroup>
     <ClCompile Include="common\button.cpp" />
     <ClCompile Include="common\color.cpp" />
+    <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="win32\pen.cpp" />
     <ClInclude Include="include\dialogs.h" />
+    <ClInclude Include="include\font.h" />
     <ClInclude Include="include\pen.h" />
     <ClInclude Include="include\rectangle.h" />
     <ClCompile Include="common\component.cpp" />

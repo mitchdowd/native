@@ -1,44 +1,126 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="common\component.cpp" />
-    <ClCompile Include="win32\componentadapter.cpp" />
-    <ClCompile Include="common\window.cpp" />
-    <ClCompile Include="common\layoutcomponent.cpp" />
     <ClCompile Include="win32\eventqueue.cpp" />
-    <ClCompile Include="common\app.cpp" />
-    <ClCompile Include="common\textcomponent.cpp" />
-    <ClCompile Include="win32\brush.cpp" />
-    <ClCompile Include="win32\canvas.cpp" />
-    <ClCompile Include="common\rectangle.cpp" />
-    <ClCompile Include="common\size.cpp" />
-    <ClCompile Include="common\point.cpp" />
-    <ClCompile Include="common\color.cpp" />
-    <ClCompile Include="common\button.cpp" />
-    <ClCompile Include="win32\dialogs.cpp" />
-    <ClCompile Include="win32\pen.cpp" />
+    <ClCompile Include="win32\canvas.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\pen.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="common\rectangle.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="common\point.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="common\size.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\brush.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="common\color.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="common\app.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="common\button.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="common\component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\componentadapter.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\dialogs.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="common\layoutcomponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="common\textcomponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="common\window.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\font.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\app.h" />
-    <ClInclude Include="include\window.h" />
-    <ClInclude Include="include\component.h" />
-    <ClInclude Include="include\layoutcomponent.h" />
-    <ClInclude Include="include\componentadapter.h" />
-    <ClInclude Include="win32\componentadapterproperties.h" />
     <ClInclude Include="..\..\include\ui.h" />
-    <ClInclude Include="include\icomponentadapter.h" />
-    <ClInclude Include="win32\componentevent.h" />
     <ClInclude Include="include\eventqueue.h" />
-    <ClInclude Include="include\textcomponent.h" />
-    <ClInclude Include="include\color.h" />
-    <ClInclude Include="include\brush.h" />
-    <ClInclude Include="include\canvas.h" />
-    <ClInclude Include="include\size.h" />
-    <ClInclude Include="include\point.h" />
-    <ClInclude Include="include\button.h" />
-    <ClInclude Include="include\inputevent.h" />
-    <ClInclude Include="include\rectangle.h" />
-    <ClInclude Include="include\dialogs.h" />
-    <ClInclude Include="include\pen.h" />
+    <ClInclude Include="include\canvas.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pen.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rectangle.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\point.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\size.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\brush.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\app.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\button.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\componentadapter.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\componentadapterproperties.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\componentevent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dialogs.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\icomponentadapter.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\inputevent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\layoutcomponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\textcomponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\window.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\color.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\font.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{5c438270-3f09-41c4-858f-01aa9b230276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{1641c7bd-78ab-4508-8b00-21dc66dba904}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
