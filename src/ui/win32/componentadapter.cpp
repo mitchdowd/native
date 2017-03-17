@@ -283,10 +283,12 @@ namespace native
 					RECT rect;
 
 					::GetWindowRect(HWND(_handle), &rect);
+					Size size(rect.right - rect.left, rect.bottom - rect.top);
+					Size client(GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam));
 
 					// Ensure the new size is properly reflected in the Component.
-					_component->_area.setSize({ rect.right - rect.left, rect.bottom - rect.top });
-					_component->onSize({ GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam) });
+					_component->_area.setSize(size.scale(1.0f / System::getDisplayScale()));
+					_component->onSize(client.scale(1.0f / System::getDisplayScale()));
 				}
 				break;
 

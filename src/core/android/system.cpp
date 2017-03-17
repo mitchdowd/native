@@ -37,7 +37,7 @@ namespace native
 		static float scale;
 
 		if (scale == 0.0f)
-			scale = 1.0;  // TODO: Use GetDeviceCaps() or equivalent to calculate this.
+			scale = 2.75f;  // TODO: Use GetDeviceCaps() or equivalent to calculate this.
 
 		return scale;
 	}

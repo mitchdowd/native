@@ -1,6 +1,7 @@
 // External Dependencies
 #include "../../../lib/jnipp/jnipp.h"
 #include "../../core/include/exception.h"
+#include "../../core/include/system.h"
 
 // Module Dependencies
 #include "../include/app.h"
@@ -76,7 +77,7 @@ namespace native
 
 		Rectangle ComponentAdapter::getContentArea() const
 		{
-            return _component->getArea().getSize();
+            return _component->getArea().getSize().scale(System::getDisplayScale());
 		}
 
 		void ComponentAdapter::setText(const String& text)
@@ -164,9 +165,9 @@ namespace native
 
                 case ComponentEvent::onSize:
                     {
-                        Size* size = (Size*) event.arg;
-                        _component->_area.setSize(*size);
-                        _component->onSize(*size);
+                        Size size = ((Size*) event.arg)->scale(1.0f / System::getDisplayScale());
+                        _component->_area.setSize(size);
+                        _component->onSize(size);
                         break;
                     }
                 }
