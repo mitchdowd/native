@@ -3,6 +3,21 @@
 
 using namespace native::ui;
 
+class Label : public Component
+{
+public:
+	Label() : Component()
+	{
+		setAlignment(Align::Fill);
+	}
+
+protected:
+	virtual void onPaint(Canvas& canvas) override
+	{
+		canvas.drawText("The quick brown fox jumps over the lazy dog.", Font("Sans serif", 16));
+	}
+};
+
 /**
 	The main application creation class.
  */
@@ -26,7 +41,7 @@ public:
 		_inner.setBackground(Color(0x49, 0x4B, 0x54));
 
 		_btn.setText("Click me!");
-		_inner.addChild(_btn);
+		_inner.addChild(_label);
 		_btn.setMargin(20);
 
 		_btn.setAlignment(Align::Center);
@@ -34,12 +49,15 @@ public:
 		_btn.onClicked.connect([&]() { 
 			Dialogs::messageBox(this, "Button clicked.", "Alert"); 
 		});
+
+		_label.setBackground(Color(255, 0, 0));
     }
 
 private:
 	// Instance Variables
 	LayoutComponent _child, _inner;
 	Button _btn;
+	Label _label;
 };
 
 // Entry Point

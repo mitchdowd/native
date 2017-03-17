@@ -6,6 +6,7 @@
 
 // Local Dependencies
 #include "brush.h"
+#include "font.h"
 #include "pen.h"
 #include "rectangle.h"
 
@@ -40,6 +41,15 @@ namespace native
 
 			/** Destructor. */
 			~Canvas();
+
+			/**
+				Draws a String of text using a given Font at a particular point.
+				The Point corresponds to the top-left corner of the line of text.
+				\param text The text to draw.
+				\param font The Font to draw the text with.
+				\param point The location to draw the text at.
+			 */
+			void drawText(const String& text, const Font& font, const Point& point = Point());
 
 			/**
 				Draws a Rectangle outline within the given rectangle. The outer
