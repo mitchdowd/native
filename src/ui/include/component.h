@@ -3,7 +3,6 @@
 
 // External Dependencies
 #include "../../core/include/exception.h"
-#include "../../core/include/flags.h"
 
 // Module Dependencies
 #include "brush.h"
@@ -18,40 +17,6 @@ namespace native
 		// Forward Declarations
 		class ComponentAdapter;
 		class LayoutComponent;
-
-		/** Maskable alignments. */
-		ENUM_FLAGS(Alignment)
-		{
-			None = 0,
-
-			// Horizontal Alignments
-			Left    = 1,
-			Right   = 2,
-			HCenter = 4,
-			HFill   = 8,
-
-			// Vertical Alignments
-			Top     = 16,
-			Bottom  = 32,
-			VCenter = 64,
-			VFill   = 128,
-
-			// Combinations
-			Fill       = HFill   | VFill,
-			Center     = HCenter | VCenter,
-			Horizontal = Left | Right  | HCenter | HFill,
-			Vertical   = Top  | Bottom | VCenter | VFill
-		};
-
-		/** Shorthand for `Alignment`. */
-		typedef Alignment Align;
-
-		/** For specifying vertical or horizontal orientation. */
-		enum Orientation
-		{
-			Horizontal = Align::Horizontal,
-			Vertical   = Align::Vertical
-		};
 
 		/**
 			Margins to place around a Component.

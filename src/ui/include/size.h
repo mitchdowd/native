@@ -1,13 +1,48 @@
 #ifndef _NATIVE_UI_SIZE_H_
 #define _NATIVE_UI_SIZE_H_ 1
 
-// External Modules
+// External Dependencies
+#include "../../core/include/flags.h"
 #include "../../core/include/types.h"
 
 namespace native
 {
 	namespace ui
 	{
+		/** Maskable alignments. */
+		ENUM_FLAGS(Alignment)
+		{
+			None = 0,
+
+			// Horizontal Alignments
+			Left    = 1,
+			Right   = 2,
+			HCenter = 4,
+			HFill   = 8,
+
+			// Vertical Alignments
+			Top     = 16,
+			Bottom  = 32,
+			VCenter = 64,
+			VFill   = 128,
+
+			// Combinations
+			Fill       = HFill   | VFill,
+			Center     = HCenter | VCenter,
+			Horizontal = Left | Right  | HCenter | HFill,
+			Vertical   = Top  | Bottom | VCenter | VFill
+		};
+
+		/** Shorthand for `Alignment`. */
+		typedef Alignment Align;
+
+		/** For specifying vertical or horizontal orientation. */
+		enum Orientation
+		{
+			Horizontal = Align::Horizontal,
+			Vertical   = Align::Vertical
+		};
+
 		/**
 			Represents a rectangular size, without a corresponding position.
 		 */
@@ -48,6 +83,14 @@ namespace native
 				\return The scaled version.
 			 */
 			Size scale(float factor) const noexcept { return Size(coord_t(width * factor), coord_t(height * factor)); }
+
+			/**
+				Gets the value which works along the given orientation within this
+				Size construct.
+				\param orientation Horizontal for width, Vertical for height.
+			 */
+			coord_t operator[](Orientation orientation) const { return orientation == Horizontal ? width : height; }
+			coord_t& operator[](Orientation orientation) { return orientation == Horizontal ? width : height; }
 
 			/**
 				Indicates whether the two Size objects are the same dimensions.

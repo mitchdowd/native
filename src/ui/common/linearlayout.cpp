@@ -16,7 +16,25 @@ namespace native
 
 		Size LinearLayout::getPreferredSize() const
 		{
-			return LayoutComponent::getPreferredSize();
+			Size size;
+
+			// Check what our x/y co-ordinates are.
+			const Orientation LENGTH = getOrientation();
+			const Orientation DEPTH  = getOrientation() == Horizontal ? Vertical : Horizontal;
+
+			for (auto child : getChildren())
+			{
+				Size childSize = child->getPreferredSize();
+
+				// Increase the preferred length.
+				size[LENGTH] += childSize[LENGTH];
+
+				// Adjust the depth (against the orientation).
+				if (size[DEPTH] < childSize[DEPTH])
+					size[DEPTH] = childSize[DEPTH];
+			}
+
+			return size;
 		}
 	}
 }
