@@ -46,6 +46,13 @@ namespace native
 		/** Shorthand for `Alignment`. */
 		typedef Alignment Align;
 
+		/** For specifying vertical or horizontal orientation. */
+		enum Orientation
+		{
+			Horizontal = Align::Horizontal,
+			Vertical   = Align::Vertical
+		};
+
 		/**
 			Margins to place around a Component.
 		 */

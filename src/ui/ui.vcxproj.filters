@@ -52,6 +52,9 @@
     <ClCompile Include="win32\eventqueue.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="common\linearlayout.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -117,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="include\inputevent.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\linearlayout.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
