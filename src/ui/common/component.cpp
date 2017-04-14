@@ -116,6 +116,9 @@ namespace native
 		{
 			Rectangle area = area_;
 
+			// Take minimum size into account.
+			area.ensureSize(getMinimumSize());
+
 			// Take margins into account.
 			area.x += _margins.left;
 			area.y += _margins.top;

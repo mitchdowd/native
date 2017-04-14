@@ -106,6 +106,13 @@ namespace native
 			virtual Size getPreferredSize() const { return Size(0, 0); }
 
 			/**
+				Override to set a minimum size which the Component requires to
+				be displayed properly.
+				\return The minimum size.
+			 */
+			virtual Size getMinimumSize() const { return Size(0, 0); }
+
+			/**
 				Allocates a given area to the Rectangle. This area includes the
 				margins, borders and any alignment values, which may result in
 				a smaller subset of the area finally being set.

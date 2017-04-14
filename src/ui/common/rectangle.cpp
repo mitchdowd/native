@@ -94,6 +94,16 @@ namespace native
 				&& width == other.width 
 				&& height == other.height;
 		}
+
+		coord_t Rectangle::operator[](Orientation orientation) const noexcept
+		{
+			return orientation == Horizontal ? width : height;
+		}
+
+		coord_t& Rectangle::operator[](Orientation orientation) noexcept
+		{
+			return orientation == Horizontal ? width : height;
+		}
 	}
 }
 

@@ -27,37 +27,24 @@ public:
     MyApp()
     {
         setTitle("To-Do List");
+		setBackground(Color(255, 255, 255));
 
-		setBackground(Color(0x49, 0x4B, 0x54));
+		addChild(_layout);
 
-		addChild(_child);
+		_label1.setAlignment(Align::Fill);
+		_label2.setAlignment(Align::Fill);
 
-		_child.setMargin(20);
-		_child.setBackground(Color(0x42, 0x44, 0x4C));
+		_layout.addChild(_label1);
+		_layout.addChild(_label2);
 
-		_child.addChild(_inner);
-
-		_inner.setMargin(20);
-		_inner.setBackground(Color(0x49, 0x4B, 0x54));
-
-		_btn.setText("Click me!");
-		_inner.addChild(_label);
-		_btn.setMargin(20);
-
-		_btn.setAlignment(Align::Center);
-
-		_btn.onClicked.connect([&]() { 
-			Dialogs::messageBox(this, "Button clicked.", "Alert"); 
-		});
-
-		_label.setBackground(Color(255, 0, 0));
+		_layout.setOrientation(Vertical);
     }
 
 private:
 	// Instance Variables
-	LayoutComponent _child, _inner;
-	Button _btn;
-	Label _label;
+	LinearLayout _layout;
+	Label _label1, _label2;
+
 };
 
 // Entry Point

@@ -14,6 +14,7 @@
 #include "../src/ui/include/icomponentadapter.h"
 #include "../src/ui/include/inputevent.h"
 #include "../src/ui/include/layoutcomponent.h"
+#include "../src/ui/include/linearlayout.h"
 #include "../src/ui/include/pen.h"
 #include "../src/ui/include/point.h"
 #include "../src/ui/include/rectangle.h"

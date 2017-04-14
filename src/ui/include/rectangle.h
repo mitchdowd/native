@@ -185,6 +185,21 @@ namespace native
 				\return `false` if equal, `true` otherwise.
 			 */
 			bool operator!=(const Rectangle& other) const { return !operator==(other); }
+
+			/**
+				Gets the length value which operates along the given Orientation.
+				\param orientation Vertical for height, Horizontal for width.
+				\return The width or height value depending on the Orientation.
+			 */
+			coord_t operator[](Orientation orientation) const noexcept;
+
+			/**
+				Gets a modifiable reference to the length value which operates along
+				the given Orientation.
+				\param orientation Vertical for height, Horizontal for width.
+				\return The width or height value depending on the Orientation.
+			 */
+			coord_t& operator[](Orientation orientation) noexcept;
 		};
 	}
 }
