@@ -83,6 +83,17 @@ namespace native
 				throw GraphicsException("Graphics::DrawString");
 		}
 
+		Size Canvas::measureText(const String& text, const Font& font) const
+		{
+			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
+			Gdiplus::RectF rect;
+
+			if (graphics->MeasureString(text.toArray(), int(text.getLength()), (Gdiplus::Font*) font.getHandle(), Gdiplus::PointF(0, 0), &rect) != Gdiplus::Ok)
+				throw GraphicsException("Graphics::MeasureString() failed");
+
+			return Size(coord_t(rect.Width + 1), coord_t(rect.Height));
+		}
+
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{
 			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;

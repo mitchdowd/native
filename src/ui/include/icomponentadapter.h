@@ -14,6 +14,7 @@ namespace native
 	{
 		// Forward Declarations
 		class Canvas;
+		class Font;
 		struct InputEvent;
 		struct ComponentEvent;
 
@@ -67,6 +68,12 @@ namespace native
 				\param text The text to set.
 			 */
 			virtual void setText(const String& text) = 0;
+
+			/**
+				Sets the Font this component will draw its text with.
+				\param font The Font to draw text with.
+			 */
+			virtual void setFont(const Font& font) = 0;
 
 			/**
 				Performs default processing of an input event.

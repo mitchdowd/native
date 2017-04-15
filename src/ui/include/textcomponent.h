@@ -35,9 +35,29 @@ namespace native
 			 */
 			String getText() const { return _text; }
 
+			/**
+				Sets the Font for this Component to draw its text with.
+				\param font The Font to set.
+			 */
+			void setFont(const Font& font);
+
+			/**
+				Gets the Font used to draw the text in this TextComponent.
+				\return The current Font.
+			 */
+			Font getFont() const { return _font; }
+
+			/**
+				Calculates the Size which will allow the current text to be
+				displayed without being trimmed off.
+				\return The preferred size.
+			 */
+			virtual Size getPreferredSize() const override;
+
 		private:
 			// Instance Variables
 			String _text;
+			Font   _font;
 		};
 	}
 }

@@ -149,6 +149,11 @@ namespace native
 			::SetWindowText(HWND(_handle), text.toArray());
 		}
 
+		void ComponentAdapter::setFont(const Font& font)
+		{
+			throw NotImplementedException();
+		}
+
 		void ComponentAdapter::doInput(const InputEvent& event)
 		{
 			if (!event.nativeEvent)

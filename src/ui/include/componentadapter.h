@@ -71,6 +71,12 @@ namespace native
 			virtual void setText(const String& text) override;
 
 			/**
+				Sets the Font this component will draw its text with.
+				\param font The Font to draw text with.
+			 */
+			virtual void setFont(const Font& font) override;
+
+			/**
 				Performs default processing of an input event.
 				\param event The event to process.
 			 */

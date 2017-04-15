@@ -52,6 +52,14 @@ namespace native
 			void drawText(const String& text, const Font& font, const Point& point = Point());
 
 			/**
+				Measures the dimensions required to draw the given text on this
+				Canvas using the specified Font.
+				\param text The text to measure.
+				\param font The Font the text would be drawn in.
+			 */
+			Size measureText(const String& text, const Font& font) const;
+
+			/**
 				Draws a Rectangle outline within the given rectangle. The outer
 				edge of the drawn rectangle's line will sit on the specified
 				Rectangle co-ordinates.
