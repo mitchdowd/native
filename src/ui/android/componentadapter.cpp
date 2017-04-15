@@ -85,7 +85,7 @@ namespace native
 
         void ComponentAdapter::setFont(const Font& font)
         {
-            throw NotImplementedException();
+            throw NotSupportedException("Only text Components can have their font set.");
         }
 
 		void ComponentAdapter::doInput(const InputEvent& event)

@@ -31,7 +31,25 @@ namespace native
 
 		Font Font::getDefault()
 		{
-			throw NotImplementedException();
+			static Font font = nullptr;
+			static SpinLock lock;
+
+			lock.lock();
+
+			if (font.getHandle() == nullptr)
+			{
+				jni::Class Button("libnative/app/Button");
+				jni::method_t viewConstructor = Button.getConstructor("(Landroid/content/Context;)V");
+				jni::Object button = Button.newInstance(viewConstructor, (jni::Object*) App::getGlobalHandle());
+
+				// Android already scales its default fonts.
+				font._shared->size = button.call<float>("getTextSize") / System::getDisplayScale();
+				font._shared->handle = new jni::Object(button.call<jni::Object>("getTypeface()Landroid/graphics/Typeface;"));
+			}
+
+			lock.release();
+
+			return font;
 		}
 
 		handle_t Font::getAuxHandle() const

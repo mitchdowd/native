@@ -8,10 +8,12 @@ namespace native
 	namespace ui
 	{
 		TextComponent::TextComponent() : Component(new TextComponentAdapter(this))
+			, _font(Font::getDefault())
 		{
 		}
 
 		TextComponent::TextComponent(IComponentAdapter* adapter) : Component(adapter)
+			, _font(Font::getDefault())
 		{
 		}
 
