@@ -71,8 +71,6 @@ namespace native
 		void ComponentAdapter::setArea(const Rectangle& area)
 		{
             jni::Class("libnative/ui/ViewExtensions").call<void>("setArea(Landroid/view/View;IIII)V", HANDLE_OBJ, area.x, area.y, area.width, area.height);
-
-		//	HANDLE_OBJ->call<void>("setArea", area.x, area.y, area.width, area.height);
 		}
 
 		Rectangle ComponentAdapter::getContentArea() const
@@ -84,6 +82,11 @@ namespace native
         {
 			throw NotSupportedException("Only text Components can have their text set.");
 		}
+
+        void ComponentAdapter::setFont(const Font& font)
+        {
+            throw NotImplementedException();
+        }
 
 		void ComponentAdapter::doInput(const InputEvent& event)
 		{

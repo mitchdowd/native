@@ -39,8 +39,8 @@ namespace native
 		/** For specifying vertical or horizontal orientation. */
 		enum Orientation
 		{
-			Horizontal = Align::Horizontal,
-			Vertical   = Align::Vertical
+			Horizontal = int(Align::Horizontal),
+			Vertical   = int(Align::Vertical)
 		};
 
 		/**

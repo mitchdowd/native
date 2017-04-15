@@ -31,21 +31,35 @@ namespace native
 			float getSize() const noexcept { return _size; }
 
 			/**
+				Gets the default system UI Font.
+				\return The default Font.
+			 */
+			static Font getDefault();
+
+			/**
 				Gets the system resource handle.
 				\return The system resource handle.
 			*/
 			handle_t getHandle() const noexcept { return _shared->handle; }
+
+			/**
+				Gets a secondary handle to the Font, for those platforms that
+				use it.
+				\return The Font's second system resource handle.
+			 */
+			handle_t getAuxHandle() const;
 
 		private:
 			/** Self-destroying Font handle. */
 			struct FontHandle
 			{
 				// Lifecycle Functions
-				FontHandle(handle_t handle) : handle(handle) {}
+				FontHandle(handle_t handle);
 				~FontHandle();
 
 				// Instance Varaibles
 				handle_t handle;
+				handle_t auxHandle;
 			};
 
 			// Instance Variables

@@ -151,7 +151,7 @@ namespace native
 
 		void ComponentAdapter::setFont(const Font& font)
 		{
-			throw NotImplementedException();
+			::SendMessage(HWND(_handle), WM_SETFONT, WPARAM(font.getAuxHandle()), FALSE);
 		}
 
 		void ComponentAdapter::doInput(const InputEvent& event)
@@ -469,17 +469,7 @@ namespace native
 
 			if (font == NULL)
 			{
-				NONCLIENTMETRICS metrics;
-
-				metrics.cbSize = sizeof(metrics);
-
-				if (!::IsWindowsVistaOrGreater())
-					metrics.cbSize -= sizeof(metrics.iPaddedBorderWidth);
-
-				// Read/create the default font from the system.
-				::SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(metrics), &metrics, 0);
-
-				font = ::CreateFontIndirect(&metrics.lfMessageFont);
+				font = HFONT(Font::getDefault().getAuxHandle());
 			}
 
 			lock.release();

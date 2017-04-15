@@ -45,6 +45,11 @@ namespace native
             HANDLE_OBJ->call<void>("drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V", text.toArray(), x, y, paint);
         }
 
+        Size Canvas::measureText(const String& text, const Font& font) const
+        {
+            throw NotImplementedException();
+        }
+
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{
 			jni::Object* penObj = (jni::Object*) pen.getHandle();

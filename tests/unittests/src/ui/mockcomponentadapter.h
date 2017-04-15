@@ -27,6 +27,8 @@ namespace native
 
 			virtual void setText(const String& text) override {}
 
+			virtual void setFont(const ui::Font& font) override {}
+
 			virtual void doInput(const ui::InputEvent& event) override {}
 
 			virtual void doPaint(ui::Canvas& canvas) override {}
