@@ -17,7 +17,7 @@ protected:
 	virtual void onPaint(Canvas& canvas) override
 	{
 		TextComponent::onPaint(canvas);
-		canvas.drawText(getText(), Font("Sans serif", 16));
+		canvas.drawText(getText(), getFont());
 	}
 };
 
