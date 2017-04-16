@@ -375,6 +375,16 @@ namespace native
 		{
 		}
 
+		void TextComponentAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
+		}
+
+		void TextComponentAdapter::setFont(const Font& font)
+		{
+			ComponentAdapter::setFont(font);
+		}
+
 		/*
 			ButtonAdapter Functions
 		 */
@@ -382,11 +392,6 @@ namespace native
 		ButtonAdapter::ButtonAdapter(Button* button) 
 			: ComponentAdapter({ button, L"BUTTON", WS_CHILD | WS_VISIBLE, 0 })
 		{
-		}
-
-		void ButtonAdapter::setText(const String& text)
-		{
-			ComponentAdapter::setText(text);
 		}
 
 		/*

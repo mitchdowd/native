@@ -156,6 +156,18 @@ namespace native
 				\param component The TextComponent for the adapter.
 			 */
 			TextComponentAdapter(TextComponent* component);
+
+            /**
+                Sets the component text.
+                \param text The new text value.
+             */
+            virtual void setText(const String& text) override;
+
+			/**
+				Sets the component's Font.
+				\param font The new Font.
+			 */
+			virtual void setFont(const Font& font) override;
 		};
 
 		/**
@@ -169,12 +181,6 @@ namespace native
 				\param button The Button for this adapter.
 			 */
 			ButtonAdapter(Button* button);
-
-            /**
-                Sets the button text.
-                \param text The new button text.
-             */
-			virtual void setText(const String& text) override;
 		};
 	}
 }

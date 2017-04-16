@@ -200,17 +200,22 @@ namespace native
 		{
 		}
 
+        void TextComponentAdapter::setText(const String& text)
+        {
+            HANDLE_OBJ->call<void>("setText(Ljava/lang/CharSequence;)V", text.toArray());
+        }
+
+        void TextComponentAdapter::setFont(const Font& font)
+        {
+            HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
+        }
+
         /*
             ButtonAdapter Functions
          */
 
         ButtonAdapter::ButtonAdapter(Button* button) : ComponentAdapter({ button, "libnative/ui/Button" })
         {
-        }
-
-        void ButtonAdapter::setText(const String& text)
-        {
-            HANDLE_OBJ->call<void>("setText(Ljava/lang/CharSequence;)V", text.toArray());
         }
 	}
 }
