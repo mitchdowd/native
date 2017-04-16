@@ -175,6 +175,15 @@ namespace native
 
 		Brush Component::getBackground() const
 		{
+			if (!_background.getHandle())
+			{
+				// Fall back to the parent background.
+				Component* parent = getParent();
+
+				if (parent)
+					return parent->getBackground();
+			}
+
 			return _background;
 		}
 

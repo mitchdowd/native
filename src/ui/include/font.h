@@ -5,6 +5,9 @@
 #include "../../core/include/shared.h"
 #include "../../core/include/string.h"
 
+// Module Dependencies
+#include "size.h"
+
 namespace native
 {
 	namespace ui
@@ -29,6 +32,13 @@ namespace native
 				Gets the size of the Font, in pixels.
 			 */
 			float getSize() const noexcept { return _size; }
+
+			/**
+				Measures the space required to draw the given text with this
+				Font.
+				\param text The text to measure.
+			 */
+			Size measureText(const String& text) const;
 
 			/**
 				Gets the default system UI Font.

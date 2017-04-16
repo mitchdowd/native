@@ -53,35 +53,14 @@ namespace native
 			return Gdiplus::Rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 		}
 
-		Canvas::Canvas(handle_t handle, handle_t auxHandle) : _handle(handle), _auxHandle(auxHandle), _needsDelete(false)
+		Canvas::Canvas(handle_t handle, handle_t auxHandle) : _handle(handle), _auxHandle(auxHandle)
 		{
 			if (auxHandle == nullptr)
 				throw InvalidArgumentException();
 		}
 
-		Canvas::Canvas(Component& component) : _handle(nullptr), _auxHandle(nullptr), _needsDelete(true)
-		{
-			Component* tmp = &component;
-
-			while (!tmp->getAdapter())
-				tmp = (Component*) tmp->getParent();
-
-			if (tmp == nullptr)
-				throw InvalidArgumentException();
-
-			ComponentAdapter* adapter = (ComponentAdapter*) tmp->getAdapter();
-
-			_auxHandle = ::GetDC(HWND(adapter->getHandle()));
-			_handle = new Gdiplus::Graphics(HDC(_auxHandle));
-		}
-
 		Canvas::~Canvas()
 		{
-			if (_needsDelete)
-			{
-				delete (Gdiplus::Graphics*) _handle;
-				::ReleaseDC(NULL, HDC(_auxHandle));
-			}
 		}
 
 		void Canvas::drawText(const String& text, const Font& font, const Point& point)
@@ -93,17 +72,6 @@ namespace native
 
 			if (graphics->DrawString(text.toArray(), int(text.getLength()), (const Gdiplus::Font*) font.getHandle(), pt, Gdiplus::StringFormat::GenericDefault(), &brush) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::DrawString");
-		}
-
-		Size Canvas::measureText(const String& text, const Font& font) const
-		{
-			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
-			Gdiplus::RectF rect;
-
-			if (graphics->MeasureString(text.toArray(), int(text.getLength()), (Gdiplus::Font*) font.getHandle(), Gdiplus::PointF(0, 0), &rect) != Gdiplus::Ok)
-				throw GraphicsException("Graphics::MeasureString() failed");
-
-			return Size(coord_t(rect.Width + 1), coord_t(rect.Height));
 		}
 
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)

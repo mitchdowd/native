@@ -10,7 +10,7 @@ public:
 	Label(const String& text) : TextComponent()
 	{
 		setText(text);
-		setBackground(Color(255, 255, 255));
+		setBackground(Color(0xFF, 0, 0));
 	}
 
 protected:
@@ -30,10 +30,12 @@ public:
     MyApp() : _label1(L"Label 1"), _label2(L"Label 2")
     {
         setTitle("To-Do List");
-		setBackground(Color(255, 255, 255));
 
 		addChild(_layout);
 
+		_label1.setMargin(20);
+
+		_label1.setAlignment(Align::Bottom | Align::Right);
 		_label2.setAlignment(Align::Center);
 
 		_layout.addChild(_label1);

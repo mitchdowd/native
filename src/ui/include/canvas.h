@@ -32,13 +32,6 @@ namespace native
 			 */
 			Canvas(handle_t handle, handle_t auxHandle = nullptr);
 
-			/**
-				Creates a Canvas which draws within the confines of the specified
-				Component.
-				\param component The Component to draw within.
-			 */
-			Canvas(Component& component);
-
 			/** Destructor. */
 			~Canvas();
 
@@ -97,7 +90,6 @@ namespace native
 			// Instance Variables
 			handle_t _handle;
 			handle_t _auxHandle;
-			bool     _needsDelete;
 			Point    _offset;
 		};
 

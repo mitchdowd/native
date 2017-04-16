@@ -8,10 +8,12 @@ namespace native
 	{
 		Window::Window() : LayoutComponent(new WindowAdapter(this))
 		{
+			setBackground(Color(0xFF, 0xFF, 0xFF));
 		}
 
 		Window::Window(IComponentAdapter* adapter) : LayoutComponent(adapter)
 		{
+			setBackground(Color(0xFF, 0xFF, 0xFF));
 		}
 
 		void Window::setTitle(const String& title)

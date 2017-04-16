@@ -8,13 +8,13 @@ namespace native
 	namespace ui
 	{
 		TextComponent::TextComponent() : Component(new TextComponentAdapter(this))
-			, _font(Font::getDefault())
 		{
+            setFont(Font::getDefault());
 		}
 
 		TextComponent::TextComponent(IComponentAdapter* adapter) : Component(adapter)
-			, _font(Font::getDefault())
 		{
+            setFont(Font::getDefault());
 		}
 
 		void TextComponent::setText(const String& text)
@@ -39,7 +39,7 @@ namespace native
 
 		Size TextComponent::getPreferredSize() const
 		{
-			return Canvas(*(Component*) this).measureText(getText(), getFont());
+			return getFont().measureText(getText());
 		}
 	}
 }

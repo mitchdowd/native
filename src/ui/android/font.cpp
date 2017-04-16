@@ -1,8 +1,11 @@
 // External Dependencies
 #include "../../../lib/jnipp/jnipp.h"
 #include "../../core/include/exception.h"
+#include "../../core/include/spinlock.h"
+#include "../../core/include/system.h"
 
 // Module Dependencies
+#include "../include/app.h"
 #include "../include/font.h"
 
 namespace native
@@ -29,21 +32,31 @@ namespace native
 			delete (jni::Object*) handle;
 		}
 
+        Size Font::measureText(const String& text) const
+        {
+            jni::Object paint = jni::Class("android/graphics/Paint").newInstance();
+
+            paint.call<jni::Object>("setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;", (jni::Object*) getHandle());
+            paint.call<void>("setTextSize", _size);
+
+            return { paint.call<float>("measureText(Ljava/lang/String;)F", text.toArray()), _size };
+        }
+
 		Font Font::getDefault()
 		{
-			static Font font = nullptr;
+			static Font font;
 			static SpinLock lock;
 
 			lock.lock();
 
 			if (font.getHandle() == nullptr)
 			{
-				jni::Class Button("libnative/app/Button");
+				jni::Class Button("libnative/ui/TextComponent");
 				jni::method_t viewConstructor = Button.getConstructor("(Landroid/content/Context;)V");
-				jni::Object button = Button.newInstance(viewConstructor, (jni::Object*) App::getGlobalHandle());
+				jni::Object button = Button.newInstance(viewConstructor, (jni::Object*) App::getAppHandle());
 
 				// Android already scales its default fonts.
-				font._shared->size = button.call<float>("getTextSize") / System::getDisplayScale();
+				font._size = button.call<float>("getScaledTextSize");
 				font._shared->handle = new jni::Object(button.call<jni::Object>("getTypeface()Landroid/graphics/Typeface;"));
 			}
 

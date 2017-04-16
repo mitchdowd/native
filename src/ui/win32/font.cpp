@@ -43,6 +43,17 @@ namespace native
 				::DeleteObject(HFONT(auxHandle));
 		}
 
+		Size Font::measureText(const String& text) const
+		{
+			Gdiplus::Graphics graphics = HWND(NULL);
+			Gdiplus::RectF rect;
+
+			if (graphics.MeasureString(text.toArray(), int(text.getLength()), (Gdiplus::Font*) getHandle(), Gdiplus::PointF(0, 0), &rect) != Gdiplus::Ok)
+				throw GraphicsException("Graphics::MeasureString() failed");
+
+			return Size(coord_t(3 + rect.Width/ System::getDisplayScale()), coord_t(1 + rect.Height / System::getDisplayScale()));
+		}
+
 		Font Font::getDefault()
 		{
 			static Font font;

@@ -20,11 +20,6 @@ namespace native
                 throw InvalidArgumentException();
 		}
 
-        Canvas::Canvas(Component& component)
-        {
-            throw NotImplementedException();
-        }
-
 		Canvas::~Canvas()
 		{
 			delete (jni::Object*) _handle;
@@ -43,11 +38,6 @@ namespace native
             paint->call<jni::Object>("setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;", (jni::Object*) font.getHandle());
 
             HANDLE_OBJ->call<void>("drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V", text.toArray(), x, y, paint);
-        }
-
-        Size Canvas::measureText(const String& text, const Font& font) const
-        {
-            throw NotImplementedException();
         }
 
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)

@@ -196,7 +196,7 @@ namespace native
 			TextComponentAdapter Functions
 		 */
 		
-		TextComponentAdapter::TextComponentAdapter(TextComponent* component) : ComponentAdapter({ /* todo */ })
+		TextComponentAdapter::TextComponentAdapter(TextComponent* component) : ComponentAdapter({ component, "libnative/ui/TextComponent" })
 		{
 		}
 
@@ -208,6 +208,7 @@ namespace native
         void TextComponentAdapter::setFont(const Font& font)
         {
             HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
+            HANDLE_OBJ->call<void>("setTextSize", font.getSize());
         }
 
         /*
