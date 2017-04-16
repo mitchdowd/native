@@ -1,20 +1,23 @@
 // Framework Dependencies
 #include <native.h>
 
+using namespace native;
 using namespace native::ui;
 
-class Label : public Component
+class Label : public TextComponent
 {
 public:
-	Label() : Component()
+	Label(const String& text) : TextComponent()
 	{
-		setAlignment(Align::Fill);
+		setText(text);
+		setBackground(Color(255, 255, 255));
 	}
 
 protected:
 	virtual void onPaint(Canvas& canvas) override
 	{
-		canvas.drawText("The quick brown fox jumps over the lazy dog.", Font("Sans serif", 16));
+		TextComponent::onPaint(canvas);
+		canvas.drawText(getText(), Font("Sans serif", 16));
 	}
 };
 
@@ -24,15 +27,14 @@ protected:
 class MyApp : public native::ui::App
 {
 public:
-    MyApp()
+    MyApp() : _label1(L"Label 1"), _label2(L"Label 2")
     {
         setTitle("To-Do List");
 		setBackground(Color(255, 255, 255));
 
 		addChild(_layout);
 
-		_label1.setAlignment(Align::Fill);
-		_label2.setAlignment(Align::Fill);
+		_label2.setAlignment(Align::Center);
 
 		_layout.addChild(_label1);
 		_layout.addChild(_label2);

@@ -9,6 +9,7 @@
 // Local Dependencies
 #include "../include/canvas.h"
 #include "../include/component.h"
+#include "../include/componentadapter.h"
 
 // External Libraries
 #pragma comment(lib, "gdiplus.lib")
@@ -58,9 +59,20 @@ namespace native
 				throw InvalidArgumentException();
 		}
 
-		Canvas::Canvas(Component& component)
+		Canvas::Canvas(Component& component) : _handle(nullptr), _auxHandle(nullptr), _needsDelete(true)
 		{
-			throw NotImplementedException();
+			Component* tmp = &component;
+
+			while (!tmp->getAdapter())
+				tmp = (Component*) tmp->getParent();
+
+			if (tmp == nullptr)
+				throw InvalidArgumentException();
+
+			ComponentAdapter* adapter = (ComponentAdapter*) tmp->getAdapter();
+
+			_auxHandle = ::GetDC(HWND(adapter->getHandle()));
+			_handle = new Gdiplus::Graphics(HDC(_auxHandle));
 		}
 
 		Canvas::~Canvas()
