@@ -269,10 +269,11 @@ namespace native
 
 		void Component::onPaint(Canvas& canvas)
 		{
+			if (_background.getHandle())
+				canvas.fillRectangle(getContentArea().getSize(), _background);
+
 			if (_adapter)
 				_adapter->doPaint(canvas);
-			else if (_background.getHandle())
-				canvas.fillRectangle(getContentArea().getSize(), _background);
 		}
 
 		void Component::onSize(const Size& size)

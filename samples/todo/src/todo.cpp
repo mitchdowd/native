@@ -30,8 +30,7 @@ public:
 private:
 	// Instance Variables
 	LinearLayout _layout;
-	TextComponent _label1, _label2;
-
+	Button _label1, _label2;
 };
 
 // Entry Point

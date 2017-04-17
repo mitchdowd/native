@@ -394,6 +394,16 @@ namespace native
 		{
 		}
 
+		void ButtonAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
+		}
+
+		void ButtonAdapter::setFont(const Font& font)
+		{
+			ComponentAdapter::setFont(font);
+		}
+
 		/*
 			Local Functions
 		 */

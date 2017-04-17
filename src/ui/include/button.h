@@ -21,6 +21,13 @@ namespace native
             /** Default constructor. A Button with no text. */
             Button();
 
+			/**
+				Convenience constructor, to create a Button and set its text
+				at the same time.
+				\param text The button text to set.
+			 */
+			Button(const String& text);
+
 			/** Signal emitted when the Button is clicked. */
 			Signal<> onClicked;
 
@@ -28,7 +35,7 @@ namespace native
 				Calculates the preferred size of this Button based upon its contents.
 				\return The preferred size.
 			 */
-			virtual Size getPreferredSize() const override { return Size(80, 30); /* TODO */ }
+			virtual Size getPreferredSize() const override;
 
 		protected:
 			/**
@@ -36,6 +43,12 @@ namespace native
 				\param event Ignored.
 			 */
 			virtual void onClick(const InputEvent& event) override { onClicked(); }
+
+			/**
+				Paints the Button in its own system-defined way.
+				\param canvas The Canvas to paint with.
+			 */
+			virtual void onPaint(Canvas& canvas) override;
         };
     }
 }

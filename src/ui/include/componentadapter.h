@@ -82,7 +82,6 @@ namespace native
 			 */
 			virtual void doInput(const InputEvent& event) override;
 
-
 			/**
 				Paints the component however the system usually would.
 				\param canvas The Canvas to paint with.
@@ -181,6 +180,18 @@ namespace native
 				\param button The Button for this adapter.
 			 */
 			ButtonAdapter(Button* button);
+
+			/**
+				Sets the component text.
+				\param text The new text value.
+			 */
+			virtual void setText(const String& text) override;
+
+			/**
+				Sets the component's Font.
+				\param font The new Font.
+			 */
+			virtual void setFont(const Font& font) override;
 		};
 	}
 }

@@ -101,9 +101,6 @@ namespace native
 
 		void ComponentAdapter::doPaint(Canvas& canvas)
 		{
-            if (_component->getBackground().getHandle())
-                canvas.fillRectangle(_component->getContentArea().getSize(), _component->getBackground());
-
             // Call super.onDraw().
             jni::Class super = jni::Class(HANDLE_OBJ->getClass()).getParent();
             auto method = super.getMethod("onDraw", "(Landroid/graphics/Canvas;)V");
@@ -217,6 +214,17 @@ namespace native
 
         ButtonAdapter::ButtonAdapter(Button* button) : ComponentAdapter({ button, "libnative/ui/Button" })
         {
+        }
+
+        void ButtonAdapter::setText(const String& text)
+        {
+            HANDLE_OBJ->call<void>("setText(Ljava/lang/CharSequence;)V", text.toArray());
+        }
+
+        void ButtonAdapter::setFont(const Font& font)
+        {
+            HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
+            HANDLE_OBJ->call<void>("setTextSize", font.getSize());
         }
 	}
 }
