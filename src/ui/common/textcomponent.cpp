@@ -12,6 +12,12 @@ namespace native
             setFont(Font::getDefault());
 		}
 
+		TextComponent::TextComponent(const String& text) : Component(new TextComponentAdapter(this))
+		{
+			setFont(Font::getDefault());
+			setText(text);
+		}
+
 		TextComponent::TextComponent(IComponentAdapter* adapter) : Component(adapter)
 		{
             setFont(Font::getDefault());
@@ -40,6 +46,15 @@ namespace native
 		Size TextComponent::getPreferredSize() const
 		{
 			return getFont().measureText(getText());
+		}
+
+		void TextComponent::onPaint(Canvas& canvas)
+		{
+			// Paint the background...
+			canvas.fillRectangle(getContentArea().getSize(), getBackground());
+
+			// Paint the text.
+			canvas.drawText(getText(), getFont());
 		}
 	}
 }

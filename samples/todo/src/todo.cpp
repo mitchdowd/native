@@ -4,23 +4,6 @@
 using namespace native;
 using namespace native::ui;
 
-class Label : public TextComponent
-{
-public:
-	Label(const String& text) : TextComponent()
-	{
-		setText(text);
-		setBackground(Color(0xFF, 0, 0));
-	}
-
-protected:
-	virtual void onPaint(Canvas& canvas) override
-	{
-		TextComponent::onPaint(canvas);
-		canvas.drawText(getText(), getFont());
-	}
-};
-
 /**
 	The main application creation class.
  */
@@ -47,7 +30,7 @@ public:
 private:
 	// Instance Variables
 	LinearLayout _layout;
-	Label _label1, _label2;
+	TextComponent _label1, _label2;
 
 };
 

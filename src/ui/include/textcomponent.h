@@ -18,6 +18,13 @@ namespace native
 			TextComponent();
 
 			/**
+				Convenience constructor. Creates the TextComponent and sets its
+				text during construction.
+				\param text The text to set.
+			 */
+			TextComponent(const String& text);
+
+			/**
 				Creates a TextComponent with the given native adapter.
 				\param adapter The adapter to set.
 			 */
@@ -53,6 +60,13 @@ namespace native
 				\return The preferred size.
 			 */
 			virtual Size getPreferredSize() const override;
+
+		protected:
+			/**
+				Draws the component, including its text.
+				\param canvas The canvas to draw with.
+			 */
+			virtual void onPaint(Canvas& canvas) override;
 
 		private:
 			// Instance Variables
