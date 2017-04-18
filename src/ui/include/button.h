@@ -29,7 +29,7 @@ namespace native
 			Button(const String& text);
 
 			/** Signal emitted when the Button is clicked. */
-			Signal<> onClicked;
+			Signal<> clicked;
 
 			/**
 				Calculates the preferred size of this Button based upon its contents.
@@ -39,10 +39,10 @@ namespace native
 
 		protected:
 			/**
-				Triggers the onClicked Signal.
+				Triggers the clicked Signal.
 				\param event Ignored.
 			 */
-			virtual void onClick(const InputEvent& event) override { onClicked(); }
+			virtual void onClick(const InputEvent& event) override { clicked(); }
 
 			/**
 				Paints the Button in its own system-defined way.

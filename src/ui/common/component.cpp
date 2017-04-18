@@ -112,6 +112,16 @@ namespace native
 				onSize(area.getSize());
 		}
 
+		void Component::setSize(coord_t width, coord_t height)
+		{
+			Rectangle area = getArea();
+
+			area.width  = width;
+			area.height = height;
+
+			setArea(area);
+		}
+
 		void Component::allocateArea(const Rectangle& area_)
 		{
 			Rectangle area = area_;

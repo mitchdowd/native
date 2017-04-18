@@ -86,6 +86,13 @@ namespace native
 			void setArea(const Rectangle& area);
 
 			/**
+				Sets the size of the Component without changing its position.
+				\param size The size to set.
+			 */
+			void setSize(const Size& size) { setSize(size.width, size.height); }
+			void setSize(coord_t width, coord_t height);
+
+			/**
 				Gets the current area, relative to the parent Component.
 				\return The current Area.
 			 */

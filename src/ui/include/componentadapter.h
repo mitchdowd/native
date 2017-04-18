@@ -58,6 +58,13 @@ namespace native
 			virtual void setArea(const Rectangle& area) override;
 
 			/**
+				Gets the total area of the Component relative to its parent
+				adapter (not necessarily the parent Component).
+				\return The Component's area.
+			 */
+			virtual Rectangle getArea() const override;
+
+			/**
 				Gets the content area of the Component, relative to its non-content
 				area.
 				\return The content area.

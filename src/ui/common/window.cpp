@@ -8,6 +8,7 @@ namespace native
 	{
 		Window::Window() : LayoutComponent(new WindowAdapter(this))
 		{
+			setArea(getAdapter()->getArea());
 			setBackground(Color(0xFF, 0xFF, 0xFF));
 		}
 

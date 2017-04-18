@@ -73,6 +73,11 @@ namespace native
             jni::Class("libnative/ui/ViewExtensions").call<void>("setArea(Landroid/view/View;IIII)V", HANDLE_OBJ, area.x, area.y, area.width, area.height);
 		}
 
+		Rectangle ComponentAdapter::getArea() const
+		{
+			return { HANDLE_OBJ->call<int>("getLeft"), HANDLE_OBJ->call<int>("getTop"), HANDLE_OBJ->call<int>("getWidth"), HANDLE_OBJ->call<int>("getHeight") };
+		}
+
 		Rectangle ComponentAdapter::getContentArea() const
 		{
             return _component->getArea().getSize().scale(System::getDisplayScale());

@@ -23,6 +23,8 @@ namespace native
 
 			virtual void setArea(const ui::Rectangle& area) override { _area = area; }
 
+			virtual ui::Rectangle getArea() const override { return _area; }
+
 			virtual ui::Rectangle getContentArea() const override { return _area.getSize(); }
 
 			virtual void setText(const String& text) override {}

@@ -132,6 +132,15 @@ namespace native
 				throw UserInterfaceException("SetWindowPos() failed");
 		}
 
+		Rectangle ComponentAdapter::getArea() const
+		{
+			RECT area;
+
+			::GetWindowRect(HWND(_handle), &area);
+
+			return { area.left, area.top, area.right - area.left, area.bottom - area.top };
+		}
+
 		Rectangle ComponentAdapter::getContentArea() const
 		{
 			RECT client, window;
