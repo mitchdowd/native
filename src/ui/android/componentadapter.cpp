@@ -245,6 +245,17 @@ namespace native
 		InputAdapter::InputAdapter(InputComponent* input) : ComponentAdapter({ input, "libnative/ui/InputComponent" })
 		{
 		}
+
+        void InputAdapter::setText(const String& text)
+        {
+            HANDLE_OBJ->call<void>("setText(Ljava/lang/CharSequence;)V", text.toArray());
+        }
+
+        void InputAdapter::setFont(const Font& font)
+        {
+            HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
+            HANDLE_OBJ->call<void>("setTextSize", font.getSize());
+        }
 	}
 }
 
