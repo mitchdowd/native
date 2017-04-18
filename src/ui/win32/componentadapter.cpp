@@ -428,6 +428,16 @@ namespace native
 		{
 		}
 
+		void InputAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
+		}
+
+		void InputAdapter::setFont(const Font& font)
+		{
+			ComponentAdapter::setFont(font);
+		}
+
 		/*
 			Local Functions
 		 */

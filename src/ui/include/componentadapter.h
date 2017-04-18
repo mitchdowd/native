@@ -219,6 +219,18 @@ namespace native
 				\param input The component for this adapter.
 			 */
 			InputAdapter(InputComponent* input);
+
+			/**
+				Sets the component text.
+				\param text The new text value.
+			 */
+			virtual void setText(const String& text) override;
+
+			/**
+				Sets the component's Font.
+				\param font The new Font.
+			 */
+			virtual void setFont(const Font& font) override;
 		};
 	}
 }
