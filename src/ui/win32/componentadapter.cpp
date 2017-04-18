@@ -14,6 +14,7 @@
 #include "../include/canvas.h"
 #include "../include/component.h"
 #include "../include/componentadapter.h"
+#include "../include/inputcomponent.h"
 #include "../include/textcomponent.h"
 #include "../include/window.h"
 
@@ -416,6 +417,15 @@ namespace native
 		void ButtonAdapter::setFont(const Font& font)
 		{
 			ComponentAdapter::setFont(font);
+		}
+
+		/*
+			InputAdapter Functions
+		 */
+
+		InputAdapter::InputAdapter(InputComponent* input)
+			: ComponentAdapter({ input, L"EDIT", WS_CHILD | WS_VISIBLE, 0 })
+		{
 		}
 
 		/*

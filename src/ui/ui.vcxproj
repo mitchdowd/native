@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="common\button.cpp" />
     <ClCompile Include="common\color.cpp" />
+    <ClCompile Include="common\inputcomponent.cpp" />
     <ClCompile Include="common\linearlayout.cpp" />
     <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="win32\pen.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="include\layoutcomponent.h" />
     <ClInclude Include="include\point.h" />
     <ClInclude Include="include\size.h" />
+    <ClInclude Include="include\inputcomponent.h" />
     <ClInclude Include="include\textcomponent.h" />
     <ClInclude Include="include\window.h" />
     <ClInclude Include="win32\componentadapterproperties.h" />

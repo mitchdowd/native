@@ -7,6 +7,7 @@
 #include "../include/app.h"
 #include "../include/button.h"
 #include "../include/componentadapter.h"
+#include "../include/inputcomponent.h"
 #include "../include/inputevent.h"
 
 // Local Dependencies
@@ -236,6 +237,14 @@ namespace native
             HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
             HANDLE_OBJ->call<void>("setTextSize", font.getSize());
         }
+
+		/*
+			InputAdapter Functions
+		 */
+
+		InputAdapter::InputAdapter(InputComponent* input) : ComponentAdapter({ input, "libnative/ui/InputComponent" })
+		{
+		}
 	}
 }
 

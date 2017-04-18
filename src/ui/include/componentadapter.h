@@ -130,6 +130,7 @@ namespace native
 
 		// Forward Declarations
 		class Button;
+		class InputComponent;
 		class TextComponent;
 
 		/**
@@ -205,6 +206,19 @@ namespace native
 				\param font The new Font.
 			 */
 			virtual void setFont(const Font& font) override;
+		};
+
+		/**
+			A ComponentAdapter for InputComponents.
+		 */
+		class InputAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given InputComponent.
+				\param input The component for this adapter.
+			 */
+			InputAdapter(InputComponent* input);
 		};
 	}
 }

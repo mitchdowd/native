@@ -55,6 +55,9 @@
     <ClCompile Include="common\linearlayout.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="common\inputcomponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -122,6 +125,9 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="include\linearlayout.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\inputcomponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
