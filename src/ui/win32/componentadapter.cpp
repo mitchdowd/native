@@ -370,6 +370,11 @@ namespace native
 		{
 		}
 
+		void WindowAdapter::setArea(const Rectangle& area)
+		{
+			ComponentAdapter::setArea(area);
+		}
+
 		void WindowAdapter::setText(const String& text)
 		{
 			ComponentAdapter::setText(text);

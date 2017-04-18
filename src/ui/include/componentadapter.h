@@ -144,6 +144,12 @@ namespace native
 			 */
 			WindowAdapter(Window* window);
 
+            /**
+                Sets the area of this Window.
+                \param area The area to set.
+             */
+            virtual void setArea(const Rectangle& area) override;
+
 			/**
 				Sets the title text of the Window.
 			 	\param text The text to set.

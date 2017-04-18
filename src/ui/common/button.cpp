@@ -21,7 +21,7 @@ namespace native
 
 #ifdef NATIVE_PLATFORM_ANDROID
             // Mobile needs bigger buttons with plenty of padding for fat fingers.
-            coord_t padding = coord_t(size.height * 1.666667);
+            coord_t padding = coord_t(size.height * 1.7);
 #else
 			coord_t padding = coord_t(size.height * 0.666667);
 #endif

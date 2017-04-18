@@ -187,6 +187,11 @@ namespace native
 		{
 		}
 
+        void WindowAdapter::setArea(const Rectangle& area)
+        {
+            // This does nothing for Android. Window area is defined by the screen size.
+        }
+
 		void WindowAdapter::setText(const String& text)
 		{
 			jni::Object* activity = (jni::Object*) App::getAppHandle();
