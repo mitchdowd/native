@@ -5,7 +5,6 @@ include ':test'
 include ':unittests'
 
 include ':helloworld'
-include ':todo'
 
 project(':core').projectDir  = new File('src', 'core')
 project(':jnipp').projectDir = new File('lib', 'jnipp')
@@ -14,4 +13,3 @@ project(':test').projectDir = new File('tests', 'test')
 project(':unittests').projectDir = new File('tests', 'unittests')
 
 project(':helloworld').projectDir = new File('samples', 'helloworld')
-project(':todo').projectDir  = new File('samples', 'todo')
