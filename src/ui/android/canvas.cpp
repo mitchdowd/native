@@ -27,17 +27,20 @@ namespace native
 
 		void Canvas::drawText(const String& text, const Font& font, const Point& point)
         {
-            // Calculate the real co-ordinates.
-            float x = float(_offset.x + point.x) * System::getDisplayScale();
-            float y = float(_offset.y + point.y + font.getSize()) * System::getDisplayScale();
+        	if (text.getLength() > 0)
+        	{
+	            // Calculate the real co-ordinates.
+	            float x = float(_offset.x + point.x) * System::getDisplayScale();
+	            float y = float(_offset.y + point.y + font.getSize()) * System::getDisplayScale();
 
-            // Set up the paint to draw the text with.
-            Brush brush = Color();
-            jni::Object* paint = (jni::Object*) brush.getHandle();
-            paint->call<void>("setTextSize", font.getSize() * System::getDisplayScale());
-            paint->call<jni::Object>("setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;", (jni::Object*) font.getHandle());
+	            // Set up the paint to draw the text with.
+	            Brush brush = Color();
+	            jni::Object* paint = (jni::Object*) brush.getHandle();
+	            paint->call<void>("setTextSize", font.getSize() * System::getDisplayScale());
+	            paint->call<jni::Object>("setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;", (jni::Object*) font.getHandle());
 
-            HANDLE_OBJ->call<void>("drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V", text.toArray(), x, y, paint);
+	            HANDLE_OBJ->call<void>("drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V", text.toArray(), x, y, paint);
+	        }
         }
 
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)

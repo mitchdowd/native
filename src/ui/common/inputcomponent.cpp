@@ -9,6 +9,12 @@ namespace native
 		InputComponent::InputComponent() : TextComponent(new InputAdapter(this))
 		{
 		}
+
+		void InputComponent::onPaint(Canvas& canvas)
+		{
+			// Do default system painting.
+			Component::onPaint(canvas);
+		}
 	}
 }
 

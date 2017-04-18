@@ -65,13 +65,16 @@ namespace native
 
 		void Canvas::drawText(const String& text, const Font& font, const Point& point)
 		{
-			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
+			if (text.getLength() > 0)
+			{
+				Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
 
-			Gdiplus::SolidBrush brush(Gdiplus::Color(0, 0, 0));	// TODO: Different colors?
-			Gdiplus::PointF pt(float(_offset.x + point.x) * System::getDisplayScale(), float(_offset.y + point.y) * System::getDisplayScale());
+				Gdiplus::SolidBrush brush(Gdiplus::Color(0, 0, 0));	// TODO: Different colors?
+				Gdiplus::PointF pt(float(_offset.x + point.x) * System::getDisplayScale(), float(_offset.y + point.y) * System::getDisplayScale());
 
-			if (graphics->DrawString(text.toArray(), int(text.getLength()), (const Gdiplus::Font*) font.getHandle(), pt, Gdiplus::StringFormat::GenericDefault(), &brush) != Gdiplus::Ok)
-				throw GraphicsException("Graphics::DrawString");
+				if (graphics->DrawString(text.toArray(), int(text.getLength()), (const Gdiplus::Font*) font.getHandle(), pt, Gdiplus::StringFormat::GenericDefault(), &brush) != Gdiplus::Ok)
+					throw GraphicsException("Graphics::DrawString");
+			}
 		}
 
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)

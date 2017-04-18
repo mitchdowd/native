@@ -5,10 +5,10 @@
 using namespace native;
 using namespace native::ui;
 
-class HelloWorldApp : public App
+class NotepadApp : public App
 {
 public:
-	HelloWorldApp()
+	NotepadApp()
 	{
 		// Set up the main window.
 		setTitle("Hello World Sample");
@@ -29,4 +29,4 @@ private:
 };
 
 // Entry Point
-NATIVE_UI_APP(HelloWorldApp)
+NATIVE_UI_APP(NotepadApp)

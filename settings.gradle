@@ -5,11 +5,13 @@ include ':test'
 include ':unittests'
 
 include ':helloworld'
+include ':notepad'
 
-project(':core').projectDir  = new File('src', 'core')
+project(':core').projectDir = new File('src', 'core')
 project(':jnipp').projectDir = new File('lib', 'jnipp')
 project(':ui').projectDir = new File('src', 'ui')
 project(':test').projectDir = new File('tests', 'test')
 project(':unittests').projectDir = new File('tests', 'unittests')
 
 project(':helloworld').projectDir = new File('samples', 'helloworld')
+project(':notepad').projectDir = new File('samples', 'notepad')

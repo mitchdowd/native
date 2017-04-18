@@ -17,6 +17,10 @@ namespace native
 		public:
 			/** Default constructor. */
 			InputComponent();
+
+		protected:
+			/** Draws the input. */
+			virtual void onPaint(Canvas& canvas) override;
 		};
 	}
 }
