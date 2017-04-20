@@ -9,6 +9,7 @@
 #include "canvas.h"
 #include "icomponentadapter.h"
 #include "inputevent.h"
+#include "pen.h"
 
 namespace native
 {
@@ -182,6 +183,18 @@ namespace native
 			Brush getBackground() const;
 
 			/**
+				Set the Pen to draw this Component's border.
+				\param pen The Pen for drawing the border.
+			 */
+			void setBorder(const Pen& pen);
+
+			/**
+				Gets the Pen currently used to draw this Component's border.
+				\return The Pen for drawing the border.
+			 */
+			Pen getBorder() const { return _border; }
+
+			/**
 				Executes the given Function asynchronously by posting it as an
 				event on the UI thread's message queue.
 				\param func The Function to execute.
@@ -245,9 +258,15 @@ namespace native
 
 			/**
 				For internal use only in sending input events.
-			    \
+			    \event Native input event information.
 			 */
             virtual void dispatchInputEvent(const InputEvent& event);
+
+			/**
+				Draws the border for this Component.
+				\param canvas The canvas to draw with.
+			 */
+			void drawBorder(Canvas& canvas);
 
 		private:
 			// Class Friendships
@@ -263,6 +282,7 @@ namespace native
 			Visibility		   _visibility;
 			Rectangle		   _area;
 			Brush              _background;
+			Pen                _border;
 			Flags<Alignment>   _alignment;
 			Margins            _margins;
 		};

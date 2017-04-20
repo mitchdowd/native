@@ -17,12 +17,25 @@ namespace native
 {
 	namespace ui
 	{
+		static Rectangle toContentArea(const Component* component, const Rectangle& area)
+		{
+			Pen border = component->getBorder();
+
+			if (border.getThickness() != 0.0)
+				return area.deflate(border.getThickness());
+
+			return area;
+		}
+
 		static Rectangle toSystemArea(const Component* component, const Rectangle& area_)
 		{
-			Rectangle area = area_;
+			Rectangle area = component->getParent() ? toContentArea(component, area_) : area_;
 
 			for (const Component* i = component->getParent(); i && !i->getAdapter(); i = i->getParent())
+			{
+				area = area.offset(toContentArea(i, area.getSize()).getPosition());
 				area = area.offset(i->getArea().getPosition());
+			}
 
 			return area;
 		}
@@ -109,7 +122,7 @@ namespace native
 
 			// Trigger the onSize() callback.
 			if (!_adapter && area.getSize() != oldArea.getSize())
-				onSize(area.getSize());
+				onSize(toContentArea(this, area).getSize());
 		}
 
 		void Component::setSize(coord_t width, coord_t height)
@@ -175,7 +188,7 @@ namespace native
 
 		Rectangle Component::getContentArea() const
 		{
-			return _adapter ? _adapter->getContentArea().scale(1 / System::getDisplayScale()) : _area.getSize();
+			return toContentArea(this, _adapter ? _adapter->getContentArea().scale(1 / System::getDisplayScale()) : _area.getSize());
 		}
 
 		void Component::setBackground(const Brush& background)
@@ -195,6 +208,11 @@ namespace native
 			}
 
 			return _background;
+		}
+
+		void Component::setBorder(const Pen& border)
+		{
+			_border = border;
 		}
 
 		void Component::invokeAsync(const Function<void>& func)
@@ -307,6 +325,15 @@ namespace native
 			// TODO: Check for mouse capture?
 
             onInput(event);
+		}
+
+		void Component::drawBorder(Canvas& canvas)
+		{
+			Rectangle area = _adapter && !_parent ? _adapter->getContentArea().scale(1 / System::getDisplayScale()).getSize() : _area;
+
+			// Draw the border as a rectangle.
+			if (_border.getThickness() != 0.0)
+				canvas.drawRectangle(area, _border);
 		}
 	}
 }

@@ -110,6 +110,8 @@ namespace native
 			// Repaint the children.
 			for (auto child : _children)
 			{
+				child->drawBorder(canvas);
+
 				if (!child->_adapter)
 				{
 					// Offset the canvas to the child's content area.
