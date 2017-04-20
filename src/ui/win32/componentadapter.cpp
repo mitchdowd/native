@@ -294,6 +294,7 @@ namespace native
 				return;
 
 			case WM_SIZE:
+				if (_component->_parent == nullptr)
 				{
 					RECT rect;
 

@@ -121,7 +121,7 @@ namespace native
 			_area = area;
 
 			// Trigger the onSize() callback.
-			if (!_adapter && area.getSize() != oldArea.getSize())
+			if (_parent && area.getSize() != oldArea.getSize())
 				onSize(toContentArea(this, area).getSize());
 		}
 
@@ -329,7 +329,7 @@ namespace native
 
 		void Component::drawBorder(Canvas& canvas)
 		{
-			Rectangle area = _adapter && !_parent ? _adapter->getContentArea().scale(1 / System::getDisplayScale()).getSize() : _area;
+			Rectangle area = _adapter && !_parent ? _adapter->getContentArea().scale(1.0f / System::getDisplayScale()).getSize() : _area;
 
 			// Draw the border as a rectangle.
 			if (_border.getThickness() != 0.0)

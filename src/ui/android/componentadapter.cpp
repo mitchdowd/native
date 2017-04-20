@@ -170,12 +170,13 @@ namespace native
                     }
 
                 case ComponentEvent::onSize:
+                    if (_component->_parent == nullptr)
                     {
-                        Size size = ((Size*) event.arg)->scale(1.0f / System::getDisplayScale());
+                        Size size = ((Size *) event.arg)->scale(1.0f / System::getDisplayScale());
                         _component->_area.setSize(size);
                         _component->onSize(size);
-                        break;
                     }
+                    break;
                 }
             }
 		}
