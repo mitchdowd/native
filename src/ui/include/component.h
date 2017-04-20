@@ -23,6 +23,12 @@ namespace native
 			Margins to place around a Component.
 		 */
 		struct Margins {
+			Margins(coord_t top, coord_t right, coord_t bottom, coord_t left)
+                : top(top)
+                , right(right)
+                , bottom(bottom)
+                , left(left) {}
+
 			coord_t top;
 			coord_t right;
 			coord_t bottom;

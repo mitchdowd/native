@@ -14,6 +14,8 @@ public:
 
 		_input.setAlignment(Align::Fill);
 
+        _input.setBorder(Pen(Color(255, 0, 0), 30));
+
 		addChild(_input);
 	}
 
