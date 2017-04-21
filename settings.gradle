@@ -6,6 +6,7 @@ include ':unittests'
 
 include ':helloworld'
 include ':notepad'
+include ':webview'
 
 project(':core').projectDir = new File('src', 'core')
 project(':jnipp').projectDir = new File('lib', 'jnipp')
@@ -15,3 +16,4 @@ project(':unittests').projectDir = new File('tests', 'unittests')
 
 project(':helloworld').projectDir = new File('samples', 'helloworld')
 project(':notepad').projectDir = new File('samples', 'notepad')
+project(':webview').projectDir = new File('samples', 'webview')

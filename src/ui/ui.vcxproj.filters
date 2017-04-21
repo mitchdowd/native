@@ -58,6 +58,9 @@
     <ClCompile Include="common\inputcomponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="win32\webview.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -128,6 +131,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\inputcomponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\webview.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

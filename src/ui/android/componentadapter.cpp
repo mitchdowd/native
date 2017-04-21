@@ -45,6 +45,12 @@ namespace native
             view.call<void>("setTag(Ljava/lang/Object;)V", l);
 		}
 
+		ComponentAdapter::ComponentAdapter(handle_t handle, Component* component)
+			: _handle(handle), _component(component)
+		{
+			// TODO
+		}
+
 		ComponentAdapter::~ComponentAdapter()
 		{
 			delete HANDLE_OBJ;

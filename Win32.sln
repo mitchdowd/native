@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloworld", "samples\hello
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "notepad", "samples\notepad\notepad.vcxproj", "{9677A95B-5C81-4BF9-9EF9-1D8AC7BF598D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "webview", "samples\webview\webview.vcxproj", "{B3639117-8746-4EE0-B120-275C70C4BC44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -85,6 +87,14 @@ Global
 		{9677A95B-5C81-4BF9-9EF9-1D8AC7BF598D}.Release|x64.Build.0 = Release|x64
 		{9677A95B-5C81-4BF9-9EF9-1D8AC7BF598D}.Release|x86.ActiveCfg = Release|Win32
 		{9677A95B-5C81-4BF9-9EF9-1D8AC7BF598D}.Release|x86.Build.0 = Release|Win32
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Debug|x64.ActiveCfg = Debug|x64
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Debug|x64.Build.0 = Debug|x64
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Debug|x86.ActiveCfg = Debug|Win32
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Debug|x86.Build.0 = Debug|Win32
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Release|x64.ActiveCfg = Release|x64
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Release|x64.Build.0 = Release|x64
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Release|x86.ActiveCfg = Release|Win32
+		{B3639117-8746-4EE0-B120-275C70C4BC44}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +106,6 @@ Global
 		{2B733AD9-5C22-43BD-8643-43635FD75638} = {F46B6693-5D9E-4316-9335-C9671A759A71}
 		{C0D5BBEB-5674-4612-8B67-828488024CEF} = {6C454FC0-A472-49FF-9884-70E8E3DDB25A}
 		{9677A95B-5C81-4BF9-9EF9-1D8AC7BF598D} = {6C454FC0-A472-49FF-9884-70E8E3DDB25A}
+		{B3639117-8746-4EE0-B120-275C70C4BC44} = {6C454FC0-A472-49FF-9884-70E8E3DDB25A}
 	EndGlobalSection
 EndGlobal

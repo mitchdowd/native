@@ -21,6 +21,7 @@
 #include "../src/ui/include/rectangle.h"
 #include "../src/ui/include/size.h"
 #include "../src/ui/include/textcomponent.h"
+#include "../src/ui/include/webview.h"
 #include "../src/ui/include/window.h"
 
 #endif // _NATIVE_UI_H_

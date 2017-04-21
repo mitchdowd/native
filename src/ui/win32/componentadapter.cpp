@@ -97,6 +97,12 @@ namespace native
 			::SetWindowLongPtr(HWND(_handle), GWLP_USERDATA, LONG_PTR(this));
 		}
 
+		ComponentAdapter::ComponentAdapter(handle_t handle, Component* component)
+			: _handle(handle), _component(component)
+		{
+			// TODO
+		}
+
 		void ComponentAdapter::setParent(IComponentAdapter* parent)
 		{
 			DWORD style = ::GetWindowLong(HWND(_handle), GWL_STYLE);

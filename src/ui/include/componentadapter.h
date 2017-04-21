@@ -29,6 +29,13 @@ namespace native
 			 */
 			ComponentAdapter(const ComponentAdapterProperties& properties);
 
+			/**
+				Creates a ComponentAdapter from an existing native handle.
+				\param handle An already-created native handle.
+				\param component The Component the adapter is for.
+			 */
+			ComponentAdapter(handle_t handle, Component* component);
+
 			/** Destructor. */
 			~ComponentAdapter();
 
