@@ -8,6 +8,9 @@ namespace native
 {
 	namespace ui
 	{
+		// Forward Declarations
+		struct WebViewDetail;
+
 		/**
 			A WebView is a Component which displays rendered HTML within its
 			content area.
@@ -17,6 +20,17 @@ namespace native
 		public:
 			/** Default constructor. */
 			WebView();
+
+			/* Destructor. */
+			~WebView();
+
+		protected:
+			/** Updates the size of the WebView. */
+			virtual void onSize(const Size& size) override;
+
+		private:
+			// Instance Variables
+			WebViewDetail* _detail;
 		};
 	}
 }

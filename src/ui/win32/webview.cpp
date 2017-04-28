@@ -19,7 +19,7 @@ namespace native
 		{
 		public:
 			// Constructor
-			ActiveXSite(HWND parent);
+			ActiveXSite(WebViewDetail* detail);
 
 			// IUnknown Functions
 			virtual HRESULT QueryInterface(REFIID riid, void** ppvObject) override;
@@ -35,7 +35,7 @@ namespace native
 			virtual HRESULT RequestNewObjectLayout() override { return E_NOTIMPL; }
 
 			// IOleWindow Functions
-			virtual HRESULT GetWindow(HWND* phwnd) override { *phwnd = _parent; return S_OK; }
+			virtual HRESULT GetWindow(HWND* phwnd) override;
 			virtual HRESULT ContextSensitiveHelp(BOOL fEnterMode) override { return E_NOTIMPL; }
 
 			// IOleInPlaceSite Functions
@@ -48,36 +48,47 @@ namespace native
 			virtual HRESULT OnInPlaceDeactivate() override { return S_OK; }
 			virtual HRESULT DiscardUndoState() override { return E_NOTIMPL; }
 			virtual HRESULT DeactivateAndUndo() override { return E_NOTIMPL; }
-			virtual HRESULT OnPosRectChange(LPCRECT lprcPosRect) override { return S_OK; }
+			virtual HRESULT OnPosRectChange(LPCRECT lprcPosRect) override;
 
 		private:
 			// Instance Variables
 			volatile int _referenceCount;
-			HWND _parent;
+			WebViewDetail* _detail;
 		};
 
-		WebView::WebView() : Component(new ComponentAdapter({ this, nullptr, WS_CHILD | WS_VISIBLE, 0 }))
+		struct WebViewDetail
+		{
+			WebViewDetail() : site(nullptr), storage(nullptr), webObject(nullptr), browser(nullptr), hwnd(NULL) {}
+			~WebViewDetail();
+
+			// Instance Variables
+			ActiveXSite*  site;
+			IStorage*     storage;
+			IOleObject*   webObject;
+			IWebBrowser2* browser;
+			HWND          hwnd;
+		};
+
+		WebView::WebView() : Component(new ComponentAdapter({ this, nullptr, WS_CHILD | WS_VISIBLE, 0 })), _detail(new WebViewDetail)
 		{
 			setAlignment(Align::Fill);
 
 			ComponentAdapter* adapter = (ComponentAdapter*) getAdapter();
 
-			ActiveXSite* site = new ActiveXSite(HWND(adapter->getHandle()));
-			IStorage* storage = NULL;
-			IOleObject* webObject = NULL;
-			IWebBrowser2* browser = NULL;
+			_detail->hwnd = HWND(adapter->getHandle());
+			_detail->site = new ActiveXSite(_detail);
 
-			HRESULT result = ::StgCreateStorageEx(NULL, STGM_READWRITE | STGM_SHARE_EXCLUSIVE | STGM_DIRECT | STGM_CREATE, STGFMT_STORAGE, 0, NULL, NULL, IID_IStorage, (void**) &storage);
+			HRESULT result = ::StgCreateStorageEx(NULL, STGM_READWRITE | STGM_SHARE_EXCLUSIVE | STGM_DIRECT | STGM_CREATE | STGM_DELETEONRELEASE, STGFMT_STORAGE, 0, NULL, NULL, IID_IStorage, (void**) &_detail->storage);
 
-			result = ::OleCreate(CLSID_WebBrowser, IID_IOleObject, OLERENDER_DRAW, NULL, site, storage, (LPVOID*) &webObject);
+			result = ::OleCreate(CLSID_WebBrowser, IID_IOleObject, OLERENDER_DRAW, NULL, _detail->site, _detail->storage, (LPVOID*) &_detail->webObject);
 
-			::OleSetContainedObject(webObject, TRUE);
+			::OleSetContainedObject(_detail->webObject, TRUE);
 
-			RECT rect = { 0, 0, 300, 300 };
+			RECT rect = { 0 };
 
-			result = webObject->DoVerb(OLEIVERB_INPLACEACTIVATE, NULL, site, -1, HWND(adapter->getHandle()), &rect);
+			result = _detail->webObject->DoVerb(OLEIVERB_INPLACEACTIVATE, NULL, _detail->site, -1, HWND(adapter->getHandle()), &rect);
 
-			result = webObject->QueryInterface(IID_IWebBrowser2, (void**) &browser);
+			result = _detail->webObject->QueryInterface(IID_IWebBrowser2, (void**) &_detail->browser);
 
 			VARIANT url, empty1, empty2, empty3, empty4;
 
@@ -86,19 +97,29 @@ namespace native
 
 			empty1.vt = empty2.vt = empty3.vt = empty4.vt = VT_EMPTY;
 
-			result = browser->put_Left(rect.left);
-			result = browser->put_Top(rect.top);
-			result = browser->put_Width(rect.right - rect.left);
-			result = browser->put_Height(rect.bottom - rect.top);
+			result = _detail->browser->put_Left(rect.left);
+			result = _detail->browser->put_Top(rect.top);
+			result = _detail->browser->put_Width(rect.right - rect.left);
+			result = _detail->browser->put_Height(rect.bottom - rect.top);
+			result = _detail->browser->Navigate2(&url, &empty1, &empty2, &empty3, &empty4);
+		}
 
-			result = browser->Navigate2(&url, &empty1, &empty2, &empty3, &empty4);
+		WebView::~WebView()
+		{
+			delete _detail;
+		}
+
+		void WebView::onSize(const Size& size)
+		{
+			_detail->browser->put_Width(size.width);
+			_detail->browser->put_Height(size.height);
 		}
 
 		/*
 			ActiveXSite Functions
 		*/
 
-		ActiveXSite::ActiveXSite(HWND parent) : _referenceCount(0), _parent(parent) 
+		ActiveXSite::ActiveXSite(WebViewDetail* detail) : _referenceCount(0), _detail(detail) 
 		{
 			static bool isOleInitialized = false;
 			static SpinLock lock;
@@ -137,21 +158,50 @@ namespace native
 			return S_OK;
 		}
 
+		HRESULT ActiveXSite::GetWindow(HWND* phwnd)
+		{
+			*phwnd = _detail->hwnd; 
+			return S_OK;
+		}
+
 		HRESULT ActiveXSite::GetWindowContext(IOleInPlaceFrame** ppFrame, IOleInPlaceUIWindow** ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo)
 		{
 			*ppFrame = NULL;
 			*ppDoc = NULL;
-			lprcPosRect->left = 0;
-			lprcPosRect->right = 300;
-			lprcPosRect->top = 0;
-			lprcPosRect->bottom = 300;
+			*lprcPosRect = { 0 };
 			*lprcClipRect = *lprcPosRect;
 
 			lpFrameInfo->fMDIApp = FALSE;
-			lpFrameInfo->hwndFrame = _parent;
+			lpFrameInfo->hwndFrame = _detail->hwnd;
 			lpFrameInfo->cAccelEntries = 0;
 
 			return S_OK;
+		}
+
+		HRESULT ActiveXSite::OnPosRectChange(LPCRECT lprcPosRect)
+		{
+			IOleInPlaceObject* place = nullptr;
+
+			_detail->webObject->QueryInterface(IID_IOleInPlaceObject, (void**) &place);
+
+			place->SetObjectRects(lprcPosRect, lprcPosRect);
+
+			place->Release();
+
+			return S_OK;
+		}
+
+		/*
+			WebViewDetail Functions
+		*/
+
+		WebViewDetail::~WebViewDetail()
+		{
+			delete site;
+			
+			if (storage) storage->Release();
+			if (webObject) webObject->Release();
+			if (browser) browser->Release();
 		}
 	}
 }
