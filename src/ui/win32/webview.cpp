@@ -112,10 +112,22 @@ namespace native
 			{
 				// Initialise the ActiveX environment.
 				isOleInitialized = true;
-
 				::OleInitialize(NULL);
-
 				System::onExit([]() { ::OleUninitialize(); });
+				
+				// Get the current process name.
+				// TODO: Make this a function elsewhere.
+				WCHAR buffer[MAX_PATH + 1];
+				::GetModuleFileName(NULL, buffer, sizeof(buffer));
+				String fileName = buffer;
+				fileName = fileName.substring(fileName.lastIndexOf(L"\\") + 1, fileName.getLength());
+
+				// Ensure we're using a decent browser version.
+				HKEY browserEmulationKey;
+				DWORD ieVersion = 11000;	// IE11 pretty please.
+				::RegOpenKeyEx(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION", 0, KEY_WRITE, &browserEmulationKey);
+				::RegSetValueEx(browserEmulationKey, fileName.toArray(), 0, REG_DWORD, (BYTE*) &ieVersion, sizeof(ieVersion));
+				::RegCloseKey(browserEmulationKey);
 			}
 
 			lock.release();

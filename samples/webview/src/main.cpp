@@ -12,7 +12,7 @@ public:
 	{
 		setTitle("WebView Sample");
 
-		_webView.navigate("google.com");
+		_webView.navigate("github.com");
 
 		addChild(_webView);
 	}
