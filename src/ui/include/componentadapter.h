@@ -136,9 +136,11 @@ namespace native
 		};
 
 		// Forward Declarations
+		struct BrowserData;
 		class Button;
 		class InputComponent;
 		class TextComponent;
+		class WebView;
 
 		/**
 			A subclassed adapter for Window-specific functionality.
@@ -238,6 +240,32 @@ namespace native
 				\param font The new Font.
 			 */
 			virtual void setFont(const Font& font) override;
+		};
+
+		/**
+			A ComponentAdapter for WebViews.
+		*/
+		class WebViewAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given WebView.
+				\param view The component for this adapter.
+			 */
+			WebViewAdapter(WebView* view);
+
+			/** Destructor. */
+			~WebViewAdapter();
+
+			/**
+				Gets browser detail implementation structure.
+				\return Implementation structure for the browser content.
+			 */
+			BrowserData* getBrowserData() const { return _browser; }
+
+		private:
+			// Instance Variables
+			BrowserData* _browser;
 		};
 	}
 }

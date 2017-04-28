@@ -12,7 +12,7 @@ public:
 	{
 		setTitle("WebView Sample");
 
-		_webView.setAlignment(Align::Fill);
+		_webView.navigate("google.com");
 
 		addChild(_webView);
 	}
