@@ -24,6 +24,8 @@ namespace native
 			// Helper Functions
 			void setSize(const Size& size);
 			void navigate(const String& url);
+			void goBack();
+			void goForward();
 
 			// IUnknown Functions
 			virtual HRESULT QueryInterface(REFIID riid, void** ppvObject) override;
@@ -74,6 +76,20 @@ namespace native
 			BrowserData* browser = ((WebViewAdapter*) getAdapter())->getBrowserData();
 
 			browser->navigate(url);
+		}
+
+		void WebView::goBack()
+		{
+			BrowserData* browser = ((WebViewAdapter*) getAdapter())->getBrowserData();
+
+			browser->goBack();
+		}
+
+		void WebView::goForward()
+		{
+			BrowserData* browser = ((WebViewAdapter*) getAdapter())->getBrowserData();
+
+			browser->goForward();
 		}
 
 		void WebView::onSize(const Size& size)
@@ -178,6 +194,26 @@ namespace native
 			
 			browser->Release();
 			::SysFreeString(vurl.bstrVal);
+		}
+
+		void BrowserData::goBack()
+		{
+			IWebBrowser2* browser = nullptr;
+			webObject->QueryInterface(IID_IWebBrowser2, (void**) &browser);
+
+			browser->GoBack();
+
+			browser->Release();
+		}
+
+		void BrowserData::goForward()
+		{
+			IWebBrowser2* browser = nullptr;
+			webObject->QueryInterface(IID_IWebBrowser2, (void**) &browser);
+
+			browser->GoForward();
+
+			browser->Release();
 		}
 
 		HRESULT BrowserData::QueryInterface(REFIID riid, void** ppvObject)

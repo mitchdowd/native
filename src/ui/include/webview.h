@@ -24,6 +24,16 @@ namespace native
 			 */
 			void navigate(const String& url);
 
+			/** 
+				Navigates backward, like clicking the "back" button.
+			 */
+			void goBack();
+
+			/**
+				Navigates forward, like clicking the "forward" button.
+			 */
+			void goForward();
+
 		protected:
 			/** Updates the size of the WebView. */
 			virtual void onSize(const Size& size) override;
