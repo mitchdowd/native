@@ -1,3 +1,6 @@
+// External Dependencies
+#include "../../../lib/jnipp/jnipp.h"
+
 // Module Dependencies
 #include "componentadapterproperties.h"
 #include "../include/componentadapter.h"
@@ -7,24 +10,30 @@ namespace native
 {
 	namespace ui
 	{
-		WebView::WebView() : Component()
+		WebView::WebView() : Component(new WebViewAdapter(this))
 		{
-            throw NotImplementedException();
+            setAlignment(Align::Fill);
 		}
 
 		void WebView::navigate(const String& url)
 		{
-			throw NotImplementedException();
+            WebViewAdapter* adapter = (WebViewAdapter*) getAdapter();
+
+            ((jni::Object*) adapter->getHandle())->call<void>("loadUrl", url.toArray());
 		}
 
         void WebView::goBack()
         {
-            throw NotImplementedException();
+            WebViewAdapter* adapter = (WebViewAdapter*) getAdapter();
+
+            ((jni::Object*) adapter->getHandle())->call<void>("goBack");
         }
 
         void WebView::goForward()
         {
-            throw NotImplementedException();
+            WebViewAdapter* adapter = (WebViewAdapter*) getAdapter();
+
+            ((jni::Object*) adapter->getHandle())->call<void>("goForward");
         }
 
         void WebView::onSize(const Size& size)
@@ -42,7 +51,6 @@ namespace native
 
         WebViewAdapter::~WebViewAdapter()
         {
-
         }
 	}
 }
