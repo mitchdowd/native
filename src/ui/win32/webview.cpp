@@ -19,7 +19,7 @@ namespace native
 		{
 		public:
 			// Constructor
-			Win32WebViewAdapter(WebView* view, HWND hwnd);
+			Win32WebViewAdapter(WebView* view);
 			~Win32WebViewAdapter();
 
 			// Helper Functions
@@ -67,7 +67,7 @@ namespace native
 			WebView Functions
 		 */
 
-		WebView::WebView() : Component(new WebViewAdapter(this))
+		WebView::WebView() : Component(new Win32WebViewAdapter(this))
 		{
 			setAlignment(Align::Fill);
 		}
@@ -126,7 +126,7 @@ namespace native
 			BrowserData Functions
 		*/
 
-		Win32WebViewAdapter::Win32WebViewAdapter(WebView* view, HWND hwnd) : WebViewAdapter(view), hwnd(hwnd)
+		Win32WebViewAdapter::Win32WebViewAdapter(WebView* view) : WebViewAdapter(view), hwnd(HWND(getHandle()))
 		{
 			static bool isOleInitialized = false;
 			static SpinLock lock;
