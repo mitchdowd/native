@@ -19,21 +19,21 @@ namespace native
 		{
             WebViewAdapter* adapter = (WebViewAdapter*) getAdapter();
 
-            ((jni::Object*) adapter->getHandle())->call<void>("loadUrl", url.toArray());
+			adapter->navigate(url);
 		}
 
         void WebView::goBack()
         {
             WebViewAdapter* adapter = (WebViewAdapter*) getAdapter();
 
-            ((jni::Object*) adapter->getHandle())->call<void>("goBack");
+			adapter->goBack();
         }
 
         void WebView::goForward()
         {
             WebViewAdapter* adapter = (WebViewAdapter*) getAdapter();
 
-            ((jni::Object*) adapter->getHandle())->call<void>("goForward");
+			adapter->goForward();
         }
 
         void WebView::onSize(const Size& size)
@@ -52,6 +52,21 @@ namespace native
         WebViewAdapter::~WebViewAdapter()
         {
         }
+
+		void WebViewAdapter::navigate(const String& url)
+		{
+			((jni::Object*) getHandle())->call<void>("loadUrl", url.toArray());
+		}
+
+		void WebViewAdapter::goBack()
+		{
+			((jni::Object*) getHandle())->call<void>("goBack");
+		}
+
+		void WebViewAdapter::goForward()
+		{
+			((jni::Object*) getHandle())->call<void>("goForward");
+		}
 	}
 }
 

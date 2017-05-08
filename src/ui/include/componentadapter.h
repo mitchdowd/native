@@ -136,7 +136,6 @@ namespace native
 		};
 
 		// Forward Declarations
-		struct BrowserData;
 		class Button;
 		class InputComponent;
 		class TextComponent;
@@ -258,14 +257,20 @@ namespace native
 			~WebViewAdapter();
 
 			/**
-				Gets browser detail implementation structure.
-				\return Implementation structure for the browser content.
+				Navigates the WebView to the given URL.
+				\param url The url to navigate to (e.g. "http://github.com/").
 			 */
-			BrowserData* getBrowserData() const { return _browser; }
+			virtual void navigate(const String& url);
 
-		private:
-			// Instance Variables
-			BrowserData* _browser;
+			/**
+				Navigates back in the browser navigation.
+			 */
+			virtual void goBack();
+
+			/**
+				Navigates forward in the browser navigation.
+			 */
+			virtual void goForward();
 		};
 	}
 }

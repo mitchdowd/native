@@ -15,17 +15,18 @@ namespace native
 {
 	namespace ui
 	{
-		struct BrowserData : public IOleClientSite, public IOleInPlaceSite
+		class Win32WebViewAdapter : public WebViewAdapter, public IOleClientSite, public IOleInPlaceSite
 		{
+		public:
 			// Constructor
-			BrowserData(HWND hwnd);
-			~BrowserData();
+			Win32WebViewAdapter(WebView* view, HWND hwnd);
+			~Win32WebViewAdapter();
 
 			// Helper Functions
 			void setSize(const Size& size);
-			void navigate(const String& url);
-			void goBack();
-			void goForward();
+			virtual void navigate(const String& url) override;
+			virtual void goBack() override;
+			virtual void goForward() override;
 
 			// IUnknown Functions
 			virtual HRESULT QueryInterface(REFIID riid, void** ppvObject) override;
@@ -73,30 +74,22 @@ namespace native
 
 		void WebView::navigate(const String& url)
 		{
-			BrowserData* browser = ((WebViewAdapter*) getAdapter())->getBrowserData();
-
-			browser->navigate(url);
+			((WebViewAdapter*) getAdapter())->navigate(url);
 		}
 
 		void WebView::goBack()
 		{
-			BrowserData* browser = ((WebViewAdapter*) getAdapter())->getBrowserData();
-
-			browser->goBack();
+			((WebViewAdapter*) getAdapter())->goBack();
 		}
 
 		void WebView::goForward()
 		{
-			BrowserData* browser = ((WebViewAdapter*) getAdapter())->getBrowserData();
-
-			browser->goForward();
+			((WebViewAdapter*) getAdapter())->goForward();
 		}
 
 		void WebView::onSize(const Size& size)
 		{
-			BrowserData* browser = ((WebViewAdapter*) getAdapter())->getBrowserData();
-
-			browser->setSize(size);
+			((Win32WebViewAdapter*) getAdapter())->setSize(size);
 		}
 
 		/*
@@ -105,19 +98,35 @@ namespace native
 
 		WebViewAdapter::WebViewAdapter(WebView* view) : ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE, 0 })
 		{
-			_browser = new BrowserData(HWND(getHandle()));
 		}
 
 		WebViewAdapter::~WebViewAdapter()
 		{
-			delete _browser;
+		}
+
+		void WebViewAdapter::navigate(const String& url)
+		{
+			// Always overridden.
+			throw NotSupportedException();
+		}
+
+		void WebViewAdapter::goBack()
+		{
+			// Always overridden.
+			throw NotSupportedException();
+		}
+
+		void WebViewAdapter::goForward()
+		{
+			// Always overridden.
+			throw NotSupportedException();
 		}
 
 		/*
 			BrowserData Functions
 		*/
 
-		BrowserData::BrowserData(HWND hwnd) : hwnd(hwnd)
+		Win32WebViewAdapter::Win32WebViewAdapter(WebView* view, HWND hwnd) : WebViewAdapter(view), hwnd(hwnd)
 		{
 			static bool isOleInitialized = false;
 			static SpinLock lock;
@@ -161,13 +170,13 @@ namespace native
 			webObject->DoVerb(OLEIVERB_INPLACEACTIVATE, NULL, this, -1, hwnd, &rect);
 		}
 
-		BrowserData::~BrowserData()
+		Win32WebViewAdapter::~Win32WebViewAdapter()
 		{
 			if (storage)   storage->Release();
 			if (webObject) webObject->Release();
 		}
 
-		void BrowserData::setSize(const Size& size)
+		void Win32WebViewAdapter::setSize(const Size& size)
 		{
 			IWebBrowser2* browser = nullptr;
 
@@ -179,7 +188,7 @@ namespace native
 			browser->Release();
 		}
 
-		void BrowserData::navigate(const String& url)
+		void Win32WebViewAdapter::navigate(const String& url)
 		{
 			IWebBrowser2* browser = nullptr;
 			webObject->QueryInterface(IID_IWebBrowser2, (void**) &browser);
@@ -196,7 +205,7 @@ namespace native
 			::SysFreeString(vurl.bstrVal);
 		}
 
-		void BrowserData::goBack()
+		void Win32WebViewAdapter::goBack()
 		{
 			IWebBrowser2* browser = nullptr;
 			webObject->QueryInterface(IID_IWebBrowser2, (void**) &browser);
@@ -206,7 +215,7 @@ namespace native
 			browser->Release();
 		}
 
-		void BrowserData::goForward()
+		void Win32WebViewAdapter::goForward()
 		{
 			IWebBrowser2* browser = nullptr;
 			webObject->QueryInterface(IID_IWebBrowser2, (void**) &browser);
@@ -216,7 +225,7 @@ namespace native
 			browser->Release();
 		}
 
-		HRESULT BrowserData::QueryInterface(REFIID riid, void** ppvObject)
+		HRESULT Win32WebViewAdapter::QueryInterface(REFIID riid, void** ppvObject)
 		{
 			if (riid == IID_IUnknown || riid == IID_IOleClientSite)
 			{
@@ -236,13 +245,13 @@ namespace native
 			return S_OK;
 		}
 
-		HRESULT BrowserData::GetWindow(HWND* phwnd)
+		HRESULT Win32WebViewAdapter::GetWindow(HWND* phwnd)
 		{
 			*phwnd = hwnd; 
 			return S_OK;
 		}
 
-		HRESULT BrowserData::GetWindowContext(IOleInPlaceFrame** ppFrame, IOleInPlaceUIWindow** ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo)
+		HRESULT Win32WebViewAdapter::GetWindowContext(IOleInPlaceFrame** ppFrame, IOleInPlaceUIWindow** ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo)
 		{
 			*ppFrame = NULL;
 			*ppDoc = NULL;
@@ -256,7 +265,7 @@ namespace native
 			return S_OK;
 		}
 
-		HRESULT BrowserData::OnPosRectChange(LPCRECT lprcPosRect)
+		HRESULT Win32WebViewAdapter::OnPosRectChange(LPCRECT lprcPosRect)
 		{
 			IOleInPlaceObject* place = nullptr;
 
