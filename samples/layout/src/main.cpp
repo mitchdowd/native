@@ -20,10 +20,10 @@ public:
 	}
 };
 
-class NotepadApp : public App
+class LayoutApp : public App
 {
 public:
-	NotepadApp()
+	LayoutApp()
 	{
 		// Set up the main window.
 		setTitle("Layout Sample");
@@ -53,4 +53,4 @@ private:
 };
 
 // Entry Point
-NATIVE_UI_APP(NotepadApp)
+NATIVE_UI_APP(LayoutApp)
