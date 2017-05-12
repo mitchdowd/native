@@ -156,7 +156,7 @@ namespace native
 	template <class TEnum>
 	bool Flags<TEnum>::isSet(Flags<TEnum> flag) const noexcept
 	{
-		return (_mask & flag._mask) != 0;
+		return (_mask & flag._mask) == flag._mask;
 	}
 
 	template <class TEnum>

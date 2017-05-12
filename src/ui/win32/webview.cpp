@@ -123,7 +123,7 @@ namespace native
 		}
 
 		/*
-			BrowserData Functions
+			Win32WebViewAdapter Functions
 		*/
 
 		Win32WebViewAdapter::Win32WebViewAdapter(WebView* view) : WebViewAdapter(view), hwnd(HWND(getHandle()))

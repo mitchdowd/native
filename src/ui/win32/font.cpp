@@ -45,6 +45,9 @@ namespace native
 
 		Size Font::measureText(const String& text) const
 		{
+			if (text.getLength() == 0)
+				return Size();
+
 			Gdiplus::Graphics graphics = HWND(NULL);
 			Gdiplus::RectF rect;
 
