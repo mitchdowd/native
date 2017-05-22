@@ -6,9 +6,9 @@
 // Module Dependencies
 #include "../include/app.h"
 #include "../include/button.h"
+#include "../include/checkbox.h"
 #include "../include/componentadapter.h"
 #include "../include/inputcomponent.h"
-#include "../include/inputevent.h"
 
 // Local Dependencies
 #include "componentadapterproperties.h"
@@ -243,6 +243,30 @@ namespace native
         {
             HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
             HANDLE_OBJ->call<void>("setTextSize", font.getSize());
+        }
+
+        /*
+            CheckboxAdapter Functions
+         */
+
+        CheckboxAdapter::CheckboxAdapter(Checkbox* checkbox) : ComponentAdapter({ checkbox, "libnative/ui/Checkbox" })
+        {
+        }
+
+        void CheckboxAdapter::setText(const String& text)
+        {
+            HANDLE_OBJ->call<void>("setText(Ljava/lang/CharSequence;)V", text.toArray());
+        }
+
+        void CheckboxAdapter::setFont(const Font& font)
+        {
+            HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
+            HANDLE_OBJ->call<void>("setTextSize", font.getSize());
+        }
+
+        void CheckboxAdapter::setChecked(bool checked)
+        {
+            HANDLE_OBJ->call<void>("setChecked", checked);
         }
 
 		/*

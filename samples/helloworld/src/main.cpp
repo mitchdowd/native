@@ -17,15 +17,13 @@ public:
 		// Set up the hello button.
 		_helloBtn.setText("Say Hello");
 		_helloBtn.setAlignment(Align::Center);
-		_helloBtn.clicked.connect([]() {
-			Dialogs::messageBox("Hello World", "Alert");
-		});
+
 
 		addChild(_helloBtn);
 	}
 
 private:
-	Button _helloBtn;
+	Checkbox _helloBtn;
 };
 
 // Entry Point

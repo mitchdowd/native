@@ -45,7 +45,7 @@ namespace native
             WebViewAdapter Functions
          */
 
-        WebViewAdapter::WebViewAdapter(WebView* view) : ComponentAdapter({ view, "libnative/ui/WebView" }), _browser(nullptr)
+        WebViewAdapter::WebViewAdapter(WebView* view) : ComponentAdapter({ view, "libnative/ui/WebView" })
         {
         }
 
