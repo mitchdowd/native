@@ -12,6 +12,7 @@
 // Module Dependencies
 #include "../include/button.h"
 #include "../include/canvas.h"
+#include "../include/checkbox.h"
 #include "../include/component.h"
 #include "../include/componentadapter.h"
 #include "../include/inputcomponent.h"
@@ -424,6 +425,30 @@ namespace native
 		void ButtonAdapter::setFont(const Font& font)
 		{
 			ComponentAdapter::setFont(font);
+		}
+
+		/*
+			CheckboxAdapter Functions
+		 */
+
+		CheckboxAdapter::CheckboxAdapter(Checkbox* checkbox)
+			: ComponentAdapter({ checkbox, L"BUTTON", WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX, 0 })
+		{
+		}
+
+		void CheckboxAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
+		}
+
+		void CheckboxAdapter::setFont(const Font& font)
+		{
+			ComponentAdapter::setFont(font);
+		}
+
+		void CheckboxAdapter::setChecked(bool checked)
+		{
+			::SendMessage(HWND(getHandle()), BM_SETCHECK, checked ? BST_CHECKED : BST_UNCHECKED, 0);
 		}
 
 		/*

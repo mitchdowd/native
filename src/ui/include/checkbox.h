@@ -29,6 +29,19 @@ namespace native
 				\return true if checked, false if unchecked.
 			 */
 			bool isChecked() const noexcept { return _checked; }
+			
+			/**
+				Calculates the preferred size of this Checkbox based upon its text.
+				\return The preferred size.
+			 */
+			virtual Size getPreferredSize() const override;
+
+		protected:
+			/**
+				Paints the Checkbox in its own system-defined way.
+				\param canvas The Canvas to paint with.
+			 */
+			virtual void onPaint(Canvas& canvas) override;
 
 		private:
 			// Instance Variables
