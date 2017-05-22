@@ -137,6 +137,7 @@ namespace native
 
 		// Forward Declarations
 		class Button;
+		class Checkbox;
 		class InputComponent;
 		class TextComponent;
 		class WebView;
@@ -214,6 +215,37 @@ namespace native
 				\param font The new Font.
 			 */
 			virtual void setFont(const Font& font) override;
+		};
+
+		/**
+			A subclassed adapter for Checkboxes.
+		 */
+		class CheckboxAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given Checkbox.
+				\param checkbox The Checkbox for this adapter.
+			 */
+			CheckboxAdapter(Checkbox* checkbox);
+
+			/**
+				Sets the component text.
+				\param text The new text value.
+			 */
+			virtual void setText(const String& text) override;
+
+			/**
+				Sets the component's Font.
+				\param font The new Font.
+			 */
+			virtual void setFont(const Font& font) override;
+
+			/**
+				Checks or unchecks the Checkbox.
+				\param checked true to check, false to uncheck.
+			 */
+			void setChecked(bool checked);
 		};
 
 		/**

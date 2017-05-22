@@ -144,12 +144,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common\button.cpp" />
+    <ClCompile Include="common\checkbox.cpp" />
     <ClCompile Include="common\color.cpp" />
     <ClCompile Include="common\inputcomponent.cpp" />
     <ClCompile Include="common\linearlayout.cpp" />
     <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="win32\pen.cpp" />
     <ClCompile Include="win32\webview.cpp" />
+    <ClInclude Include="include\checkbox.h" />
     <ClInclude Include="include\dialogs.h" />
     <ClInclude Include="include\font.h" />
     <ClInclude Include="include\linearlayout.h" />
