@@ -1,3 +1,6 @@
+// System Dependencies
+#include <unistd.h>
+
 // Local Dependencies
 #include "../include/file.h"
 
@@ -7,13 +10,27 @@ namespace native
 	{
 		File::File(const String& path, Flags<FileState> state) : _handle(nullptr)
 		{
-			throw NotImplementedException();
+			open(path, state);
 		}
 
-		void File::close()
-		{
-			// TODO
+        File::File(File&& other) : _handle(other._handle)
+        {
+            other._handle = nullptr;
 		}
+
+        void File::open(const String& path, Flags<FileState> state)
+        {
+            throw NotImplementedException();
+        }
+
+        void File::close()
+        {
+            if (_handle)
+            {
+                ::close(int(_handle));
+                _handle = nullptr;
+            }
+        }
 
 		size_t File::read(void* buffer, size_t maxBytes)
 		{
@@ -24,6 +41,11 @@ namespace native
 		{
 			throw NotImplementedException();
 		}
+
+		void File::deleteFromDisk(const String& path)
+        {
+            throw NotImplementedException();
+        }
 
 		bool File::exists(const String& path)
 		{

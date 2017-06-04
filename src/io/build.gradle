@@ -1,4 +1,4 @@
-apply plugin: 'com.android.model.library'
+apply plugin: 'com.android.model.native'
 
 model {
     android {
@@ -28,9 +28,6 @@ model {
 
         sources {
             main {
-                manifest {
-                    source.srcDir '.'
-                }
                 jni {
                     source {
                         srcDirs 'include'
@@ -44,8 +41,4 @@ model {
             }
         }
     }
-}
-
-dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"])
 }
