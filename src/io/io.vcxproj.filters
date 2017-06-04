@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="common\file.cpp" />
     <ClCompile Include="common\socket.cpp">
       <Filter>Net</Filter>
     </ClCompile>
@@ -11,6 +10,7 @@
     <ClCompile Include="common\udpsocket.cpp">
       <Filter>Net</Filter>
     </ClCompile>
+    <ClCompile Include="win32\file.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\io.h" />

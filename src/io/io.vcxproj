@@ -115,7 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="common\file.cpp" />
+    <ClCompile Include="win32\file.cpp" />
     <ClCompile Include="common\socket.cpp" />
     <ClCompile Include="common\tcpsocket.cpp" />
     <ClCompile Include="common\udpsocket.cpp" />
