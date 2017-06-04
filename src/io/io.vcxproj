@@ -115,10 +115,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dummy.cpp" />
+    <ClCompile Include="common\file.cpp" />
+    <ClCompile Include="common\socket.cpp" />
+    <ClCompile Include="common\tcpsocket.cpp" />
+    <ClCompile Include="common\udpsocket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\io.h" />
+    <ClInclude Include="include\file.h" />
+    <ClInclude Include="include\istream.h" />
+    <ClInclude Include="include\socket.h" />
+    <ClInclude Include="include\tcpsocket.h" />
+    <ClInclude Include="include\udpsocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
