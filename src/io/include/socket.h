@@ -4,25 +4,13 @@
 // External Dependencies
 #include "../../core/include/exception.h"
 
+// Local Dependencies
+#include "networkaddress.h"
+
 namespace native
 {
 	namespace io
 	{
-		/** IP protocols which can be applied to a Socket. */
-		enum class IpProtocol 
-		{
-			Tcp,
-			Udp
-		};
-
-		/** Supported internet protocol versions. */
-		enum class IpVersion
-		{
-			Any,
-			IPv4,
-			IPv6
-		};
-
 		/**
 			The basis for network communication. Various subclasses may implement
 			various networking protocols.

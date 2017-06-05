@@ -1,3 +1,6 @@
+// System Dependencies
+#include <climits>
+
 // Local Dependencies
 #include "../include/tcpsocket.h"
 
@@ -6,6 +9,7 @@
 // System Dependencies
 #include <winsock2.h>
 
+#undef EWOULDBLOCK
 #define EWOULDBLOCK WSAEWOULDBLOCK
 
 namespace native
@@ -21,6 +25,7 @@ namespace native
 #else
 
 // System Dependencies
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 
@@ -30,9 +35,6 @@ typedef int SOCKET;
 // Constants
 #define INVALID_SOCKET SOCKET(-1)
 #define SOCKET_ERROR (-1)
-
-// Function Aliases
-inline int closesocket(SOCKET s) { return ::close(s); }
 
 namespace native
 {
@@ -56,13 +58,34 @@ namespace native
 
 		size_t TcpSocket::read(void* buffer, size_t maxBytes)
 		{
-			throw NotImplementedException();
+            if (maxBytes > INT_MAX)
+                maxBytes = INT_MAX;
+
+            // Perform the read operation.
+            int result = ::recv(SOCKET(getHandle()), (char*) buffer, int(maxBytes), 0);
+
+            // Error checking.
+            if (result == SOCKET_ERROR)
+            {
+                if (lastError() == EWOULDBLOCK)
+                    return 0;
+
+                throw SocketException("Error reading from TcpSocket");
+            }
+            else if (result == 0)
+            {
+                // Socket was closed on the remote host.
+                close();
+                return 0;
+            }
+
+            return result;
 		}
 
 		size_t TcpSocket::write(const void* data, size_t bytes)
 		{
-			if (bytes > MAXINT)
-				bytes = MAXINT;
+			if (bytes > INT_MAX)
+				bytes = INT_MAX;
 
 			// Perform the write operation.
 			int result = ::send(SOCKET(getHandle()), (const char*) data, int(bytes), 0);

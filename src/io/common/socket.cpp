@@ -43,8 +43,10 @@ namespace native
 #else
 
 // System Dependencies
+#include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <unistd.h>
 
 // Type Definitions
 typedef int SOCKET;

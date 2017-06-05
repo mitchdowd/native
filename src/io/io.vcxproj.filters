@@ -11,6 +11,9 @@
       <Filter>Net</Filter>
     </ClCompile>
     <ClCompile Include="win32\file.cpp" />
+    <ClCompile Include="common\networkaddress.cpp">
+      <Filter>Net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\io.h" />
@@ -23,6 +26,9 @@
       <Filter>Net</Filter>
     </ClInclude>
     <ClInclude Include="include\udpsocket.h">
+      <Filter>Net</Filter>
+    </ClInclude>
+    <ClInclude Include="include\networkaddress.h">
       <Filter>Net</Filter>
     </ClInclude>
   </ItemGroup>
