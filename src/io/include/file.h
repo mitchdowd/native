@@ -54,7 +54,7 @@ namespace native
 			/**
 				Closes the File. No further operations can occur on it.
 			 */
-			void close();
+			void close() noexcept;
 
 			/**
 				Reads up to `maxBytes` from the file into the buffer. A partial
@@ -91,7 +91,7 @@ namespace native
 				Gets the file handle.
 				\return The underlying system-dependent file handle.
 			 */
-			handle_t getHandle() const { return _handle; }
+			handle_t getHandle() const noexcept { return _handle; }
 
 		private:
 			// Instance Variables

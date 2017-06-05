@@ -87,7 +87,7 @@ namespace native
 			}
 		}
 
-		void File::close()
+		void File::close() noexcept
 		{
 			if (_handle)
 			{
