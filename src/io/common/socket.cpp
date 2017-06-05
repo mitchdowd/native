@@ -12,25 +12,31 @@
 // External Libraries
 # pragma comment(lib, "ws2_32.lib")
 
-static void registerSocketApi()
+namespace native
 {
-	static native::SpinLock lock;
-	static bool registered = false;
+	namespace io
+	{
+		void registerSocketApi()
+		{
+			static SpinLock lock;
+			static bool registered = false;
 
-	if (!registered) {
-		lock.lock();
+			if (!registered) {
+				lock.lock();
 
-		if (!registered) {
-			WSADATA wsaData;
+				if (!registered) {
+					WSADATA wsaData;
 
-			// Register the winsock library.
-			::WSAStartup(MAKEWORD(2, 2), &wsaData);
-			registered = true;
+					// Register the winsock library.
+					::WSAStartup(MAKEWORD(2, 2), &wsaData);
+					registered = true;
 
-			// TODO: Where is this released?
+					// TODO: Where is this released?
+				}
+
+				lock.release();
+			}
 		}
-
-		lock.release();
 	}
 }
 
@@ -48,7 +54,14 @@ typedef int SOCKET;
 
 // Function Aliases
 inline int closesocket(SOCKET s) { return ::close(s); }
-inline void registerSocketApi() {}
+
+namespace native
+{
+	namespace io
+	{
+		inline void registerSocketApi() {}
+	}
+}
 
 #endif // NATIVE_PLATFORM_WIN32
 
@@ -78,7 +91,7 @@ namespace native
 				throw InvalidArgumentException("Invalid IP protocol");
 			}
 
-			::registerSocketApi();
+			registerSocketApi();
 
 			// Allocate the system resources.
 			_handle = (handle_t) ::socket(af, socktype, proto);

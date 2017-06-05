@@ -15,6 +15,12 @@ namespace native
 		class TcpSocket : public Socket, public IStream
 		{
 		public:
+			/** 
+				Constructor.
+				\param version IP version.
+			 */
+			TcpSocket(IpVersion version = IpVersion::Any);
+
 			/**
 				Reads available data from the socket. Partial reads are allowed.
 				\param buffer Location to store retrieved data.
