@@ -219,6 +219,21 @@ namespace native
 
 			switch (event.msg)
 			{
+			case WM_CTLCOLORSTATIC:
+				{
+					ComponentAdapter* label = ComponentAdapter::fromHandle(handle_t(event.lparam));
+
+					if (label && label->_component)
+					{
+						Color bg = label->_component->getBackground().getPrimaryColor();
+
+						// Apply the background color to the static control's device context.
+						::SetBkColor(HDC(event.wparam), RGB(bg.red, bg.green, bg.blue));
+						return;
+					}
+					break;
+				}
+
 			case WM_DESTROY:
 				_handle = nullptr;
 				break;

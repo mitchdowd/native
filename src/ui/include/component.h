@@ -162,6 +162,7 @@ namespace native
 				\param margins The margins to set.
 			 */
 			void setMargins(const Margins& margins) { _margins = margins; }
+			void setMargins(coord_t top, coord_t right, coord_t bottom, coord_t left) { setMargins({ top, right, bottom, left }); }
 
 			/**
 				Sets the same margin on all 4 sides of this Component.

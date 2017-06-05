@@ -27,6 +27,21 @@ namespace native
 
 			_shared->handle = brush;
 		}
+
+		Color Brush::getPrimaryColor() const
+		{
+			Gdiplus::Color gdiColor;
+
+			switch (((Gdiplus::Brush*) getHandle())->GetType())
+			{
+			case Gdiplus::BrushType::BrushTypeSolidColor:
+				((Gdiplus::SolidBrush*) getHandle())->GetColor(&gdiColor);
+				return Color::fromArgb(gdiColor.GetValue());
+
+			default:
+				throw InvalidStateException("Brush not in a supported state to determine its primary color");
+			}
+		}
 	}
 }
 

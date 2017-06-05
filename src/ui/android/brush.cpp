@@ -24,6 +24,13 @@ namespace native
 
 			_shared->handle = new jni::Object(paint);
 		}
+
+		Color Brush::getPrimaryColor() const
+		{
+			jni::Object* paint = (jni::Object*) getHandle();
+
+			return Color::fromArgb(paint->call<int>("getColor"));
+		}
 	}
 }
 

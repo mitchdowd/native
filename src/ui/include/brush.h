@@ -27,6 +27,12 @@ namespace native
 			Brush(const Color& color);
 
 			/**
+				Gets the main (primary) color for this brush.
+				\return The main color.
+			 */
+			Color getPrimaryColor() const;
+
+			/**
 				Gets the system resource handle.
 				\return The system resource handle.
 			 */
