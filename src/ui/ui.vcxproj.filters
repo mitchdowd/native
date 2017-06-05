@@ -142,6 +142,9 @@
     <ClInclude Include="include\checkbox.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="include\label.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

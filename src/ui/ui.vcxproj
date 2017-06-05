@@ -154,6 +154,7 @@
     <ClInclude Include="include\checkbox.h" />
     <ClInclude Include="include\dialogs.h" />
     <ClInclude Include="include\font.h" />
+    <ClInclude Include="include\label.h" />
     <ClInclude Include="include\linearlayout.h" />
     <ClInclude Include="include\pen.h" />
     <ClInclude Include="include\rectangle.h" />
