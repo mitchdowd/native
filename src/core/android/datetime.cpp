@@ -15,7 +15,13 @@ namespace native
 {
 	DateTime::DateTime()
 	{
-		throw NotImplementedException();
+		struct timeval tv;
+		struct timezone tz;
+
+		::gettimeofday(&tv, &tz);
+
+		_value = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+		_offset = tz.tz_minuteswest;
 	}
 
 	DateTime::DateTime(int year, int month, int day)
