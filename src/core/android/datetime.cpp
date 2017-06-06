@@ -20,8 +20,8 @@ namespace native
 
 		::gettimeofday(&tv, &tz);
 
-		_value = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-		_offset = tz.tz_minuteswest;
+        _offset = short(-tz.tz_minuteswest);
+		_value = (int64_t(tv.tv_sec) * 1000) + (tv.tv_usec / 1000) + (_offset * MINUTE_DIVISOR);
 	}
 
 	DateTime::DateTime(int year, int month, int day)
