@@ -121,7 +121,7 @@ namespace native
 			_area = area;
 
 			// Trigger the onSize() callback.
-			if (_parent && area.getSize() != oldArea.getSize())
+			if ((_parent || !_adapter) && area.getSize() != oldArea.getSize())
 				onSize(toContentArea(this, area).getSize());
 		}
 

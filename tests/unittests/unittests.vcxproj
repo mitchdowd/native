@@ -155,6 +155,7 @@
     <ClCompile Include="src\core\stack.cpp" />
     <ClCompile Include="src\core\thread.cpp" />
     <ClCompile Include="src\core\types.cpp" />
+    <ClCompile Include="src\core\variant.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ui\color.cpp" />
     <ClCompile Include="src\ui\component.cpp" />

@@ -35,6 +35,7 @@
     <ClCompile Include="win32\thread.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
+    <ClCompile Include="common\variant.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\platform.h" />
@@ -106,6 +107,7 @@
     <ClInclude Include="include\task.h">
       <Filter>Threading</Filter>
     </ClInclude>
+    <ClInclude Include="include\variant.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collections">

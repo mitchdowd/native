@@ -33,6 +33,7 @@
 #include "../src/core/include/thread.h"
 #include "../src/core/include/types.h"
 #include "../src/core/include/utf8codec.h"
+#include "../src/core/include/variant.h"
 
 #endif // _NATIVE_CORE_H_
 
