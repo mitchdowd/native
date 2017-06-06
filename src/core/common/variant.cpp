@@ -86,13 +86,13 @@ namespace native
 		switch (_type)
 		{
 		case VariantType::String:
-			return Convert::toInt(_string.toArray());
+			return Convert::toInt(_string);
 
 		case VariantType::Int:
 			return _int;
 
 		case VariantType::Float:
-			return (int)_float;
+			return int(_float);
 		}
 
 		throw InvalidStateException("Cannot convert current Variant to int");
@@ -103,10 +103,10 @@ namespace native
 		switch (_type)
 		{
 		case VariantType::String:
-			return Convert::toFloat(_string.toArray());
+			return Convert::toFloat(_string);
 
 		case VariantType::Int:
-			return (float) _int;
+			return float(_int);
 
 		case VariantType::Float:
 			return _float;

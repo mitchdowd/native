@@ -7,6 +7,7 @@
 #include "../src/core/include/clock.h"
 #include "../src/core/include/collection.h"
 #include "../src/core/include/convert.h"
+#include "../src/core/include/datetime.h"
 #include "../src/core/include/exception.h"
 #include "../src/core/include/flags.h"
 #include "../src/core/include/function.h"

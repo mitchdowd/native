@@ -6,6 +6,9 @@
 
 namespace native
 {
+	// Forward Declarations
+	class String;
+
 	/**
 		Convert is a static class that provides basic type conversions.
 	 */
@@ -19,6 +22,7 @@ namespace native
 			\param str The string to convert.
 			\return The integer result.
 		 */
+		static int toInt(const String& str);
 		static int toInt(const wchar_t* str);
 		static int toInt(const char* str);
 
@@ -27,6 +31,7 @@ namespace native
 			\param str The string to conert.
 			\return The float result.
 		 */
+		static float toFloat(const String& str);
 		static float toFloat(const wchar_t* str);
 		static float toFloat(const char* str);
 	};

@@ -141,6 +141,7 @@
     <ClCompile Include="src\core\asciicodec.cpp" />
     <ClCompile Include="src\core\atomic.cpp" />
     <ClCompile Include="src\core\convert.cpp" />
+    <ClCompile Include="src\core\datetime.cpp" />
     <ClCompile Include="src\core\function.cpp" />
     <ClCompile Include="src\core\hash.cpp" />
     <ClCompile Include="src\core\string.cpp" />

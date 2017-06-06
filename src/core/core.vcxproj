@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\clock.h" />
+    <ClInclude Include="include\datetime.h" />
     <ClInclude Include="include\flags.h" />
     <ClInclude Include="include\shared.h" />
     <ClInclude Include="include\signal.h" />
@@ -134,6 +135,7 @@
     <ClCompile Include="common\utf8codec.cpp" />
     <ClCompile Include="common\variant.cpp" />
     <ClCompile Include="win32\atomic.cpp" />
+    <ClCompile Include="win32\datetime.cpp" />
     <ClCompile Include="win32\system.cpp" />
     <ClCompile Include="win32\thread.cpp" />
     <ClInclude Include="include\variant.h" />
