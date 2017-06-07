@@ -118,7 +118,7 @@ namespace native
 			ultimately result in shifting the time by the offset difference.
 			\param offset The new offset value to set.
 		 */
-		void setTimeZoneOffset(short offset) { _offset = offset; }
+		void setTimeZoneOffset(short offset) noexcept { _offset = offset; }
 
 		/**
 			The offset of this DateTime from UTC timezone, in minutes. Subtract

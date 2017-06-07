@@ -1,15 +1,15 @@
 // System Dependencies
-#include <sys/time.h>
+#include <ctime>
 
 // Local Dependencies
 #include "../include/datetime.h"
-#include "../include/exception.h"
 
 /** Divisors: The number of milliseconds per item. */
-#define DAY_DIVISOR		86400000
-#define HOUR_DIVISOR	3600000
-#define MINUTE_DIVISOR	60000
-#define SECOND_DIVISOR	1000
+#define DAY_DIVISOR		   86400000
+#define HOUR_DIVISOR	   3600000
+#define MINUTE_DIVISOR	   60000
+#define SECOND_DIVISOR	   1000
+#define MICROSECOND_FACTOR 1000
 
 namespace native
 {
@@ -21,12 +21,25 @@ namespace native
 		::gettimeofday(&tv, &tz);
 
         _offset = short(-tz.tz_minuteswest);
-		_value = (int64_t(tv.tv_sec) * 1000) + (tv.tv_usec / 1000) + (_offset * MINUTE_DIVISOR);
+		_value = (int64_t(tv.tv_sec) * SECOND_DIVISOR)
+                 + (tv.tv_usec / MICROSECOND_FACTOR)
+                 + (_offset * MINUTE_DIVISOR);
 	}
 
 	DateTime::DateTime(int year, int month, int day)
 	{
-		throw NotImplementedException();
+        struct tm tm = { 0 };
+        struct timeval tv;
+        struct timezone tz;
+
+        ::gettimeofday(&tv, &tz);
+
+        tm.tm_year = year - 1900;
+        tm.tm_mon  = month - 1;
+        tm.tm_mday = day;
+
+        _offset = short(-tz.tz_minuteswest);
+        _value = (int64_t(std::mktime(&tm)) * SECOND_DIVISOR) + (_offset * MINUTE_DIVISOR);
 	}
 
 	DateTime::DateTime(const DateTime& other) : _value(other._value), _offset(other._offset)
@@ -60,37 +73,72 @@ namespace native
 
 	short DateTime::getDay() const
 	{
-		throw NotImplementedException();
+        struct tm tm;
+        time_t t = time_t(_value / SECOND_DIVISOR);
+
+        ::gmtime_r(&t, &tm);
+
+		return tm.tm_mday;
 	}
 
 	WeekDay DateTime::getWeekDay() const
 	{
-		throw NotImplementedException();
+        struct tm tm;
+        time_t t = time_t(_value / SECOND_DIVISOR);
+
+        ::gmtime_r(&t, &tm);
+
+        return WeekDay(tm.tm_wday);
 	}
 
 	Month DateTime::getMonth() const
 	{
-		throw NotImplementedException();
+        struct tm tm;
+        time_t t = time_t(_value / SECOND_DIVISOR);
+
+        ::gmtime_r(&t, &tm);
+
+        return Month(tm.tm_mon + 1);
 	}
 
 	int DateTime::getYear() const
 	{
-		throw NotImplementedException();
+        struct tm tm;
+        time_t t = time_t(_value / SECOND_DIVISOR);
+
+        ::gmtime_r(&t, &tm);
+
+        return tm.tm_year + 1900;
 	}
 
 	short DateTime::getHour() const
 	{
-		throw NotImplementedException();
+        struct tm tm;
+        time_t t = time_t(_value / SECOND_DIVISOR);
+
+        ::gmtime_r(&t, &tm);
+
+        return tm.tm_hour;
 	}
 
 	short DateTime::getMinute() const
 	{
-		throw NotImplementedException();
+        struct tm tm;
+        time_t t = time_t(_value / SECOND_DIVISOR);
+
+        ::gmtime_r(&t, &tm);
+
+        return tm.tm_min;
 	}
 
 	short DateTime::getSecond() const
 	{
-		throw NotImplementedException();
+        struct tm tm;
+        time_t t = time_t(_value / SECOND_DIVISOR);
+
+        ::gmtime_r(&t, &tm);
+
+        return tm.tm_sec;
 	}
 
 	short DateTime::getMilliSecond() const

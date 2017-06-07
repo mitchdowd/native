@@ -128,12 +128,20 @@ namespace native
 class _jobject;
 struct _JNIEnv;
 
+namespace native {
+    namespace ui {
+        // Forward Declarations
+        void init(_JNIEnv*, _jobject*);
+    }
+}
+
 #define NATIVE_TEST_MAIN()									\
 	extern "C" void 										\
 	Java_libnative_test_TestActivity_onCreate(				\
 		_JNIEnv* env,										\
 		_jobject* activity									\
 	) {														\
+		native::ui::init(env, activity);					\
 		native::test::TestRegistry::runAllTests();			\
 	}
 
