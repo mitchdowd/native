@@ -95,7 +95,7 @@ namespace native
 
 	short DateTime::getMilliSecond() const
 	{
-		throw NotImplementedException();
+		return _value % 1000;
 	}
 
 	String DateTime::toString() const
