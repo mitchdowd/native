@@ -20,12 +20,7 @@ namespace native
 
 		RadioButton::~RadioButton()
 		{
-			groupsLock.lock();
-
-			if (groups.containsKey(_group))
-				groups[_group].remove(this);
-
-			groupsLock.release();
+			setGroup(nullptr);
 		}
 
 		void RadioButton::check()
@@ -33,19 +28,45 @@ namespace native
 			if (_group == nullptr)
 				setGroup(getParent());
 
-			RadioButtonAdapter* adapter = (RadioButtonAdapter*)getAdapter();
+			RadioButtonAdapter* adapter = (RadioButtonAdapter*) getAdapter();
 			adapter->setChecked(_checked = true);
 
-			// TODO: Uncheck others in group.
+			if (_group)
+			{
+				groupsLock.lock();
+
+				// Uncheck others in group.
+				for (auto radio : groups[_group])
+					if (radio->isChecked() && radio != this)
+						((RadioButtonAdapter*) radio->getAdapter())->setChecked(radio->_checked = false);
+
+				groupsLock.release();
+			}
 		}
 
 		void RadioButton::setGroup(handle_t group)
 		{
-			if (_group)
-				; // TODO: Remove from old group.
+			if (_group != group)
+			{
+				groupsLock.lock();
 
-			if ((_group = group))
-				; // TODO: Add to new group.
+				if (_group)
+				{
+					// Remove from old group.
+					groups[_group].remove(this);
+				}
+
+				if ((_group = group))
+				{
+					// Add to new group.
+					if (!groups.containsKey(_group))
+						groups.add(_group, Set<RadioButton*>());
+
+					groups[_group].add(this);
+				}
+
+				groupsLock.release();
+			}
 		}
 
 		Size RadioButton::getPreferredSize() const

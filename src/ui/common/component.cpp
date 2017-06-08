@@ -74,14 +74,16 @@ namespace native
 					parent->addChild(this);
 				}
 				else if (_adapter != nullptr) {
+					LayoutComponent* oldParent = _parent;
+
 					// Converting to a popup Component.
-					if (_parent)
-						_parent->removeChild(this);
+					if (oldParent)
+						oldParent->removeChild(this);
 
 					_parent = nullptr;
 					_adapter->setParent(nullptr);
 
-					// TODO: onParentChange()
+					onParentChange(oldParent);
 				}
 				else {
 					// Can't pop up a Component without an adapter.

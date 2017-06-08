@@ -247,6 +247,12 @@ namespace native
 			virtual void onPaint(Canvas& canvas);
 
 			/**
+				Called when the parent of this Component changes.
+				\param old The previous parent for this Component.
+			 */
+			virtual void onParentChange(LayoutComponent* old) {}
+
+			/**
 				Called when the geometric size of the Component changes. This is
 				where child Components have their positions adjusted to fit into
 				the new dimensions.

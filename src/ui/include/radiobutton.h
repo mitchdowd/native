@@ -72,6 +72,12 @@ namespace native
 			 */
 			virtual void onPaint(Canvas& canvas) override;
 
+			/**
+				When a parent changes, we may want to change the grouping.
+				\param old The previous parent.
+			 */
+			virtual void onParentChange(LayoutComponent* old) override { if (_group == old) setGroup(getParent()); }
+
 		private:
 			// Instance Variables
 			bool     _checked;

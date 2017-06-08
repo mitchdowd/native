@@ -51,7 +51,7 @@ namespace native
 				if (previousParent || tmp)
 					child->setParentAdapter(tmp ? tmp->_adapter : nullptr);
 
-				// TODO: onParentChange()
+				child->onParentChange(previousParent);
 			}
 		}
 
