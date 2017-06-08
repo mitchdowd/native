@@ -59,7 +59,8 @@ namespace native
 		Set<TValue>& operator=(const Set<TValue>& other);
 
 		/**
-			Adds the given value to the Set.
+			Adds the given value to the Set. If it already exists within the Set,
+			no action is taken.
 			\param value The value to add.
 		 */
 		void add(const TValue& value) override;
@@ -165,12 +166,12 @@ namespace native
 	}
 
 	template <class TValue>
-	Set<TValue>::Set(const Set<TValue>& other) : _table(other._data), _length(other._length)
+	Set<TValue>::Set(const Set<TValue>& other) : _table(other._table), _length(other._length)
 	{
 	}
 
 	template <class TValue>
-	Set<TValue>::Set(Set<TValue>&& other) noexcept : _table(std::move(other._data)), _length(other._length)
+	Set<TValue>::Set(Set<TValue>&& other) noexcept : _table(std::move(other._table)), _length(other._length)
 	{
 		other._length = 0;
 	}

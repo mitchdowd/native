@@ -77,7 +77,8 @@ namespace native
 		Map<TKey, TValue>& operator=(const Map<TKey, TValue>& other);
 
 		/**
-			Adds the given key/value pair to the Map.
+			Adds the given key/value pair to the Map. If the key already exists,
+			there nothing is done.
 			\param pair The key/value pair to add.
 		 */
 		void add(const Pair<TKey, TValue>& pair) override;

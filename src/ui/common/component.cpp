@@ -80,6 +80,8 @@ namespace native
 
 					_parent = nullptr;
 					_adapter->setParent(nullptr);
+
+					// TODO: onParentChange()
 				}
 				else {
 					// Can't pop up a Component without an adapter.

@@ -31,23 +31,28 @@ namespace native
 
 			LayoutComponent* previousParent = child->getParent();
 
-			// Remove the child from its previous parent.
-			if (previousParent)
-				previousParent->removeChild(child);
+			if (previousParent != this)
+			{
+				// Remove the child from its previous parent.
+				if (previousParent)
+					previousParent->removeChild(child);
 
-			// Add to its new place in the Component hierarchy.
-			child->_parent = this;
-			_children.insert(index, child);
+				// Add to its new place in the Component hierarchy.
+				child->_parent = this;
+				_children.insert(index, child);
 
-			// Search for the next parent with an adapter.
-			Component* tmp = this;
+				// Search for the next parent with an adapter.
+				Component* tmp = this;
 
-			while (tmp && !tmp->_adapter)
-				tmp = tmp->_parent;
+				while (tmp && !tmp->_adapter)
+					tmp = tmp->_parent;
 
-			// Update the native component adapter's parent.
-			if (previousParent || tmp)
-				child->setParentAdapter(tmp ? tmp->_adapter : nullptr);
+				// Update the native component adapter's parent.
+				if (previousParent || tmp)
+					child->setParentAdapter(tmp ? tmp->_adapter : nullptr);
+
+				// TODO: onParentChange()
+			}
 		}
 
 		void LayoutComponent::onSize(const Size& size)
