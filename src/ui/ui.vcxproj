@@ -148,6 +148,7 @@
     <ClCompile Include="common\color.cpp" />
     <ClCompile Include="common\inputcomponent.cpp" />
     <ClCompile Include="common\linearlayout.cpp" />
+    <ClCompile Include="common\radiobutton.cpp" />
     <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="win32\pen.cpp" />
     <ClCompile Include="win32\webview.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="include\label.h" />
     <ClInclude Include="include\linearlayout.h" />
     <ClInclude Include="include\pen.h" />
+    <ClInclude Include="include\radiobutton.h" />
     <ClInclude Include="include\rectangle.h" />
     <ClCompile Include="common\component.cpp" />
     <ClCompile Include="common\layoutcomponent.cpp" />

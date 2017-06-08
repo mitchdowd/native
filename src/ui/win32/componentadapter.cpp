@@ -16,6 +16,7 @@
 #include "../include/component.h"
 #include "../include/componentadapter.h"
 #include "../include/inputcomponent.h"
+#include "../include/radiobutton.h"
 #include "../include/textcomponent.h"
 #include "../include/window.h"
 
@@ -462,6 +463,30 @@ namespace native
 		}
 
 		void CheckboxAdapter::setChecked(bool checked)
+		{
+			::SendMessage(HWND(getHandle()), BM_SETCHECK, checked ? BST_CHECKED : BST_UNCHECKED, 0);
+		}
+
+		/*
+			RadioButtonAdapter Functions
+		 */
+
+		RadioButtonAdapter::RadioButtonAdapter(RadioButton* radio)
+			: ComponentAdapter({ radio, L"BUTTON", WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON, 0 })
+		{
+		}
+
+		void RadioButtonAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
+		}
+
+		void RadioButtonAdapter::setFont(const Font& font)
+		{
+			ComponentAdapter::setFont(font);
+		}
+
+		void RadioButtonAdapter::setChecked(bool checked)
 		{
 			::SendMessage(HWND(getHandle()), BM_SETCHECK, checked ? BST_CHECKED : BST_UNCHECKED, 0);
 		}

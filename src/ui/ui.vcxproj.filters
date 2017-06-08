@@ -64,6 +64,9 @@
     <ClCompile Include="common\checkbox.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="common\radiobutton.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -143,6 +146,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\label.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\radiobutton.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

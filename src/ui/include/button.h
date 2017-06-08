@@ -12,8 +12,8 @@ namespace native
     namespace ui
     {
         /**
-            An on-screen push button which can be clicked by the user
-            in order to perform an action.
+            An on-screen push button which can be clicked by the user in order
+            to perform an action.
          */
         class Button : public TextComponent
         {

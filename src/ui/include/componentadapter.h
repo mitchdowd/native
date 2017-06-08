@@ -139,6 +139,7 @@ namespace native
 		class Button;
 		class Checkbox;
 		class InputComponent;
+		class RadioButton;
 		class TextComponent;
 		class WebView;
 
@@ -243,6 +244,38 @@ namespace native
 
 			/**
 				Checks or unchecks the Checkbox.
+				\param checked true to check, false to uncheck.
+			 */
+			void setChecked(bool checked);
+		};
+
+		/**
+			A subclassed adapter for RadioButtons.
+		 */
+		class RadioButtonAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given RadioButton.
+				\param radio The RadioButton for this adapter.
+			 */
+			RadioButtonAdapter(RadioButton* radio);
+
+			/**
+				Sets the component text.
+				\param text The new text value.
+			 */
+			virtual void setText(const String& text) override;
+
+			/**
+				Sets the component's Font.
+				\param font The new Font.
+			 */
+			virtual void setFont(const Font& font) override;
+
+			/**
+				Checks or unchecks the RadioButton. This should not affect
+				the states of other RadioButtons.
 				\param checked true to check, false to uncheck.
 			 */
 			void setChecked(bool checked);
