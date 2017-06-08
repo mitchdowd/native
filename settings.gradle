@@ -6,6 +6,7 @@ include ':ui'
 include ':test'
 include ':unittests'
 
+include ':components'
 include ':helloworld'
 include ':layout'
 include ':notepad'
@@ -19,6 +20,7 @@ project(':ui').projectDir = new File('src', 'ui')
 project(':test').projectDir = new File('tests', 'test')
 project(':unittests').projectDir = new File('tests', 'unittests')
 
+project(':components').projectDir = new File('samples', 'components')
 project(':helloworld').projectDir = new File('samples', 'helloworld')
 project(':layout').projectDir = new File('samples', 'layout')
 project(':notepad').projectDir = new File('samples', 'notepad')

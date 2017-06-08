@@ -9,6 +9,7 @@
 #include "../include/checkbox.h"
 #include "../include/componentadapter.h"
 #include "../include/inputcomponent.h"
+#include "../include/radiobutton.h"
 
 // Local Dependencies
 #include "componentadapterproperties.h"
@@ -290,7 +291,7 @@ namespace native
 
         void RadioButtonAdapter::setChecked(bool checked)
         {
-            throw NotImplementedException();
+            HANDLE_OBJ->call<void>("setChecked", checked);
         }
 
 		/*
