@@ -16,6 +16,7 @@ namespace native
 
 		RadioButton::RadioButton() : TextComponent(new RadioButtonAdapter(this)), _group(nullptr), _checked(false)
 		{
+			setMargins(1, 0, 1, 0);
 		}
 
 		RadioButton::~RadioButton()

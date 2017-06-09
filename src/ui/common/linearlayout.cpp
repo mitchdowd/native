@@ -18,7 +18,7 @@ namespace native
 			return alignment & (Alignment) orientation & Align::Fill;
 		}
 
-		LinearLayout::LinearLayout(Orientation orientation) : _orientation(orientation)
+		LinearLayout::LinearLayout(Orientation orientation) : _orientation(orientation), _fillStrategy(FillStrategy::After)
 		{
 		}
 
@@ -71,12 +71,17 @@ namespace native
 				{
 					Size childPrefSize = child->getPreferredSize();
 
+					// Add desired margins.
+					Margins childMargins = child->getMargins();
+					childPrefSize.width += childMargins.left + childMargins.right;
+					childPrefSize.height += childMargins.top + childMargins.bottom;
+
 					if (usePrefSize)
 					{
 						// Grant it the preferred length.
 						childArea[LENGTH] = childPrefSize[LENGTH];
 
-						if (expandingChildren == 0 || isExpanding(getOrientation(), child->getAlignment()))
+						if ((expandingChildren == 0 || isExpanding(getOrientation(), child->getAlignment())) && _fillStrategy == FillStrategy::Between)
 						{
 							// Handle filling (Spacing Strategy: Space between).
 							int32_t childExtra = --remainingChildren ? childSpacing : extraSpace;
@@ -119,6 +124,11 @@ namespace native
 			for (auto child : getChildren())
 			{
 				Size childSize = child->getPreferredSize();
+
+				// Add desired margins.
+				Margins childMargins = child->getMargins();
+				childSize.width  += childMargins.left + childMargins.right;
+				childSize.height += childMargins.top + childMargins.bottom;
 
 				// Increase the preferred length.
 				size[LENGTH] += childSize[LENGTH];

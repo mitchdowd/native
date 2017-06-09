@@ -8,6 +8,7 @@ namespace native
 	{
 		Checkbox::Checkbox() : TextComponent(new CheckboxAdapter(this)), _checked(false)
 		{
+			setMargins(1, 0, 1, 0);
 		}
 
 		void Checkbox::setChecked(bool checked)
