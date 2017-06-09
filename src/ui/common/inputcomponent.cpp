@@ -7,14 +7,11 @@ namespace native
 {
 	namespace ui
 	{
-		static const Pen ENABLED_BORDER  = Color(0x80, 0x80, 0x80);
-		static const Pen DISABLED_BORDER = Color(0xE0, 0xE0, 0xE0);
-
 		InputComponent::InputComponent() : TextComponent(new InputAdapter(this))
 		{
-			setBorder(isEnabled() ? ENABLED_BORDER : DISABLED_BORDER);
+			static const Pen BORDER_COLOR = Color(0x80, 0x80, 0x80);
 
-			// TODO: Change when set to disabled.
+			setBorder(BORDER_COLOR);
 		}
 
 		Size InputComponent::getPreferredSize() const

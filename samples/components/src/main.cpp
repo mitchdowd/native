@@ -36,6 +36,9 @@ public:
 		_radio3.setText("RadioButton 3");
 		_radio3.setEnabled(false);
 
+		_input1.setText("InputComponent 1");
+
+		_input2.setText("InputComponent 2");
 		_input2.setEnabled(false);
 
 		_layout.addChild(_button1);

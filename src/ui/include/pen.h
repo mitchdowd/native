@@ -28,6 +28,12 @@ namespace native
 			Pen(const Color& color, float width = 1.0f);
 
 			/**
+				Gets the Color of this Pen.
+				\return The Pen's color.
+			 */
+			Color getColor() const noexcept { return _color; }
+
+			/**
 				Gets the thickness of the Pen's drawing line, in pixels.
 				\return The Pen's thickness.
 			 */
@@ -54,6 +60,7 @@ namespace native
 			// Instance Variables
 			Shared<PenHandle> _shared;
 			float _thickness;
+			Color _color;
 		};
 	}
 }

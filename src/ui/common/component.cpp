@@ -347,7 +347,17 @@ namespace native
 
 			// Draw the border as a rectangle.
 			if (_border.getThickness() != 0.0)
-				canvas.drawRectangle(area, _border);
+			{
+				if (isEnabled())
+				{
+					canvas.drawRectangle(area, _border);
+				}
+				else
+				{
+					Pen disabledBorder(_border.getColor().lighten(50), _border.getThickness());
+					canvas.drawRectangle(area, disabledBorder);
+				}
+			}
 		}
 	}
 }

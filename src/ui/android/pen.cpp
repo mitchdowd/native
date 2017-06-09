@@ -9,7 +9,7 @@ namespace native
 {
 	namespace ui
 	{
-		Pen::Pen(const Color& color, float thickness) : _shared(nullptr), _thickness(thickness)
+		Pen::Pen(const Color& color, float thickness) : _shared(nullptr), _thickness(thickness), _color(color)
 		{
 			jni::Object paint = jni::Class("android/graphics/Paint").newInstance();
 

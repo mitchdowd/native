@@ -10,7 +10,7 @@ namespace native
 {
 	namespace ui
 	{
-		Pen::Pen(const Color& color, float width) : _shared(nullptr), _thickness(width)
+		Pen::Pen(const Color& color, float width) : _shared(nullptr), _thickness(width), _color(color)
 		{
 			Gdiplus::Pen* pen = new Gdiplus::Pen(Gdiplus::Color(color.alpha, color.red, color.green, color.blue), width);
 
