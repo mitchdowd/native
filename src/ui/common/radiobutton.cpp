@@ -4,7 +4,6 @@
 #include "../../core/include/spinlock.h"
 
 // Local Dependencies
-#include "../include/app.h"
 #include "../include/componentadapter.h"
 #include "../include/radiobutton.h"
 
@@ -17,7 +16,6 @@ namespace native
 
 		RadioButton::RadioButton() : TextComponent(new RadioButtonAdapter(this)), _group(nullptr), _checked(false)
 		{
-			setMargins(coord_t(2 * App::getDisplayScale()), 0, coord_t(2 * App::getDisplayScale()), 0);
 		}
 
 		RadioButton::~RadioButton()

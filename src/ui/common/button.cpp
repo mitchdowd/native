@@ -1,5 +1,4 @@
 // Module Dependencies
-#include "../include/app.h"
 #include "../include/componentadapter.h"
 #include "../include/button.h"
 
@@ -9,7 +8,6 @@ namespace native
     {
         Button::Button() : TextComponent(new ButtonAdapter(this))
         {
-			setMargins(2 * App::getDisplayScale(), 0, 2 * App::getDisplayScale(), 0);
         }
 
 		Button::Button(const String& text) : TextComponent(new ButtonAdapter(this))
@@ -23,10 +21,10 @@ namespace native
 
 #ifdef NATIVE_FORM_MOBILE
             // Mobile needs bigger buttons with plenty of padding for fat fingers.
-            size.width += coord_t(size.height * 2);
+            size.width  += coord_t(size.height * 2);
             size.height += coord_t(size.height * 1.5);
 #else
-            size.width += coord_t(size.height);
+            size.width  += coord_t(size.height);
 			size.height += coord_t(size.height * 0.666667);
 #endif
 

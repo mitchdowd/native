@@ -1,4 +1,5 @@
 // Module Dependencies
+#include "../include/app.h"
 #include "../include/canvas.h"
 #include "../include/componentadapter.h"
 #include "../include/textcomponent.h"
@@ -10,17 +11,20 @@ namespace native
 		TextComponent::TextComponent() : Component(new TextComponentAdapter(this))
 		{
             setFont(Font::getDefault());
+			setMargins(coord_t(2 * App::getDisplayScale()), 0, coord_t(2 * App::getDisplayScale()), 0);
 		}
 
 		TextComponent::TextComponent(const String& text) : Component(new TextComponentAdapter(this))
 		{
 			setFont(Font::getDefault());
 			setText(text);
+			setMargins(coord_t(2 * App::getDisplayScale()), 0, coord_t(2 * App::getDisplayScale()), 0);
 		}
 
 		TextComponent::TextComponent(IComponentAdapter* adapter) : Component(adapter)
 		{
             setFont(Font::getDefault());
+			setMargins(coord_t(2 * App::getDisplayScale()), 0, coord_t(2 * App::getDisplayScale()), 0);
 		}
 
 		void TextComponent::setText(const String& text)

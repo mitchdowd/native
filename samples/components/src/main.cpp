@@ -14,7 +14,9 @@ public:
 
 		_layout.setMargin(10);
 
-		_button.setText("Button");
+		_button1.setText("Button 1");
+		_button2.setText("Button 2");
+		_button2.setEnabled(false);
 		
 		_check1.setText("Checkbox 1");
 		_check1.setChecked(true);
@@ -34,7 +36,10 @@ public:
 		_radio3.setText("RadioButton 3");
 		_radio3.setEnabled(false);
 
-		_layout.addChild(_button);
+		_input2.setEnabled(false);
+
+		_layout.addChild(_button1);
+		_layout.addChild(_button2);
 		_layout.addChild(_check1);
 		_layout.addChild(_check2);
 		_layout.addChild(_check3);
@@ -42,15 +47,18 @@ public:
 		_layout.addChild(_radio1);
 		_layout.addChild(_radio2);
 		_layout.addChild(_radio3);
+		_layout.addChild(_input1);
+		_layout.addChild(_input2);
 
 		addChild(_layout);
 	}
 
 private:
-	Button _button;
+	Button _button1, _button2;
 	Checkbox _check1, _check2, _check3;
 	Label _label;
 	RadioButton _radio1, _radio2, _radio3;
+	InputComponent _input1, _input2;
 	VLayout _layout;
 };
 

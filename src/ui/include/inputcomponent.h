@@ -18,6 +18,12 @@ namespace native
 			/** Default constructor. */
 			InputComponent();
 
+			/**
+				Gets the preferred size for this Component.
+				\return The preferred size.
+			 */
+			virtual Size getPreferredSize() const override;
+
 		protected:
 			/** Draws the input. */
 			virtual void onPaint(Canvas& canvas) override;
