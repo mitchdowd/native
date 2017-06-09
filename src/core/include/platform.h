@@ -32,5 +32,14 @@
 # define NATIVE_BIT_WIDTH 32
 #endif // NATIVE_BIT_WIDTH
 
+// Form-Factors
+#if defined(NATIVE_PLATFORM_WIN32)
+# define NATIVE_FORM_DESKTOP 1
+#elif defined(NATIVE_PLATFORM_ANDROID)
+# define NATIVE_FORM_MOBILE 1
+#else
+# error Form-factor for current platform not defined.
+#endif
+
 #endif // _NATIVE_CORE_PLATFORM_H_
 

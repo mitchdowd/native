@@ -6,19 +6,37 @@ namespace native
 {
 	namespace ui
 	{
-		static int _appExists = 0;
 		handle_t App::_handle = nullptr;
+		volatile App* App::_instance = nullptr;
 
 		App::App()
 		{
-			if (Atomic::compareExchange(_appExists, 1, 0) != 0)
+			if (Atomic::compareExchange((volatile void*&) _instance, (void*) this, (void*) nullptr) != nullptr)
 				throw AppInitializationException("App already exists");
 		}
 
 		App::~App()
 		{
-			_appExists = 0;
+			_instance = nullptr;
 		}
+
+        float App::getDisplayScale()
+        {
+            static float scale;
+
+            if (scale == 0.0f)
+            {
+#ifdef NATIVE_PLATFORM_ANDROID
+                scale = 2.75f;  // TODO: Use getResources().getDisplayMetrics().density
+#elif defined(NATIVE_PLATFORM_WIN32)
+                scale = 1.00f;  // TODO: Use GetDeviceCaps()
+#else
+                scale = 1.00f;
+#endif
+            }
+
+            return scale;
+        }
 
 		int App::run()
 		{

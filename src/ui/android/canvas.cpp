@@ -1,8 +1,8 @@
 // External Dependencies
 #include "../../../lib/jnipp/jnipp.h"
-#include "../../core/include/system.h"
 
 // Local Dependencies
+#include "../include/app.h"
 #include "../include/canvas.h"
 #include "../include/component.h"
 
@@ -30,13 +30,13 @@ namespace native
         	if (text.getLength() > 0)
         	{
 	            // Calculate the real co-ordinates.
-	            float x = float(_offset.x + point.x) * System::getDisplayScale();
-	            float y = float(_offset.y + point.y + font.getSize()) * System::getDisplayScale();
+	            float x = float(_offset.x + point.x) * App::getDisplayScale();
+	            float y = float(_offset.y + point.y + font.getSize()) * App::getDisplayScale();
 
 	            // Set up the paint to draw the text with.
 	            Brush brush = Color();
 	            jni::Object* paint = (jni::Object*) brush.getHandle();
-	            paint->call<void>("setTextSize", font.getSize() * System::getDisplayScale());
+	            paint->call<void>("setTextSize", font.getSize() * App::getDisplayScale());
 	            paint->call<jni::Object>("setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;", (jni::Object*) font.getHandle());
 
 	            HANDLE_OBJ->call<void>("drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V", text.toArray(), x, y, paint);
@@ -46,14 +46,14 @@ namespace native
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{
 			jni::Object* penObj = (jni::Object*) pen.getHandle();
-			Rectangle area = rect.offset(_offset).deflate(pen.getThickness() / 2).scale(System::getDisplayScale());
+			Rectangle area = rect.offset(_offset).deflate(pen.getThickness() / 2).scale(App::getDisplayScale());
 
 			HANDLE_OBJ->call<void>("drawRect(FFFFLandroid/graphics/Paint;)V", float(area.x), float(area.y), float(area.x + area.width), float(area.y + area.height), penObj);
 		}
 
 		void Canvas::fillRectangle(const Rectangle& rect, const Brush& brush)
 		{
-            Rectangle area = rect.offset(_offset).scale(System::getDisplayScale());
+            Rectangle area = rect.offset(_offset).scale(App::getDisplayScale());
             HANDLE_OBJ->call<void>("drawRect(FFFFLandroid/graphics/Paint;)V", float(area.x), float(area.y), float(area.x + area.width), float(area.y + area.height), (jni::Object*) brush.getHandle());
 		}
 	}

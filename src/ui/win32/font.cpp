@@ -6,9 +6,9 @@
 // External Dependencies
 #include "../../core/include/math.h"
 #include "../../core/include/spinlock.h"
-#include "../../core/include/system.h"
 
 // Module Dependencies
+#include "../include/app.h"
 #include "../include/canvas.h"
 #include "../include/font.h"
 
@@ -18,7 +18,7 @@ namespace native
 	{
 		Font::Font(const String& family, float size) : _shared(nullptr), _size(size)
 		{
-			Gdiplus::Font* font = new Gdiplus::Font(family.toArray(), size * System::getDisplayScale(), Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+			Gdiplus::Font* font = new Gdiplus::Font(family.toArray(), size * App::getDisplayScale(), Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 
 			if (font->GetLastStatus() != Gdiplus::Ok)
 			{
@@ -54,7 +54,7 @@ namespace native
 			if (graphics.MeasureString(text.toArray(), int(text.getLength()), (Gdiplus::Font*) getHandle(), Gdiplus::PointF(0, 0), &rect) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::MeasureString() failed");
 
-			return Size(coord_t(rect.Width / System::getDisplayScale()), coord_t(rect.Height / System::getDisplayScale()));
+			return Size(coord_t(rect.Width / App::getDisplayScale()), coord_t(rect.Height / App::getDisplayScale()));
 		}
 
 		Font Font::getDefault()
@@ -77,7 +77,7 @@ namespace native
 				::SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(metrics), &metrics, 0);
 
 				font._size = Math::abs(float(metrics.lfMessageFont.lfHeight));
-				font._shared->handle = new Gdiplus::Font(&Gdiplus::FontFamily(metrics.lfMessageFont.lfFaceName), font._size * System::getDisplayScale(), Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+				font._shared->handle = new Gdiplus::Font(&Gdiplus::FontFamily(metrics.lfMessageFont.lfFaceName), font._size * App::getDisplayScale(), Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 			}
 
 			lock.release();

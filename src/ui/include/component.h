@@ -83,6 +83,18 @@ namespace native
 			 */
 			bool isVisible() const;
 
+			/**
+				Enables or disables this Component. A disabled Component does not
+				accept user input.
+				\param enable true to enable, false to disable.
+			 */
+			void setEnabled(bool enable);
+
+			/**
+				Tells whether this Component is currently enabled.
+				\return true if enabled, false if disabled.
+			 */
+			bool isEnabled() const noexcept { return _enabled; }
 
 			/**
 				Sets tha are used by this Component, relative to the top-left
@@ -293,6 +305,7 @@ namespace native
 			IComponentAdapter* _adapter;
 			LayoutComponent*   _parent;
 			Visibility		   _visibility;
+			bool               _enabled;
 			Rectangle		   _area;
 			Brush              _background;
 			Pen                _border;

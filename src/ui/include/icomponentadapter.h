@@ -50,6 +50,12 @@ namespace native
 			virtual bool isVisible() const = 0;
 
 			/**
+				Enables or disables the Component.
+				\param enable true to enable, false to disable.
+			 */
+			virtual void setEnabled(bool enable) = 0;
+
+			/**
 				Sets the area occupied by this adapter, relative to its parent
 				adapter (not necessarily the parent Component).
 				\param area The area to set.

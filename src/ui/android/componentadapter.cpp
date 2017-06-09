@@ -1,7 +1,6 @@
 // External Dependencies
 #include "../../../lib/jnipp/jnipp.h"
 #include "../../core/include/exception.h"
-#include "../../core/include/system.h"
 
 // Module Dependencies
 #include "../include/app.h"
@@ -76,6 +75,11 @@ namespace native
 			throw NotImplementedException();
 		}
 
+        void ComponentAdapter::setEnabled(bool enable)
+        {
+            HANDLE_OBJ->call<void>("setEnabled", enable);
+        }
+
 		void ComponentAdapter::setArea(const Rectangle& area)
 		{
             jni::Class("libnative/ui/ViewExtensions").call<void>("setArea(Landroid/view/View;IIII)V", HANDLE_OBJ, area.x, area.y, area.width, area.height);
@@ -88,7 +92,7 @@ namespace native
 
 		Rectangle ComponentAdapter::getContentArea() const
 		{
-            return _component->getArea().getSize().scale(System::getDisplayScale());
+            return _component->getArea().getSize().scale(App::getDisplayScale());
 		}
 
 		void ComponentAdapter::setText(const String& text)
@@ -179,7 +183,7 @@ namespace native
                 case ComponentEvent::onSize:
                     if (_component->_parent == nullptr)
                     {
-                        Size size = ((Size *) event.arg)->scale(1.0f / System::getDisplayScale());
+                        Size size = ((Size *) event.arg)->scale(1.0f / App::getDisplayScale());
                         _component->_area.setSize(size);
                         _component->onSize(size);
                     }

@@ -31,14 +31,4 @@ namespace native
 		funcs->push(func);
 		lock.release();
 	}
-
-	float System::getDisplayScale()
-	{
-		static float scale;
-
-		if (scale == 0.0f)
-			scale = 1.0f;  // TODO: Use GetDeviceCaps() or equivalent to calculate this.
-
-		return scale;
-	}
 }

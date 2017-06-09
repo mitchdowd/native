@@ -8,7 +8,11 @@ namespace native
 	{
 		Checkbox::Checkbox() : TextComponent(new CheckboxAdapter(this)), _checked(false)
 		{
+#ifdef NATIVE_FORM_MOBILE
+			setMargins(10, 0, 10, 0);
+#else
 			setMargins(1, 0, 2, 0);
+#endif
 		}
 
 		void Checkbox::setChecked(bool checked)
@@ -20,7 +24,7 @@ namespace native
 		{
 			Size size = TextComponent::getPreferredSize();
 
-#ifdef NATIVE_PLATFORM_ANDROID
+#ifdef NATIVE_FORM_MOBILE
 			// TODO: Proper checkbox size calculation.
 			return Size(size.width + 40, size.height + 5);
 #else

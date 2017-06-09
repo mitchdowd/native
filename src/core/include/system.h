@@ -21,13 +21,6 @@ namespace native
 			\param func The Function to register.
 		 */
 		static void onExit(const Function<void>& func);
-
-		/**
-			Gets a scaling factor for the default display. This allows for high
-			(or low) DPI displays to still render outputs in a sensible way.
-			\return The scaling factor applied to display output operations.
-		 */
-		static float getDisplayScale();
 	};
 }
 

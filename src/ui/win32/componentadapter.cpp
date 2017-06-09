@@ -10,6 +10,7 @@
 #include "../../core/include/system.h"
 
 // Module Dependencies
+#include "../include/app.h"
 #include "../include/button.h"
 #include "../include/canvas.h"
 #include "../include/checkbox.h"
@@ -133,6 +134,11 @@ namespace native
 		bool ComponentAdapter::isVisible() const
 		{
 			return ::IsWindowVisible(HWND(_handle)) != FALSE;
+		}
+
+		void ComponentAdapter::setEnabled(bool enable)
+		{
+			::EnableWindow(HWND(_handle), enable ? TRUE : FALSE);
 		}
 
 		void ComponentAdapter::setArea(const Rectangle& area)
@@ -326,8 +332,8 @@ namespace native
 					Size client(GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam));
 
 					// Ensure the new size is properly reflected in the Component.
-					_component->_area.setSize(size.scale(1.0f / System::getDisplayScale()));
-					_component->onSize(client.scale(1.0f / System::getDisplayScale()));
+					_component->_area.setSize(size.scale(1.0f / App::getDisplayScale()));
+					_component->onSize(client.scale(1.0f / App::getDisplayScale()));
 				}
 				break;
 

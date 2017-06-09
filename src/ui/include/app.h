@@ -28,6 +28,19 @@ namespace native
 			 */
 			int run();
 
+            /**
+                Gets what _should be_ the only App instance, if there is one.
+                \return The App instance.
+             */
+			static App* getInstance() { return (App*) _instance; }
+
+            /**
+                Gets a scaling factor for the default display. This allows for high
+                (or low) DPI displays to still render outputs in a sensible way.
+                \return The scaling factor applied to display output operations.
+             */
+            static float getDisplayScale();
+
 			/**
 				Sets a system handle for this App. Not all platforms have a relevant app
 			 	handle. Those platforms that do will automatically call this function.
@@ -49,6 +62,7 @@ namespace native
 		private:
 			// Instance Variables
 			static handle_t _handle;
+            static volatile App* _instance;
 		};
 
 		/**
@@ -102,7 +116,8 @@ namespace native {
 		_jobject* activity							\
 	) {												\
 		native::ui::init(env, activity);			\
-		new TApp();									\
+        if (App::getInstance() == nullptr)          \
+		    new TApp();							    \
 	}
 
 #else

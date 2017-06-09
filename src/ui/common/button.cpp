@@ -19,7 +19,7 @@ namespace native
 		{
 			Size size = TextComponent::getPreferredSize();
 
-#ifdef NATIVE_PLATFORM_ANDROID
+#ifdef NATIVE_FORM_MOBILE
             // Mobile needs bigger buttons with plenty of padding for fat fingers.
             coord_t padding = coord_t(size.height * 1.7);
 #else

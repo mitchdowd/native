@@ -4,9 +4,9 @@
 
 // External Dependencies
 #include "../../core/include/spinlock.h"
-#include "../../core/include/system.h"
 
 // Local Dependencies
+#include "../include/app.h"
 #include "../include/canvas.h"
 #include "../include/component.h"
 #include "../include/componentadapter.h"
@@ -70,7 +70,7 @@ namespace native
 				Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
 
 				Gdiplus::SolidBrush brush(Gdiplus::Color(0, 0, 0));	// TODO: Different colors?
-				Gdiplus::PointF pt(float(_offset.x + point.x) * System::getDisplayScale(), float(_offset.y + point.y) * System::getDisplayScale());
+				Gdiplus::PointF pt(float(_offset.x + point.x) * App::getDisplayScale(), float(_offset.y + point.y) * App::getDisplayScale());
 
 				if (graphics->DrawString(text.toArray(), int(text.getLength()), (const Gdiplus::Font*) font.getHandle(), pt, Gdiplus::StringFormat::GenericDefault(), &brush) != Gdiplus::Ok)
 					throw GraphicsException("Graphics::DrawString");
@@ -83,7 +83,7 @@ namespace native
 			Gdiplus::Pen* gdiPen = (Gdiplus::Pen*) pen.getHandle();
 
 			// Perform the draw operation.
-			if (graphics->DrawRectangle(gdiPen, toGdiRect(rect.offset(_offset).deflate(pen.getThickness() / 2).scale(System::getDisplayScale()))) != Gdiplus::Ok)
+			if (graphics->DrawRectangle(gdiPen, toGdiRect(rect.offset(_offset).deflate(pen.getThickness() / 2).scale(App::getDisplayScale()))) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::DrawRectangle()");
 		}
 
@@ -92,7 +92,7 @@ namespace native
 			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
 			Gdiplus::Brush*    gdiBrush = (Gdiplus::Brush*) brush.getHandle();
 
-			if (graphics->FillRectangle(gdiBrush, toGdiRect(rect.offset(_offset).scale(System::getDisplayScale()))) != Gdiplus::Ok)
+			if (graphics->FillRectangle(gdiBrush, toGdiRect(rect.offset(_offset).scale(App::getDisplayScale()))) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::FillRectangle()");
 		}
 	}

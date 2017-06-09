@@ -1,11 +1,11 @@
 // External Dependencies
 #include "../../core/include/clock.h"
 #include "../../core/include/exception.h"
-#include "../../core/include/math.h"
 #include "../../core/include/system.h"
 #include "../../core/include/task.h"
 
 // Module Dependencies
+#include "../include/app.h"
 #include "../include/component.h"
 #include "../include/layoutcomponent.h"
 
@@ -43,6 +43,7 @@ namespace native
 		Component::Component()
 			: _adapter(nullptr)
 			, _parent(nullptr)
+			, _enabled(true)
 			, _area({ 0, 0, -1, -1 })
 			, _alignment(Align::Top | Align::Left)
 			, _margins({ 0, 0, 0, 0 })
@@ -52,6 +53,7 @@ namespace native
 		Component::Component(IComponentAdapter* adapter)
 			: _adapter(adapter)
 			, _parent(nullptr)
+			, _enabled(true)
 			, _area({ 0, 0, -1, -1 })
 			, _alignment(Align::Top | Align::Left)
 			, _margins({ 0, 0, 0, 0 })
@@ -115,12 +117,20 @@ namespace native
 			return _visibility == Show;
 		}
 
+		void Component::setEnabled(bool enable)
+		{
+			if (_adapter)
+				_adapter->setEnabled(enable);
+
+			_enabled = enable;
+		}
+
 		void Component::setArea(const Rectangle& area)
 		{
 			Rectangle oldArea = _area;
 
 			if (_adapter)
-				_adapter->setArea(toSystemArea(this, area).scale(System::getDisplayScale()));
+				_adapter->setArea(toSystemArea(this, area).scale(App::getDisplayScale()));
 
 			_area = area;
 
@@ -192,7 +202,7 @@ namespace native
 
 		Rectangle Component::getContentArea() const
 		{
-			return toContentArea(this, _adapter ? _adapter->getContentArea().scale(1 / System::getDisplayScale()) : _area.getSize());
+			return toContentArea(this, _adapter ? _adapter->getContentArea().scale(1 / App::getDisplayScale()) : _area.getSize());
 		}
 
 		void Component::setBackground(const Brush& background)
@@ -333,7 +343,7 @@ namespace native
 
 		void Component::drawBorder(Canvas& canvas)
 		{
-			Rectangle area = _adapter && !_parent ? _adapter->getContentArea().scale(1.0f / System::getDisplayScale()).getSize() : _area;
+			Rectangle area = _adapter && !_parent ? _adapter->getContentArea().scale(1.0f / App::getDisplayScale()).getSize() : _area;
 
 			// Draw the border as a rectangle.
 			if (_border.getThickness() != 0.0)

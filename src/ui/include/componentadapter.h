@@ -58,6 +58,12 @@ namespace native
 			virtual bool isVisible() const override;
 
 			/**
+				Enables or disables the Component.
+				\param enable true to enable, false to disable.
+			 */
+			virtual void setEnabled(bool enable) override;
+
+			/**
 				Sets the area occupied by this adapter, relative to its parent
 				adapter (not necessarily the parent Component).
 				\param area The area to set.

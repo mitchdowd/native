@@ -16,7 +16,11 @@ namespace native
 
 		RadioButton::RadioButton() : TextComponent(new RadioButtonAdapter(this)), _group(nullptr), _checked(false)
 		{
+#ifdef NATIVE_FORM_MOBILE
+            setMargins(10, 0, 10, 0);
+#else
 			setMargins(1, 0, 1, 0);
+#endif
 		}
 
 		RadioButton::~RadioButton()
@@ -74,7 +78,7 @@ namespace native
 		{
 			Size size = TextComponent::getPreferredSize();
 
-#ifdef NATIVE_PLATFORM_ANDROID
+#ifdef NATIVE_FORM_MOBILE
 			size.width += coord_t(size.height * 1.7);
 #else
 			size.width += coord_t(size.height * 0.666667);
