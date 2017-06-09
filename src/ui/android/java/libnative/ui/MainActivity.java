@@ -22,11 +22,25 @@ public class MainActivity extends Activity {
         onCreate();
     }
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        onDestroyApp();
+    }
+
     public void invokeAsync(long funcPtr) {
         this.runOnUiThread(new NativeRunnable(funcPtr));
     }
 
+    public float getDisplayScale()
+    {
+        return getResources().getDisplayMetrics().density;
+    }
+
     private native void onCreate();
+
+    private native void onDestroyApp();
 
     private void loadNativeLibrary()
     {

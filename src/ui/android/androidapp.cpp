@@ -17,3 +17,10 @@ namespace native
     }
 }
 
+extern "C"
+{
+    void Java_libnative_ui_MainActivity_onDestroyApp(_JNIEnv*, jni::jobject) {
+        delete native::ui::App::getInstance();
+    }
+}
+

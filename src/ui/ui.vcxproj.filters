@@ -67,6 +67,9 @@
     <ClCompile Include="common\radiobutton.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="common\label.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />

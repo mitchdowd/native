@@ -147,6 +147,7 @@
     <ClCompile Include="common\checkbox.cpp" />
     <ClCompile Include="common\color.cpp" />
     <ClCompile Include="common\inputcomponent.cpp" />
+    <ClCompile Include="common\label.cpp" />
     <ClCompile Include="common\linearlayout.cpp" />
     <ClCompile Include="common\radiobutton.cpp" />
     <ClCompile Include="win32\font.cpp" />

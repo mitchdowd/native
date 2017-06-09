@@ -16,13 +16,13 @@ namespace native
 		{
 		public:
 			/** Creates a Label with no text set. */
-			Label() : TextComponent() {}
+			Label();
 
 			/**
 				Creates the Label with the given text.
 				\param text The text to set.
 			 */
-			Label(const String& text) : TextComponent(text) {}
+			Label(const String& text);
 		};
 	}
 }

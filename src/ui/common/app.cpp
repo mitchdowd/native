@@ -2,6 +2,12 @@
 #include "../include/app.h"
 #include "../include/eventqueue.h"
 
+#ifdef NATIVE_PLATFORM_ANDROID
+#include "../../../lib/jnipp/jnipp.h"
+#elif defined(NATIVE_PLATFORM_WIN32)
+# include <windows.h>
+#endif // NATIVE_PLATFORM_*
+
 namespace native
 {
 	namespace ui
@@ -27,12 +33,16 @@ namespace native
             if (scale == 0.0f)
             {
 #ifdef NATIVE_PLATFORM_ANDROID
-                scale = 2.75f;  // TODO: Use getResources().getDisplayMetrics().density
+                jni::Object* activity = (jni::Object*) _handle;
+
+                scale = activity->call<float>("getDisplayScale");
 #elif defined(NATIVE_PLATFORM_WIN32)
-                scale = 1.00f;  // TODO: Use GetDeviceCaps()
+				HDC hdc = ::GetDC(NULL);
+				scale = float(::GetDeviceCaps(hdc, LOGPIXELSX)) / 96.0f;
+				::ReleaseDC(NULL, hdc);
 #else
                 scale = 1.00f;
-#endif
+#endif // NATIVE_PLATFORM_*
             }
 
             return scale;

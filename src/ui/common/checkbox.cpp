@@ -1,4 +1,5 @@
 // Module Dependencies
+#include "../include/app.h"
 #include "../include/componentadapter.h"
 #include "../include/checkbox.h"
 
@@ -8,11 +9,7 @@ namespace native
 	{
 		Checkbox::Checkbox() : TextComponent(new CheckboxAdapter(this)), _checked(false)
 		{
-#ifdef NATIVE_FORM_MOBILE
-			setMargins(10, 0, 10, 0);
-#else
-			setMargins(1, 0, 2, 0);
-#endif
+			setMargins(coord_t(2 * App::getDisplayScale()), 0, coord_t(2 * App::getDisplayScale()), 0);
 		}
 
 		void Checkbox::setChecked(bool checked)
