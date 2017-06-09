@@ -54,7 +54,7 @@ namespace native
 			if (graphics.MeasureString(text.toArray(), int(text.getLength()), (Gdiplus::Font*) getHandle(), Gdiplus::PointF(0, 0), &rect) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::MeasureString() failed");
 
-			return Size(coord_t(3 + rect.Width/ System::getDisplayScale()), coord_t(1 + rect.Height / System::getDisplayScale()));
+			return Size(coord_t(rect.Width / System::getDisplayScale()), coord_t(rect.Height / System::getDisplayScale()));
 		}
 
 		Font Font::getDefault()
