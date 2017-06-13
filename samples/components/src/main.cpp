@@ -41,6 +41,8 @@ public:
 		_input2.setText("InputComponent 2");
 		_input2.setEnabled(false);
 
+		_progress1.setProgress(50);
+
 		_layout.addChild(_button1);
 		_layout.addChild(_button2);
 		_layout.addChild(_check1);
@@ -52,6 +54,7 @@ public:
 		_layout.addChild(_radio3);
 		_layout.addChild(_input1);
 		_layout.addChild(_input2);
+		_layout.addChild(_progress1);
 
 		addChild(_layout);
 	}
@@ -62,6 +65,7 @@ private:
 	Label _label;
 	RadioButton _radio1, _radio2, _radio3;
 	InputComponent _input1, _input2;
+	ProgressBar _progress1;
 	VLayout _layout;
 };
 

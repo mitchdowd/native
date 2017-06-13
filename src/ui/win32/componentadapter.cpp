@@ -17,6 +17,7 @@
 #include "../include/component.h"
 #include "../include/componentadapter.h"
 #include "../include/inputcomponent.h"
+#include "../include/progressbar.h"
 #include "../include/radiobutton.h"
 #include "../include/textcomponent.h"
 #include "../include/window.h"
@@ -514,6 +515,25 @@ namespace native
 		void InputAdapter::setFont(const Font& font)
 		{
 			ComponentAdapter::setFont(font);
+		}
+
+		/*
+			ProgressBarAdapter Functions
+		 */
+
+		ProgressBarAdapter::ProgressBarAdapter(ProgressBar* component)
+			: ComponentAdapter({ component, PROGRESS_CLASS, WS_CHILD | WS_VISIBLE | PBS_SMOOTH, 0 })
+		{
+		}
+
+		void ProgressBarAdapter::setMax(int max)
+		{
+			::SendMessage(HWND(getHandle()), PBM_SETRANGE32, 0, max);
+		}
+
+		void ProgressBarAdapter::setProgress(int progress)
+		{
+			::SendMessage(HWND(getHandle()), PBM_SETPOS, progress, 0);
 		}
 
 		/*

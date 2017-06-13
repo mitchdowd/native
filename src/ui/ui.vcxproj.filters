@@ -70,6 +70,9 @@
     <ClCompile Include="common\label.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="common\progressbar.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -152,6 +155,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\radiobutton.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\progressbar.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

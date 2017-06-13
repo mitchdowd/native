@@ -3,13 +3,10 @@ package libnative.ui;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
-import android.widget.EditText;
 
-public class InputComponent extends EditText {
-    public InputComponent(Context context) {
+public class ProgressBar extends android.widget.ProgressBar {
+    public ProgressBar(Context context) {
         super(context);
-
-        setMaxLines(1);
     }
 
     @Override

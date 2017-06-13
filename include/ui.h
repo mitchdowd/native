@@ -20,6 +20,7 @@
 #include "../src/ui/include/linearlayout.h"
 #include "../src/ui/include/pen.h"
 #include "../src/ui/include/point.h"
+#include "../src/ui/include/progressbar.h"
 #include "../src/ui/include/radiobutton.h"
 #include "../src/ui/include/rectangle.h"
 #include "../src/ui/include/size.h"

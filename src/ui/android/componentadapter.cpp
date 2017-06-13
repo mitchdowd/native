@@ -8,6 +8,7 @@
 #include "../include/checkbox.h"
 #include "../include/componentadapter.h"
 #include "../include/inputcomponent.h"
+#include "../include/progressbar.h"
 #include "../include/radiobutton.h"
 
 // Local Dependencies
@@ -316,6 +317,24 @@ namespace native
             HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
             HANDLE_OBJ->call<void>("setTextSize", font.getSize());
         }
+
+        /*
+			ProgressBarAdapter Functions
+		 */
+
+		ProgressBarAdapter::ProgressBarAdapter(ProgressBar* component) : ComponentAdapter({ component, "libnative/ui/ProgressBar" })
+		{
+		}
+
+		void ProgressBarAdapter::setMax(int max)
+		{
+            HANDLE_OBJ->call<void>("setMax", max);
+		}
+
+		void ProgressBarAdapter::setProgress(int progress)
+		{
+            HANDLE_OBJ->call<void>("setProgress", progress);
+		}
 	}
 }
 

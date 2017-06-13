@@ -145,6 +145,7 @@ namespace native
 		class Button;
 		class Checkbox;
 		class InputComponent;
+		class ProgressBar;
 		class RadioButton;
 		class TextComponent;
 		class WebView;
@@ -310,6 +311,31 @@ namespace native
 				\param font The new Font.
 			 */
 			virtual void setFont(const Font& font) override;
+		};
+
+		/**
+			A ComponentAdapter for ProgressBars.
+		 */
+		class ProgressBarAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given ProgressBar.
+				\param component The component for this adapter.
+			 */
+			ProgressBarAdapter(ProgressBar* component);
+
+			/**
+				Sets the maximum range value.
+				\param max Maximum valid value.
+			 */
+			void setMax(int max);
+
+			/**
+				Sets the current progress value.
+				\param progress The current progress.
+			 */
+			void setProgress(int progress);
 		};
 
 		/**

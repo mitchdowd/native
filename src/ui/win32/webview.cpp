@@ -29,33 +29,33 @@ namespace native
 			virtual void goForward() override;
 
 			// IUnknown Functions
-			virtual HRESULT QueryInterface(REFIID riid, void** ppvObject) override;
-			virtual ULONG AddRef()  override { return 1; }	// Unneeded
-			virtual ULONG Release() override { return 1; }	// Unneeded
+			virtual HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void** ppvObject) override;
+			virtual ULONG STDMETHODCALLTYPE AddRef()  override { return 1; }	// Unneeded
+			virtual ULONG STDMETHODCALLTYPE Release() override { return 1; }	// Unneeded
 
 			// IOleClientSite Functions
-			virtual HRESULT SaveObject() override { return E_NOTIMPL; }
-			virtual HRESULT GetMoniker(DWORD dwAssign, DWORD dwWhichMoniker, IMoniker** ppmk) override { return E_NOTIMPL; }
-			virtual HRESULT GetContainer(IOleContainer** ppContainer) override { return E_NOINTERFACE; }
-			virtual HRESULT ShowObject() override { return S_OK; }
-			virtual HRESULT OnShowWindow(BOOL fShow) override { return E_NOTIMPL; }
-			virtual HRESULT RequestNewObjectLayout() override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE SaveObject() override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE GetMoniker(DWORD dwAssign, DWORD dwWhichMoniker, IMoniker** ppmk) override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE GetContainer(IOleContainer** ppContainer) override { return E_NOINTERFACE; }
+			virtual HRESULT STDMETHODCALLTYPE ShowObject() override { return S_OK; }
+			virtual HRESULT STDMETHODCALLTYPE OnShowWindow(BOOL fShow) override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE RequestNewObjectLayout() override { return E_NOTIMPL; }
 
 			// IOleWindow Functions
-			virtual HRESULT GetWindow(HWND* phwnd) override;
-			virtual HRESULT ContextSensitiveHelp(BOOL fEnterMode) override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE GetWindow(HWND* phwnd) override;
+			virtual HRESULT STDMETHODCALLTYPE ContextSensitiveHelp(BOOL fEnterMode) override { return E_NOTIMPL; }
 
 			// IOleInPlaceSite Functions
-			virtual HRESULT CanInPlaceActivate() override { return S_OK; }
-			virtual HRESULT OnInPlaceActivate()  override { return S_OK; }
-			virtual HRESULT OnUIActivate() override { return S_OK; }
-			virtual HRESULT GetWindowContext(IOleInPlaceFrame** ppFrame, IOleInPlaceUIWindow** ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo) override;
-			virtual HRESULT Scroll(SIZE scrollExtant) override { return E_NOTIMPL; }
-			virtual HRESULT OnUIDeactivate(BOOL fUndoable) override { return S_OK; }
-			virtual HRESULT OnInPlaceDeactivate() override { return S_OK; }
-			virtual HRESULT DiscardUndoState() override { return E_NOTIMPL; }
-			virtual HRESULT DeactivateAndUndo() override { return E_NOTIMPL; }
-			virtual HRESULT OnPosRectChange(LPCRECT lprcPosRect) override;
+			virtual HRESULT STDMETHODCALLTYPE CanInPlaceActivate() override { return S_OK; }
+			virtual HRESULT STDMETHODCALLTYPE OnInPlaceActivate()  override { return S_OK; }
+			virtual HRESULT STDMETHODCALLTYPE OnUIActivate() override { return S_OK; }
+			virtual HRESULT STDMETHODCALLTYPE GetWindowContext(IOleInPlaceFrame** ppFrame, IOleInPlaceUIWindow** ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo) override;
+			virtual HRESULT STDMETHODCALLTYPE Scroll(SIZE scrollExtant) override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE OnUIDeactivate(BOOL fUndoable) override { return S_OK; }
+			virtual HRESULT STDMETHODCALLTYPE OnInPlaceDeactivate() override { return S_OK; }
+			virtual HRESULT STDMETHODCALLTYPE DiscardUndoState() override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE DeactivateAndUndo() override { return E_NOTIMPL; }
+			virtual HRESULT STDMETHODCALLTYPE OnPosRectChange(LPCRECT lprcPosRect) override;
 
 			// Instance Variables
 			IStorage*   storage;
