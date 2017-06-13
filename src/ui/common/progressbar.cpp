@@ -30,7 +30,7 @@ namespace native
         Size ProgressBar::getPreferredSize() const
         {
 #ifdef NATIVE_FORM_MOBILE
-            return Size(coord_t(120 * App::getDisplayScale()), coord_t(30 * App::getDisplayScale()));
+            return Size(coord_t(100 * App::getDisplayScale()), coord_t(10 * App::getDisplayScale()));
 #else
             return Size(coord_t(160 * App::getDisplayScale()), coord_t(15 * App::getDisplayScale()));
 #endif // NATIVE_FORM_*
