@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 
 public class ProgressBar extends android.widget.ProgressBar {
     public ProgressBar(Context context) {
-        super(context);
+        super(context, null, android.R.attr.progressBarStyleHorizontal);
     }
 
     @Override
@@ -26,5 +26,8 @@ public class ProgressBar extends android.widget.ProgressBar {
     protected void onDraw(Canvas canvas) { ViewExtensions.onPaint(this, canvas); }
 
     @Override
-    public void onSizeChanged(int w, int h, int oldW, int oldH) { ViewExtensions.onSize(this, w, h); }
+    public void onSizeChanged(int w, int h, int oldW, int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
+        ViewExtensions.onSize(this, w, h);
+    }
 }
