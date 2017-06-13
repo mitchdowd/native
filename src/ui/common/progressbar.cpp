@@ -35,6 +35,13 @@ namespace native
             return Size(coord_t(160 * App::getDisplayScale()), coord_t(15 * App::getDisplayScale()));
 #endif // NATIVE_FORM_*
         }
+
+		void ProgressBar::onSize(const Size& size)
+		{
+			setProgress(_progress);
+
+			Component::onSize(size);
+		}
     }
 }
 

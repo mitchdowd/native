@@ -522,7 +522,7 @@ namespace native
 		 */
 
 		ProgressBarAdapter::ProgressBarAdapter(ProgressBar* component)
-			: ComponentAdapter({ component, PROGRESS_CLASS, WS_CHILD | WS_VISIBLE | PBS_SMOOTH, 0 })
+			: ComponentAdapter({ component, PROGRESS_CLASS, WS_CHILD | WS_VISIBLE, 0 })
 		{
 		}
 

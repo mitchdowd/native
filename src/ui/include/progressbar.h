@@ -41,6 +41,10 @@ namespace native
              */
             virtual Size getPreferredSize() const override;
 
+		protected:
+			/** Handles resizing. */
+			virtual void onSize(const Size& size) override;
+
         private:
             // Instance Variables
             int _min, _max, _progress;
