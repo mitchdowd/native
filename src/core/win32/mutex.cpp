@@ -13,21 +13,6 @@ namespace native
 			throw Exception("Mutex::Mutex");
 	}
 
-	Mutex::Mutex(const String& name)
-	{
-		if ((_handle = ::CreateMutex(NULL, FALSE, name.toArray())) == 0)
-		{
-			switch (::GetLastError())
-			{
-			case ERROR_ACCESS_DENIED:
-			case ERROR_INVALID_HANDLE:
-				throw AccessException("No access to given named Mutex");
-			}
-
-			throw Exception("Mutex::Mutex");
-		}
-	}
-
 	Mutex::~Mutex()
 	{
 		::CloseHandle(_handle);

@@ -14,11 +14,6 @@ namespace native
             throw Exception("Mutex::Mutex");
 	}
 
-	Mutex::Mutex(const String& name)
-	{
-        throw NotImplementedException();
-	}
-
 	Mutex::~Mutex()
 	{
         if (_handle)

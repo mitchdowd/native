@@ -8,7 +8,8 @@ namespace native
 {
 	/**
 		A Mutex is a resource locking mechanism, which can lock and release a
-		resource across multiple processes.
+		resource and allow resource consumers to block until the resource is
+		available.
 	 */
 	class Mutex
 	{
@@ -24,14 +25,6 @@ namespace native
 			\param other The Mutex to move.
 		 */
 		Mutex(Mutex&& other) : _handle(other._handle) { other._handle = nullptr; }
-
-		/**
-			Creates a named Mutex. If a Mutex with the given name already exists
-			in the system, this Mutex will share resource locking with the existing
-			Mutex.
-			\param name The name of the Mutex.
-		 */
-		Mutex(const String& name);
 
 		/** Destructor. */
 		~Mutex();
