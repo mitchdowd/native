@@ -1,7 +1,8 @@
 # Project Native
 
 Project Native is a developer-friendly, light-weight, native C++ library for
-basic client applications.
+basic client applications. It is currently in pre-alpha stage, as features
+are gradually implemented.
 
 ## Overview
 
@@ -25,3 +26,84 @@ decisions are made regarding its design.
  - Do not force developers to allocate everything onto the heap. C++ has an
    excellent memory management facility in stack-based object lifecycles. Let
    the developer use it.
+
+## Feature Status
+
+This library is still in relatively early development, and many features are
+not yet implemented. Below is a guide as to the status of each feature.
+
+### Core Functionality
+
+Various classes for basic, core functionality, used all throughout the library.
+
+- [x] Collection classes
+- [x] DateTime
+- [x] Exception
+- [x] Flags
+- [x] Function
+- [ ] Mutex
+- [x] Signal
+- [x] Singleton
+- [x] String
+- [x] Task
+- [x] Thread
+- [x] Variant
+
+### IO Classes
+
+Classes for IO operations across various channels. These are minimal implementations
+to be expanded upon once they are stable.
+
+- [x] File
+- [ ] MemoryStream
+- [ ] ServerSocket
+- [x] TcpSocket
+- [ ] TextStream
+- [ ] UdpSocket
+
+### Minimal Control Implementations
+
+This is for minimal implementation only. Once each component is working well
+in its minimal state, then each control will be fleshed out with all of the
+relevant features for that control.
+
+- [x] Button
+- [x] CheckBox
+- [ ] DatePicker
+- [ ] GroupBox
+- [x] InputComponent
+- [x] Label
+- [ ] ListView
+- [ ] NumberPicker
+- [x] ProgressBar
+- [x] RadioButton
+- [ ] SliderComponent
+- [ ] TableView
+- [ ] TabView
+- [x] TextArea
+- [ ] ToolBar
+- [x] WebView
+- [x] Window
+
+### Layouts
+
+Components whose task is to lay out their child Components in a specific
+format.
+
+- [ ] FlowLayout
+- [ ] GridLayout
+- [x] LinearLayout
+
+### Graphics
+
+These are basic, minimal implementations of various drawing classes. Once they
+are all working as intended, features will be added.
+
+- [x] Brush
+- [x] Canvas
+- [x] Color
+- [x] Font
+- [ ] Image
+- [ ] Menu
+- [x] Pen
+
