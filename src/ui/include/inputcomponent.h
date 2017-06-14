@@ -2,6 +2,7 @@
 #define _NATIVE_UI_INPUT_COMPONENT_H_ 1
 
 // Module Dependencies
+#include "componentadapter.h"
 #include "textcomponent.h"
 
 namespace native
@@ -25,6 +26,12 @@ namespace native
 			virtual Size getPreferredSize() const override;
 
 		protected:
+			/**
+				Creates an InputComponent with the given adapter.
+				\param adapter The input component adapter.
+			 */
+			InputComponent(InputAdapter* adapter);
+
 			/** Draws the input. */
 			virtual void onPaint(Canvas& canvas) override;
 		};

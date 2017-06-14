@@ -16,6 +16,15 @@ namespace native
 #endif // NATIVE_PLATFORM_WIN32
 		}
 
+		InputComponent::InputComponent(InputAdapter* adapter) : TextComponent(adapter)
+		{
+#ifdef NATIVE_PLATFORM_WIN32
+			static const Pen BORDER_COLOR = Color(0x80, 0x80, 0x80);
+
+			setBorder(BORDER_COLOR);
+#endif // NATIVE_PLATFORM_WIN32
+		}
+
 		Size InputComponent::getPreferredSize() const
 		{
 			String text = getText();

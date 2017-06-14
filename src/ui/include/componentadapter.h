@@ -147,6 +147,7 @@ namespace native
 		class InputComponent;
 		class ProgressBar;
 		class RadioButton;
+		class TextArea;
 		class TextComponent;
 		class WebView;
 
@@ -301,6 +302,13 @@ namespace native
 			InputAdapter(InputComponent* input);
 
 			/**
+				Creates an InputAdapter with the given platform-specific
+				properties.
+				\param properties A set of platform-specific inputs.
+			 */
+			InputAdapter(const ComponentAdapterProperties& properties) : ComponentAdapter(properties) {}
+
+			/**
 				Sets the component text.
 				\param text The new text value.
 			 */
@@ -311,6 +319,19 @@ namespace native
 				\param font The new Font.
 			 */
 			virtual void setFont(const Font& font) override;
+		};
+
+		/**
+			A ComponentAdapter for TextAreas.
+		 */
+		class TextAreaAdapter : public InputAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given TextArea.
+				\param area The component for this adapter.
+			 */
+			TextAreaAdapter(TextArea* area);
 		};
 
 		/**

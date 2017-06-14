@@ -10,6 +10,7 @@
 #include "../include/inputcomponent.h"
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
+#include "../include/textarea.h"
 
 // Local Dependencies
 #include "componentadapterproperties.h"
@@ -317,6 +318,14 @@ namespace native
             HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
             HANDLE_OBJ->call<void>("setTextSize", font.getSize());
         }
+
+		/*
+			TextAreaAdapter Functions
+		 */
+
+		TextAreaAdapter::TextAreaAdapter(TextArea* area) : InputAdapter({ area, "libnative/ui/TextArea" })
+		{
+		}
 
         /*
 			ProgressBarAdapter Functions

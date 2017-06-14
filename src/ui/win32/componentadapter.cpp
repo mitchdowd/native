@@ -19,6 +19,7 @@
 #include "../include/inputcomponent.h"
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
+#include "../include/textarea.h"
 #include "../include/textcomponent.h"
 #include "../include/window.h"
 
@@ -515,6 +516,15 @@ namespace native
 		void InputAdapter::setFont(const Font& font)
 		{
 			ComponentAdapter::setFont(font);
+		}
+
+		/*
+			TextAreaAdapter Functions
+		 */
+
+		TextAreaAdapter::TextAreaAdapter(TextArea* area)
+			: InputAdapter({ area, L"EDIT", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL | ES_MULTILINE | ES_WANTRETURN | ES_AUTOVSCROLL, 0 })
+		{
 		}
 
 		/*
