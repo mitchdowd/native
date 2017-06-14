@@ -101,6 +101,15 @@ namespace native
 	public:
 		NotSupportedException(const char* message = "Operation not supported") : Exception(message) {}
 	};
+
+	/**
+		Insufficient access is granted on a particular resource.
+	 */
+	class AccessException : public Exception
+	{
+	public:
+		AccessException(const char* message = "Insufficient access") : Exception(message) {}
+	};
 }
 
 #endif // _NATIVE_EXCEPTION_H_

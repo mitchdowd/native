@@ -107,3 +107,13 @@ are all working as intended, features will be added.
 - [ ] Menu
 - [x] Pen
 
+### Data Handling
+
+Various classes used to structure and handle data in various formats.
+
+- [ ] JsonConverter
+- [ ] ListModel
+- [ ] SqlClient
+- [ ] TableModel
+- [ ] ValueModel
+- [ ] XmlConverter

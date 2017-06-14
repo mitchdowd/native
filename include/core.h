@@ -19,6 +19,7 @@
 #include "../src/core/include/map.h"
 #include "../src/core/include/math.h"
 #include "../src/core/include/memory.h"
+#include "../src/core/include/mutex.h"
 #include "../src/core/include/platform.h"
 #include "../src/core/include/queue.h"
 #include "../src/core/include/set.h"

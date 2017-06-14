@@ -37,6 +37,9 @@
     </ClCompile>
     <ClCompile Include="common\variant.cpp" />
     <ClCompile Include="win32\datetime.cpp" />
+    <ClCompile Include="win32\mutex.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\platform.h" />
@@ -110,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="include\variant.h" />
     <ClInclude Include="include\datetime.h" />
+    <ClInclude Include="include\mutex.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collections">
