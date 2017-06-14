@@ -38,7 +38,10 @@ namespace native
 
 		void ProgressBar::onSize(const Size& size)
 		{
+#ifdef NATIVE_PLATFORM_WIN32
+			// Get around an "order of calls" issue with Windows
 			setProgress(_progress);
+#endif
 
 			Component::onSize(size);
 		}
