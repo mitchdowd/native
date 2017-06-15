@@ -86,6 +86,16 @@ namespace native
 			}
 		}
 
+		Size LayoutComponent::getPreferredSize() const
+		{
+			Size size;
+
+			for (auto child : _children)
+				size = size.combine(child->getPreferredSize());
+
+			return size;
+		}
+
 		void LayoutComponent::dispatchInputEvent(const InputEvent& event)
 		{
 			// TODO: Check for mouse capture.

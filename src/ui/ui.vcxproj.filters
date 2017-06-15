@@ -76,6 +76,9 @@
     <ClCompile Include="common\textarea.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="common\groupbox.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -164,6 +167,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\textarea.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\groupbox.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

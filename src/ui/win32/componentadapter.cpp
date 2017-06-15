@@ -16,6 +16,7 @@
 #include "../include/checkbox.h"
 #include "../include/component.h"
 #include "../include/componentadapter.h"
+#include "../include/groupbox.h"
 #include "../include/inputcomponent.h"
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
@@ -544,6 +545,25 @@ namespace native
 		void ProgressBarAdapter::setProgress(int progress)
 		{
 			::SendMessage(HWND(getHandle()), PBM_SETPOS, progress, 0);
+		}
+
+		/*
+			GroupBoxAdapter Functions
+		 */
+
+		GroupBoxAdapter::GroupBoxAdapter(GroupBox* box)
+			: ComponentAdapter({ box, L"BUTTON", WS_CHILD | WS_VISIBLE | BS_GROUPBOX, 0 })
+		{
+		}
+
+		void GroupBoxAdapter::setText(const String& text)
+		{
+			ComponentAdapter::setText(text);
+		}
+
+		void GroupBoxAdapter::setFont(const Font& font)
+		{
+			ComponentAdapter::setFont(font);
 		}
 
 		/*

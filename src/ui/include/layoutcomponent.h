@@ -51,6 +51,13 @@ namespace native
 			 */
 			const List<Component*>& getChildren() const noexcept { return _children; }
 
+			/**
+				Gets the preferred Size for this layout. This is just the minimum
+				size required to be able to hold each child.
+				\return The preferred size.
+			 */
+			virtual Size getPreferredSize() const override;
+
 		protected:
 			/**
 				Called when the geometric size of the Component changes. This will

@@ -144,6 +144,7 @@ namespace native
 		// Forward Declarations
 		class Button;
 		class Checkbox;
+		class GroupBox;
 		class InputComponent;
 		class ProgressBar;
 		class RadioButton;
@@ -389,6 +390,31 @@ namespace native
 				Navigates forward in the browser navigation.
 			 */
 			virtual void goForward();
+		};
+
+		/**
+			A ComponentAdapter for GroupBoxes.
+		*/
+		class GroupBoxAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given GroupBox.
+				\param view The component for this adapter.
+			 */
+			GroupBoxAdapter(GroupBox* box);
+
+			/**
+				Sets the component text.
+				\param text The new text value.
+			 */
+			virtual void setText(const String& text) override;
+
+			/**
+				Sets the GroupBox Font.
+				\param font The new Font.
+			 */
+			virtual void setFont(const Font& font) override;
 		};
 	}
 }

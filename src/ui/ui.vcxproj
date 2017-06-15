@@ -146,6 +146,7 @@
     <ClCompile Include="common\button.cpp" />
     <ClCompile Include="common\checkbox.cpp" />
     <ClCompile Include="common\color.cpp" />
+    <ClCompile Include="common\groupbox.cpp" />
     <ClCompile Include="common\inputcomponent.cpp" />
     <ClCompile Include="common\label.cpp" />
     <ClCompile Include="common\linearlayout.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="include\checkbox.h" />
     <ClInclude Include="include\dialogs.h" />
     <ClInclude Include="include\font.h" />
+    <ClInclude Include="include\groupbox.h" />
     <ClInclude Include="include\label.h" />
     <ClInclude Include="include\linearlayout.h" />
     <ClInclude Include="include\pen.h" />

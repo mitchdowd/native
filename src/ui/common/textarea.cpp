@@ -15,7 +15,7 @@ namespace native
 		{
 			Size size = InputComponent::getPreferredSize();
 
-			return Size(160 * App::getDisplayScale(), size.height * 5);
+			return Size(coord_t(160 * App::getDisplayScale()), size.height * 5);
 		}
 	}
 }

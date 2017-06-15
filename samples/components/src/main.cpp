@@ -45,6 +45,8 @@ public:
 
 		_area1.setText("TextArea 1");
 
+		_group1.setText("GroupBox 1");
+
 		_layout.addChild(_button1);
 		_layout.addChild(_button2);
 		_layout.addChild(_check1);
@@ -58,6 +60,7 @@ public:
 		_layout.addChild(_input2);
 		_layout.addChild(_progress1);
 		_layout.addChild(_area1);
+		_layout.addChild(_group1);
 
 		addChild(_layout);
 	}
@@ -70,6 +73,7 @@ private:
 	InputComponent _input1, _input2;
 	ProgressBar _progress1;
 	TextArea _area1;
+	GroupBox _group1;
 	VLayout _layout;
 };
 

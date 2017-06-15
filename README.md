@@ -41,7 +41,7 @@ Various classes for basic, core functionality, used all throughout the library.
 - [x] Exception
 - [x] Flags
 - [x] Function
-- [ ] Mutex
+- [x] Mutex
 - [x] Signal
 - [x] Singleton
 - [x] String
