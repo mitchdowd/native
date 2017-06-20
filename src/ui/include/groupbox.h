@@ -55,6 +55,12 @@ namespace native
              */
 			virtual void onPaint(Canvas& canvas) override;
 
+			/**
+				Positions the children within the GroupBox when resizing.
+				\param size The new size.
+			 */
+			virtual void onSize(const Size& size) override;
+
 		private:
 			// Instance Variables
 			String _text;

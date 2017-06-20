@@ -13,6 +13,7 @@ namespace native
         GroupBox::GroupBox() : LayoutComponent()
 #endif // NATIVE_PLATFORM_WIN32
 		{
+			setBackground(Color(0xFF, 0xFF, 0xFF));
 			setFont(Font::getDefault());
 			setAlignment(Align::Left | Align::Top);
 		}
@@ -45,10 +46,10 @@ namespace native
 			if (size.width < measure.width)
 				size.width = measure.width;
 
-			size.height += measure.height + coord_t(10 * App::getDisplayScale());
-			size.width += coord_t(10 * App::getDisplayScale());
+			size.height += (measure.height / 2) + coord_t(14 * App::getDisplayScale());
+			size.width += coord_t(14 * App::getDisplayScale());
 
-			return Size(500, 500);
+			return size;
 		}
 
         void GroupBox::onPaint(Canvas& canvas)
@@ -61,6 +62,19 @@ namespace native
             canvas.drawText(_text, _font);
 #endif // NATIVE_PLATFORM_WIN32
         }
+
+		void GroupBox::onSize(const Size& size)
+		{
+			Rectangle area = size;
+
+			Size measure = getFont().measureText(_text.getLength() ? _text : L"Thank you");
+
+			area = area.deflate(7 * App::getDisplayScale());
+			area.y += measure.height / 2;
+
+			for (auto child : getChildren())
+				child->allocateArea(area);
+		}
 	}
 }
 
