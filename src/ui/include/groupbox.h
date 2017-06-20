@@ -48,6 +48,13 @@ namespace native
 			 */
 			virtual Size getPreferredSize() const override;
 
+		protected:
+            /**
+                Paints the GroupBox.
+                @param canvas The Canvas to paint with.
+             */
+			virtual void onPaint(Canvas& canvas) override;
+
 		private:
 			// Instance Variables
 			String _text;

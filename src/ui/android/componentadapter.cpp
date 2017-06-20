@@ -345,26 +345,6 @@ namespace native
 		{
             HANDLE_OBJ->call<void>("setProgress", progress);
 		}
-
-        /*
-            GroupBoxAdapter Functions
-         */
-
-        GroupBoxAdapter::GroupBoxAdapter(GroupBox* box) : ComponentAdapter({ box, "libnative/ui/GroupBox" })
-        {
-            throw NotImplementedException();
-        }
-
-        void GroupBoxAdapter::setText(const String& text)
-        {
-            HANDLE_OBJ->call<void>("setText(Ljava/lang/CharSequence;)V", text.toArray());
-        }
-
-        void GroupBoxAdapter::setFont(const Font& font)
-        {
-            HANDLE_OBJ->call<void>("setTypeface(Landroid/graphics/Typeface;)V", (jni::Object*) font.getHandle());
-            HANDLE_OBJ->call<void>("setTextSize", font.getSize());
-        }
 	}
 }
 

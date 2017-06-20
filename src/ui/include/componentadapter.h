@@ -392,6 +392,8 @@ namespace native
 			virtual void goForward();
 		};
 
+#ifdef NATIVE_PLATFORM_WIN32
+
 		/**
 			A ComponentAdapter for GroupBoxes.
 		*/
@@ -416,6 +418,8 @@ namespace native
 			 */
 			virtual void setFont(const Font& font) override;
 		};
+
+#endif // NATIVE_PLATFORM_WIN32
 	}
 }
 
