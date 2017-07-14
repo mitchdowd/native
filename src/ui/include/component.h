@@ -146,6 +146,11 @@ namespace native
 			 */
 			virtual void allocateArea(const Rectangle& area);
 
+            /**
+                Refreshes the layout of this Component.
+             */
+            void refresh();
+
 			/**
 				Gets the usable portion of this Component's area, relative to
 				the Component's top-left corner. For many Components this will
@@ -293,6 +298,12 @@ namespace native
 			 */
 			void drawBorder(Canvas& canvas);
 
+            /**
+                Tells whether the layout of this Component is currently being refreshed.
+                \return true if refreshing, false otherwise.
+             */
+            bool isRefreshing() const noexcept;
+
 		private:
 			// Class Friendships
 			friend class ComponentAdapter;
@@ -307,6 +318,7 @@ namespace native
 			Visibility		   _visibility;
 			bool               _enabled;
 			Rectangle		   _area;
+            bool               _refreshing;
 			Brush              _background;
 			Pen                _border;
 			Flags<Alignment>   _alignment;

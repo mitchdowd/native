@@ -46,8 +46,8 @@ namespace native
 			if (size.width < measure.width)
 				size.width = measure.width;
 
-			size.height += (measure.height / 2) + coord_t(14 * App::getDisplayScale());
-			size.width += coord_t(14 * App::getDisplayScale());
+			size.height += (measure.height / 2) + coord_t(14);
+			size.width += coord_t(14);
 
 			return size;
 		}
@@ -59,7 +59,7 @@ namespace native
 #else
             canvas.drawRectangle(getSize(), Color());
 
-            canvas.drawText(_text, _font);
+            canvas.drawText(_text, _font, Point(7, 0));
 #endif // NATIVE_PLATFORM_WIN32
         }
 
@@ -69,7 +69,7 @@ namespace native
 
 			Size measure = getFont().measureText(_text.getLength() ? _text : L"Thank you");
 
-			area = area.deflate(7 * App::getDisplayScale());
+			area = area.deflate(7);
 			area.y += measure.height / 2;
 
 			for (auto child : getChildren())

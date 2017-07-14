@@ -188,7 +188,9 @@ namespace native
                     {
                         Size size = ((Size *) event.arg)->scale(1.0f / App::getDisplayScale());
                         _component->_area.setSize(size);
+                        _component->_refreshing = true;
                         _component->onSize(size);
+                        _component->_refreshing = false;
                     }
                     break;
                 }

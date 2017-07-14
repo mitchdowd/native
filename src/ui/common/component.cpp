@@ -45,6 +45,7 @@ namespace native
 			, _parent(nullptr)
 			, _enabled(true)
 			, _area({ 0, 0, -1, -1 })
+			, _refreshing(false)
 			, _alignment(Align::Top | Align::Left)
 			, _margins({ 0, 0, 0, 0 })
 		{
@@ -55,6 +56,7 @@ namespace native
 			, _parent(nullptr)
 			, _enabled(true)
 			, _area({ 0, 0, -1, -1 })
+			, _refreshing(false)
 			, _alignment(Align::Top | Align::Left)
 			, _margins({ 0, 0, 0, 0 })
 		{
@@ -135,7 +137,7 @@ namespace native
 			_area = area;
 
 			// Trigger the onSize() callback.
-			if ((_parent || !_adapter) && area.getSize() != oldArea.getSize())
+			if (((_parent || !_adapter) && area.getSize() != oldArea.getSize()) || isRefreshing())
 				onSize(toContentArea(this, area).getSize());
 		}
 
@@ -199,6 +201,14 @@ namespace native
 
 			setArea(allocation);
 		}
+
+        void Component::refresh()
+        {
+            // Trigger repositioning of all child items.
+            _refreshing = true;
+            onSize(getContentArea().getSize());
+            _refreshing = false;
+        }
 
 		Rectangle Component::getContentArea() const
 		{
@@ -359,6 +369,14 @@ namespace native
 				}
 			}
 		}
+
+        bool Component::isRefreshing() const noexcept
+        {
+            if (_refreshing)
+                return true;
+
+            return _parent ? _parent->isRefreshing() : false;
+        }
 	}
 }
 
