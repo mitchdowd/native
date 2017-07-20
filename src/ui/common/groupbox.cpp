@@ -3,11 +3,15 @@
 #include "../include/componentadapter.h"
 #include "../include/groupbox.h"
 
+#ifdef NATIVE_PLATFORM_WIN32
+# define USE_NATIVE_GROUP_BOX 1
+#endif
+
 namespace native
 {
 	namespace ui
 	{
-#ifdef NATIVE_PLATFORM_WIN32
+#ifdef USE_NATIVE_GROUP_BOX
 		GroupBox::GroupBox() : LayoutComponent(new GroupBoxAdapter(this))
 #else
         GroupBox::GroupBox() : LayoutComponent()
@@ -46,18 +50,30 @@ namespace native
 			if (size.width < measure.width)
 				size.width = measure.width;
 
-			size.height += (measure.height / 2) + coord_t(14);
-			size.width += coord_t(14);
+			size.height += (measure.height / 2) + coord_t(13);
+			size.width += coord_t(15);
 
 			return size;
 		}
 
         void GroupBox::onPaint(Canvas& canvas)
         {
-#ifdef NATIVE_PLATFORM_WIN32
+#ifdef USE_NATIVE_GROUP_BOX
             Component::onPaint(canvas);
 #else
-            canvas.drawRectangle(getSize(), Color());
+			Size measure = getFont().measureText(_text.getLength() ? _text : L"Thank you");
+
+			Rectangle area = getSize();
+
+			area.y += measure.height / 2;
+			area.height -= measure.height / 2;
+
+            canvas.drawRectangle(area, Color(0xDC, 0xDC, 0xDC));
+
+			area = measure;
+			area.x += 6;
+
+			canvas.fillRectangle(area, getBackground());
 
             canvas.drawText(_text, _font, Point(7, 0));
 #endif // NATIVE_PLATFORM_WIN32

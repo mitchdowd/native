@@ -38,11 +38,17 @@ public:
 
 		_radio1.setText("RadioButton 1");
 		_radio1.check();
+		_radioLayout.addChild(_radio1);
 
 		_radio2.setText("RadioButton 2");
+		_radioLayout.addChild(_radio2);
 
 		_radio3.setText("RadioButton 3");
 		_radio3.setEnabled(false);
+		_radioLayout.addChild(_radio3);
+
+		_radioGroup.setText("RadioButtons");
+		_radioGroup.addChild(_radioLayout);
 
 		_input1.setText("InputComponent 1");
 
@@ -57,9 +63,7 @@ public:
 		_layout.addChild(_button2);
 		_layout.addChild(_checkGroup);
 		_layout.addChild(_label);
-		_layout.addChild(_radio1);
-		_layout.addChild(_radio2);
-		_layout.addChild(_radio3);
+		_layout.addChild(_radioGroup);
 		_layout.addChild(_input1);
 		_layout.addChild(_input2);
 		_layout.addChild(_progress1);
@@ -77,8 +81,8 @@ private:
 	InputComponent _input1, _input2;
 	ProgressBar _progress1;
 	TextArea _area1;
-	GroupBox _checkGroup;
-	VLayout _layout, _checkLayout;
+	GroupBox _checkGroup, _radioGroup;
+	VLayout _layout, _checkLayout, _radioLayout;
 };
 
 // Entry Point
