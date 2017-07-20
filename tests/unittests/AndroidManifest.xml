@@ -6,7 +6,7 @@
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name">
+        android:label="Native Unit Tests">
 
         <activity android:name="libnative.test.TestActivity">
             <meta-data android:name="libnative.test.lib_name"

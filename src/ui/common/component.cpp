@@ -348,7 +348,9 @@ namespace native
 		{
 			// TODO: Check for mouse capture?
 
-            onInput(event);
+            // Disabled Components get no input.
+            if (isEnabled())
+                onInput(event);
 		}
 
 		void Component::drawBorder(Canvas& canvas)

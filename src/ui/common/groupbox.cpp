@@ -71,9 +71,9 @@ namespace native
             canvas.drawRectangle(area, Color(0xDC, 0xDC, 0xDC));
 
 			area = measure;
-			area.x += 6;
+			area.x += 7;
 
-			canvas.fillRectangle(area, getBackground());
+			canvas.fillRectangle(area.inflate(1, 0), getBackground());
 
             canvas.drawText(_text, _font, Point(7, 0));
 #endif // NATIVE_PLATFORM_WIN32
