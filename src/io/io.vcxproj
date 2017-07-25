@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="common\networkaddress.cpp" />
+    <ClCompile Include="common\memorystream.cpp" />
     <ClCompile Include="win32\file.cpp" />
     <ClCompile Include="common\socket.cpp" />
     <ClCompile Include="common\tcpsocket.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="..\..\include\io.h" />
     <ClInclude Include="include\file.h" />
     <ClInclude Include="include\istream.h" />
+    <ClInclude Include="include\memorystream.h" />
     <ClInclude Include="include\networkaddress.h" />
     <ClInclude Include="include\socket.h" />
     <ClInclude Include="include\tcpsocket.h" />

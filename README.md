@@ -70,7 +70,7 @@ relevant features for that control.
 - [x] Button
 - [x] CheckBox
 - [ ] DatePicker
-- [ ] GroupBox
+- [x] GroupBox
 - [x] InputComponent
 - [x] Label
 - [ ] ListView
