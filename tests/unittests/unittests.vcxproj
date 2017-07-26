@@ -129,6 +129,9 @@
     <ProjectReference Include="..\..\src\core\core.vcxproj">
       <Project>{2ede4b51-9297-4bbc-b8ab-77114cdbd65f}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\io\io.vcxproj">
+      <Project>{c44140a6-b71f-4a0b-893d-b0adf024cd46}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\ui\ui.vcxproj">
       <Project>{5774511e-219c-4e6b-83bc-b928a918e724}</Project>
     </ProjectReference>
@@ -157,6 +160,7 @@
     <ClCompile Include="src\core\thread.cpp" />
     <ClCompile Include="src\core\types.cpp" />
     <ClCompile Include="src\core\variant.cpp" />
+    <ClCompile Include="src\io\memorystream.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ui\color.cpp" />
     <ClCompile Include="src\ui\component.cpp" />

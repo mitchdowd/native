@@ -55,7 +55,7 @@ Classes for IO operations across various channels. These are minimal implementat
 to be expanded upon once they are stable.
 
 - [x] File
-- [ ] MemoryStream
+- [x] MemoryStream
 - [ ] ServerSocket
 - [x] TcpSocket
 - [ ] TextStream

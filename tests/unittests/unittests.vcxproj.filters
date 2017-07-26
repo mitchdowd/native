@@ -7,6 +7,9 @@
     <Filter Include="ui">
       <UniqueIdentifier>{6054ccaf-cee8-4b24-ac1c-66ce64bc453a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{1188341f-024a-4c23-a6f3-623899e88263}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -90,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="src\core\datetime.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\memorystream.cpp">
+      <Filter>io</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
