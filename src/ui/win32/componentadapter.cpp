@@ -505,7 +505,7 @@ namespace native
 		 */
 
 		InputAdapter::InputAdapter(InputComponent* input)
-			: ComponentAdapter({ input, L"EDIT", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL /* | *ES_MULTILINE | ES_WANTRETURN | ES_AUTOVSCROLL */, 0 })
+			: ComponentAdapter({ input, L"EDIT", WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 0 })
 		{
 		}
 

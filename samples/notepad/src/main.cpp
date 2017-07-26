@@ -11,14 +11,18 @@ public:
 	NotepadApp()
 	{
 		setTitle("Notepad Sample");
+		setBackground(Color(0xF0, 0xF0, 0xF0));
 
+		_input.setMargins(2, 0, 0, 0);
+		_input.setFont(Font("Consolas", 14));
+		_input.setBorder(Pen());
 		_input.setAlignment(Align::Fill);
 
 		addChild(_input);
 	}
 
 private:
-	InputComponent _input;
+	TextArea _input;
 };
 
 // Entry Point
