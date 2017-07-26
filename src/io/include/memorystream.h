@@ -36,17 +36,22 @@ namespace native
 			/**
 				Writes an array of bytes to the current position in the stream.
 				This will increase the MemoryStream's capacity if required. It
-				will also update the seek position of the stream.
+				will also update the seek position of the stream, and overwrite
+				the data at the current seek position (if the seek position is
+				not at the end of the stream).
 				\param data The data to write to the stream.
 				\param bytes The number of bytes to write.
 				\return The number of bytes written.
 			 */
 			virtual size_t write(const void* data, size_t bytes) override;
 
+			/** Empties the MemoryStream buffer. */
+			void clear();
+
 			/**
 				Changes the current read/write position to the given index in the
-				stream's internal buffer. Produces an ArrayIndexException if the
-				seek position is out of bounds.
+				stream's internal buffer. Attempting to navigate further than the
+				length of the buffer will simply navigate to the end of the buffer.
 				\param position The seek position to set.
 			 */
 			void seek(size_t position);
@@ -55,11 +60,25 @@ namespace native
 				Gets the current capacity (in bytes) of this MemoryStream.
 				\return The number of usable allocated bytes of memory.
 			 */
-			size_t getCapacity() const noexcept { return _capacity; }
+			size_t getCapacity() const noexcept { return _array.getLength(); }
+
+			/**
+				Gets the number of buffered bytes in the MemoryStream.
+				\return The number of bytes available.
+			 */
+			size_t getLength() const noexcept { return _length; }
+
+			/**
+				Returns the current seek position in the stream buffer.
+				\return The current seek position.
+			 */
+			size_t getPosition() const noexcept { return _pos; }
 
 		private:
 			// Instance Variables
-			size_t _capacity;
+			ByteArray _array;
+			size_t _length;
+			size_t _pos;
 		};
 	}
 }

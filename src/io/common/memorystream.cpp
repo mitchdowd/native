@@ -5,7 +5,7 @@ namespace native
 {
 	namespace io
 	{
-		MemoryStream::MemoryStream(size_t initialCapacity) : _capacity(initialCapacity)
+		MemoryStream::MemoryStream(size_t initialCapacity) : _array(initialCapacity), _length(0), _pos(0)
 		{
 		}
 
@@ -23,9 +23,18 @@ namespace native
 			throw NotImplementedException();
 		}
 
+		void MemoryStream::clear()
+		{
+			_pos = _length = 0;
+			_array.clear();
+		}
+
 		void MemoryStream::seek(size_t position)
 		{
-			throw NotImplementedException();
+			if (position > _length)
+				position = _length;
+
+			_pos = position;
 		}
 	}
 }
