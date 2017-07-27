@@ -5,7 +5,16 @@ namespace native
 {
 	namespace io
 	{
-		MemoryStream::MemoryStream(size_t initialCapacity) : _array(initialCapacity), _length(0), _pos(0)
+		MemoryStream::MemoryStream(const void* data, size_t length) : _length(length), _pos(0), _data(data)
+		{
+		}
+
+		MemoryStream::MemoryStream(const ByteArray& array) : _array(array), _length(array.getLength()), _pos(0)
+		{
+			_data = _array.toArray();
+		}
+
+		MemoryStream::MemoryStream(size_t initialCapacity) : _array(initialCapacity), _length(0), _pos(0), _data(nullptr)
 		{
 		}
 
@@ -21,13 +30,18 @@ namespace native
 			if (_length - _pos < maxBytes)
 				maxBytes = _length - _pos;
 
-			Memory::copy(buffer, &_array[_pos], maxBytes);
+			// May be reading from either _data or _array.
+			const byte_t* data = _data ? (const byte_t*) _data : _array.toArray();
+			Memory::copy(buffer, &data[_pos], maxBytes);
 			_pos += maxBytes;
 			return maxBytes;
 		}
 
 		size_t MemoryStream::write(const void* data, size_t bytes)
 		{
+			if (_data != nullptr)
+				throw IoException("Cannot write to MemoryStream for existing byte array.");
+
 			// Ensure we have capacity to write to.
 			if (getCapacity() < _pos + bytes)
 				_array.setLength(internal::getCapacityForLength(_pos + bytes));
@@ -45,6 +59,7 @@ namespace native
 		{
 			_pos = _length = 0;
 			_array.clear();
+			_data = nullptr;
 		}
 
 		void MemoryStream::seek(size_t position)

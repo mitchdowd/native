@@ -15,6 +15,23 @@ namespace native
 		{
 		public:
 			/**
+				Creates a MemoryStream initialised with the given data. The data
+				should remain valid for the lifetime of the MemoryStream. The
+				MemoryStream may not write to this data array.
+				\param data The array of byte data.
+				\param length The number of bytes in the array.
+			 */
+			MemoryStream(const void* data, size_t length);
+
+			/**
+				Creates a MemoryStream initialised with the given data. The data
+				should remain valid for the lifetime of the MemoryStream. The
+				MemoryStream may not write to this data array.
+				\param array A ByteArray to initialise the stream with.
+			 */
+			MemoryStream(const ByteArray& array);
+
+			/**
 				Creates a MemoryStream with the specified initial capacity. The
 				capacity will still expand as needed during a write() operation.
 				\param initialCapacity The initial capacity, in bytes.
@@ -79,6 +96,7 @@ namespace native
 			ByteArray _array;
 			size_t _length;
 			size_t _pos;
+			const void* _data;
 		};
 	}
 }

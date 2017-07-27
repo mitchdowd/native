@@ -65,3 +65,18 @@ TEST(MemoryStream_read)
 	ASSERT(stream.getPosition() == stream.getLength());
 	ASSERT_EQUAL(buffer, "Hello world");
 }
+
+TEST(MemoryStream_initialArray)
+{
+	MemoryStream stream("Hello world", 12);
+
+	ASSERT_THROWS(stream.write("test", 4), IoException);
+
+	char buffer[30];
+	size_t result = stream.read(buffer, stream.getLength());
+
+	ASSERT(result == stream.getLength());
+	ASSERT(stream.getPosition() == stream.getLength());
+	ASSERT_EQUAL(buffer, "Hello world");
+}
+
