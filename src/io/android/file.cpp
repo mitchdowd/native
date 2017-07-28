@@ -23,7 +23,7 @@ namespace native
             throw NotImplementedException();
         }
 
-        void File::close()
+        void File::close() noexcept
         {
             if (_handle)
             {

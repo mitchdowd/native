@@ -40,6 +40,7 @@ model {
                     dependencies {
                         project ':ui' linkage 'static'
                         project ':core' linkage 'static'
+                        project ':io' linkage 'static'
                         project ':test' linkage 'static'
                         project ':jnipp' linkage 'static'
                     }
