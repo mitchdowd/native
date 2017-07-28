@@ -172,6 +172,8 @@
     <ClInclude Include="include\groupbox.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="include\menu.h" />
+    <ClInclude Include="include\action.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
