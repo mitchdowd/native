@@ -14,6 +14,18 @@ namespace native
 		class Menu
 		{
 		public:
+			/** Creates a Menu. */
+			Menu() {}
+
+			/**
+				Move constructor. Moves the Menu to another instance.
+				\param other The Menu to move.
+			 */
+			Menu(Menu&& other) {}
+
+			/** Destructor. Destroys the Menu */
+			~Menu() {}
+
 			/**
 				Inserts the given Action at the given index in the menu.
 				\param index The zero-based index to insert at.
@@ -22,10 +34,19 @@ namespace native
 			void insert(size_t index, Action& action) {}
 
 			/**
+				Inserts a separator at the given index in the Menu.
+				\param index The zero-based index to insert at.
+			 */
+			void insertSeparator(size_t index) {}
+
+			/**
 				Adds an Action to the Menu.
 				\param action The Action to add.
 			 */
 			void add(Action& action) {}
+
+			/** Appends a separator to the end of this Menu. */
+			void addSeparator() {}
 
 			/**
 				Inserts the given Menu as a sub-menu at the given index in the menu.
@@ -39,6 +60,32 @@ namespace native
 				\param menu The sub-menu to add.
 			 */
 			void add(Menu& menu) {}
+
+			/**
+				Sets the Menu's text.
+				\param text The text to set.
+			 */
+			void setText(const String& text) {}
+
+			/**
+				Gets the Menu's label text.
+				\return The menu text.
+			 */
+			String getText() const { return _text; }
+
+			/**
+				Retrieves the system handle for this Menu.
+				\return The system handle.
+			 */
+			handle_t getHandle() const noexcept { return _handle; }
+
+		private:
+			// Prevent Copying
+			Menu(const Menu&) = delete;
+
+			// Instance Variables
+			handle_t _handle;
+			String _text;
 		};
 	}
 }
