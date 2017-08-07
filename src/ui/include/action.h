@@ -83,6 +83,13 @@ namespace native
 			 */
 			void addListener(ActionListener* listener);
 
+			/**
+				Gets an Action via its handle. Used for implementation purposes.
+				\param handle The handle of the Action.
+				\return The Action with that handle, or null.
+			 */
+			static Action* fromHandle(handle_t handle);
+
 		private:
 			// Class Friendships
 			friend class ActionListener;

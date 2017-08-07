@@ -21,6 +21,21 @@ namespace native
 			}
 		}
 
+		void Menu::insert(size_t index, Action& action)
+		{
+			// TODO
+		}
+
+		void Menu::insertSeparator(size_t index)
+		{
+			// TODO
+		}
+
+		void Menu::insert(size_t index, Menu& menu)
+		{
+			// TODO
+		}
+
 		void Menu::setText(const String& text)
 		{
 			_text = text;

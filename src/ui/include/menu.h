@@ -25,35 +25,35 @@ namespace native
 				\param index The zero-based index to insert at.
 				\param action The action to add.
 			 */
-			void insert(size_t index, Action& action) {}
+			void insert(size_t index, Action& action);
 
 			/**
 				Inserts a separator at the given index in the Menu.
 				\param index The zero-based index to insert at.
 			 */
-			void insertSeparator(size_t index) {}
+			void insertSeparator(size_t index);
 
 			/**
 				Adds an Action to the Menu.
 				\param action The Action to add.
 			 */
-			void add(Action& action) {}
+			void add(Action& action) { insert(~0, action); }
 
 			/** Appends a separator to the end of this Menu. */
-			void addSeparator() {}
+			void addSeparator() { insertSeparator(~0); }
 
 			/**
 				Inserts the given Menu as a sub-menu at the given index in the menu.
 				\param index The zero-based index to insert at.
 				\param menu The sub-menu to add.
 			 */
-			void insert(size_t index, Menu& menu) {}
+			void insert(size_t index, Menu& menu);
 
 			/**
 				Adds a sub-menu to the Menu.
 				\param menu The sub-menu to add.
 			 */
-			void add(Menu& menu) {}
+			void add(Menu& menu) { insert(~0, menu); }
 
 			/**
 				Sets the Menu's text.

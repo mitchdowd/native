@@ -46,6 +46,13 @@ namespace native
 				listener->_actions.add(this);
 			}
 		}
+
+		Action* Action::fromHandle(handle_t handle)
+		{
+			// TODO
+
+			return nullptr;
+		}
 	}
 }
 
