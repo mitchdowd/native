@@ -11,20 +11,14 @@ namespace native
 		/**
 			A displayable menu of selectable actions.
 		 */
-		class Menu
+		class Menu : public ActionListener
 		{
 		public:
 			/** Creates a Menu. */
-			Menu() {}
-
-			/**
-				Move constructor. Moves the Menu to another instance.
-				\param other The Menu to move.
-			 */
-			Menu(Menu&& other) {}
+			Menu();
 
 			/** Destructor. Destroys the Menu */
-			~Menu() {}
+			~Menu();
 
 			/**
 				Inserts the given Action at the given index in the menu.
@@ -65,7 +59,7 @@ namespace native
 				Sets the Menu's text.
 				\param text The text to set.
 			 */
-			void setText(const String& text) {}
+			void setText(const String& text);
 
 			/**
 				Gets the Menu's label text.
@@ -78,6 +72,11 @@ namespace native
 				\return The system handle.
 			 */
 			handle_t getHandle() const noexcept { return _handle; }
+
+		protected:
+			// Action Listeners
+			virtual void onActionUpdated(Action* action) override;
+			virtual void onActionDestroyed(Action* action) override;
 
 		private:
 			// Prevent Copying

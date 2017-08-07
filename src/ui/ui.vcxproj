@@ -153,6 +153,7 @@
     <ClCompile Include="common\progressbar.cpp" />
     <ClCompile Include="common\radiobutton.cpp" />
     <ClCompile Include="common\textarea.cpp" />
+    <ClCompile Include="win32\action.cpp" />
     <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="win32\menu.cpp" />
     <ClCompile Include="win32\pen.cpp" />
