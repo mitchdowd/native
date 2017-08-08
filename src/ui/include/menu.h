@@ -84,7 +84,8 @@ namespace native
 
 			// Instance Variables
 			handle_t _handle;
-			String _text;
+			String   _text;
+			int32_t  _id;
 		};
 	}
 }

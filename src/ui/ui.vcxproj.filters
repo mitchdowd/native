@@ -80,7 +80,7 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="win32\menu.cpp" />
-    <ClCompile Include="win32\action.cpp" />
+    <ClCompile Include="common\action.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />

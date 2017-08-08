@@ -1,3 +1,7 @@
+// External Dependencies
+#include "../../core/include/map.h"
+#include "../../core/include/spinlock.h"
+
 // Module Dependencies
 #include "../include/action.h"
 
@@ -5,6 +9,10 @@ namespace native
 {
 	namespace ui
 	{
+		static Map<handle_t, Action*> _actionMap;
+		static uintptr_t _nextId = 100;
+		static SpinLock _lock;
+
 		ActionListener::~ActionListener()
 		{
 			// Remove from Action's subscriber lists.
@@ -14,12 +22,17 @@ namespace native
 
 		Action::Action()
 		{
-			// TODO: Create resources.
+			_lock.lock();
+			_handle = handle_t(_nextId++);
+			_actionMap.add(_handle, this);
+			_lock.release();
 		}
 
 		Action::~Action()
 		{
-			// TODO: Release resources.
+			_lock.lock();
+			_actionMap.remove(_handle);
+			_lock.release();
 
 			// Trigger the callbacks in the ActionHosts.
 			for (auto listener : _listeners)
@@ -49,9 +62,11 @@ namespace native
 
 		Action* Action::fromHandle(handle_t handle)
 		{
-			// TODO
+			_lock.lock();
+			Action* action = _actionMap[handle];
+			_lock.release();
 
-			return nullptr;
+			return action;
 		}
 	}
 }

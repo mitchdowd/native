@@ -90,6 +90,12 @@ namespace native
 			 */
 			static Action* fromHandle(handle_t handle);
 
+			/**
+				Gets the underlying handle for this Action.
+				\return The system resource handle.
+			 */
+			handle_t getHandle() const noexcept { return _handle; }
+
 		private:
 			// Class Friendships
 			friend class ActionListener;
