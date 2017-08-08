@@ -229,6 +229,16 @@ namespace native
 
 			switch (event.msg)
 			{
+			case WM_COMMAND:
+				if ((HIWORD(event.wparam) == BN_CLICKED && event.wparam != 0 && ::IsWindow((HWND)event.lparam)) || event.lparam == 0)
+				{
+					Action* action = Action::fromHandle((handle_t) uptrint_t(event.wparam));
+
+					if (action)
+						action->emit();
+				}
+				break;
+
 			case WM_CTLCOLORSTATIC:
 				{
 					ComponentAdapter* label = ComponentAdapter::fromHandle(handle_t(event.lparam));

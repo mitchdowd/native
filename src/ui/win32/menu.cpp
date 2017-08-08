@@ -11,7 +11,11 @@ namespace native
 	{
 		static volatile int32_t _nextId = 1000000;
 
-		Menu::Menu() : _handle(::CreatePopupMenu()), _id(Atomic::increment(_nextId))
+		Menu::Menu() : _handle(::CreatePopupMenu())
+		{
+		}
+
+		Menu::Menu(handle_t handle) : _handle(handle), _id(Atomic::increment(_nextId))
 		{
 		}
 

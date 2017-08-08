@@ -17,6 +17,12 @@ namespace native
 			/** Creates a Menu. */
 			Menu();
 
+			/**
+				Encapsulates the given menu handle with a Menu.
+				\param handle The menu's system handle.
+			 */
+			Menu(handle_t handle);
+
 			/** Destructor. Destroys the Menu */
 			~Menu();
 

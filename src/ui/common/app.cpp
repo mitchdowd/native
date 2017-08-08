@@ -1,5 +1,6 @@
 // Module Dependencies
 #include "../include/app.h"
+#include "../include/componentadapter.h"
 #include "../include/eventqueue.h"
 
 #ifdef NATIVE_PLATFORM_ANDROID
@@ -15,7 +16,7 @@ namespace native
 		handle_t App::_handle = nullptr;
 		volatile App* App::_instance = nullptr;
 
-		App::App()
+		App::App() : _menu(nullptr)
 		{
 			if (Atomic::compareExchange((volatile void*&) _instance, (void*) this, (void*) nullptr) != nullptr)
 				throw AppInitializationException("App already exists");
@@ -23,6 +24,8 @@ namespace native
 
 		App::~App()
 		{
+			delete _menu;
+
 			_instance = nullptr;
 		}
 
@@ -50,12 +53,36 @@ namespace native
 
 		int App::run()
 		{
+#ifdef NATIVE_PLATFORM_WIN32
+			ComponentAdapter* adapter = (ComponentAdapter*) getAdapter();
+			::DrawMenuBar(HWND(adapter->getHandle()));
+#endif
+
 			setVisible(true);
 
 			while (isVisible() && EventQueue::handleEvent())
 				;	// No-op.
 
 			return EventQueue::getExitCode();
+		}
+
+		Menu& App::getMenu()
+		{
+#ifdef NATIVE_PLATFORM_WIN32
+			if (_menu == nullptr)
+			{
+				ComponentAdapter* adapter = (ComponentAdapter*) getAdapter();
+
+				HMENU menu = ::CreateMenu();
+				::SetMenu(HWND(adapter->getHandle()), menu);
+				
+				_menu = new Menu(handle_t(menu));
+			}
+
+			return *_menu;
+#else
+# error "Not implemented"
+#endif
 		}
 	}
 }

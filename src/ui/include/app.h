@@ -5,6 +5,7 @@
 #include "../../core/include/platform.h"
 
 // Module Dependencies
+#include "menu.h"
 #include "window.h"
 
 namespace native
@@ -27,6 +28,13 @@ namespace native
 				closed.
 			 */
 			int run();
+
+			/**
+				Gets the application menu for this App. This is created automatically
+				when required.
+				\return The application menu.
+			 */
+			Menu& getMenu();
 
             /**
                 Gets what _should be_ the only App instance, if there is one.
@@ -60,9 +68,12 @@ namespace native
 			App();
 
 		private:
-			// Instance Variables
+			// Static Variables
 			static handle_t _handle;
             static volatile App* _instance;
+
+			// Instance Variables
+			Menu* _menu;
 		};
 
 		/**
