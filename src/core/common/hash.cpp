@@ -7,6 +7,8 @@
 #define FNV_1A32_MAGIC_PRIME (16777619UL)
 #define FNV_1A64_OFFSET      (14695981039346656037UL)
 #define FNV_1A64_MAGIC_PRIME (1099511628211UL)
+#define INT32_MAGIC_NUMBER	 (0x45D9F3B)
+#define INT64_MAGIC_NUMBER	 (0xBF58476D1CE4E5B9)
 
 namespace native
 {
@@ -42,6 +44,22 @@ namespace native
 		}
 
 		return value;
+	}
+
+	uint32_t hash32(uint64_t i)
+	{
+		i = ((i >> 16) ^ i) * INT32_MAGIC_NUMBER;
+		i = ((i >> 16) ^ i) * INT32_MAGIC_NUMBER;
+
+		return uint32_t((i >> 16) ^ i);
+	}
+
+	uint64_t hash64(uint64_t i)
+	{
+		i = (i ^ (i >> 30)) * INT64_MAGIC_NUMBER;
+		i = (i ^ (i >> 27)) * INT64_MAGIC_NUMBER;
+
+		return i ^ (i >> 31);
 	}
 }
 
