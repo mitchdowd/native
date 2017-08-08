@@ -232,7 +232,7 @@ namespace native
 			case WM_COMMAND:
 				if ((HIWORD(event.wparam) == BN_CLICKED && event.wparam != 0 && ::IsWindow((HWND)event.lparam)) || event.lparam == 0)
 				{
-					Action* action = Action::fromHandle((handle_t) uptrint_t(event.wparam));
+					Action* action = Action::fromHandle((handle_t) uptrint_t(LOWORD(event.wparam)));
 
 					if (action)
 						action->emit();

@@ -81,7 +81,13 @@ namespace native
 
 			return *_menu;
 #else
-# error "Not implemented"
+            if (_menu == nullptr)
+            {
+                // TODO
+                _menu = new Menu();
+            }
+
+            return *_menu;
 #endif
 		}
 	}
