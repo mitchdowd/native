@@ -36,11 +36,11 @@ namespace native
 			info.cbSize     = sizeof(info);
 			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_ID | MIIM_BITMAP;
 			info.fState     = MFS_ENABLED;
-			info.wID        = uptrint_t(action.getHandle());
+			info.wID        = (UINT) uptrint_t(action.getHandle());
 			info.dwTypeData = (LPWSTR) action.getText().toArray();
 
 			// Insert the menu item into the menu.
-			if (::InsertMenuItem(HMENU(_handle), index, TRUE, &info) == 0)
+			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
 				throw UserInterfaceException("InsertMenuItem() failed");
 
 			// We want to receive notifications when the Action is updated.
@@ -57,7 +57,7 @@ namespace native
 			info.fType  = MFT_SEPARATOR;
 
 			// Insert the separator into the menu.
-			if (::InsertMenuItem(HMENU(_handle), index, TRUE, &info) == 0)
+			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
 				throw UserInterfaceException("InsertMenuItem() failed");
 		}
 
@@ -69,12 +69,12 @@ namespace native
 			info.cbSize     = sizeof(info);
 			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_SUBMENU | MIIM_ID;
 			info.fState     = MFS_ENABLED;
-			info.wID        = menu._id;
+			info.wID        = UINT(menu._id);
 			info.hSubMenu   = HMENU(menu._handle);
 			info.dwTypeData = LPWSTR(menu._text.toArray());
 
 			// Insert the menu item into the Menu.
-			if (::InsertMenuItem(HMENU(_handle), index, TRUE, &info) == 0)
+			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
 				throw UserInterfaceException("InsertMenuItem() failed");
 		}
 
@@ -95,14 +95,14 @@ namespace native
 			info.fState     = MFS_ENABLED;
 			info.dwTypeData = (LPTSTR) action->getText().toArray();
 
-			if (::SetMenuItemInfo(HMENU(_handle), uptrint_t(action->getHandle()), FALSE, &info) == 0)
+			if (::SetMenuItemInfo(HMENU(_handle), (UINT) uptrint_t(action->getHandle()), FALSE, &info) == 0)
 				throw UserInterfaceException("SetMenuItemInfo() failed");
 			
 		}
 
 		void Menu::onActionDestroyed(Action* action)
 		{
-			::RemoveMenu(HMENU(_handle), uptrint_t(action->getHandle()), MF_BYCOMMAND);
+			::RemoveMenu(HMENU(_handle), (UINT) uptrint_t(action->getHandle()), MF_BYCOMMAND);
 		}
 	}
 }
