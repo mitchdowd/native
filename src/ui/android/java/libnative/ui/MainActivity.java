@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.Menu;
 
 /**
  * The main activity which serves as the link into the Java-based Android application from the
@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
     // Static Variables
     private static boolean _libIsLoaded = false;
     private static final String META_LIB_NAME = "libnative.ui.lib_name";
+    private Menu _appMenu = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,15 @@ public class MainActivity extends Activity {
         super.onDestroy();
         onDestroyApp();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        _appMenu = menu;
+        return true;
+    }
+
+    public Menu getAppMenu() { return _appMenu; }
 
     public void invokeAsync(long funcPtr) {
         this.runOnUiThread(new NativeRunnable(funcPtr));
