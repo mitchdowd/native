@@ -36,8 +36,8 @@ private:
 	}
 
 	TextArea _input;
-	Menu _file;
 	Action _exit;
+	Menu _file;
 };
 
 // Entry Point

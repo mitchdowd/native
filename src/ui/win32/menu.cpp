@@ -11,7 +11,7 @@ namespace native
 	{
 		static volatile int32_t _nextId = 1000000;
 
-		Menu::Menu() : _handle(::CreatePopupMenu()), _id(Atomic::increment(_nextId))
+		Menu::Menu() : _handle(::CreatePopupMenu()), _id(Atomic::increment(_nextId)), _parent(nullptr)
 		{
 			if (!_handle)
 				throw InsufficientResourcesException();
@@ -26,12 +26,13 @@ namespace native
 		Menu::~Menu()
 		{
 			// Remove from parent Menus.
-			for (auto parent : _parents)
-				parent->_children.remove(this);
+			if (_parent)
+				_parent->_children.remove(this);
 
 			// Remove child Menus from this.
 			for (auto child : _children)
-				child->_parents.remove(this);
+				if (child.type == MenuItemType::Menu)
+					child.menu->_parent = nullptr;
 
 			if (_handle)
 			{
@@ -57,7 +58,7 @@ namespace native
 
 			// We want to receive notifications when the Action is updated.
 			action.addListener(this);
-
+			_children.insert(index, &action);
 			onHierarchyUpdate();
 		}
 
@@ -74,6 +75,8 @@ namespace native
 			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
 				throw UserInterfaceException("InsertMenuItem() failed");
 
+			// Hierarchy updates.
+			_children.insert(index, MenuItem());
 			onHierarchyUpdate();
 		}
 
@@ -93,10 +96,16 @@ namespace native
 			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
 				throw UserInterfaceException("InsertMenuItem() failed");
 
-			// Set up the hierarchy.
-			menu._parents.add(this);
-			_children.add(&menu);
+			// Remove the menu from its previous parent.
+			if (menu._parent)
+			{
+				::RemoveMenu(HMENU(menu._parent->_handle), UINT(menu._id), MF_BYCOMMAND);
+				menu._parent->_children.remove(&menu);
+			}
 
+			// Hierarchy updates.
+			menu._parent = this;
+			_children.insert(index, &menu);
 			menu.onHierarchyUpdate();
 		}
 
@@ -105,7 +114,7 @@ namespace native
 			_text = text;
 
 			// Update parent Menus.
-			for (auto parent : _parents)
+			if (_parent)
 			{
 				MENUITEMINFO info = { 0 };
 
@@ -118,10 +127,10 @@ namespace native
 				info.hSubMenu   = HMENU(_handle);
 				info.dwTypeData = LPWSTR(_text.toArray());
 
-				if (::SetMenuItemInfo(HMENU(parent->getHandle()), UINT(_id), FALSE, &info) == 0)
+				if (::SetMenuItemInfo(HMENU(_parent->getHandle()), UINT(_id), FALSE, &info) == 0)
 					throw UserInterfaceException("SetMenuItemInfo() failed");
 
-				parent->onHierarchyUpdate();
+				_parent->onHierarchyUpdate();
 			}
 		}
 
@@ -147,12 +156,13 @@ namespace native
 		void Menu::onActionDestroyed(Action* action)
 		{
 			::RemoveMenu(HMENU(_handle), (UINT) uptrint_t(action->getHandle()), MF_BYCOMMAND);
+			_children.remove(action);
 		}
 
 		void Menu::onHierarchyUpdate()
 		{
-			for (auto parent : _parents)
-				parent->onHierarchyUpdate();
+			if (_parent)
+				_parent->onHierarchyUpdate();
 		}
 	}
 }

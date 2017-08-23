@@ -76,9 +76,7 @@ namespace native
 		Menu& App::getMenu()
 		{
 			if (_menu == nullptr)
-			{
 				_menu = new MenuBar(this);
-			}
 
 			return *_menu;
 		}

@@ -98,14 +98,32 @@ namespace native
 			// Prevent Copying
 			Menu(const Menu&) = delete;
 
+			// Internal Types
+			enum class MenuItemType { Menu, Action, Separator };
+
+			struct MenuItem 
+			{
+				MenuItem(Menu* menu) : type(MenuItemType::Menu), menu(menu) {}
+				MenuItem(Action* action) : type(MenuItemType::Action), action(action) {}
+				MenuItem() : type(MenuItemType::Separator), menu(nullptr) {}
+
+				bool operator==(const MenuItem& item) const { return type == item.type && menu == item.menu; }
+
+				MenuItemType type; 
+				union { 
+					Menu* menu; 
+					Action* action;
+				}; 
+			};
+
 			// Instance Variables
 			handle_t _handle;
 			String   _text;
 			int32_t  _id;
 
 			// Hierarchy Stuff
-			Set<Menu*> _parents;
-			Set<Menu*> _children;
+			Menu* _parent;
+			List<MenuItem> _children;
 		};
 	}
 }

@@ -10,7 +10,7 @@ namespace native
 	namespace ui
 	{
 		static Map<handle_t, Action*> _actionMap;
-		static uptrint_t _nextId = 100;
+		static int32_t _nextId = 100;
 		static SpinLock _lock;
 
 		ActionListener::~ActionListener()
@@ -23,7 +23,7 @@ namespace native
 		Action::Action()
 		{
 			_lock.lock();
-			_handle = handle_t(_nextId++);
+			_handle = handle_t(++_nextId);
 			_actionMap.add(_handle, this);
 			_lock.release();
 		}

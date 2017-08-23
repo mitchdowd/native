@@ -65,6 +65,12 @@ namespace native
 		 */
 		void removeAt(size_t index);
 
+		/**
+			Removes all instances of the given value from the List.
+			\param value The value to remove.
+		 */
+		void remove(const TValue& value);
+
 		/** Removes all items from the List. */
 		void clear() override;
 
@@ -225,6 +231,18 @@ namespace native
 		}
 
 		--_length;
+	}
+
+	template <class TValue>
+	void List<TValue>::remove(const TValue& value)
+	{
+		const List<TValue>& constRef = *this;
+
+		for (size_t i = 0; i < getLength(); ++i)
+		{
+			while (constRef.atIndex(i) == value)
+				removeAt(i);
+		}
 	}
 
 	template <class TValue>
