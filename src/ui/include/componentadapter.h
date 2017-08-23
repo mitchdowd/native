@@ -119,7 +119,7 @@ namespace native
 				Gets the handle to system resources for this ComponentAdapter.
 				\return The system resource handle.
 			 */
-			handle_t getHandle() const noexcept { return _handle; }
+			virtual handle_t getHandle() const noexcept override { return _handle; }
 
 			/**
 				Gets an adapter via its system resource handle.

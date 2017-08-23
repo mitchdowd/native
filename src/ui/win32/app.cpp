@@ -1,13 +1,9 @@
+// System Dependencies
+#include <windows.h>
+
 // Module Dependencies
 #include "../include/app.h"
-#include "../include/componentadapter.h"
 #include "../include/eventqueue.h"
-
-#ifdef NATIVE_PLATFORM_ANDROID
-#include "../../../lib/jnipp/jnipp.h"
-#elif defined(NATIVE_PLATFORM_WIN32)
-# include <windows.h>
-#endif // NATIVE_PLATFORM_*
 
 namespace native
 {
@@ -15,6 +11,30 @@ namespace native
 	{
 		handle_t App::_handle = nullptr;
 		volatile App* App::_instance = nullptr;
+
+		class MenuBar : public Menu
+		{
+		public:
+			MenuBar(Component* component) : Menu(::CreateMenu()), _component(component)
+			{
+				if (component != App::getInstance())
+					throw UserInterfaceException("Only the App component can currently have a MenuBar.");
+
+				::SetMenu(HWND(component->getAdapter()->getHandle()), HMENU(getHandle()));
+			}
+
+			virtual Component* getComponent() const override { return _component; }
+
+		protected:
+			virtual void onHierarchyUpdate() override
+			{
+				::DrawMenuBar(HWND(_component->getAdapter()->getHandle()));
+			}
+
+		private:
+			// Instance Variables
+			Component* _component;
+		};
 
 		App::App() : _menu(nullptr)
 		{
@@ -35,17 +55,9 @@ namespace native
 
             if (scale == 0.0f)
             {
-#ifdef NATIVE_PLATFORM_ANDROID
-                jni::Object* activity = (jni::Object*) _handle;
-
-                scale = activity->call<float>("getDisplayScale");
-#elif defined(NATIVE_PLATFORM_WIN32)
 				HDC hdc = ::GetDC(NULL);
 				scale = float(::GetDeviceCaps(hdc, LOGPIXELSX)) / 96.0f;
 				::ReleaseDC(NULL, hdc);
-#else
-                scale = 1.00f;
-#endif // NATIVE_PLATFORM_*
             }
 
             return scale;
@@ -53,11 +65,6 @@ namespace native
 
 		int App::run()
 		{
-#ifdef NATIVE_PLATFORM_WIN32
-			ComponentAdapter* adapter = (ComponentAdapter*) getAdapter();
-			::DrawMenuBar(HWND(adapter->getHandle()));
-#endif
-
 			setVisible(true);
 
 			while (isVisible() && EventQueue::handleEvent())
@@ -68,27 +75,12 @@ namespace native
 
 		Menu& App::getMenu()
 		{
-#ifdef NATIVE_PLATFORM_WIN32
 			if (_menu == nullptr)
 			{
-				ComponentAdapter* adapter = (ComponentAdapter*) getAdapter();
-
-				HMENU menu = ::CreateMenu();
-				::SetMenu(HWND(adapter->getHandle()), menu);
-				
-				_menu = new Menu(handle_t(menu));
+				_menu = new MenuBar(this);
 			}
 
 			return *_menu;
-#else
-            if (_menu == nullptr)
-            {
-                // TODO
-                _menu = new Menu();
-            }
-
-            return *_menu;
-#endif
 		}
 	}
 }

@@ -8,6 +8,9 @@ namespace native
 {
 	namespace ui
 	{
+		// Forward Declarations
+		class Component;
+
 		/**
 			A displayable menu of selectable actions.
 		 */
@@ -79,10 +82,17 @@ namespace native
 			 */
 			handle_t getHandle() const noexcept { return _handle; }
 
+			/**
+				For internal use only.
+				\return Component this Menu is bound to.
+			 */
+			virtual Component* getComponent() const { return nullptr; }
+
 		protected:
 			// Action Listeners
 			virtual void onActionUpdated(Action* action) override;
 			virtual void onActionDestroyed(Action* action) override;
+			virtual void onHierarchyUpdate();
 
 		private:
 			// Prevent Copying
@@ -92,6 +102,10 @@ namespace native
 			handle_t _handle;
 			String   _text;
 			int32_t  _id;
+
+			// Hierarchy Stuff
+			Set<Menu*> _parents;
+			Set<Menu*> _children;
 		};
 	}
 }

@@ -89,6 +89,12 @@ namespace native
 			virtual void setFont(const Font& font) = 0;
 
 			/**
+				For retrieving the system handle, if there is one.
+				\return The system resource handle.
+			 */
+			virtual handle_t getHandle() const noexcept = 0;
+
+			/**
 				Performs default processing of an input event.
 				\param event The event to process.
 			 */

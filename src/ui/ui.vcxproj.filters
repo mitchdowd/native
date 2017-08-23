@@ -22,9 +22,6 @@
     <ClCompile Include="common\color.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="common\app.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="common\button.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -81,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="win32\menu.cpp" />
     <ClCompile Include="common\action.cpp" />
+    <ClCompile Include="win32\app.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
