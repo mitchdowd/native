@@ -23,10 +23,7 @@ namespace native
 				::SetMenu(HWND(component->getAdapter()->getHandle()), HMENU(getHandle()));
 			}
 
-			virtual Component* getComponent() const override { return _component; }
-
-		protected:
-			virtual void onHierarchyUpdate() override
+			virtual void onHierarchyUpdate() override 
 			{
 				::DrawMenuBar(HWND(_component->getAdapter()->getHandle()));
 			}

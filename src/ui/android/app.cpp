@@ -12,6 +12,15 @@ namespace native
 		handle_t App::_handle = nullptr;
 		volatile App* App::_instance = nullptr;
 
+        class OptionsMenu : public Menu
+        {
+        public:
+            void populate(const jni::Object& menu) const;
+
+        protected:
+            virtual void onHierarchyUpdate() override;
+        };
+
 		App::App() : _menu(nullptr)
 		{
 			if (Atomic::compareExchange((volatile void*&) _instance, (void*) this, (void*) nullptr) != nullptr)
@@ -53,12 +62,34 @@ namespace native
 		{
             if (_menu == nullptr)
             {
-                // TODO
-                _menu = new Menu();
+                _menu = new OptionsMenu();
             }
 
             return *_menu;
 		}
+
+        void OptionsMenu::onHierarchyUpdate()
+        {
+            // TODO: Call Activity.invalidateOptionsMenu()
+        }
+
+        void OptionsMenu::populate(const jni::Object &menu) const
+        {
+            // TODO: Set all initial handles in the tree hierarchy.
+        }
 	}
+}
+
+// Namespace Usage
+using namespace native::ui;
+
+extern "C"
+{
+    void Java_libnative_ui_MainActivity_populateOptionsMenu(_JNIEnv*, jni::jobject, jni::jobject optionsMenu)
+    {
+        OptionsMenu& menu = (OptionsMenu&) App::getInstance()->getMenu();
+
+        menu.populate(optionsMenu);
+    }
 }
 

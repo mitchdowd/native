@@ -27,7 +27,7 @@ namespace native
 			Menu(handle_t handle);
 
 			/** Destructor. Destroys the Menu */
-			~Menu();
+			virtual ~Menu();
 
 			/**
 				Inserts the given Action at the given index in the menu.
@@ -76,45 +76,48 @@ namespace native
 			 */
 			String getText() const { return _text; }
 
+            /**
+                Gets this Menu's parent menu, if it has one.
+                \return The parent menu if this is a submenu, or null.
+             */
+			Menu* getParent() const noexcept { return _parent; }
+
 			/**
 				Retrieves the system handle for this Menu.
 				\return The system handle.
 			 */
 			handle_t getHandle() const noexcept { return _handle; }
 
-			/**
-				For internal use only.
-				\return Component this Menu is bound to.
-			 */
-			virtual Component* getComponent() const { return nullptr; }
-
 		protected:
 			// Action Listeners
 			virtual void onActionUpdated(Action* action) override;
 			virtual void onActionDestroyed(Action* action) override;
-			virtual void onHierarchyUpdate();
+            virtual void onHierarchyUpdate();
+
+            // Internal Types
+            enum class MenuItemType { Menu, Action, Separator };
+
+            struct MenuItem
+            {
+                MenuItem(Menu* menu) : type(MenuItemType::Menu), menu(menu) {}
+                MenuItem(Action* action) : type(MenuItemType::Action), action(action) {}
+                MenuItem() : type(MenuItemType::Separator), menu(nullptr) {}
+
+                bool operator==(const MenuItem& item) const { return type == item.type && menu == item.menu; }
+
+                MenuItemType type;
+                union {
+                    Menu* menu;
+                    Action* action;
+                };
+            };
+
+            // Perhaps this could be useful being public?
+            const List<MenuItem>& getChildren() const { return _children; }
 
 		private:
 			// Prevent Copying
 			Menu(const Menu&) = delete;
-
-			// Internal Types
-			enum class MenuItemType { Menu, Action, Separator };
-
-			struct MenuItem 
-			{
-				MenuItem(Menu* menu) : type(MenuItemType::Menu), menu(menu) {}
-				MenuItem(Action* action) : type(MenuItemType::Action), action(action) {}
-				MenuItem() : type(MenuItemType::Separator), menu(nullptr) {}
-
-				bool operator==(const MenuItem& item) const { return type == item.type && menu == item.menu; }
-
-				MenuItemType type; 
-				union { 
-					Menu* menu; 
-					Action* action;
-				}; 
-			};
 
 			// Instance Variables
 			handle_t _handle;

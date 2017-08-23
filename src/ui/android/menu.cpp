@@ -40,31 +40,32 @@ namespace native
 
         void Menu::insert(size_t index, Action& action)
         {
-            // TODO
+            if (_handle)
+            {
+                // TODO: Menu.add()
+            }
 
             // We want to receive notifications when the Action is updated.
             action.addListener(this);
             _children.insert(index, &action);
-            onHierarchyUpdate();
         }
 
         void Menu::insertSeparator(size_t index)
         {
-            // TODO
-
-            // Hierarchy updates.
+            // Android doesn't have separators, but we'll still track it.
             _children.insert(index, MenuItem());
-            onHierarchyUpdate();
         }
 
         void Menu::insert(size_t index, Menu& menu)
         {
-            // TODO
+            if (_handle)
+            {
+                // TODO: Menu.addSubmenu()
+            }
 
             // Hierarchy updates.
             menu._parent = this;
             _children.insert(index, &menu);
-            menu.onHierarchyUpdate();
         }
 
         void Menu::setText(const String& text)

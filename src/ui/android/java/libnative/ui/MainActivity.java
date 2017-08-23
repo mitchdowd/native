@@ -14,6 +14,8 @@ public class MainActivity extends Activity {
     // Static Variables
     private static boolean _libIsLoaded = false;
     private static final String META_LIB_NAME = "libnative.ui.lib_name";
+
+    // Instance Variables
     private Menu _appMenu = null;
 
     @Override
@@ -33,7 +35,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        _appMenu = menu;
+        populateOptionsMenu(_appMenu = menu);
         return true;
     }
 
@@ -51,6 +53,8 @@ public class MainActivity extends Activity {
     private native void onCreate();
 
     private native void onDestroyApp();
+
+    private native void populateOptionsMenu(Menu menu);
 
     private void loadNativeLibrary()
     {
