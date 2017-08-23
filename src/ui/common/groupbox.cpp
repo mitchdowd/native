@@ -15,7 +15,7 @@ namespace native
 		GroupBox::GroupBox() : LayoutComponent(new GroupBoxAdapter(this))
 #else
         GroupBox::GroupBox() : LayoutComponent()
-#endif // NATIVE_PLATFORM_WIN32
+#endif // USE_NATIVE_GROUP_BOX
 		{
 			setBackground(Color(0xFF, 0xFF, 0xFF));
 			setFont(Font::getDefault());
@@ -76,7 +76,7 @@ namespace native
 			canvas.fillRectangle(area.inflate(1, 0), getBackground());
 
             canvas.drawText(_text, _font, Point(7, 0));
-#endif // NATIVE_PLATFORM_WIN32
+#endif // USE_NATIVE_GROUP_BOX
         }
 
 		void GroupBox::onSize(const Size& size)

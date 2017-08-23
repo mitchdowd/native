@@ -2,7 +2,6 @@
 #include <windows.h>
 
 // Module Dependencies
-#include "../include/componentadapter.h"
 #include "../include/dialogs.h"
 #include "../include/layoutcomponent.h"
 
@@ -17,7 +16,7 @@ namespace native
 			while (tmp && !tmp->getAdapter())
 				tmp = tmp->getParent();
 
-			ComponentAdapter* adapter = tmp ? (ComponentAdapter*) tmp->getAdapter() : nullptr;
+			IComponentAdapter* adapter = tmp ? tmp->getAdapter() : nullptr;
 
 			::MessageBox(adapter ? HWND(adapter->getHandle()) : NULL, message.toArray(), caption.toArray(), MB_OK);
 		}
