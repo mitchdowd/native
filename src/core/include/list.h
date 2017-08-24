@@ -240,7 +240,7 @@ namespace native
 
 		for (size_t i = 0; i < getLength(); ++i)
 		{
-			while (constRef.atIndex(i) == value)
+			while (i < getLength() && constRef.atIndex(i) == value)
 				removeAt(i);
 		}
 	}

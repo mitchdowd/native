@@ -26,13 +26,13 @@ private:
 	// Helper Functions
 	void initMenu()
 	{
+		getMenu().add(_file);
+
+        _file.setText("File");
+        _file.add(_exit);
+
 		_exit.setText("Exit");
 		_exit.connect(&EventQueue::quit);
-
-		_file.setText("File");
-		_file.add(_exit);
-
-		getMenu().add(_file);
 	}
 
 	TextArea _input;

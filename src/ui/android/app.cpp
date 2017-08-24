@@ -15,6 +15,8 @@ namespace native
         class OptionsMenu : public Menu
         {
         public:
+            OptionsMenu(handle_t handle) : Menu(handle) {}
+
             void populate(const jni::Object& menu) const;
 
         protected:
@@ -62,7 +64,10 @@ namespace native
 		{
             if (_menu == nullptr)
             {
-                _menu = new OptionsMenu();
+                jni::Object* activity = (jni::Object*) App::getInstance()->getAppHandle();
+                jni::Object  appMenu  = activity->call<jni::Object>("getAppMenu()Landroid/view/Menu;");
+
+                _menu = new OptionsMenu(appMenu.isNull()? nullptr : new jni::Object(appMenu));
             }
 
             return *_menu;
