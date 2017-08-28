@@ -78,9 +78,25 @@ namespace native
             // TODO: Call Activity.invalidateOptionsMenu()
         }
 
-        void OptionsMenu::populate(const jni::Object &menu) const
+        void OptionsMenu::populate(const jni::Object& menu) const
         {
+            auto children = getChildren();
+
             // TODO: Set all initial handles in the tree hierarchy.
+            for (auto child : children) {
+                if (child.type == MenuItemType::Menu) {
+                    jni::Object subMenu = menu.call<jni::Object>("addSubMenu(Ljava/lang/CharSequence;)Landroid/view/SubMenu;", child.menu->getText().toArray());
+
+                    // TODO: Set the menu handle.
+
+                    // TODO: Populate menu children.
+                }
+                else if (child.type == MenuItemType::Action) {
+                    jni::Object menuItem = menu.call<jni::Object>("add(Ljava/lang/CharSequence;)Landroid/view/MenuItem;", child.action->getText().toArray());
+
+                    // TODO: Set the action handle.
+                }
+            }
         }
 	}
 }
@@ -92,9 +108,7 @@ extern "C"
 {
     void Java_libnative_ui_MainActivity_populateOptionsMenu(_JNIEnv*, jni::jobject, jni::jobject optionsMenu)
     {
-        OptionsMenu& menu = (OptionsMenu&) App::getInstance()->getMenu();
-
-        menu.populate(optionsMenu);
+        ((OptionsMenu&) App::getInstance()->getMenu()).populate(optionsMenu);
     }
 }
 
