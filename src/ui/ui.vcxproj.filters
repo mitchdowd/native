@@ -73,7 +73,6 @@
     <ClCompile Include="common\groupbox.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="win32\menu.cpp" />
     <ClCompile Include="common\action.cpp" />
     <ClCompile Include="win32\app.cpp">
       <Filter>Components</Filter>
@@ -84,6 +83,7 @@
     <ClCompile Include="win32\menuadapter.cpp">
       <Filter>Adapters</Filter>
     </ClCompile>
+    <ClCompile Include="common\menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />

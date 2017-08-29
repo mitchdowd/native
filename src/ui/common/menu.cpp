@@ -1,6 +1,3 @@
-// System Dependencies
-#include <windows.h>
-
 // Module Dependencies
 #include "../include/component.h"
 #include "../include/menu.h"
@@ -85,19 +82,8 @@ namespace native
 			// Update parent Menus.
 			if (_parent)
 			{
-				MENUITEMINFO info = { 0 };
-
-				// Set the new menu item information.
-				info.cbSize     = sizeof(info);
-				info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_SUBMENU | MIIM_ID | MIIM_FTYPE;
-				info.fState     = MFS_ENABLED;
-				info.fType      = MFT_STRING;
-				info.wID        = UINT(_id);
-				info.hSubMenu   = HMENU(_adapter->getHandle());
-				info.dwTypeData = LPWSTR(_text.toArray());
-
-				if (::SetMenuItemInfo(HMENU(_parent->getAdapter()->getHandle()), UINT(_id), FALSE, &info) == 0)
-					throw UserInterfaceException("SetMenuItemInfo() failed");
+				if (_parent->getAdapter())
+					_parent->getAdapter()->update(*this);
 
 				_parent->onHierarchyUpdate();
 			}
@@ -105,19 +91,8 @@ namespace native
 
 		void Menu::onActionUpdated(Action* action)
 		{
-			MENUITEMINFO info = { 0 };
-
-			UINT id = (UINT) uptrint_t(action->getHandle());
-
-			// Set the new menu item information.
-			info.cbSize     = sizeof(info);
-			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_FTYPE;
-			info.fState     = MFS_ENABLED;
-			info.fType      = MFT_STRING;
-			info.dwTypeData = LPWSTR(action->getText().toArray());
-
-			if (::SetMenuItemInfo(HMENU(_adapter->getHandle()), id, FALSE, &info) == 0)
-				throw UserInterfaceException("SetMenuItemInfo() failed");
+			if (_adapter && action)
+				_adapter->update(*action);
 
 			onHierarchyUpdate();
 		}

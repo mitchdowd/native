@@ -24,6 +24,9 @@ namespace native
 			virtual void remove(Menu& menu) override;
 			virtual void remove(Action& action) override;
 
+			virtual void update(Action& action) override;
+			virtual void update(Menu& menu) override;
+
 			virtual handle_t getHandle() const override { return _handle; }
 
 		private:

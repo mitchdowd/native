@@ -4,6 +4,7 @@
 // Module Dependencies
 #include "../include/app.h"
 #include "../include/eventqueue.h"
+#include "../include/menuadapter.h"
 
 namespace native
 {
@@ -15,7 +16,7 @@ namespace native
         class OptionsMenu : public Menu
         {
         public:
-            OptionsMenu(handle_t handle) : Menu(handle) {}
+            OptionsMenu(handle_t handle) : Menu(new MenuAdapter(handle)) {}
 
             void populate(const jni::Object& menu) const;
 

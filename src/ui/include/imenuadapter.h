@@ -21,6 +21,9 @@ namespace native
 			virtual void remove(Menu& menu) = 0;
 			virtual void remove(Action& action) = 0;
 
+			virtual void update(Action& action) = 0;
+			virtual void update(Menu& menu) = 0;
+
 			virtual handle_t getHandle() const = 0;
 		};
 	}

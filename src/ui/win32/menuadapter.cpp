@@ -89,6 +89,43 @@ namespace native
 		{
 			::RemoveMenu(HMENU(_handle), (UINT) uptrint_t(action.getHandle()), MF_BYCOMMAND);
 		}
+
+		void MenuAdapter::update(Menu& menu)
+		{
+			MENUITEMINFO info = { 0 };
+
+			if (menu.getAdapter())
+			{
+				// Set the new menu item information.
+				info.cbSize     = sizeof(info);
+				info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_SUBMENU | MIIM_ID | MIIM_FTYPE;
+				info.fState     = MFS_ENABLED;
+				info.fType      = MFT_STRING;
+				info.wID        = UINT(menu.getId());
+				info.hSubMenu   = HMENU(menu.getAdapter()->getHandle());
+				info.dwTypeData = LPWSTR(menu.getText().toArray());
+
+				if (::SetMenuItemInfo(HMENU(getHandle()), UINT(menu.getId()), FALSE, &info) == 0)
+					throw UserInterfaceException("SetMenuItemInfo() failed");
+			}
+		}
+
+		void MenuAdapter::update(Action& action)
+		{
+			MENUITEMINFO info = { 0 };
+
+			UINT id = (UINT) uptrint_t(action.getHandle());
+
+			// Set the new menu item information.
+			info.cbSize     = sizeof(info);
+			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_FTYPE;
+			info.fState     = MFS_ENABLED;
+			info.fType      = MFT_STRING;
+			info.dwTypeData = LPWSTR(action.getText().toArray());
+
+			if (::SetMenuItemInfo(HMENU(getHandle()), id, FALSE, &info) == 0)
+				throw UserInterfaceException("SetMenuItemInfo() failed");
+		}
 	}
 }
 
