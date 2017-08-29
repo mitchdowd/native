@@ -3,6 +3,7 @@
 
 // Module Dependencies
 #include "action.h"
+#include "imenuadapter.h"
 
 namespace native
 {
@@ -21,10 +22,9 @@ namespace native
 			Menu();
 
 			/**
-				Encapsulates the given menu handle with a Menu.
-				\param handle The menu's system handle.
+				Creates a Menu which encapsulates the given menu adapter.
 			 */
-			Menu(handle_t handle);
+			Menu(IMenuAdapter* adapter);
 
 			/** Destructor. Destroys the Menu */
 			virtual ~Menu();
@@ -82,11 +82,13 @@ namespace native
              */
 			Menu* getParent() const noexcept { return _parent; }
 
+			int32_t getId() const noexcept { return _id; }
+
 			/**
-				Retrieves the system handle for this Menu.
-				\return The system handle.
+				Gets the adapter which provides platform-dependent functionality.
+				\return The underlying menu adapter.
 			 */
-			handle_t getHandle() const noexcept { return _handle; }
+			IMenuAdapter* getAdapter() const noexcept { return _adapter; }
 
 		protected:
 			// Action Listeners
@@ -120,9 +122,9 @@ namespace native
 			Menu(const Menu&) = delete;
 
 			// Instance Variables
-			handle_t _handle;
-			String   _text;
-			int32_t  _id;
+			IMenuAdapter* _adapter;
+			String        _text;
+			int32_t       _id;
 
 			// Hierarchy Stuff
 			Menu* _parent;

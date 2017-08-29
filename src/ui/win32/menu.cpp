@@ -4,6 +4,7 @@
 // Module Dependencies
 #include "../include/component.h"
 #include "../include/menu.h"
+#include "../include/menuadapter.h"
 
 namespace native
 {
@@ -11,16 +12,13 @@ namespace native
 	{
 		static volatile int32_t _nextId = 1000000;
 
-		Menu::Menu() : _handle(::CreatePopupMenu()), _id(Atomic::increment(_nextId)), _parent(nullptr)
+		Menu::Menu() : _adapter(new MenuAdapter()), _id(Atomic::increment(_nextId)), _parent(nullptr)
 		{
-			if (!_handle)
-				throw InsufficientResourcesException();
 		}
 
-		Menu::Menu(handle_t handle) : _handle(handle), _id(Atomic::increment(_nextId))
+		Menu::Menu(IMenuAdapter* adapter) : _adapter(adapter), _id(Atomic::increment(_nextId))
 		{
-			if (!::IsMenu(HMENU(handle)))
-				throw InvalidArgumentException();
+
 		}
 
 		Menu::~Menu()
@@ -34,27 +32,13 @@ namespace native
 				if (child.type == MenuItemType::Menu)
 					child.menu->_parent = nullptr;
 
-			if (_handle)
-			{
-				::DestroyMenu(HMENU(_handle));
-				_handle = NULL;
-			}
+			delete _adapter;
 		}
 
 		void Menu::insert(size_t index, Action& action)
 		{
-			MENUITEMINFO info = { 0 };
-
-			// Fill out the regular menu item information.
-			info.cbSize     = sizeof(info);
-			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_ID;
-			info.fState     = MFS_ENABLED;
-			info.wID        = (UINT) uptrint_t(action.getHandle());
-			info.dwTypeData = LPWSTR(action.getText().toArray());
-
-			// Insert the menu item into the menu.
-			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
-				throw UserInterfaceException("InsertMenuItem() failed");
+			if (_adapter)
+				_adapter->insert(index, action);
 
 			// We want to receive notifications when the Action is updated.
 			action.addListener(this);
@@ -64,16 +48,8 @@ namespace native
 
 		void Menu::insertSeparator(size_t index)
 		{
-			MENUITEMINFO info = { 0 };
-
-			// Fill out the regular menu item information.
-			info.cbSize = sizeof(info);
-			info.fMask  = MIIM_TYPE;
-			info.fType  = MFT_SEPARATOR;
-
-			// Insert the separator into the menu.
-			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
-				throw UserInterfaceException("InsertMenuItem() failed");
+			if (_adapter)
+				_adapter->insertSeparator(index);
 
 			// Hierarchy updates.
 			_children.insert(index, MenuItem());
@@ -82,24 +58,17 @@ namespace native
 
 		void Menu::insert(size_t index, Menu& menu)
 		{
-			MENUITEMINFO info = { 0 };
-
-			// Fill out the regular menu item information.
-			info.cbSize     = sizeof(info);
-			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_SUBMENU | MIIM_ID;
-			info.fState     = MFS_ENABLED;
-			info.wID        = UINT(menu._id);
-			info.hSubMenu   = HMENU(menu._handle);
-			info.dwTypeData = LPWSTR(menu._text.toArray());
-
-			// Insert the menu item into the Menu.
-			if (::InsertMenuItem(HMENU(_handle), UINT(index), TRUE, &info) == 0)
-				throw UserInterfaceException("InsertMenuItem() failed");
+			if (_adapter && menu._adapter)
+				_adapter->insert(index, menu);
 
 			// Remove the menu from its previous parent.
 			if (menu._parent)
 			{
-				::RemoveMenu(HMENU(menu._parent->_handle), UINT(menu._id), MF_BYCOMMAND);
+				Menu* oldParent = menu.getParent();
+
+				if (oldParent && oldParent->getAdapter())
+					oldParent->getAdapter()->remove(menu);
+
 				menu._parent->_children.remove(&menu);
 			}
 
@@ -124,10 +93,10 @@ namespace native
 				info.fState     = MFS_ENABLED;
 				info.fType      = MFT_STRING;
 				info.wID        = UINT(_id);
-				info.hSubMenu   = HMENU(_handle);
+				info.hSubMenu   = HMENU(_adapter->getHandle());
 				info.dwTypeData = LPWSTR(_text.toArray());
 
-				if (::SetMenuItemInfo(HMENU(_parent->getHandle()), UINT(_id), FALSE, &info) == 0)
+				if (::SetMenuItemInfo(HMENU(_parent->getAdapter()->getHandle()), UINT(_id), FALSE, &info) == 0)
 					throw UserInterfaceException("SetMenuItemInfo() failed");
 
 				_parent->onHierarchyUpdate();
@@ -147,7 +116,7 @@ namespace native
 			info.fType      = MFT_STRING;
 			info.dwTypeData = LPWSTR(action->getText().toArray());
 
-			if (::SetMenuItemInfo(HMENU(_handle), id, FALSE, &info) == 0)
+			if (::SetMenuItemInfo(HMENU(_adapter->getHandle()), id, FALSE, &info) == 0)
 				throw UserInterfaceException("SetMenuItemInfo() failed");
 
 			onHierarchyUpdate();
@@ -155,7 +124,9 @@ namespace native
 
 		void Menu::onActionDestroyed(Action* action)
 		{
-			::RemoveMenu(HMENU(_handle), (UINT) uptrint_t(action->getHandle()), MF_BYCOMMAND);
+			if (_adapter && action)
+				_adapter->remove(*action);
+
 			_children.remove(action);
 		}
 

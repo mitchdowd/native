@@ -156,6 +156,7 @@
     <ClCompile Include="common\action.cpp" />
     <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="win32\menu.cpp" />
+    <ClCompile Include="win32\menuadapter.cpp" />
     <ClCompile Include="win32\pen.cpp" />
     <ClCompile Include="win32\webview.cpp" />
     <ClInclude Include="include\action.h" />
@@ -163,9 +164,11 @@
     <ClInclude Include="include\dialogs.h" />
     <ClInclude Include="include\font.h" />
     <ClInclude Include="include\groupbox.h" />
+    <ClInclude Include="include\imenuadapter.h" />
     <ClInclude Include="include\label.h" />
     <ClInclude Include="include\linearlayout.h" />
     <ClInclude Include="include\menu.h" />
+    <ClInclude Include="include\menuadapter.h" />
     <ClInclude Include="include\pen.h" />
     <ClInclude Include="include\progressbar.h" />
     <ClInclude Include="include\radiobutton.h" />

@@ -4,6 +4,7 @@
 // Module Dependencies
 #include "../include/app.h"
 #include "../include/eventqueue.h"
+#include "../include/menuadapter.h"
 
 namespace native
 {
@@ -15,12 +16,12 @@ namespace native
 		class MenuBar : public Menu
 		{
 		public:
-			MenuBar(Component* component) : Menu(::CreateMenu()), _component(component)
+			MenuBar(Component* component) : Menu(new MenuAdapter(::CreateMenu())), _component(component)
 			{
 				if (component != App::getInstance())
 					throw UserInterfaceException("Only the App component can currently have a MenuBar.");
 
-				::SetMenu(HWND(component->getAdapter()->getHandle()), HMENU(getHandle()));
+				::SetMenu(HWND(component->getAdapter()->getHandle()), HMENU(getAdapter()->getHandle()));
 			}
 
 			virtual void onHierarchyUpdate() override 

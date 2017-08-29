@@ -28,9 +28,6 @@
     <ClCompile Include="common\component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="win32\componentadapter.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="win32\dialogs.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -81,6 +78,12 @@
     <ClCompile Include="win32\app.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="win32\componentadapter.cpp">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\menuadapter.cpp">
+      <Filter>Adapters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -111,19 +114,10 @@
     <ClInclude Include="include\component.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="include\componentadapter.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="win32\componentadapterproperties.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="win32\componentevent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\dialogs.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\icomponentadapter.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\layoutcomponent.h">
@@ -176,6 +170,21 @@
     </ClInclude>
     <ClInclude Include="include\menu.h" />
     <ClInclude Include="include\action.h" />
+    <ClInclude Include="include\componentadapter.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\componentadapterproperties.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="include\icomponentadapter.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imenuadapter.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="include\menuadapter.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -186,6 +195,9 @@
     </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{5692e783-632c-4281-9f7c-cf828ed13acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Adapters">
+      <UniqueIdentifier>{c7243ed1-7a65-41a2-9c39-f72e53f65c6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
