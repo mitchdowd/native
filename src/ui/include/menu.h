@@ -11,6 +11,7 @@ namespace native
 	{
 		// Forward Declarations
 		class Component;
+        class MenuAdapter;
 
 		/**
 			A displayable menu of selectable actions.
@@ -82,7 +83,17 @@ namespace native
              */
 			Menu* getParent() const noexcept { return _parent; }
 
+			/**
+				Gets a unique numerical ID for this Menu.
+			 	\return The Menu ID.
+			 */
 			int32_t getId() const noexcept { return _id; }
+
+            /**
+                Sets the adapter used by this Menu.
+                \param adapter The new menu adapter.
+             */
+            void setAdapter(IMenuAdapter* adapter) { _adapter = adapter; }
 
 			/**
 				Gets the adapter which provides platform-dependent functionality.
@@ -118,6 +129,9 @@ namespace native
             const List<MenuItem>& getChildren() const { return _children; }
 
 		private:
+            // Class Friendships
+            friend class MenuAdapter;
+
 			// Prevent Copying
 			Menu(const Menu&) = delete;
 

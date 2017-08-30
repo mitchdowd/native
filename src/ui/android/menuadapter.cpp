@@ -3,9 +3,10 @@
 #include "../../../lib/jnipp/jnipp.h"
 
 // Module Dependencies
-#include "../include/component.h"
 #include "../include/menu.h"
 #include "../include/menuadapter.h"
+
+#define HANDLE_OBJ ((jni::Object*) _handle)
 
 namespace native
 {
@@ -13,7 +14,7 @@ namespace native
     {
         MenuAdapter::MenuAdapter()
         {
-            throw NotImplementedException();
+            throw InvalidStateException("Android MenuAdapters shouldn't be default constructed!");
         }
 
         MenuAdapter::MenuAdapter(handle_t handle) : _handle(handle)
@@ -27,17 +28,42 @@ namespace native
 
         void MenuAdapter::insert(size_t index, Action& action)
         {
-            throw NotImplementedException();
+            HANDLE_OBJ->call<jni::Object>("add(IIILjava/lang/CharSequence;)Landroid/view/MenuItem;",
+                0, (int) ptrint_t(action.getHandle()), int(index), action.getText().toArray());
+
+            // TODO: Remember the handle.
         }
 
         void MenuAdapter::insertSeparator(size_t index)
         {
-            throw NotImplementedException();
+            // "Separators are for wimps, yo!"
+            //   -- Android
         }
 
         void MenuAdapter::insert(size_t index, Menu& menu)
         {
-            throw NotImplementedException();
+            jni::Object handle = HANDLE_OBJ->call<jni::Object>("addSubMenu(IIILjava/lang/CharSequence;)Landroid/view/SubMenu;",
+                0, menu.getId(), int(index), menu.getText().toArray());
+
+            if (menu.getAdapter())
+                delete menu.getAdapter();
+
+            IMenuAdapter* adapter = new MenuAdapter(new jni::Object(handle));
+            menu.setAdapter(adapter);
+
+            // Re-insert the submenu's children to account for its new adapter.
+            for (size_t i = 0; i < menu.getChildren().getLength(); ++i) {
+                auto& child = menu.getChildren()[i];
+
+                if (child.type == Menu::MenuItemType::Menu) {
+                    adapter->insert(i, *child.menu);
+                }
+                else if (child.type == Menu::MenuItemType::Action) {
+                    adapter->insert(i, *child.action);
+                }
+            }
+
+            // TODO: Update ordering of other children to accommodate inserted item.
         }
 
         void MenuAdapter::remove(Menu& menu)

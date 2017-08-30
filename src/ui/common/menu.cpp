@@ -3,17 +3,24 @@
 #include "../include/menu.h"
 #include "../include/menuadapter.h"
 
+#ifdef NATIVE_PLATFORM_WIN32
+# define CREATE_DEFAULT_MENU_ADAPTER 1
+#endif
+
 namespace native
 {
 	namespace ui
 	{
 		static volatile int32_t _nextId = 1000000;
 
-		Menu::Menu() : _adapter(new MenuAdapter()), _id(Atomic::increment(_nextId)), _parent(nullptr)
+		Menu::Menu() : _adapter(nullptr), _id(Atomic::increment(_nextId)), _parent(nullptr)
 		{
+#ifdef CREATE_DEFAULT_MENU_ADAPTER
+            _adapter = new MenuAdapter();
+#endif
 		}
 
-		Menu::Menu(IMenuAdapter* adapter) : _adapter(adapter), _id(Atomic::increment(_nextId))
+		Menu::Menu(IMenuAdapter* adapter) : _adapter(adapter), _id(Atomic::increment(_nextId)), _parent(nullptr)
 		{
 
 		}

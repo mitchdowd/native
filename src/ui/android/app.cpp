@@ -16,12 +16,9 @@ namespace native
         class OptionsMenu : public Menu
         {
         public:
-            OptionsMenu(handle_t handle) : Menu(new MenuAdapter(handle)) {}
+            OptionsMenu() : Menu() {}
 
-            void populate(const jni::Object& menu) const;
-
-        protected:
-            virtual void onHierarchyUpdate() override;
+            void populate(const jni::Object& menu);
         };
 
 		App::App() : _menu(nullptr)
@@ -68,34 +65,34 @@ namespace native
                 jni::Object* activity = (jni::Object*) App::getInstance()->getAppHandle();
                 jni::Object  appMenu  = activity->call<jni::Object>("getAppMenu()Landroid/view/Menu;");
 
-                _menu = new OptionsMenu(appMenu.isNull()? nullptr : new jni::Object(appMenu));
+                _menu = new OptionsMenu();
+
+                if (!appMenu.isNull())
+                    ((OptionsMenu*) _menu)->populate(appMenu);
             }
 
             return *_menu;
 		}
 
-        void OptionsMenu::onHierarchyUpdate()
-        {
-            // TODO: Call Activity.invalidateOptionsMenu()
-        }
-
-        void OptionsMenu::populate(const jni::Object& menu) const
+        void OptionsMenu::populate(const jni::Object& menu)
         {
             auto children = getChildren();
 
-            // TODO: Set all initial handles in the tree hierarchy.
-            for (auto child : children) {
+            // Set up the adapter if we don't have one.
+            if (!getAdapter())
+                setAdapter(new MenuAdapter(new jni::Object(menu)));
+
+            IMenuAdapter* adapter = getAdapter();
+
+            // Parse the tree hierarchy, instantiating system resources.
+            for (size_t i = 0; i < children.getLength(); ++i) {
+                auto& child = children[i];
+
                 if (child.type == MenuItemType::Menu) {
-                    jni::Object subMenu = menu.call<jni::Object>("addSubMenu(Ljava/lang/CharSequence;)Landroid/view/SubMenu;", child.menu->getText().toArray());
-
-                    // TODO: Set the menu handle.
-
-                    // TODO: Populate menu children.
+                    adapter->insert(i, *child.menu);
                 }
                 else if (child.type == MenuItemType::Action) {
-                    jni::Object menuItem = menu.call<jni::Object>("add(Ljava/lang/CharSequence;)Landroid/view/MenuItem;", child.action->getText().toArray());
-
-                    // TODO: Set the action handle.
+                    adapter->insert(i, *child.action);
                 }
             }
         }
