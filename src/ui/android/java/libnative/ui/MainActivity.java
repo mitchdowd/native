@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * The main activity which serves as the link into the Java-based Android application from the
@@ -39,6 +40,14 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public Menu getAppMenu() { return _appMenu; }
 
     public void invokeAsync(long funcPtr) {
@@ -53,6 +62,8 @@ public class MainActivity extends Activity {
     private native void onCreate();
 
     private native void onDestroyApp();
+
+    private native boolean onAction(int actionId);
 
     private native void populateOptionsMenu(Menu menu);
 

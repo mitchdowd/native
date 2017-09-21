@@ -90,12 +90,6 @@ namespace native
 			 */
 			static Action* fromId(int32_t id);
 
-			/**
-				Gets the underlying handle for this Action.
-				\return The system resource handle.
-			 */
-			handle_t getHandle() const noexcept { return _handle; }
-
             /**
                 Gets the unique numerical identifier for this Action.
                 \return The Action's unique ID.
@@ -107,7 +101,6 @@ namespace native
 			friend class ActionListener;
 
 			// Instance Variables
-			handle_t _handle;
 			String   _text;
             int32_t  _id;
 			Set<ActionListener*> _listeners;

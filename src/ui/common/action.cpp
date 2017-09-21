@@ -20,7 +20,7 @@ namespace native
 				action->_listeners.remove(this);
 		}
 
-		Action::Action() : _handle(nullptr)
+		Action::Action()
 		{
 			_lock.lock();
 			_actionMap.add(_id = ++_nextId, this);

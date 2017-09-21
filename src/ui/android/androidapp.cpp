@@ -22,5 +22,13 @@ extern "C"
     void Java_libnative_ui_MainActivity_onDestroyApp(_JNIEnv*, jni::jobject) {
         delete native::ui::App::getInstance();
     }
+
+    bool Java_libnative_ui_MainActivity_onAction(_JNIEnv*, jni::jobject, int actionId) {
+        // TODO
+        if (actionId == 100)
+            return true;
+
+        return false;
+    }
 }
 

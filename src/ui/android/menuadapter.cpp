@@ -29,9 +29,9 @@ namespace native
         void MenuAdapter::insert(size_t index, Action& action)
         {
             HANDLE_OBJ->call<jni::Object>("add(IIILjava/lang/CharSequence;)Landroid/view/MenuItem;",
-                0, (int) ptrint_t(action.getHandle()), int(index), action.getText().toArray());
+                0, action.getId(), int(index), action.getText().toArray());
 
-            // TODO: Remember the handle.
+            // TODO: Update ordering of other children to accommodate inserted item.
         }
 
         void MenuAdapter::insertSeparator(size_t index)
