@@ -9,7 +9,7 @@ namespace native
 {
 	namespace ui
 	{
-		static Map<handle_t, Action*> _actionMap;
+		static Map<int32_t, Action*> _actionMap;
 		static int32_t _nextId = 100;
 		static SpinLock _lock;
 
@@ -20,18 +20,17 @@ namespace native
 				action->_listeners.remove(this);
 		}
 
-		Action::Action()
+		Action::Action() : _handle(nullptr)
 		{
 			_lock.lock();
-			_handle = handle_t(++_nextId);
-			_actionMap.add(_handle, this);
+			_actionMap.add(_id = ++_nextId, this);
 			_lock.release();
 		}
 
 		Action::~Action()
 		{
 			_lock.lock();
-			_actionMap.remove(_handle);
+			_actionMap.remove(_id);
 			_lock.release();
 
 			// Trigger the callbacks in the ActionHosts.
@@ -60,10 +59,10 @@ namespace native
 			}
 		}
 
-		Action* Action::fromHandle(handle_t handle)
+		Action* Action::fromId(int32_t id)
 		{
 			_lock.lock();
-			Action* action = _actionMap[handle];
+			Action* action = _actionMap[id];
 			_lock.release();
 
 			return action;

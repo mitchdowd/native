@@ -84,11 +84,11 @@ namespace native
 			void addListener(ActionListener* listener);
 
 			/**
-				Gets an Action via its handle. Used for implementation purposes.
-				\param handle The handle of the Action.
-				\return The Action with that handle, or null.
+				Gets an Action via its unique ID.
+				\param id The unique Action ID.
+				\return The Action with that ID, or null.
 			 */
-			static Action* fromHandle(handle_t handle);
+			static Action* fromId(int32_t id);
 
 			/**
 				Gets the underlying handle for this Action.
@@ -96,13 +96,20 @@ namespace native
 			 */
 			handle_t getHandle() const noexcept { return _handle; }
 
+            /**
+                Gets the unique numerical identifier for this Action.
+                \return The Action's unique ID.
+             */
+            int32_t getId() const noexcept { return _id; }
+
 		private:
 			// Class Friendships
 			friend class ActionListener;
 
 			// Instance Variables
 			handle_t _handle;
-			String _text;
+			String   _text;
+            int32_t  _id;
 			Set<ActionListener*> _listeners;
 		};
 	}

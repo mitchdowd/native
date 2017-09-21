@@ -36,7 +36,7 @@ namespace native
 			info.cbSize     = sizeof(info);
 			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_ID;
 			info.fState     = MFS_ENABLED;
-			info.wID        = (UINT) uptrint_t(action.getHandle());
+			info.wID        = UINT(action.getId());
 			info.dwTypeData = LPWSTR(action.getText().toArray());
 
 			// Insert the menu item into the menu.
@@ -87,7 +87,7 @@ namespace native
 
 		void MenuAdapter::remove(Action& action)
 		{
-			::RemoveMenu(HMENU(_handle), (UINT) uptrint_t(action.getHandle()), MF_BYCOMMAND);
+			::RemoveMenu(HMENU(_handle), (UINT) uptrint_t(action.getId()), MF_BYCOMMAND);
 		}
 
 		void MenuAdapter::update(Menu& menu)
@@ -114,8 +114,6 @@ namespace native
 		{
 			MENUITEMINFO info = { 0 };
 
-			UINT id = (UINT) uptrint_t(action.getHandle());
-
 			// Set the new menu item information.
 			info.cbSize     = sizeof(info);
 			info.fMask      = MIIM_STRING | MIIM_STATE | MIIM_FTYPE;
@@ -123,7 +121,7 @@ namespace native
 			info.fType      = MFT_STRING;
 			info.dwTypeData = LPWSTR(action.getText().toArray());
 
-			if (::SetMenuItemInfo(HMENU(getHandle()), id, FALSE, &info) == 0)
+			if (::SetMenuItemInfo(HMENU(getHandle()), UINT(action.getId()), FALSE, &info) == 0)
 				throw UserInterfaceException("SetMenuItemInfo() failed");
 		}
 	}
