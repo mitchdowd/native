@@ -61,8 +61,11 @@ namespace native
 
 		Action* Action::fromId(int32_t id)
 		{
+			Action* action = nullptr;
+
 			_lock.lock();
-			Action* action = _actionMap[id];
+			if (_actionMap.containsKey(id))
+                action = _actionMap[id];
 			_lock.release();
 
 			return action;

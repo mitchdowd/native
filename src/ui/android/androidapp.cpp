@@ -17,6 +17,8 @@ namespace native
     }
 }
 
+using namespace native::ui;
+
 extern "C"
 {
     void Java_libnative_ui_MainActivity_onDestroyApp(_JNIEnv*, jni::jobject) {
@@ -24,11 +26,13 @@ extern "C"
     }
 
     bool Java_libnative_ui_MainActivity_onAction(_JNIEnv*, jni::jobject, int actionId) {
-        // TODO
-        if (actionId == 100)
-            return true;
+        Action* action = Action::fromId(actionId);
 
-        return false;
+        if (action == nullptr)
+            return false;
+
+        action->emit();
+        return true;
     }
 }
 
