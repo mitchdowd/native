@@ -14,11 +14,15 @@ public class Window extends RelativeLayout {
 
         // Window is the main view.
         if (context instanceof Activity) {
+            /*
             ScrollView parent = new ScrollView(context);
 
             parent.addView(this);
 
             ((Activity) context).setContentView(parent);
+            */
+
+            ((Activity) context).setContentView(this);
         }
     }
 
@@ -26,5 +30,7 @@ public class Window extends RelativeLayout {
     protected void onDraw(Canvas canvas) { ViewExtensions.onPaint(this, canvas); }
 
     @Override
-    public void onSizeChanged(int w, int h, int oldW, int oldH) { ViewExtensions.onSize(this, w, h); }
+    public void onSizeChanged(int w, int h, int oldW, int oldH) {
+        ViewExtensions.onSize(this, w, h);
+    }
 }
