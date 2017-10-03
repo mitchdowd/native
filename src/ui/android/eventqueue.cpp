@@ -1,4 +1,8 @@
+// External Depdendencies
+#include "../../../lib/jnipp/jnipp.h"
+
 // Module Dependencies
+#include "../include/app.h"
 #include "../include/eventqueue.h"
 
 namespace native
@@ -15,7 +19,9 @@ namespace native
 
         void EventQueue::quitWithCode(int exitCode)
         {
-            throw NotImplementedException();
+            jni::Object* activity = (jni::Object*) App::getAppHandle();
+
+            activity->call<void>("finish");
         }
     }
 }
