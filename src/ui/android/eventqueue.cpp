@@ -21,6 +21,7 @@ namespace native
         {
             jni::Object* activity = (jni::Object*) App::getAppHandle();
 
+            _exitCode = exitCode;
             activity->call<void>("finish");
         }
     }
