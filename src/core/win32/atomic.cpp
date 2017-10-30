@@ -19,6 +19,9 @@
 # define _InterlockedCompareExchange64 InterlockedCompareExchange64
 #endif
 
+// Safety Check
+static_assert(sizeof(bool) == 1, "Unexpected size for 'bool' type.");
+
 namespace native
 {
 	int16_t Atomic::increment(volatile int16_t& value) noexcept
@@ -74,9 +77,14 @@ namespace native
 #else
 	void* Atomic::exchange(volatile void*& variable, void* value) noexcept
 	{
-		return (void*) _InterlockedExchange((volatile long*)&variable, (long) value);
+		return (void*) _InterlockedExchange((volatile long*) &variable, (long) value);
 	}
 #endif
+
+	bool Atomic::exchange(volatile bool& variable, bool value) noexcept
+	{
+		return (bool) _InterlockedExchange8((volatile char*) &variable, (char) value);
+	}
 
 	int16_t Atomic::compareExchange(volatile int16_t& variable, int16_t value, int16_t comparand) noexcept
 	{
@@ -104,4 +112,9 @@ namespace native
 		return (void*) _InterlockedCompareExchange((volatile long*) &variable, (long) value, (long) comparand);
 	}
 #endif
+
+	bool Atomic::compareExchange(volatile bool& variable, bool value, bool comparand) noexcept
+	{
+		return (bool) _InterlockedCompareExchange8((volatile char*) &variable, (char) value, (char) comparand);
+	}
 }

@@ -52,6 +52,7 @@ namespace native
 		static int32_t exchange(volatile int32_t& variable, int32_t value) noexcept;
 		static int64_t exchange(volatile int64_t& variable, int64_t value) noexcept;
 		static void* exchange(volatile void*& variable, void* value) noexcept;
+		static bool exchange(volatile bool& variable, bool value) noexcept;
 
 		/**
 			Performs an atomic swap operation on two values, pending the result
@@ -67,6 +68,7 @@ namespace native
 		static int32_t compareExchange(volatile int32_t& variable, int32_t value, int32_t comparand) noexcept;
 		static int64_t compareExchange(volatile int64_t& variable, int64_t value, int64_t comparand) noexcept;
 		static void* compareExchange(volatile void*& variable, void* value, void* comparand) noexcept;
+		static bool compareExchange(volatile bool& variable, bool value, bool comparand) noexcept;
 	};
 }
 

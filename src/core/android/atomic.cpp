@@ -52,6 +52,11 @@ namespace native
     {
         return __sync_lock_test_and_set_4(&variable, value);
     }
+	
+	bool Atomic::exchange(volatile bool& variable, bool value) noexcept
+	{
+		return __sync_lock_test_and_set(&variable, value);
+	}
 
     int16_t Atomic::compareExchange(volatile int16_t& variable, int16_t value, int16_t comparand) noexcept
     {
@@ -72,5 +77,10 @@ namespace native
     {
         return __sync_val_compare_and_swap((void**) &variable, comparand, value);
     }
+	
+	bool Atomic::compareExchange(volatile bool& variable, bool value, bool comparand) noexcept
+	{
+		return __sync_val_compare_and_swap(&variable, comparand, value);
+	}
 }
 

@@ -54,11 +54,27 @@ namespace native
 
 	namespace internal
 	{
+		inline Thread* getThread(const Function<void>& func)
+		{
+			return new Thread(func);
+		}
+
+		inline void disposeThread(Thread* thread)
+		{
+			delete thread;
+		}
+
 		template <class TOutput>
 		struct TaskDetail
 		{
-			TaskDetail(const Function<TOutput>& func) : referenceCount(1), func(func), result(nullptr), thread(Function<void>(this, &TaskDetail::execute)) {}
-			~TaskDetail() { if (result) delete result; }
+			TaskDetail(const Function<TOutput>& func) : referenceCount(1), isDone(false), func(func), result(nullptr), thread(getThread(Function<void>(this, &TaskDetail::execute))) {}
+			~TaskDetail() 
+			{ 
+				if (result) 
+					delete result;
+
+				disposeThread(thread);
+			}
 
 			void execute()
 			{
@@ -66,18 +82,22 @@ namespace native
 
 				if (Atomic::decrement(referenceCount) < 1)
 					delete this;
+				else
+					Atomic::exchange(isDone, true);
 			}
 
 			volatile int referenceCount;
+			volatile bool isDone;
 			Function<TOutput> func;
 			TOutput* result;
-			Thread   thread;
+			Thread*  thread;
 		};
 
 		template <>
 		struct TaskDetail<void>
 		{
-			TaskDetail(const Function<void>& func) : referenceCount(1), func(func), thread(Function<void>(this, &TaskDetail::execute)) {}
+			TaskDetail(const Function<void>& func) : referenceCount(1), isDone(false), func(func), thread(getThread(Function<void>(this, &TaskDetail::execute))) {}
+			~TaskDetail() { disposeThread(thread); }
 
 			void execute()
 			{
@@ -85,11 +105,14 @@ namespace native
 
 				if (Atomic::decrement(referenceCount) < 1)
 					delete this;
+				else
+					Atomic::exchange(isDone, true);
 			}
 
 			volatile int referenceCount;
+			volatile bool isDone;
 			Function<void> func;
-			Thread   thread;
+			Thread* thread;
 		};
 	}
 
@@ -109,7 +132,7 @@ namespace native
 	template <class TOutput>
 	void Task<TOutput>::join() const
 	{
-		_details->thread.join();
+		_details->thread->join();
 	}
 
 	template <class TOutput>
