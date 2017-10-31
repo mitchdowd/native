@@ -46,6 +46,9 @@
     <ClCompile Include="win32\semaphore.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
+    <ClCompile Include="common\threadpool.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\platform.h" />
@@ -126,6 +129,9 @@
       <Filter>Threading</Filter>
     </ClInclude>
     <ClInclude Include="include\semaphore.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\threadpool.h">
       <Filter>Threading</Filter>
     </ClInclude>
   </ItemGroup>

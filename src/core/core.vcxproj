@@ -135,6 +135,7 @@
     <ClCompile Include="common\spinlock.cpp" />
     <ClCompile Include="common\string.cpp" />
     <ClCompile Include="common\stringcodec.cpp" />
+    <ClCompile Include="common\threadpool.cpp" />
     <ClCompile Include="common\utf8codec.cpp" />
     <ClCompile Include="common\variant.cpp" />
     <ClCompile Include="win32\atomic.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="win32\semaphore.cpp" />
     <ClCompile Include="win32\system.cpp" />
     <ClCompile Include="win32\thread.cpp" />
+    <ClInclude Include="include\threadpool.h" />
     <ClInclude Include="include\variant.h" />
   </ItemGroup>
   <ItemGroup>
