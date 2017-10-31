@@ -38,3 +38,30 @@ TEST(ConditionVariable_waitsToBeSignalled)
 	ASSERT(handled);
 }
 
+TEST(ConditionVariable_signalAllReleasesAll)
+{
+	Mutex lock;
+	ConditionVariable cond(lock);
+	Thread threads[10];
+	int finished = 0;
+
+	for (int i = 0; i < 10; i++)
+		threads[i].start([&]() {
+			lock.lock();	// Need to lock before accessing "signalled".
+
+			cond.wait();
+
+			Atomic::increment(finished);
+
+			lock.release();
+		});
+
+	Thread::sleep(100);
+
+	cond.signalAll();
+
+	for (int i = 0; i < 10; i++)
+		threads[i].join();
+
+	ASSERT(finished == 10);
+}

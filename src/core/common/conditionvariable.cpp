@@ -30,7 +30,9 @@ namespace native
 
 	void ConditionVariable::signalAll()
 	{
-		for (int i = 0; i < _waitCount; i++)
+		int toRelease = _waitCount;
+
+		for (int i = 0; i < toRelease; i++)
 			_waiters.release();
 	}
 }
