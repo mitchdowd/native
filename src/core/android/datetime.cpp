@@ -28,18 +28,20 @@ namespace native
 
 	DateTime::DateTime(int year, int month, int day)
 	{
-        struct tm tm = { 0 };
-        struct timeval tv;
-        struct timezone tz;
+        struct tm       tm = { 0 };
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
         ::gettimeofday(&tv, &tz);
 
         tm.tm_year = year - 1900;
         tm.tm_mon  = month - 1;
         tm.tm_mday = day;
+		tm.tm_isdst = -1;
 
         _offset = short(-tz.tz_minuteswest);
-        _value = (int64_t(std::mktime(&tm)) * SECOND_DIVISOR) + (_offset * MINUTE_DIVISOR);
+        auto x = int64_t(std::mktime(&tm));
+        _value = (x * SECOND_DIVISOR) + (_offset * MINUTE_DIVISOR);
 	}
 
 	DateTime::DateTime(const DateTime& other) : _value(other._value), _offset(other._offset)
@@ -74,9 +76,14 @@ namespace native
 	short DateTime::getDay() const
 	{
         struct tm tm;
-        time_t t = time_t(_value / SECOND_DIVISOR);
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
-        ::gmtime_r(&t, &tm);
+        ::gettimeofday(&tv, &tz);
+
+        time_t t = time_t(_value / SECOND_DIVISOR) + (tz.tz_minuteswest * 60);
+
+        ::localtime_r(&t, &tm);
 
 		return tm.tm_mday;
 	}
@@ -84,9 +91,14 @@ namespace native
 	WeekDay DateTime::getWeekDay() const
 	{
         struct tm tm;
-        time_t t = time_t(_value / SECOND_DIVISOR);
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
-        ::gmtime_r(&t, &tm);
+        ::gettimeofday(&tv, &tz);
+
+        time_t t = time_t(_value / SECOND_DIVISOR) + (tz.tz_minuteswest * 60);
+
+        ::localtime_r(&t, &tm);
 
         return WeekDay(tm.tm_wday);
 	}
@@ -94,9 +106,14 @@ namespace native
 	Month DateTime::getMonth() const
 	{
         struct tm tm;
-        time_t t = time_t(_value / SECOND_DIVISOR);
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
-        ::gmtime_r(&t, &tm);
+        ::gettimeofday(&tv, &tz);
+
+        time_t t = time_t(_value / SECOND_DIVISOR) + (tz.tz_minuteswest * 60);
+
+        ::localtime_r(&t, &tm);
 
         return Month(tm.tm_mon + 1);
 	}
@@ -104,9 +121,14 @@ namespace native
 	int DateTime::getYear() const
 	{
         struct tm tm;
-        time_t t = time_t(_value / SECOND_DIVISOR);
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
-        ::gmtime_r(&t, &tm);
+        ::gettimeofday(&tv, &tz);
+
+        time_t t = time_t(_value / SECOND_DIVISOR) + (tz.tz_minuteswest * 60);
+
+        ::localtime_r(&t, &tm);
 
         return tm.tm_year + 1900;
 	}
@@ -114,9 +136,14 @@ namespace native
 	short DateTime::getHour() const
 	{
         struct tm tm;
-        time_t t = time_t(_value / SECOND_DIVISOR);
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
-        ::gmtime_r(&t, &tm);
+        ::gettimeofday(&tv, &tz);
+
+        time_t t = time_t(_value / SECOND_DIVISOR) + (tz.tz_minuteswest * 60);
+
+        ::localtime_r(&t, &tm);
 
         return tm.tm_hour;
 	}
@@ -124,9 +151,14 @@ namespace native
 	short DateTime::getMinute() const
 	{
         struct tm tm;
-        time_t t = time_t(_value / SECOND_DIVISOR);
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
-        ::gmtime_r(&t, &tm);
+        ::gettimeofday(&tv, &tz);
+
+        time_t t = time_t(_value / SECOND_DIVISOR) + (tz.tz_minuteswest * 60);
+
+        ::localtime_r(&t, &tm);
 
         return tm.tm_min;
 	}
@@ -134,9 +166,14 @@ namespace native
 	short DateTime::getSecond() const
 	{
         struct tm tm;
-        time_t t = time_t(_value / SECOND_DIVISOR);
+        struct timeval  tv = { 0 };
+        struct timezone tz = { 0 };
 
-        ::gmtime_r(&t, &tm);
+        ::gettimeofday(&tv, &tz);
+
+        time_t t = time_t(_value / SECOND_DIVISOR) + (tz.tz_minuteswest * 60);
+
+        ::localtime_r(&t, &tm);
 
         return tm.tm_sec;
 	}
