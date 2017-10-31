@@ -8,16 +8,15 @@
 
 namespace native
 {
-	Semaphore::Semaphore(int maxCount) : _maxCount(maxCount), _handle(new sem_t())
+	Semaphore::Semaphore(uint32_t initialValue) : _handle(new sem_t())
 	{
-		if (::sem_init((sem_t*) _handle, 0, maxCount) != 0)
+		if (::sem_init((sem_t*) _handle, 0, initialValue) != 0)
 			throw Exception("Semaphore::Semaphore");
 	}
 
-	Semaphore::Semaphore(Semaphore&& other) : _handle(other._handle), _maxCount(other._maxCount)
+	Semaphore::Semaphore(Semaphore&& other) : _handle(other._handle)
 	{
 		other._handle = nullptr;
-		other._maxCount = 0;
 	}
 
 	Semaphore::~Semaphore()

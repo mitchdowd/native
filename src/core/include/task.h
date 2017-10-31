@@ -57,7 +57,11 @@ namespace native
 		template <class TOutput>
 		struct TaskDetail
 		{
-			TaskDetail(const Function<TOutput>& func) : referenceCount(1), func(func), result(nullptr), thread(Function<void>(this, &TaskDetail::execute)) {}
+			TaskDetail(const Function<TOutput>& func) 
+				: referenceCount(1), func(func), result(nullptr), thread(Function<void>(this, &TaskDetail::execute)) 
+			{
+			}
+
 			~TaskDetail() { if (result) delete result; }
 
 			void execute()
@@ -77,7 +81,10 @@ namespace native
 		template <>
 		struct TaskDetail<void>
 		{
-			TaskDetail(const Function<void>& func) : referenceCount(1), func(func), thread(Function<void>(this, &TaskDetail::execute)) {}
+			TaskDetail(const Function<void>& func) 
+				: referenceCount(1), func(func), thread(Function<void>(this, &TaskDetail::execute)) 
+			{
+			}
 
 			void execute()
 			{

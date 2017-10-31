@@ -7,9 +7,9 @@ using namespace native;
 
 TEST(Semaphore_tryAcquireDoesNotBlock)
 {
-	Semaphore semaphore(1);
+	Semaphore semaphore = 1;
 
-	semaphore.acquire();
+	semaphore.acquire();	// Decrements to zero (locked).
 	
 	ASSERT(semaphore.tryAcquire() == false);
 	semaphore.release();

@@ -6,16 +6,15 @@
 
 namespace native
 {
-	Semaphore::Semaphore(int maxCount) : _maxCount(maxCount)
+	Semaphore::Semaphore(uint32_t initialValue)
 	{
-		if ((_handle = ::CreateSemaphore(NULL, maxCount, maxCount, NULL)) == 0)
+		if ((_handle = ::CreateSemaphore(NULL, initialValue, LONG_MAX, NULL)) == 0)
 			throw Exception("Mutex::Mutex");
 	}
 
-	Semaphore::Semaphore(Semaphore&& other) : _handle(other._handle), _maxCount(other._maxCount)
+	Semaphore::Semaphore(Semaphore&& other) : _handle(other._handle)
 	{
 		other._handle = nullptr; 
-		other._maxCount = 0;
 	}
 
 	Semaphore::~Semaphore()
