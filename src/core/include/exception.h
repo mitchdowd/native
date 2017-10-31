@@ -110,6 +110,15 @@ namespace native
 	public:
 		AccessException(const char* message = "Insufficient access") : Exception(message) {}
 	};
+
+	/**
+		Exception thrown when a blocking call has been interrupted.
+	 */
+	class InterruptException : public Exception
+	{
+	public:
+		InterruptException(const char* message = "Wait timer interrupted") : Exception(message) {}
+	};
 }
 
 #endif // _NATIVE_EXCEPTION_H_

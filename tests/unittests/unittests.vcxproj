@@ -147,6 +147,7 @@
     <ClCompile Include="src\core\datetime.cpp" />
     <ClCompile Include="src\core\function.cpp" />
     <ClCompile Include="src\core\hash.cpp" />
+    <ClCompile Include="src\core\semaphore.cpp" />
     <ClCompile Include="src\core\string.cpp" />
     <ClCompile Include="src\core\task.cpp" />
     <ClCompile Include="src\core\utf8codec.cpp" />

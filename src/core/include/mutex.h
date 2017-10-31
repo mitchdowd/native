@@ -52,15 +52,6 @@ namespace native
 		// Instance Variables
 		handle_t _handle;
 	};
-
-	/**
-		Exception thrown when a blocking call has been interrupted.
-	 */
-	class InterruptException : public Exception
-	{
-	public:
-		InterruptException(const char* message = "Wait timer interrupted") : Exception(message) {}
-	};
 }
 
 #endif // _NATIVE_MUTEX_H_
