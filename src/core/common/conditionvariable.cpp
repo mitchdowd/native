@@ -13,13 +13,13 @@ namespace native
 
 	void ConditionVariable::wait()
 	{
-		_waitCount++;
+		Atomic::increment(_waitCount);
 		_mutex.release();
 
 		_waiters.acquire();
 		
 		_mutex.lock();
-		_waitCount--;
+		Atomic::decrement(_waitCount);
 	}
 
 	void ConditionVariable::signalOne()

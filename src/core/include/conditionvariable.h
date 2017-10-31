@@ -45,7 +45,7 @@ namespace native
 		// Instance Variables
 		Semaphore _waiters;
 		Mutex& _mutex;
-		int _waitCount;
+		volatile int _waitCount;
 	};
 }
 
