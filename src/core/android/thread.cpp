@@ -13,17 +13,15 @@ namespace native
 
 	static thread_local Thread* _current = nullptr;
 
-    Thread::Thread(const Function<void>& func) : _func(func), _started(false), _id(0)
+    Thread::Thread(const Function<void>& func) : _handle(nullptr), _func(func), _started(false), _id(0)
     {
         start(func);
     }
 
     Thread::~Thread()
     {
-        while (!_started)
+        while (_handle != nullptr && !_started)
             yield();
-
-		_current = nullptr;
     }
 
     void Thread::start(const Function<void>& func)
@@ -38,7 +36,7 @@ namespace native
         if (::pthread_create(&id, nullptr, start_routine_t(&entryPoint), this) != 0)
             throw InsufficientResourcesException();
 
-        _handle = (handle_t) id;
+        _handle = handle_t(id);
     }
 
     void Thread::join() const
@@ -84,6 +82,7 @@ namespace native
             result = 1;
         }
 
+        _current = nullptr;
         return result;
     }
 }

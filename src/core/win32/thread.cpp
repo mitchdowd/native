@@ -18,10 +18,8 @@ namespace native
 
 	Thread::~Thread()
 	{
-		while (!_started)
+		while (_handle != nullptr && !_started)
 			yield();
-
-		_current = nullptr;
 	}
 
 	void Thread::start(const Function<void>& func)
@@ -81,6 +79,7 @@ namespace native
 			return 1;
 		}
 
+		_current = nullptr;
 		return 0;
 	}
 }
