@@ -22,7 +22,7 @@ namespace native
 
 	void Mutex::lock()
 	{
-		switch (::pthread_mutex_lock((pthread_mutex_t*) _handle))
+		switch (::pthread_mutex_lock((pthread_mutex_t*) &_handle))
         {
         case 0:
             return; // All is well.
@@ -37,7 +37,7 @@ namespace native
 
 	bool Mutex::tryLock()
 	{
-        switch (::pthread_mutex_trylock((pthread_mutex_t*) _handle))
+        switch (::pthread_mutex_trylock((pthread_mutex_t*) &_handle))
         {
         case 0:
             true; // All is well.
@@ -55,7 +55,7 @@ namespace native
 
 	void Mutex::release()
 	{
-        switch (::pthread_mutex_unlock((pthread_mutex_t*) _handle))
+        switch (::pthread_mutex_unlock((pthread_mutex_t*) &_handle))
         {
         case 0:
             return; // All is well.

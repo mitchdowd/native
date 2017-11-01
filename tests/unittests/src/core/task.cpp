@@ -10,8 +10,12 @@ static bool hasUpdated = false;
 static thread_local bool tlHasUpdated = false;
 
 // Helper Functions
-static void doUpdate() { hasUpdated = true; }
-static void doUpdateTl() { tlHasUpdated = true; }
+static void doUpdate() {
+	hasUpdated = true;
+}
+static void doUpdateTl() {
+    tlHasUpdated = true;
+}
 
 TEST(Task_start)
 {

@@ -14,7 +14,7 @@ namespace native
 	{
 		LockScope lock(_lock);
 
-		if (_tasks.getSize() > 0 || _threads.getLength() == 0)
+		if (_threads.getLength() == 0 || (_tasks.getSize() > 0 && _threads.getLength() < 8))	// TODO: Something less arbitrary.
 		{
 			_threads.add(new Thread([&]() {
 				while (!_terminate)
