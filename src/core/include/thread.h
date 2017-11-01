@@ -16,7 +16,17 @@ namespace native
 
 	public:
 		/** Creates a Thread, but does not start it. */
-		Thread() : _handle(nullptr), _func([]() {}), _started(false) {}
+		Thread() : _handle(nullptr), _func([]() {}), _started(false), _id(0) {}
+
+		/**
+			Move constructor.
+			\param other The Thread to move to this one.
+		 */
+		Thread(Thread&& other) : _handle(other._handle), _func(other._func), _started(other._started)
+		{
+			other._handle = nullptr;
+			other._started = false;
+		}
 
 		/**
 			Creates a Thread which will execute the given Function upon creation.
@@ -38,6 +48,12 @@ namespace native
 		void join() const;
 
 		/**
+			Gets a numerical ID for this Thread.
+			\return The Thread's numerical ID.
+		 */
+		int64_t getId() const noexcept { return _id; }
+
+		/**
 			Pauses execution of the current thread.
 			\param milliSeconds The duration to sleep for, in milli-seconds.
 		 */
@@ -45,6 +61,20 @@ namespace native
 
 		/** Relinquishes the current thread's execution context. */
 		static void yield();
+
+		/**
+			Gets the currently-executing Thread of execution. If the Thread object
+			which commended the current execution has gone out of scope, null will
+			be returned.
+			\return The current executing Thread, or nullptr.
+		 */
+		static Thread* getCurrent();
+
+		/**
+			Gets the numeric ID of the currently-executing Thread.
+			\return The ID of the current thread.
+		 */
+		static int64_t getCurrentId();
 
 	private:
 		/** Entry point to the Thread, as far as the OS is concerned. */
@@ -54,6 +84,7 @@ namespace native
 		handle_t _handle;
 		Function<void> _func;
 		bool _started;
+		int64_t _id;
 	};
 }
 

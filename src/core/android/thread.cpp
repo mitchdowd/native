@@ -1,5 +1,6 @@
 // System Dependencies
 #include <pthread.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 // Module Dependencies
@@ -10,20 +11,32 @@ namespace native
 {
     typedef void* (*start_routine_t)(void*);
 
-    Thread::Thread(const Function<void>& func) : _func(func), _started(false)
+	static thread_local Thread* _current = nullptr;
+
+    Thread::Thread(const Function<void>& func) : _handle(nullptr), _func(func), _started(false), _id(0)
     {
+        start(func);
+    }
+
+    Thread::~Thread()
+    {
+        while (_handle != nullptr && !_started)
+            yield();
+    }
+
+    void Thread::start(const Function<void>& func)
+    {
+        if (_handle != nullptr)
+            throw InvalidStateException();
+
+        _func = func;
+
         pthread_t id;
 
         if (::pthread_create(&id, nullptr, start_routine_t(&entryPoint), this) != 0)
             throw InsufficientResourcesException();
 
-        _handle = (handle_t) id;
-    }
-
-    Thread::~Thread()
-    {
-        while (!_started)
-            yield();
+        _handle = handle_t(id);
     }
 
     void Thread::join() const
@@ -41,10 +54,22 @@ namespace native
         ::sched_yield();
     }
 
+	Thread* Thread::getCurrent()
+	{
+		return _current;
+	}
+
+	int64_t Thread::getCurrentId()
+	{
+        return (int64_t) ::gettid();
+	}
+
     ptrint_t Thread::entryPoint(Thread* thread)
     {
         ptrint_t result = 0;
 
+		_current = thread;
+        thread->_id = getCurrentId();
         thread->_started = true;
 
         try
@@ -57,6 +82,7 @@ namespace native
             result = 1;
         }
 
+        _current = nullptr;
         return result;
     }
 }

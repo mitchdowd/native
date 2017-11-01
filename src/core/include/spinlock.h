@@ -2,6 +2,7 @@
 #define _NATIVE_SPIN_LOCK_H_ 1
 
 // Module Dependencies
+#include "ilockable.h"
 #include "types.h"
 
 namespace native
@@ -15,7 +16,7 @@ namespace native
 		execution statements, as it will leave competing threads executing.
 		Use a Mutex when protecting a resource for longer periods.
 	 */
-	class SpinLock
+	class SpinLock : public ILockable
 	{
 	public:
 		/** Creates an unlocked SpinLock. */

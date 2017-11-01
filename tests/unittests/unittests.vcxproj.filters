@@ -97,6 +97,15 @@
     <ClCompile Include="src\io\memorystream.cpp">
       <Filter>io</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\semaphore.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\conditionvariable.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\threadpool.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ui\mockcomponentadapter.h">

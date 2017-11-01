@@ -115,9 +115,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\clock.h" />
+    <ClInclude Include="include\conditionvariable.h" />
     <ClInclude Include="include\datetime.h" />
     <ClInclude Include="include\flags.h" />
+    <ClInclude Include="include\ilockable.h" />
+    <ClInclude Include="include\lockscope.h" />
     <ClInclude Include="include\mutex.h" />
+    <ClInclude Include="include\semaphore.h" />
     <ClInclude Include="include\shared.h" />
     <ClInclude Include="include\signal.h" />
     <ClInclude Include="include\stringcodec.h" />
@@ -133,13 +137,17 @@
     <ClCompile Include="common\spinlock.cpp" />
     <ClCompile Include="common\string.cpp" />
     <ClCompile Include="common\stringcodec.cpp" />
+    <ClCompile Include="common\threadpool.cpp" />
     <ClCompile Include="common\utf8codec.cpp" />
     <ClCompile Include="common\variant.cpp" />
     <ClCompile Include="win32\atomic.cpp" />
+    <ClCompile Include="common\conditionvariable.cpp" />
     <ClCompile Include="win32\datetime.cpp" />
     <ClCompile Include="win32\mutex.cpp" />
+    <ClCompile Include="win32\semaphore.cpp" />
     <ClCompile Include="win32\system.cpp" />
     <ClCompile Include="win32\thread.cpp" />
+    <ClInclude Include="include\threadpool.h" />
     <ClInclude Include="include\variant.h" />
   </ItemGroup>
   <ItemGroup>

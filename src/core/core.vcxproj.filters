@@ -40,6 +40,15 @@
     <ClCompile Include="win32\mutex.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
+    <ClCompile Include="common\conditionvariable.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\semaphore.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="common\threadpool.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\platform.h" />
@@ -114,6 +123,21 @@
     <ClInclude Include="include\variant.h" />
     <ClInclude Include="include\datetime.h" />
     <ClInclude Include="include\mutex.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\conditionvariable.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\semaphore.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\threadpool.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lockscope.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ilockable.h">
       <Filter>Threading</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 
 // Local Dependencies
 #include "exception.h"
+#include "ilockable.h"
 
 namespace native
 {
@@ -11,7 +12,7 @@ namespace native
 		resource and allow resource consumers to block until the resource is
 		available.
 	 */
-	class Mutex
+	class Mutex : public ILockable
 	{
 	public:
 		/**
@@ -51,15 +52,6 @@ namespace native
 	private:
 		// Instance Variables
 		handle_t _handle;
-	};
-
-	/**
-		Exception thrown when a blocking call has been interrupted.
-	 */
-	class InterruptException : public Exception
-	{
-	public:
-		InterruptException(const char* message = "Wait timer interrupted") : Exception(message) {}
 	};
 }
 
