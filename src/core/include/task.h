@@ -3,7 +3,8 @@
 
 // Module Dependencies
 #include "function.h"
-#include "thread.h"
+#include "spinlock.h"
+#include "threadpool.h"
 
 namespace native
 {
@@ -57,9 +58,9 @@ namespace native
 		template <class TOutput>
 		struct TaskDetail
 		{
-			TaskDetail(const Function<TOutput>& func) 
-				: referenceCount(1), func(func), result(nullptr), thread(Function<void>(this, &TaskDetail::execute)) 
+			TaskDetail(const Function<TOutput>& func) : referenceCount(1), func(func), result(nullptr), signal(lock), isDone(false)
 			{
+				ThreadPool::enqueue(Function<void>(this, &TaskDetail::execute));
 			}
 
 			~TaskDetail() { if (result) delete result; }
@@ -68,6 +69,9 @@ namespace native
 			{
 				result = new TOutput(std::move(func()));
 
+				Atomic::exchange(isDone, true);
+				signal.signalAll();
+
 				if (Atomic::decrement(referenceCount) < 1)
 					delete this;
 			}
@@ -75,20 +79,25 @@ namespace native
 			volatile int referenceCount;
 			Function<TOutput> func;
 			TOutput* result;
-			Thread   thread;
+			SpinLock lock;
+			ConditionVariable signal;
+			bool isDone;
 		};
 
 		template <>
 		struct TaskDetail<void>
 		{
-			TaskDetail(const Function<void>& func) 
-				: referenceCount(1), func(func), thread(Function<void>(this, &TaskDetail::execute)) 
+			TaskDetail(const Function<void>& func) : referenceCount(1), func(func), signal(lock), isDone(false)
 			{
+				ThreadPool::enqueue(Function<void>(this, &TaskDetail::execute));
 			}
 
 			void execute()
 			{
 				func();
+
+				Atomic::exchange(isDone, true);
+				signal.signalAll();
 
 				if (Atomic::decrement(referenceCount) < 1)
 					delete this;
@@ -96,7 +105,9 @@ namespace native
 
 			volatile int referenceCount;
 			Function<void> func;
-			Thread   thread;
+			SpinLock lock;
+			ConditionVariable signal;
+			bool isDone;
 		};
 	}
 
@@ -116,7 +127,8 @@ namespace native
 	template <class TOutput>
 	void Task<TOutput>::join() const
 	{
-		_details->thread.join();
+		while (!_details->isDone)
+			_details->signal.wait();
 	}
 
 	template <class TOutput>

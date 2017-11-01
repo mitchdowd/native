@@ -9,19 +9,11 @@ using namespace native;
 static bool hasUpdated = false;
 static thread_local bool tlHasUpdated = false;
 
-// Helper Functions
-static void doUpdate() {
-	hasUpdated = true;
-}
-static void doUpdateTl() {
-    tlHasUpdated = true;
-}
-
 TEST(Task_start)
 {
 	hasUpdated = false;
 
-	Task<void> task(&doUpdate);
+	Task<void> task([]() { hasUpdated = true; });
 
 	task.join();
 
@@ -32,7 +24,7 @@ TEST(Task_assertIsOwnThread)
 {
 	tlHasUpdated = false;
 
-	Task<void> task(&doUpdateTl);
+	Task<void> task([]() { tlHasUpdated = true; });
 	task.join();
 
 	ASSERT(!tlHasUpdated);
