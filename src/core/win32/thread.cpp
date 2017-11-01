@@ -9,7 +9,9 @@
 
 namespace native
 {
-	Thread::Thread(const Function<void>& func) : _handle(nullptr), _func(func), _started(false)
+	static thread_local Thread* _current = nullptr;
+
+	Thread::Thread(const Function<void>& func) : _handle(nullptr), _func(func), _started(false), _id(0)
 	{
 		start(_func);
 	}
@@ -18,6 +20,8 @@ namespace native
 	{
 		while (!_started)
 			yield();
+
+		_current = nullptr;
 	}
 
 	void Thread::start(const Function<void>& func)
@@ -52,8 +56,19 @@ namespace native
 		::YieldProcessor();
 	}
 
+	Thread* Thread::getCurrent()
+	{
+		return _current;
+	}
+
+	int64_t Thread::getCurrentId()
+	{
+		return ::GetCurrentThreadId();
+	}
+
 	ptrint_t Thread::entryPoint(Thread* thread)
 	{
+		_current = thread;
 		thread->_started = true;
 
 		try

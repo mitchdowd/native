@@ -7,7 +7,7 @@ namespace native
 	Queue<Function<void>> ThreadPool::_tasks;
 	List<Thread*> ThreadPool::_threads;
 	Mutex ThreadPool::_lock;
-	ConditionVariable ThreadPool::_taskAvailable = _lock;
+	ConditionVariable ThreadPool::_taskAvailable(_lock);
 	bool ThreadPool::_terminate = false;
 
 	void ThreadPool::enqueue(const Function<void>& task)
