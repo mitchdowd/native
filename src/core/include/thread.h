@@ -19,6 +19,16 @@ namespace native
 		Thread() : _handle(nullptr), _func([]() {}), _started(false) {}
 
 		/**
+			Move constructor.
+			\param other The Thread to move to this one.
+		 */
+		Thread(Thread&& other) : _handle(other._handle), _func(other._func), _started(other._started)
+		{
+			other._handle = nullptr;
+			other._started = false;
+		}
+
+		/**
 			Creates a Thread which will execute the given Function upon creation.
 			\param func The Function to execute when started.
 		 */

@@ -134,6 +134,12 @@
     <ClInclude Include="include\threadpool.h">
       <Filter>Threading</Filter>
     </ClInclude>
+    <ClInclude Include="include\lockscope.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ilockable.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collections">

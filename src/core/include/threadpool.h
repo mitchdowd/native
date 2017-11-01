@@ -4,6 +4,9 @@
 // Module Dependencies
 #include "conditionvariable.h"
 #include "function.h"
+#include "list.h"
+#include "mutex.h"
+#include "queue.h"
 #include "thread.h"
 
 namespace native
@@ -25,23 +28,18 @@ namespace native
 
 	public:
 		/**
-			Sets the maximum number of Threads that the ThreadPool will spawn to
-			execute its tasks.
-			\param threadCount The new maximum thread count.
-		 */
-		static void setMaxThreads(int threadCount);
-
-		/**
-			Gets the maximum number of Threads that the ThreadPool will create.
-			\return The maximum thread count.
-		 */
-		static int getMaxThreads();
-
-		/**
 			Enqueues a Function to be called on the next available Thread.
 			\param task The Function to be executed.
 		 */
 		static void enqueue(const Function<void>& task);
+
+	private:
+		// Variables
+		static Queue<Function<void>> _tasks;
+		static List<Thread*> _threads;
+		static Mutex _lock;
+		static ConditionVariable _taskAvailable;
+		static bool _terminate;
 	};
 }
 

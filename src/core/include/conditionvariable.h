@@ -2,7 +2,7 @@
 #define _NATIVE_CONDITION_VARIABLE_H_ 1
 
 // Module Dependencies
-#include "mutex.h"
+#include "ilockable.h"
 #include "semaphore.h"
 
 namespace native
@@ -17,9 +17,9 @@ namespace native
 	public:
 		/** 
 			Constructor.
-			\param mutex Mutex protecting the shared resource.
+			\param lock ILockable protecting the shared resource.
 		 */
-		ConditionVariable(Mutex& mutex);
+		ConditionVariable(ILockable& lock);
 
 		/** Destructor. */
 		~ConditionVariable();
@@ -44,7 +44,7 @@ namespace native
 	private:
 		// Instance Variables
 		Semaphore _waiters;
-		Mutex& _mutex;
+		ILockable& _lock;
 		volatile int _waitCount;
 	};
 }

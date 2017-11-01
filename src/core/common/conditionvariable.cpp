@@ -3,7 +3,7 @@
 
 namespace native
 {
-	ConditionVariable::ConditionVariable(Mutex& mutex) : _waiters(0), _mutex(mutex), _waitCount(0)
+	ConditionVariable::ConditionVariable(ILockable& lock) : _waiters(0), _lock(lock), _waitCount(0)
 	{
 	}
 
@@ -14,11 +14,11 @@ namespace native
 	void ConditionVariable::wait()
 	{
 		Atomic::increment(_waitCount);
-		_mutex.release();
+		_lock.release();
 
 		_waiters.acquire();
 		
-		_mutex.lock();
+		_lock.lock();
 		Atomic::decrement(_waitCount);
 	}
 

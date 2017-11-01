@@ -3,6 +3,7 @@
 
 // Local Dependencies
 #include "exception.h"
+#include "ilockable.h"
 
 namespace native
 {
@@ -11,7 +12,7 @@ namespace native
 		resource and allow resource consumers to block until the resource is
 		available.
 	 */
-	class Mutex
+	class Mutex : public ILockable
 	{
 	public:
 		/**

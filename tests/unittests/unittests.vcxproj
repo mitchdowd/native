@@ -151,6 +151,7 @@
     <ClCompile Include="src\core\semaphore.cpp" />
     <ClCompile Include="src\core\string.cpp" />
     <ClCompile Include="src\core\task.cpp" />
+    <ClCompile Include="src\core\threadpool.cpp" />
     <ClCompile Include="src\core\utf8codec.cpp" />
     <ClCompile Include="src\core\linkedlist.cpp" />
     <ClCompile Include="src\core\list.cpp" />

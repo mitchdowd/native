@@ -118,6 +118,8 @@
     <ClInclude Include="include\conditionvariable.h" />
     <ClInclude Include="include\datetime.h" />
     <ClInclude Include="include\flags.h" />
+    <ClInclude Include="include\ilockable.h" />
+    <ClInclude Include="include\lockscope.h" />
     <ClInclude Include="include\mutex.h" />
     <ClInclude Include="include\semaphore.h" />
     <ClInclude Include="include\shared.h" />

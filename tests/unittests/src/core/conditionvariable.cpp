@@ -14,7 +14,7 @@ TEST(ConditionVariable_waitsToBeSignalled)
 
 	// Start a thread that waits for a condition.
 	Thread thread([&]() {
-		lock.lock();	// Need to lock before accessing "signalled".
+		lock.lock();
 
 		cond.wait();
 
@@ -47,7 +47,7 @@ TEST(ConditionVariable_signalAllReleasesAll)
 
 	for (int i = 0; i < 10; i++)
 		threads[i].start([&]() {
-			lock.lock();	// Need to lock before accessing "signalled".
+			lock.lock();
 
 			cond.wait();
 
