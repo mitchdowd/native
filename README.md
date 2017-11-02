@@ -78,6 +78,7 @@ relevant features for that control.
 - [x] ProgressBar
 - [x] RadioButton
 - [ ] SliderComponent
+- [ ] StatusBar
 - [ ] TableView
 - [ ] TabView
 - [x] TextArea

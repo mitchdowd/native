@@ -5,15 +5,13 @@ namespace native
 {
 	void Latin1Codec::encode(byte_t* buffer, size_t& size, const wchar_t* text, size_t& length)
 	{
-		size_t i = 0;
-
 		if (size < length)
 			length = size;
 		else
 			size = length;
 
 		// Encode character by character.
-		while (i < size)
+		for (size_t i = 0; i < size; ++i)
 		{
 			if (text[i] & 0xFF00)
 				buffer[i] = '?';
@@ -24,15 +22,13 @@ namespace native
 
 	void Latin1Codec::decode(wchar_t* buffer, size_t& size, const byte_t* data, size_t& bytes)
 	{
-		size_t i = 0;
-
 		if (size < bytes)
 			bytes = size;
 		else
 			size = bytes;
 
 		// Decode character by character.
-		while (i < size)
+		for (size_t i = 0; i < size; ++i)
 			buffer[i] = wchar_t(data[i]);
 	}
 

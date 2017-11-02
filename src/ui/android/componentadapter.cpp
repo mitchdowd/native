@@ -37,7 +37,7 @@ namespace native
             jni::method_t viewConstructor = View.getConstructor("(Landroid/content/Context;)V");
             jni::Object view = View.newInstance(viewConstructor, (jni::Object*) App::getAppHandle());
 
-            if (view == nullptr)
+            if (view.isNull())
                 throw UserInterfaceException("Creating android ComponentAdapter");
 
             _handle = new jni::Object(view);
