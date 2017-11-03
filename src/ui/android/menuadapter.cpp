@@ -68,22 +68,32 @@ namespace native
 
         void MenuAdapter::remove(Menu& menu)
         {
-            throw NotImplementedException();
+            HANDLE_OBJ->call<void>("removeItem(I)V", menu.getId());
         }
 
         void MenuAdapter::remove(Action& action)
         {
-            throw NotImplementedException();
+            HANDLE_OBJ->call<void>("removeItem(I)V", action.getId());
         }
 
         void MenuAdapter::update(Menu& menu)
         {
-            throw NotImplementedException();
+            if (menu.getAdapter())
+            {
+                jni::Object* handle = (jni::Object*) menu.getAdapter()->getHandle();
+
+                handle->call<jni::Object>("setTitle(Ljava/lang/CharSequence;)Landroid/view/MenuItem;", menu.getText().toArray());
+            }
         }
 
         void MenuAdapter::update(Action& action)
         {
-            throw NotImplementedException();
+            jni::Object menuItem = HANDLE_OBJ->call<jni::Object>("findItem(I)Landroid/view/MenuItem;", action.getId());
+
+            if (!menuItem.isNull())
+            {
+                menuItem.call<jni::Object>("setTitle(Ljava/lang/CharSequence;)Landroid/view/MenuItem;", action.getText().toArray());
+            }
         }
     }
 }
