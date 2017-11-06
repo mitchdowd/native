@@ -538,6 +538,36 @@ namespace native
 		{
 		}
 
+		void TextAreaAdapter::setScrollBars(bool horizontal, bool vertical)
+		{
+			int toShow = -1;
+			int toHide = -1;
+
+			if (horizontal && vertical)
+			{
+				toShow = SB_BOTH;
+			}
+			else if (horizontal)
+			{
+				toShow = SB_HORZ;
+				toHide = SB_VERT;
+			}
+			else if (vertical)
+			{
+				toShow = SB_VERT;
+				toHide = SB_HORZ;
+			}
+			else
+			{
+				toHide = SB_BOTH;
+			}
+
+			if (toShow >= 0 && ::ShowScrollBar(HWND(getHandle()), toShow, TRUE) == 0)
+				throw UserInterfaceException("ShowScrollBar()");
+			if (toHide >= 0 && ::ShowScrollBar(HWND(getHandle()), toHide, FALSE) == 0)
+				throw UserInterfaceException("ShowScrollBar()");
+		}
+
 		/*
 			ProgressBarAdapter Functions
 		 */

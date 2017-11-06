@@ -330,6 +330,11 @@ namespace native
 		{
 		}
 
+		void TextAreaAdapter::setScrollBars(bool horizontal, bool vertical)
+		{
+			// TODO
+		}
+
         /*
 			ProgressBarAdapter Functions
 		 */

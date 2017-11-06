@@ -11,6 +11,13 @@ namespace native
 		{
 		}
 
+		void TextArea::setScrollBars(bool horizontal, bool vertical)
+		{
+			TextAreaAdapter* adapter = (TextAreaAdapter*) getAdapter();
+
+			adapter->setScrollBars(horizontal, vertical);
+		}
+
 		Size TextArea::getPreferredSize() const
 		{
 			Size size = InputComponent::getPreferredSize();

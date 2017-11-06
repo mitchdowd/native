@@ -333,6 +333,13 @@ namespace native
 				\param area The component for this adapter.
 			 */
 			TextAreaAdapter(TextArea* area);
+
+			/**
+				Either shows or hides the scroll bars.
+				\param horizontal Whether to show the horizontal scroll bar.
+				\param vertical Whether to show the vertical scroll bar.
+			 */
+			void setScrollBars(bool horizontal, bool vertical);
 		};
 
 		/**

@@ -18,6 +18,13 @@ namespace native
 			TextArea();
 
 			/**
+				Either shows or hides the scroll bars.
+				\param horizontal Whether to show the horizontal scroll bar.
+				\param vertical Whether to show the vertical scroll bar.
+			 */
+			void setScrollBars(bool horizontal, bool vertical);
+
+			/**
 				Gets the preferred size for the TextArea. Currently this is
 				just the height of 5 lines of text.
 				\return The preferred size.
