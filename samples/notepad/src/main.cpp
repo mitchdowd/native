@@ -13,6 +13,7 @@ public:
 		setTitle("Notepad Sample");
 		setBackground(Color(0xF0, 0xF0, 0xF0));
 
+		// Main text area setup.
 		_input.setMargins(1, 0, 0, 0);
 		_input.setFont(Font("Consolas", 14));
 		_input.setBorder(Pen());
@@ -23,16 +24,40 @@ public:
 		initMenus();
 	}
 
+	bool isContentModified() const
+	{
+		// TODO
+		return true;
+	}
+
 private:
 	// Helper Functions
 	void initMenus()
 	{
 		// File Menu
 		_file.setText("File");
-        _file.add(_exit);
+
+		_new.setText("New");
+		_new.connect(this, &NotepadApp::newFile);
+		_file.add(_new);
+
+		_open.setText("Open");
+		_open.connect(this, &NotepadApp::openFile);
+		_file.add(_open);
+
+		_save.setText("Save");
+		_save.connect(this, &NotepadApp::saveFile);
+		_file.add(_save);
+
+		_saveAs.setText("Save As...");
+		_saveAs.connect(this, &NotepadApp::saveFileAs);
+		_file.add(_saveAs);
+
+		_file.addSeparator();
 
 		_exit.setText("Exit");
 		_exit.connect(&EventQueue::quit);
+		_file.add(_exit);
 
 		// Edit Menu
 		_edit.setText("Edit");
@@ -54,8 +79,28 @@ private:
 		menuBar.add(_help);
 	}
 
+	void newFile()
+	{
+		// TODO
+	}
+
+	void openFile()
+	{
+		// TODO
+	}
+
+	void saveFile()
+	{
+		// TODO
+	}
+
+	void saveFileAs()
+	{
+		// TODO
+	}
+
 	TextArea _input;
-	Action _exit;
+	Action _new, _open, _save, _saveAs, _exit;
 	Menu _file, _edit, _format, _view, _help;
 };
 
