@@ -71,6 +71,15 @@ private:
 		// Help Menu
 		_help.setText("Help");
 
+        _viewHelp.setText("View Help");
+        _help.add(_viewHelp);
+
+        _help.addSeparator();
+
+        _about.setText("About");
+        _about.connect([]() { Dialogs::messageBox(L"This is a demo replica of Microsoft's Notepad using the native C++ framework.", L"About Notepad"); });
+        _help.add(_about);
+
 		Menu& menuBar = getMenu();
 		menuBar.add(_file);
 		menuBar.add(_edit);
@@ -81,7 +90,11 @@ private:
 
 	void newFile()
 	{
-		// TODO
+        if (isContentModified()) {
+            // TODO: Prompt to save.
+        }
+
+        _input.setText(L"");
 	}
 
 	void openFile()
@@ -100,7 +113,8 @@ private:
 	}
 
 	TextArea _input;
-	Action _new, _open, _save, _saveAs, _exit;
+	Action _new, _open, _save, _saveAs, _exit; 	// File menu actions
+	Action _viewHelp, _about;					// Help menu actions
 	Menu _file, _edit, _format, _view, _help;
 };
 
