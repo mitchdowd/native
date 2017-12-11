@@ -154,6 +154,7 @@
     <ClCompile Include="common\radiobutton.cpp" />
     <ClCompile Include="common\textarea.cpp" />
     <ClCompile Include="common\action.cpp" />
+    <ClCompile Include="win32\bitmap.cpp" />
     <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="common\menu.cpp" />
     <ClCompile Include="win32\menuadapter.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="include\dialogs.h" />
     <ClInclude Include="include\font.h" />
     <ClInclude Include="include\groupbox.h" />
+    <ClInclude Include="include\bitmap.h" />
     <ClInclude Include="include\imenuadapter.h" />
     <ClInclude Include="include\label.h" />
     <ClInclude Include="include\linearlayout.h" />

@@ -84,6 +84,9 @@
       <Filter>Adapters</Filter>
     </ClCompile>
     <ClCompile Include="common\menu.cpp" />
+    <ClCompile Include="win32\bitmap.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="include\menuadapter.h">
       <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bitmap.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
