@@ -87,6 +87,9 @@
     <ClCompile Include="win32\bitmap.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="common\numberpicker.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="include\bitmap.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\numberpicker.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

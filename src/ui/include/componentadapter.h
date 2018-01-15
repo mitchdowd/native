@@ -146,6 +146,7 @@ namespace native
 		class Checkbox;
 		class GroupBox;
 		class InputComponent;
+		class NumberPicker;
 		class ProgressBar;
 		class RadioButton;
 		class TextArea;
@@ -397,6 +398,19 @@ namespace native
 				Navigates forward in the browser navigation.
 			 */
 			virtual void goForward();
+		};
+
+		/**
+			A ComponentAdapter for NumberPickers.
+		 */
+		class NumberPickerAdapter : public ComponentAdapter
+		{
+		public:
+			/**
+				Creates an adapter for the given NumberPicker.
+				\param picker The component for this adapter.
+			 */
+			NumberPickerAdapter(NumberPicker* picker);
 		};
 
 #ifdef NATIVE_PLATFORM_WIN32

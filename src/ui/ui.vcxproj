@@ -150,6 +150,7 @@
     <ClCompile Include="common\inputcomponent.cpp" />
     <ClCompile Include="common\label.cpp" />
     <ClCompile Include="common\linearlayout.cpp" />
+    <ClCompile Include="common\numberpicker.cpp" />
     <ClCompile Include="common\progressbar.cpp" />
     <ClCompile Include="common\radiobutton.cpp" />
     <ClCompile Include="common\textarea.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="include\linearlayout.h" />
     <ClInclude Include="include\menu.h" />
     <ClInclude Include="include\menuadapter.h" />
+    <ClInclude Include="include\numberpicker.h" />
     <ClInclude Include="include\pen.h" />
     <ClInclude Include="include\progressbar.h" />
     <ClInclude Include="include\radiobutton.h" />

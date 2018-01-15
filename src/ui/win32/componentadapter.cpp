@@ -18,6 +18,7 @@
 #include "../include/componentadapter.h"
 #include "../include/groupbox.h"
 #include "../include/inputcomponent.h"
+#include "../include/numberpicker.h"
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
 #include "../include/textarea.h"
@@ -585,6 +586,16 @@ namespace native
 		void ProgressBarAdapter::setProgress(int progress)
 		{
 			::SendMessage(HWND(getHandle()), PBM_SETPOS, progress, 0);
+		}
+
+		/*
+			NumberPickerAdapter Functions
+		 */
+
+		NumberPickerAdapter::NumberPickerAdapter(NumberPicker* picker)
+			: ComponentAdapter({ picker, L"EDIT", WS_CHILD | WS_VISIBLE, 0 })
+		{
+			throw NotImplementedException();
 		}
 
 		/*

@@ -9,6 +9,7 @@
 #include "../include/componentadapter.h"
 #include "../include/groupbox.h"
 #include "../include/inputcomponent.h"
+#include "../include/numberpicker.h"
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
 #include "../include/textarea.h"
@@ -352,6 +353,14 @@ namespace native
 		{
             HANDLE_OBJ->call<void>("setProgress", progress);
 		}
+
+        /*
+            NumberPickerAdapter Functions
+         */
+
+        NumberPickerAdapter::NumberPickerAdapter(NumberPicker* picker) : ComponentAdapter({ picker, "libnative/ui/NumberPicker" })
+        {
+        }
 	}
 }
 
