@@ -9,5 +9,10 @@ namespace native
 		NumberPicker::NumberPicker() : Component(new NumberPickerAdapter(this))
 		{
 		}
+
+		Size NumberPicker::getPreferredSize() const
+		{
+			return Size(80, 30);
+		}
 	}
 }

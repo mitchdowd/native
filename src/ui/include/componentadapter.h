@@ -151,6 +151,7 @@ namespace native
 		class RadioButton;
 		class TextArea;
 		class TextComponent;
+		class UpDownAdapter;
 		class WebView;
 
 		/**
@@ -411,6 +412,16 @@ namespace native
 				\param picker The component for this adapter.
 			 */
 			NumberPickerAdapter(NumberPicker* picker);
+
+			/**
+				Sets the parent adapter.
+				\param parent The new parent adapter.
+			 */
+			virtual void setParent(IComponentAdapter* parent) override;
+
+		private:
+			// Instance Variables
+			UpDownAdapter* _upDown;	//< Used in Win32 only.
 		};
 
 #ifdef NATIVE_PLATFORM_WIN32

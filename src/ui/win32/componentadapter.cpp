@@ -75,6 +75,15 @@ namespace native
 		 */
 		HFONT getDefaultFont();
 
+		/**
+			Adapter for a Win32 Up-Down control. Used by the NumberPickerAdapter.
+		 */
+		class UpDownAdapter : public ComponentAdapter
+		{
+		public:
+			UpDownAdapter(NumberPickerAdapter* picker);
+		};
+
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props) : _component(props.component)
 		{
 			ensureApiRegistered();
@@ -205,7 +214,7 @@ namespace native
 				// Call paint process of the native control.
 				::CallWindowProc(WNDPROC(baseProc), HWND(_handle), WM_PRINTCLIENT, WPARAM(canvas.getAuxHandle()), 0);
 			}
-			else if (_component->getBackground().getHandle())
+			else if (_component && _component->getBackground().getHandle())
 			{
 				canvas.fillRectangle(_component->getContentArea().getSize(), _component->getBackground());
 			}
@@ -225,22 +234,21 @@ namespace native
 		{
 			LONG_PTR baseProc = ::GetClassLongPtr(event.hwnd, GCLP_WNDPROC);
 
-			if (_component == nullptr)
-				throw InvalidStateException("Adapter without a Component.");
-
-			switch (event.msg)
+			if (_component != nullptr)
 			{
-			case WM_COMMAND:
-				if ((HIWORD(event.wparam) == BN_CLICKED && event.wparam != 0 && ::IsWindow((HWND)event.lparam)) || event.lparam == 0)
+				switch (event.msg)
 				{
-					Action* action = Action::fromId(int32_t(LOWORD(event.wparam)));
+				case WM_COMMAND:
+					if ((HIWORD(event.wparam) == BN_CLICKED && event.wparam != 0 && ::IsWindow((HWND)event.lparam)) || event.lparam == 0)
+					{
+						Action* action = Action::fromId(int32_t(LOWORD(event.wparam)));
 
-					if (action)
-						action->emit();
-				}
-				break;
+						if (action)
+							action->emit();
+					}
+					break;
 
-			case WM_CTLCOLORSTATIC:
+				case WM_CTLCOLORSTATIC:
 				{
 					ComponentAdapter* label = ComponentAdapter::fromHandle(handle_t(event.lparam));
 
@@ -255,146 +263,147 @@ namespace native
 					break;
 				}
 
-			case WM_DESTROY:
-				_handle = nullptr;
-				break;
-
-			case WM_INVOKE_ASYNC:	// WM_USER
-				if (event.lparam)
-				{
-					Function<void>* func = (Function<void>*) event.lparam;
-
-					func->invoke();
-					delete func;
-				}
-				break;
-
-			case WM_LBUTTONDOWN:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Press, InputEvent::LeftButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_LBUTTONUP:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Release, InputEvent::LeftButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_MBUTTONDOWN:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Press, InputEvent::MiddleButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_MBUTTONUP:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Release, InputEvent::MiddleButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_MOUSEMOVE:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Motion, InputEvent::Mouse, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_MOVE:
-				if (!_component->getParent())
-				{
-					RECT rect;
-
-					::GetWindowRect(HWND(_handle), &rect);
-
-					// Ensure the new position is properly reflected in the Component.
-					_component->_area.setPosition({ rect.left, rect.top });
-				}
-				break;
-
-			case WM_PAINT:
-				if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)
-				{
-					PAINTSTRUCT ps = { 0 };
-
-					HDC hdc = ::BeginPaint(event.hwnd, &ps);
-
-					{
-						// TODO: Dispatch the paint messages.
-						Gdiplus::Graphics graphics = hdc;
-						Canvas canvas(&graphics, hdc);
-
-						_component->dispatchPaintEvent(canvas);
-					}
-
-					::EndPaint(event.hwnd, &ps);
-					return;
-				}
-				break;
-
-			case WM_RBUTTONDOWN:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Press, InputEvent::RightButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_RBUTTONUP:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Release, InputEvent::RightButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_SIZE:
-				if (_component->_parent == nullptr)
-				{
-					RECT rect;
-
-					::GetWindowRect(HWND(_handle), &rect);
-					Size size(rect.right - rect.left, rect.bottom - rect.top);
-					Size client(GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam));
-
-					// Ensure the new size is properly reflected in the Component.
-					_component->_area.setSize(size.scale(1.0f / App::getDisplayScale()));
-					_component->onSize(client.scale(1.0f / App::getDisplayScale()));
-				}
-				break;
-
-			case WM_TOUCH:
-			{
-				uint16_t    count = LOWORD(event.wparam);
-				HTOUCHINPUT hinput = HTOUCHINPUT(event.lparam);
-				TOUCHINPUT  inputs[MAX_TOUCH_COUNT];
-
-				// Get information on the current "touch".
-				if (!::GetTouchInputInfo(hinput, count, inputs, sizeof(TOUCHINPUT)))
+				case WM_DESTROY:
+					_handle = nullptr;
 					break;
 
-				for (int i = 0; i < count; ++i)
+				case WM_INVOKE_ASYNC:	// WM_USER
+					if (event.lparam)
+					{
+						Function<void>* func = (Function<void>*) event.lparam;
+
+						func->invoke();
+						delete func;
+					}
+					break;
+
+				case WM_LBUTTONDOWN:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Press, InputEvent::LeftButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+
+				case WM_LBUTTONUP:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Release, InputEvent::LeftButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+
+				case WM_MBUTTONDOWN:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Press, InputEvent::MiddleButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+
+				case WM_MBUTTONUP:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Release, InputEvent::MiddleButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+
+				case WM_MOUSEMOVE:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Motion, InputEvent::Mouse, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+
+				case WM_MOVE:
+					if (!_component->getParent())
+					{
+						RECT rect;
+
+						::GetWindowRect(HWND(_handle), &rect);
+
+						// Ensure the new position is properly reflected in the Component.
+						_component->_area.setPosition({ rect.left, rect.top });
+					}
+					break;
+
+				case WM_PAINT:
+					if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)
+					{
+						PAINTSTRUCT ps = { 0 };
+
+						HDC hdc = ::BeginPaint(event.hwnd, &ps);
+
+						{
+							// TODO: Dispatch the paint messages.
+							Gdiplus::Graphics graphics = hdc;
+							Canvas canvas(&graphics, hdc);
+
+							_component->dispatchPaintEvent(canvas);
+						}
+
+						::EndPaint(event.hwnd, &ps);
+						return;
+					}
+					break;
+
+				case WM_RBUTTONDOWN:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Press, InputEvent::RightButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+
+				case WM_RBUTTONUP:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Release, InputEvent::RightButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+
+				case WM_SIZE:
+					if (_component->_parent == nullptr)
+					{
+						RECT rect;
+
+						::GetWindowRect(HWND(_handle), &rect);
+						Size size(rect.right - rect.left, rect.bottom - rect.top);
+						Size client(GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam));
+
+						// Ensure the new size is properly reflected in the Component.
+						_component->_area.setSize(size.scale(1.0f / App::getDisplayScale()));
+						_component->onSize(client.scale(1.0f / App::getDisplayScale()));
+					}
+					break;
+
+				case WM_TOUCH:
 				{
-					if ((inputs[i].dwFlags & TOUCHEVENTF_PRIMARY) == 0)
-						continue;
+					uint16_t    count = LOWORD(event.wparam);
+					HTOUCHINPUT hinput = HTOUCHINPUT(event.lparam);
+					TOUCHINPUT  inputs[MAX_TOUCH_COUNT];
 
-					InputEvent::Action action;
+					// Get information on the current "touch".
+					if (!::GetTouchInputInfo(hinput, count, inputs, sizeof(TOUCHINPUT)))
+						break;
 
-					if (inputs[i].dwFlags & TOUCHEVENTF_MOVE)
-						action = InputEvent::Motion;
-					else if (inputs[i].dwFlags & TOUCHEVENTF_DOWN)
-						action = InputEvent::Press;
-					else if (inputs[i].dwFlags & TOUCHEVENTF_UP)
-						action = InputEvent::Release;
-					else
-						continue;
+					for (int i = 0; i < count; ++i)
+					{
+						if ((inputs[i].dwFlags & TOUCHEVENTF_PRIMARY) == 0)
+							continue;
 
-					POINT pt = { inputs[i].x / 100, inputs[i].y / 100 };
-					::ScreenToClient(event.hwnd, &pt);
-					_component->dispatchInputEvent({ action, InputEvent::Touch, pt.x, pt.y });
+						InputEvent::Action action;
+
+						if (inputs[i].dwFlags & TOUCHEVENTF_MOVE)
+							action = InputEvent::Motion;
+						else if (inputs[i].dwFlags & TOUCHEVENTF_DOWN)
+							action = InputEvent::Press;
+						else if (inputs[i].dwFlags & TOUCHEVENTF_UP)
+							action = InputEvent::Release;
+						else
+							continue;
+
+						POINT pt = { inputs[i].x / 100, inputs[i].y / 100 };
+						::ScreenToClient(event.hwnd, &pt);
+						_component->dispatchInputEvent({ action, InputEvent::Touch, pt.x, pt.y });
+					}
+
+					::CloseTouchInputHandle(hinput);
+					return;
 				}
 
-				::CloseTouchInputHandle(hinput);
-				return;
-			}
+				case WM_XBUTTONDOWN:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Press, HIWORD(event.wparam) == XBUTTON1 ? InputEvent::BackButton : InputEvent::ForwardButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
 
-			case WM_XBUTTONDOWN:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Press, HIWORD(event.wparam) == XBUTTON1 ? InputEvent::BackButton : InputEvent::ForwardButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
-
-			case WM_XBUTTONUP:
-				if (!IS_TOUCH_EVENT())
-					_component->dispatchInputEvent({ InputEvent::Release, HIWORD(event.wparam) == XBUTTON1 ? InputEvent::BackButton : InputEvent::ForwardButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
-				return;
+				case WM_XBUTTONUP:
+					if (!IS_TOUCH_EVENT())
+						_component->dispatchInputEvent({ InputEvent::Release, HIWORD(event.wparam) == XBUTTON1 ? InputEvent::BackButton : InputEvent::ForwardButton, GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam), &event });
+					return;
+				}
 			}
 
 			// Check for inherited window proc.
@@ -593,9 +602,22 @@ namespace native
 		 */
 
 		NumberPickerAdapter::NumberPickerAdapter(NumberPicker* picker)
-			: ComponentAdapter({ picker, L"EDIT", WS_CHILD | WS_VISIBLE, 0 })
+			: ComponentAdapter({ picker, L"EDIT", WS_CHILD | WS_VISIBLE, WS_EX_CLIENTEDGE })
 		{
-			throw NotImplementedException();
+			_upDown = new UpDownAdapter(this);
+		}
+
+		void NumberPickerAdapter::setParent(IComponentAdapter* parent)
+		{
+			_upDown->setParent(parent);
+
+			ComponentAdapter::setParent(parent);
+		}
+
+		UpDownAdapter::UpDownAdapter(NumberPickerAdapter* picker)
+			: ComponentAdapter({ nullptr, UPDOWN_CLASS, WS_CHILD | WS_VISIBLE | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_SETBUDDYINT, 0 })
+		{
+			::SendMessage(HWND(getHandle()), UDM_SETBUDDY, WPARAM(picker->getHandle()), 0);
 		}
 
 		/*

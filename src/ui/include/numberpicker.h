@@ -17,6 +17,12 @@ namespace native
 		public:
 			/** Creates a NumberPicker with unbounded range. */
 			NumberPicker();
+
+			/**
+				Gets the preferred size for this Component.
+				\return The preferred size.
+			 */
+			virtual Size getPreferredSize() const override;
 		};
 	}
 }
