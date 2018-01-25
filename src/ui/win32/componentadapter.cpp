@@ -602,7 +602,7 @@ namespace native
 		 */
 
 		NumberPickerAdapter::NumberPickerAdapter(NumberPicker* picker)
-			: ComponentAdapter({ picker, L"EDIT", WS_CHILD | WS_VISIBLE, WS_EX_CLIENTEDGE })
+			: ComponentAdapter({ picker, L"EDIT", WS_CHILD | WS_VISIBLE | ES_NUMBER, WS_EX_CLIENTEDGE })
 		{
 			_upDown = new UpDownAdapter(this);
 		}
@@ -615,9 +615,13 @@ namespace native
 		}
 
 		UpDownAdapter::UpDownAdapter(NumberPickerAdapter* picker)
-			: ComponentAdapter({ nullptr, UPDOWN_CLASS, WS_CHILD | WS_VISIBLE | UDS_ALIGNRIGHT | UDS_ARROWKEYS | UDS_SETBUDDYINT, 0 })
+			: ComponentAdapter({ nullptr, UPDOWN_CLASS, WS_CHILD | WS_VISIBLE | UDS_ARROWKEYS | UDS_SETBUDDYINT, 0 })
 		{
+			// Assign the buddy window, so its value gets updated.
 			::SendMessage(HWND(getHandle()), UDM_SETBUDDY, WPARAM(picker->getHandle()), 0);
+
+			// TODO: Handle size/position changes.
+			setArea(Rectangle(300, 50, 50, 50));
 		}
 
 		/*
