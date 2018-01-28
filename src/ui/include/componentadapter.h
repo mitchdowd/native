@@ -425,9 +425,23 @@ namespace native
 			 */
 			int getValue() const;
 
+			/**
+			    Sets the allowable range for the NumberPicker.
+			    \param min The minimum value.
+			    \param max The maximum value.
+			 */
 			void setRange(int min, int max);
 
+            /**
+                Gets the minimum allowable value in the NumberPicker.
+                \return The minimum value.
+             */
 			int getMinimum() const;
+
+            /**
+                Gets the maximum allowable value in the NumberPicker.
+                \return The maximum value.
+             */
 			int getMaximum() const;
 
 			/**

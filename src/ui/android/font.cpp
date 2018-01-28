@@ -39,7 +39,7 @@ namespace native
             paint.call<jni::Object>("setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;", (jni::Object*) getHandle());
             paint.call<void>("setTextSize", _size);
 
-            return { paint.call<float>("measureText(Ljava/lang/String;)F", text.toArray()), _size * 1.4 /* TODO: Actually measure this? */ };
+            return { (coord_t) paint.call<float>("measureText(Ljava/lang/String;)F", text.toArray()), coord_t(_size * 1.4) /* TODO: Actually measure this? */ };
         }
 
 		Font Font::getDefault()

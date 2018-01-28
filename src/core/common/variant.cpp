@@ -76,9 +76,10 @@ namespace native
 
 		case VariantType::Float:
 			return String::format(L"{0}", _float);
-		}
 
-		throw InvalidStateException("Cannot convert current Variant to String");
+		default:
+			throw InvalidStateException("Cannot convert current Variant to String");
+		}
 	}
 
 	int Variant::toInt() const
@@ -93,9 +94,10 @@ namespace native
 
 		case VariantType::Float:
 			return int(_float);
-		}
 
-		throw InvalidStateException("Cannot convert current Variant to int");
+        default:
+            throw InvalidStateException("Cannot convert current Variant to int");
+		}
 	}
 
 	float Variant::toFloat() const
@@ -110,9 +112,10 @@ namespace native
 
 		case VariantType::Float:
 			return _float;
-		}
 
-		throw InvalidStateException("Cannot convert current Variant to float");
+        default:
+            throw InvalidStateException("Cannot convert current Variant to float");
+        }
 	}
 
 	void Variant::destroy(Variant* value)
@@ -124,6 +127,9 @@ namespace native
 			break;
 
 			// TODO: New VariantTypes MUST go here.
+
+        default:
+            throw InvalidArgumentException("Invalid variant type supplied.");
 		}
 
 		value->_type = VariantType::Null;
@@ -148,6 +154,9 @@ namespace native
 			break;
 
 			// TODO: New VariantTypes MUST go here.
+
+        default:
+            throw InvalidArgumentException("Invalid variant type supplied.");
 		}
 	}
 }

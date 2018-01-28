@@ -40,7 +40,7 @@ namespace native
         switch (::pthread_mutex_trylock((pthread_mutex_t*) &_handle))
         {
         case 0:
-            true; // All is well.
+            return true; // All is well.
 
         case EBUSY:
             return false;

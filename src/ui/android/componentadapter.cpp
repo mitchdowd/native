@@ -361,6 +361,32 @@ namespace native
         NumberPickerAdapter::NumberPickerAdapter(NumberPicker* picker) : ComponentAdapter({ picker, "libnative/ui/NumberPicker" })
         {
         }
+
+        void NumberPickerAdapter::setValue(int value)
+        {
+            HANDLE_OBJ->call<void>("setValue", value);
+        }
+
+        int NumberPickerAdapter::getValue() const
+        {
+            return HANDLE_OBJ->call<int>("getValue");
+        }
+
+        void NumberPickerAdapter::setRange(int min, int max)
+        {
+            HANDLE_OBJ->call<void>("setMinValue", min);
+            HANDLE_OBJ->call<void>("setMaxValue", max);
+        }
+
+        int NumberPickerAdapter::getMinimum() const
+        {
+            return HANDLE_OBJ->call<int>("getMinValue");
+        }
+
+        int NumberPickerAdapter::getMaximum() const
+        {
+            return HANDLE_OBJ->call<int>("getMaxValue");
+        }
 	}
 }
 
