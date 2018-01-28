@@ -82,6 +82,12 @@ namespace native
 		{
 		public:
 			UpDownAdapter(NumberPickerAdapter* picker);
+
+			int setValue(int value);
+			int getValue() const;
+			void setRange(int min, int max);
+			int getMinimum() const;
+			int getMaximum() const;
 		};
 
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props) : _component(props.component)
@@ -602,9 +608,34 @@ namespace native
 		 */
 
 		NumberPickerAdapter::NumberPickerAdapter(NumberPicker* picker)
-			: ComponentAdapter({ picker, L"EDIT", WS_CHILD | WS_VISIBLE | ES_NUMBER, WS_EX_CLIENTEDGE })
+			: ComponentAdapter({ picker, L"EDIT", WS_CHILD | WS_VISIBLE | ES_NUMBER, 0 })
 		{
 			_upDown = new UpDownAdapter(this);
+		}
+
+		void NumberPickerAdapter::setValue(int value)
+		{
+			_upDown->setValue(value);
+		}
+
+		int NumberPickerAdapter::getValue() const
+		{
+			return _upDown->getValue();
+		}
+
+		void NumberPickerAdapter::setRange(int min, int max)
+		{
+			_upDown->setRange(min, max);
+		}
+
+		int NumberPickerAdapter::getMaximum() const
+		{
+			return _upDown->getMaximum();
+		}
+
+		int NumberPickerAdapter::getMinimum() const
+		{
+			return _upDown->getMinimum();
 		}
 
 		void NumberPickerAdapter::setParent(IComponentAdapter* parent)
@@ -614,14 +645,66 @@ namespace native
 			ComponentAdapter::setParent(parent);
 		}
 
+		void NumberPickerAdapter::onEvent(ComponentEvent& event)
+		{
+			if (event.msg == WM_WINDOWPOSCHANGING)
+			{
+				WINDOWPOS* pos = (WINDOWPOS*) event.lparam;
+
+				// Shrink by the size of the updown window.
+				pos->cx -= 20;
+
+				// Position the updown.
+				_upDown->setArea(Rectangle(pos->x + pos->cx, pos->y, 20, pos->cy));
+
+				event.result = 0;
+				return;
+			}
+
+			ComponentAdapter::onEvent(event);
+		}
+
 		UpDownAdapter::UpDownAdapter(NumberPickerAdapter* picker)
-			: ComponentAdapter({ nullptr, UPDOWN_CLASS, WS_CHILD | WS_VISIBLE | UDS_ARROWKEYS | UDS_SETBUDDYINT, 0 })
+			: ComponentAdapter({ nullptr, UPDOWN_CLASS, WS_CHILD | WS_VISIBLE | UDS_ARROWKEYS | UDS_SETBUDDYINT | UDS_HOTTRACK, 0 })
 		{
 			// Assign the buddy window, so its value gets updated.
 			::SendMessage(HWND(getHandle()), UDM_SETBUDDY, WPARAM(picker->getHandle()), 0);
 
-			// TODO: Handle size/position changes.
-			setArea(Rectangle(300, 50, 50, 50));
+			setRange(INT_MIN, INT_MAX);
+			setValue(0);
+		}
+
+		int UpDownAdapter::setValue(int value)
+		{
+			return (int) ::SendMessage(HWND(getHandle()), UDM_SETPOS32, 0, value);
+		}
+
+		int UpDownAdapter::getValue() const
+		{
+			return (int) ::SendMessage(HWND(getHandle()), UDM_GETPOS32, 0, 0);
+		}
+
+		void UpDownAdapter::setRange(int min, int max)
+		{
+			::SendMessage(HWND(getHandle()), UDM_SETRANGE32, min, max);
+		}
+
+		int UpDownAdapter::getMinimum() const
+		{
+			int min = INT_MIN;
+
+			::SendMessage(HWND(getHandle()), UDM_GETRANGE32, (WPARAM) &min, 0);
+
+			return min;
+		}
+
+		int UpDownAdapter::getMaximum() const
+		{
+			int max = INT_MAX;
+
+			::SendMessage(HWND(getHandle()), UDM_GETRANGE32, (WPARAM) &max, 0);
+
+			return max;
 		}
 
 		/*

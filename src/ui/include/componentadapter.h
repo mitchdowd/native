@@ -414,10 +414,33 @@ namespace native
 			NumberPickerAdapter(NumberPicker* picker);
 
 			/**
+				Sets the value in the NumberPicker.
+				\param value The value to set.
+			 */
+			void setValue(int value);
+
+			/**
+				Gets the current value in the NumberPicker.
+				\return The current value.
+			 */
+			int getValue() const;
+
+			void setRange(int min, int max);
+
+			int getMinimum() const;
+			int getMaximum() const;
+
+			/**
 				Sets the parent adapter.
 				\param parent The new parent adapter.
 			 */
 			virtual void setParent(IComponentAdapter* parent) override;
+
+			/**
+				Provides some custom event handling functionality.
+				\param event The system component event.
+			 */
+			virtual void onEvent(ComponentEvent& event) override;
 
 		private:
 			// Instance Variables
