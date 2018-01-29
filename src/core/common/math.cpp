@@ -1,11 +1,3 @@
-#ifdef __ANDROID__
-
-double nan(const char*);
-float nanf(const char*);
-long double nanl(const char*);
-
-#endif // __ANDROID__
-
 // Standard Dependencies
 #include <cmath>
 #include <random>

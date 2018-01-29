@@ -387,6 +387,16 @@ namespace native
         {
             return HANDLE_OBJ->call<int>("getMaxValue");
         }
+
+        void NumberPickerAdapter::setParent(IComponentAdapter* parent)
+        {
+            ComponentAdapter::setParent(parent);
+        }
+
+        void NumberPickerAdapter::onEvent(ComponentEvent& event)
+        {
+            ComponentAdapter::onEvent(event);
+        }
 	}
 }
 
