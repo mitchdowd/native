@@ -11,10 +11,10 @@ model {
         }
 
         ndk {
-            platformVersion = 9
+            platformVersion = 15
             moduleName      = 'native-data'
-            toolchain       = 'gcc'
-            stl             = 'gnustl_static'
+            toolchain       = 'clang'
+            stl             = 'c++_static'
             cppFlags.addAll(['-std=c++11', '-fexceptions'])
             ldLibs.addAll(['log', 'android', 'EGL', 'GLESv1_CM'])
         }
