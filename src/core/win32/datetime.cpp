@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // Local Dependencies
 #include "../include/datetime.h"
@@ -61,7 +61,7 @@ namespace native
 	DateTime::DateTime(int year, int month, int day)
 	{
 		TIME_ZONE_INFORMATION tz;
-		SYSTEMTIME st = { 0 };
+		SYSTEMTIME st = {};
 
 		st.wYear = year;
 		st.wMonth = month;
@@ -71,10 +71,6 @@ namespace native
 
 		_value = toInt64(st);
 		_offset = short(-tz.Bias);
-	}
-
-	DateTime::DateTime(const DateTime& other) : _value(other._value), _offset(other._offset)
-	{
 	}
 
 	void DateTime::addDays(int days)

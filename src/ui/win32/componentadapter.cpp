@@ -1,9 +1,9 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 #include <windowsx.h>
-#include <commctrl.h>
+#include <CommCtrl.h>
 #include <gdiplus.h>
-#include <versionhelpers.h>
+#include <VersionHelpers.h>
 
 // External Dependencies
 #include "../../core/include/spinlock.h"
@@ -228,7 +228,7 @@ namespace native
 
 		void ComponentAdapter::invokeAsync(const Function<void>& func)
 		{
-			::PostMessage(HWND(_handle), WM_INVOKE_ASYNC, 0, (LPARAM) new Function<void>(func));
+			::PostMessage(HWND(_handle), WM_INVOKE_ASYNC, 0, LPARAM(new Function<void>(func)));
 		}
 
 		ComponentAdapter* ComponentAdapter::fromHandle(handle_t handle)
@@ -323,7 +323,7 @@ namespace native
 				case WM_PAINT:
 					if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)
 					{
-						PAINTSTRUCT ps = { 0 };
+						PAINTSTRUCT ps = {};
 
 						HDC hdc = ::BeginPaint(event.hwnd, &ps);
 
@@ -393,7 +393,7 @@ namespace native
 
 						POINT pt = { inputs[i].x / 100, inputs[i].y / 100 };
 						::ScreenToClient(event.hwnd, &pt);
-						_component->dispatchInputEvent({ action, InputEvent::Touch, pt.x, pt.y });
+						_component->dispatchInputEvent({ action, InputEvent::Touch, pt.x, pt.y, nullptr });
 					}
 
 					::CloseTouchInputHandle(hinput);
@@ -668,7 +668,7 @@ namespace native
 			: ComponentAdapter({ nullptr, UPDOWN_CLASS, WS_CHILD | WS_VISIBLE | UDS_ARROWKEYS | UDS_SETBUDDYINT | UDS_HOTTRACK, 0 })
 		{
 			// Assign the buddy window, so its value gets updated.
-			::SendMessage(HWND(getHandle()), UDM_SETBUDDY, WPARAM(picker->getHandle()), 0);
+			::SendMessage(HWND(ComponentAdapter::getHandle()), UDM_SETBUDDY, WPARAM(picker->getHandle()), 0);
 
 			setRange(INT_MIN, INT_MAX);
 			setValue(0);
@@ -734,14 +734,13 @@ namespace native
 		{
 			static bool isRegistered = false;
 			static SpinLock lock;
-			static ULONG_PTR gdiPlusToken = 0;
 
 			lock.lock();
 
 			if (!isRegistered)
 			{
-				INITCOMMONCONTROLSEX icc = { 0 };
-				WNDCLASSEX wc = { 0 };
+				INITCOMMONCONTROLSEX icc = {};
+				WNDCLASSEX wc = {};
 
 				// Initialise common control window classes.
 				icc.dwSize = sizeof(icc);
@@ -784,7 +783,7 @@ namespace native
 					ensureApiRegistered();
 
 					// Create a top-level HWND to hold orphan children.
-					HWND handle = hwnd = ::CreateWindowEx(0, NATIVE_WINDOW_CLASS_NAME, L"", 0, 0, 0, 0, 0, NULL, NULL, ::GetModuleHandle(0), NULL);
+					hwnd = ::CreateWindowEx(0, NATIVE_WINDOW_CLASS_NAME, L"", 0, 0, 0, 0, 0, NULL, NULL, ::GetModuleHandle(0), NULL);
 					System::onExit([=]() { ::DestroyWindow(hwnd); });
 				}
 

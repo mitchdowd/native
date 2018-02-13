@@ -4,8 +4,8 @@
 
 #ifdef NATIVE_PLATFORM_WIN32
 // System Dependencies
-#include <winsock2.h>
-#include <ws2tcpip.h>
+#include <WinSock2.h>
+#include <WS2tcpip.h>
 
 namespace native
 {
@@ -35,7 +35,7 @@ namespace native
 {
     namespace io
     {
-        NetworkAddress::NetworkAddress(const String& ip, port_t port, IpVersion version) : _port(port), _version(version)
+        NetworkAddress::NetworkAddress(const String& ip, port_t port, IpVersion version) : _version(version), _protocol(IpProtocol::Any), _port(port)
         {
             if (version == IpVersion::Any)
             {
@@ -56,7 +56,7 @@ namespace native
         List<NetworkAddress> NetworkAddress::byHost(const String& hostName, IpVersion version)
         {
             List<NetworkAddress> list;
-            addrinfo *result, hints = { 0 };
+            addrinfo *result, hints = {};
 
             registerSocketApi();
 
@@ -74,10 +74,10 @@ namespace native
             if (::getaddrinfo(hostName.toUtf8(), "0", &hints, &result) != 0)
                 throw SocketException("Error during DNS resolution");
 
-            for (addrinfo* i = result; i != NULL; i = i->ai_next)
+            for (addrinfo* i = result; i != nullptr; i = i->ai_next)
             {
                 NetworkAddress addr;
-                void* ip = 0;
+                void* ip = nullptr;
 
                 // Translate the IP version.
                 switch (i->ai_family)

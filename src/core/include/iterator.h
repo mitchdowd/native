@@ -17,7 +17,7 @@ namespace native
 		typedef TValue Value;
 
 		/** Virtual destructor. */
-		virtual ~Iterator() {}
+		virtual ~Iterator() = default;
 
 		/**
 			Increments the iterator forward to the next value in the Collection.

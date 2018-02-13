@@ -27,7 +27,7 @@ namespace native
 		}
 	}
 
-	ByteArray::ByteArray(const char* data, size_t length) : Array<byte_t>()
+	ByteArray::ByteArray(const char* data, size_t length)
 	{
 		if (data != nullptr)
 		{
@@ -59,7 +59,7 @@ namespace native
 	{
 		if (lhs.getLength() == 0)
 			return rhs;
-		if (rhs == 0)
+		if (rhs == nullptr)
 			return lhs;
 
 		size_t rhsLen = std::strlen(rhs);
@@ -72,7 +72,7 @@ namespace native
 
 	ByteArray operator+(const char* lhs, const ByteArray& rhs)
 	{
-		if (lhs == 0)
+		if (lhs == nullptr)
 			return rhs;
 		if (rhs.getLength() == 0)
 			return lhs;

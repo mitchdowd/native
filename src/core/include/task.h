@@ -21,10 +21,10 @@ namespace native
 	template <class TOutput>
 	class Task
 	{
+	public:
 		// Prevent Copying
 		Task(const Task<TOutput>&) = delete;
 
-	public:
 		/**
 			Creates a Task which executes the given function. Execution begins
 			as soon as a worker thread is available.
@@ -63,7 +63,7 @@ namespace native
 				ThreadPool::enqueue(Function<void>(this, &TaskDetail::execute));
 			}
 
-			~TaskDetail() { if (result) delete result; }
+			~TaskDetail() { delete result; }
 
 			void execute()
 			{

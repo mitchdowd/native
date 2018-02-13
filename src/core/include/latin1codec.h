@@ -26,7 +26,7 @@ namespace native
 			\param text The text to encode.
 			\param length Number of character to encode. Returns number of characters encoded.
 		 */
-		void encode(byte_t* buffer, size_t& size, const wchar_t* text, size_t& length);
+		void encode(byte_t* buffer, size_t& size, const wchar_t* text, size_t& length) override;
 
 		/**
 			Decodes the Latin-1 data into text.
@@ -35,7 +35,7 @@ namespace native
 			\param data The data to decode.
 			\param bytes Number of bytes to decode. Returns bytes deocded.
 		 */
-		void decode(wchar_t* buffer, size_t& size, const byte_t* data, size_t& bytes);
+		void decode(wchar_t* buffer, size_t& size, const byte_t* data, size_t& bytes) override;
 
 		/**
 			Returns the required number of bytes to represent the given string in
@@ -44,7 +44,7 @@ namespace native
 			\param length The number of characters to measure.
 			\return The number of bytes required.
 		 */
-		size_t length(const wchar_t* text, size_t length);
+		size_t length(const wchar_t* text, size_t length) override;
 
 		/**
 			Writes the Latin-1 byte order mark to the buffer. This is a three
@@ -53,7 +53,7 @@ namespace native
 			\param size The size of the buffer.
 			\return The number of bytes written (will be 3 for UTF-8).
 		 */
-		size_t encodeByteOrderMark(byte_t* buffer, size_t size);
+		size_t encodeByteOrderMark(byte_t* buffer, size_t size) override;
 	};
 }
 

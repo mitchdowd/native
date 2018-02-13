@@ -36,7 +36,7 @@ namespace native
 			Move constructor.
 			\param other The Variant the move.
 		 */
-		Variant(Variant&& other);
+		Variant(Variant&& other) noexcept;
 
 		/**
 			Creates a Variant of type String.

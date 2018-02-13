@@ -82,7 +82,7 @@ namespace native
 				\param factor The factor to multiply by.
 				\return The scaled version.
 			 */
-			Size scale(float factor) const noexcept { return Size(coord_t(width * factor), coord_t(height * factor)); }
+			Size scale(float factor) const noexcept { return { coord_t(width * factor), coord_t(height * factor) }; }
 
 			/**
 				Gets the value which works along the given orientation within this

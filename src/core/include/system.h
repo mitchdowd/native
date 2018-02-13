@@ -12,10 +12,10 @@ namespace native
 	 */
 	class System
 	{
+	public:
 		// Prevent Instantiation
 		System() = delete;
-
-	public:
+		
 		/**
 			Registers the given Function to be called on program termination.
 			\param func The Function to register.

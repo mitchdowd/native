@@ -18,9 +18,10 @@ namespace native
 	 */
 	class Math
 	{
+	public:
+		// Prevent Instantiation
 		Math() = delete;
 
-	public:
 		/**
 			Returns the smaller of two values.
 			\param lhs The first value.

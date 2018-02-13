@@ -42,18 +42,20 @@ namespace native
 
 		Component::Component()
 			: _adapter(nullptr)
-			, _parent(nullptr)
-			, _enabled(true)
-			, _area({ 0, 0, -1, -1 })
-			, _refreshing(false)
-			, _alignment(Align::Top | Align::Left)
-			, _margins({ 0, 0, 0, 0 })
+			  , _parent(nullptr)
+			  , _visibility(Inherit)
+			  , _enabled(true)
+			  , _area({0, 0, -1, -1})
+			  , _refreshing(false)
+			  , _alignment(Align::Top | Align::Left)
+			  , _margins({0, 0, 0, 0})
 		{
 		}
 
 		Component::Component(IComponentAdapter* adapter)
 			: _adapter(adapter)
 			, _parent(nullptr)
+			, _visibility(Inherit)
 			, _enabled(true)
 			, _area({ 0, 0, -1, -1 })
 			, _refreshing(false)
@@ -151,20 +153,20 @@ namespace native
 			setArea(area);
 		}
 
-		void Component::allocateArea(const Rectangle& area_)
+		void Component::allocateArea(const Rectangle& area)
 		{
-			Rectangle area = area_;
+			Rectangle area_ = area;
 
 			// Take minimum size into account.
-			area.ensureSize(getMinimumSize());
+			area_.ensureSize(getMinimumSize());
 
 			// Take margins into account.
-			area.x += _margins.left;
-			area.y += _margins.top;
-			area.width -= _margins.left + _margins.right;
-			area.height -= _margins.top + _margins.bottom;
+			area_.x += _margins.left;
+			area_.y += _margins.top;
+			area_.width -= _margins.left + _margins.right;
+			area_.height -= _margins.top + _margins.bottom;
 
-			Rectangle allocation = area;
+			Rectangle allocation = area_;
 
 			if (!_alignment.isSet(Align::Fill))
 			{
@@ -189,15 +191,15 @@ namespace native
 
 			// Handle horizontal Alignments.
 			if (_alignment.isSet(Align::Right))
-				allocation.x = area.x + area.width - allocation.width;
+				allocation.x = area_.x + area_.width - allocation.width;
 			else if (_alignment.isSet(Align::HCenter))
-				allocation.x = area.x + ((area.width - allocation.width) / 2);
+				allocation.x = area_.x + ((area_.width - allocation.width) / 2);
 
 			// Handle vertical Alignments.
 			if (_alignment.isSet(Align::Bottom))
-				allocation.y = area.y + area.height - allocation.height;
+				allocation.y = area_.y + area_.height - allocation.height;
 			else if (_alignment.isSet(Align::VCenter))
-				allocation.y = area.y + ((area.height - allocation.height) / 2);
+				allocation.y = area_.y + ((area_.height - allocation.height) / 2);
 
 			setArea(allocation);
 		}
@@ -234,9 +236,9 @@ namespace native
 			return _background;
 		}
 
-		void Component::setBorder(const Pen& border)
+		void Component::setBorder(const Pen& pen)
 		{
-			_border = border;
+			_border = pen;
 		}
 
 		void Component::invokeAsync(const Function<void>& func)

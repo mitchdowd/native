@@ -39,7 +39,7 @@ namespace native
 			MemoryStream(size_t initialCapacity = 0);
 
 			/** Destroys the MemoryStream and its contents. */
-			~MemoryStream();
+			~MemoryStream() = default;
 
 			/**
 				Reads bytes of data from the current position in the stream. This

@@ -2,7 +2,7 @@
 #define _NATIVE_UI_COMPONENT_EVENT_H_ 1
 
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 namespace native
 {

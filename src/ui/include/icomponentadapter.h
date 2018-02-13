@@ -27,7 +27,7 @@ namespace native
 		{
 		public:
 			/** Virtual destructor. */
-			virtual ~IComponentAdapter() {}
+			virtual ~IComponentAdapter() = default;
 
 			/**
 				Sets the native parent of this native component. The parent should

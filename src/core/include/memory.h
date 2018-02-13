@@ -12,10 +12,10 @@ namespace native
 	 */
 	class Memory
 	{
+	public:
 		// Prevent Creation
 		Memory() = delete;
 
-	public:
 		/**
 			Allocates a block of memory of at least the given number of bytes.
 			That memory must later be used by calling Memory::free().

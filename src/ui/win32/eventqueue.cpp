@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // Module Dependencies
 #include "../include/eventqueue.h"
@@ -13,7 +13,7 @@ namespace native
 
 		bool EventQueue::handleEvent(bool block)
 		{
-			MSG  msg = { 0 };
+			MSG  msg = {};
 			BOOL result = 0;
 
 			// Retrieve the message.

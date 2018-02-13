@@ -25,7 +25,7 @@ namespace native
 	{
 		CodecRegistry& registry = Singleton<CodecRegistry>::get();
 
-		if (codec == 0)
+		if (codec == nullptr)
 			throw InvalidArgumentException();
 
 		if (!registry.containsKey(codec->getName()))

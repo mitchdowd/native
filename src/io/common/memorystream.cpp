@@ -18,10 +18,6 @@ namespace native
 		{
 		}
 
-		MemoryStream::~MemoryStream()
-		{
-		}
-
 		size_t MemoryStream::read(void* buffer, size_t maxBytes)
 		{
 			if (_pos >= _length)

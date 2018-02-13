@@ -43,7 +43,7 @@ namespace native
 		Size NumberPicker::getPreferredSize() const
 		{
 			// TODO: Calculate this.
-			return Size(60, 25);
+			return { 60, 25 };
 		}
 	}
 }

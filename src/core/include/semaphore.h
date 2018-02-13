@@ -24,7 +24,7 @@ namespace native
 			Move constructor. Moves the other Semaphore to this instance.
 			\param other The Semaphore to move.
 		 */
-		Semaphore(Semaphore&& other);
+		Semaphore(Semaphore&& other) noexcept;
 
 		/** Destructor. */
 		~Semaphore();

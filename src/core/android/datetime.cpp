@@ -44,10 +44,6 @@ namespace native
         _value = (x * SECOND_DIVISOR) + (_offset * MINUTE_DIVISOR);
 	}
 
-	DateTime::DateTime(const DateTime& other) : _value(other._value), _offset(other._offset)
-	{
-	}
-
 	void DateTime::addDays(int days)
 	{
 		_value += int64_t(days) * DAY_DIVISOR;

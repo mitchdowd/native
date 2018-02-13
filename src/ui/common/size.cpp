@@ -24,7 +24,7 @@ namespace native
 
 		Size Size::combine(const Size& other) const noexcept
 		{
-			return Size(Math::max(width, other.width), Math::max(height, other.height));
+			return { Math::max(width, other.width), Math::max(height, other.height) };
 		}
 	}
 }

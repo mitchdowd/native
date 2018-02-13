@@ -15,7 +15,7 @@ namespace native
 	{
 	public:
 		/** Virtual destructor. */
-		virtual ~Collection() {}
+		virtual ~Collection() = default;
 
 		/**
 			Adds the given value to the Collection.

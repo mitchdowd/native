@@ -80,7 +80,7 @@ namespace native
 			\param other The Array to move.
 			\return This Array.
 		 */
-		Array<TValue>& operator=(Array<TValue>&& other);
+		Array<TValue>& operator=(Array<TValue>&& other) noexcept;
 
 		/**
 			Sets a new length for the Array. If this is shorter than the previous
@@ -171,7 +171,7 @@ namespace native
 
 		// Helper Functions
 		static Data* allocate(size_t length);
-		static void release(Data* details) noexcept;
+		static void release(Data* data) noexcept;
 
 		// Static Variables
 		static Data _empty;
@@ -190,7 +190,7 @@ namespace native
 		/** 
 			Default constructor. Creates empty array of size zero. 
 		 */
-		ByteArray() noexcept {}
+		ByteArray() noexcept = default;
 
 		/**
 			Creates a ByteArray that contains the given bytes of data.
@@ -341,7 +341,7 @@ namespace native
 	}
 
 	template <class TValue>
-	Array<TValue>& Array<TValue>::operator=(Array<TValue>&& other)
+	Array<TValue>& Array<TValue>::operator=(Array<TValue>&& other) noexcept
 	{
 		if (other._data != _data)
 		{

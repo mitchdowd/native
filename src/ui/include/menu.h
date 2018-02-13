@@ -27,6 +27,9 @@ namespace native
 			 */
 			Menu(IMenuAdapter* adapter);
 
+			// Prevent Copying
+			Menu(const Menu&) = delete;
+
 			/** Destructor. Destroys the Menu */
 			virtual ~Menu();
 
@@ -131,9 +134,6 @@ namespace native
 		private:
             // Class Friendships
             friend class MenuAdapter;
-
-			// Prevent Copying
-			Menu(const Menu&) = delete;
 
 			// Instance Variables
 			IMenuAdapter* _adapter;

@@ -14,7 +14,7 @@ namespace native
 		static Map<handle_t, Set<RadioButton*>> groups;
 		static SpinLock groupsLock;
 
-		RadioButton::RadioButton() : TextComponent(new RadioButtonAdapter(this)), _group(nullptr), _checked(false)
+		RadioButton::RadioButton() : TextComponent(new RadioButtonAdapter(this)), _checked(false), _group(nullptr)
 		{
 		}
 

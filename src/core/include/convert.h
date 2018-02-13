@@ -14,9 +14,10 @@ namespace native
 	 */
 	class Convert
 	{
+	public:
+		// Prevent Instantiation
 		Convert() = delete;
 
-	public:
 		/**
 			Converts a string to an int, or raises a FormatException.
 			\param str The string to convert.

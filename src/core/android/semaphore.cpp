@@ -14,7 +14,7 @@ namespace native
 			throw Exception("Semaphore::Semaphore");
 	}
 
-	Semaphore::Semaphore(Semaphore&& other) : _handle(other._handle)
+	Semaphore::Semaphore(Semaphore&& other) noexcept : _handle(other._handle)
 	{
 		other._handle = nullptr;
 	}

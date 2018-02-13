@@ -10,6 +10,7 @@ namespace native
 			isn't always STDOUT, as a platform such as Android would want it
 			sent to the debugger console output as STDOUT is directed nowhere.
 			\param format A printf() style format string, with extra arguments.
+			\param ... Formatted arguments, for the printf() style formatting.
 		 */
 		void log(const char* format, ...);
 	}

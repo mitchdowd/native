@@ -65,7 +65,7 @@ namespace native
 			 \param utf32 The UTF-32 encoded text.
 			 \param length The number of bytes, or NULL_TERMINATED.
 		 */
-		String(const char32_t* utf16, size_t length = NULL_TERMINATED);
+		String(const char32_t* utf32, size_t length = NULL_TERMINATED);
 
 		/**
 			Creates a String from a single character.
@@ -81,12 +81,15 @@ namespace native
 		 */
 		String(const Array<wchar_t>& text, size_t length = NULL_TERMINATED);
 
+		/** Destructor. */
+		~String() = default;
+
 		/**
 			Discards the previous String text and copies another String.
 			\param other The String to copy.
 			\return Reference to this String.
 		 */
-		String& operator=(const String& other);
+		String& operator=(const String& other) = default;
 
 		/**
 			Assigns the contents of the given text to this String.
@@ -156,7 +159,7 @@ namespace native
 
 		/**
 			Appends the given text to the end of this String.
-			\param str The text to append.
+			\param text The text to append.
 			\return This String.
 		 */
 		String& operator+=(const wchar_t* text);

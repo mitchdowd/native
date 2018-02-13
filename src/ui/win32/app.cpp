@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // Module Dependencies
 #include "../include/app.h"

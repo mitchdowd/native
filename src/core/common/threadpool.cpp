@@ -19,19 +19,19 @@ namespace native
 			_threads.add(new Thread([&]() {
 				while (!_terminate)
 				{
-					Function<void> task;
+					Function<void> t;
 
 					{
-						LockScope lock(_lock);
+						LockScope l(_lock);
 
 						// Wait for the next task in the queue.
 						while (_tasks.getSize() == 0)
 							_taskAvailable.wait();
 
-						task = _tasks.pop();
+						t = _tasks.pop();
 					}
 
-					task.invoke();
+					t.invoke();
 				}
 			}));
 		}

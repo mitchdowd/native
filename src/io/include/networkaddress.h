@@ -20,6 +20,7 @@ namespace native
         /** Available networking protocols. */
         enum class IpProtocol
         {
+			Any = 0,
             Tcp = 1,	///< Transmission control protocol.
             Udp = 2 	///< User datagram protocol.
         };
@@ -78,7 +79,7 @@ namespace native
 
         private:
             // Default Constructor
-            NetworkAddress() {}
+			NetworkAddress() = default;
 
             // Instance Variables
             IpVersion  _version;

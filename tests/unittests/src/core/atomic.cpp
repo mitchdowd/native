@@ -23,8 +23,6 @@ class Foobar
 
 TEST(Atomic_decrement)
 {
-	auto x = new Foobar();
-
 	volatile int16_t i16 = 1;
 	volatile int32_t i32 = 1;
 	volatile int64_t i64 = 1;

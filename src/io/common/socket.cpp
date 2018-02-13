@@ -7,7 +7,7 @@
 #ifdef NATIVE_PLATFORM_WIN32
 
 // System Dependencies
-# include <winsock2.h>
+# include <WinSock2.h>
 
 // External Libraries
 # pragma comment(lib, "ws2_32.lib")

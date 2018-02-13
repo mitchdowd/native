@@ -23,10 +23,10 @@ namespace native
 	 */
 	class ThreadPool
 	{
+	public:
 		// Prevent Instantiation
 		ThreadPool() = delete;
 
-	public:
 		/**
 			Enqueues a Function to be called on the next available Thread.
 			\param task The Function to be executed.

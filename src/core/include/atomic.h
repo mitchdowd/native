@@ -20,10 +20,10 @@ namespace native
 	 */
 	class Atomic
 	{
+	public:
 		// Prevent Instantiation
 		Atomic() = delete;
 
-	public:
 		/**
 			Atomically increments a value.
 			\param value The value to increment.

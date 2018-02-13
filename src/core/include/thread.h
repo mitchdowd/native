@@ -11,10 +11,10 @@ namespace native
 	 */
 	class Thread
 	{
+	public:
 		// Prevent Copying
 		Thread(const Thread&) = delete;
 
-	public:
 		/** Creates a Thread, but does not start it. */
 		Thread() : _handle(nullptr), _func([]() {}), _started(false), _id(0) {}
 
@@ -22,7 +22,7 @@ namespace native
 			Move constructor.
 			\param other The Thread to move to this one.
 		 */
-		Thread(Thread&& other) : _handle(other._handle), _func(other._func), _started(other._started)
+		Thread(Thread&& other) noexcept : _handle(other._handle), _func(other._func), _started(other._started), _id(0)
 		{
 			other._handle = nullptr;
 			other._started = false;
@@ -78,7 +78,7 @@ namespace native
 
 	private:
 		/** Entry point to the Thread, as far as the OS is concerned. */
-		static ptrint_t entryPoint(Thread*);
+		static ptrint_t __stdcall entryPoint(Thread*);
 
 		// Instance Variables
 		handle_t _handle;

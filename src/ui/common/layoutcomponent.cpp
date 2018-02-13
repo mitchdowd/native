@@ -8,7 +8,7 @@ namespace native
 {
     namespace ui
     {
-		LayoutComponent::LayoutComponent() : Component()
+		LayoutComponent::LayoutComponent()
 		{
 			setAlignment(Align::Fill);
 		}
@@ -108,7 +108,7 @@ namespace native
 					Rectangle area = child->getArea();
 
 					if (area.containsPoint(event.x, event.y)) {
-						child->dispatchInputEvent({ event.action, event.source, event.x - area.x, event.y - area.y });
+						child->dispatchInputEvent({ event.action, event.source, event.x - area.x, event.y - area.y, nullptr });
 						return;
 					}
 				}

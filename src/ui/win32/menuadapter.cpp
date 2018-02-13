@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // External Dependencies
 #include "../../core/include/exception.h"

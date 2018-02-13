@@ -5,7 +5,7 @@ namespace native
 {
     namespace ui
     {
-        Label::Label() : TextComponent()
+        Label::Label()
         {
         }
 

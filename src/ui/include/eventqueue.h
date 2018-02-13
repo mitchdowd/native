@@ -18,10 +18,10 @@ namespace native
 		 */
 		class EventQueue
 		{
+		public:
 			// Prevent Creation
 			EventQueue() = delete;
 
-		public:
 			/**
 				Handles a pending event in the current Thread's event queue. It can
 				either block and wait for an event handle, or return immediately,

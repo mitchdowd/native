@@ -44,6 +44,7 @@ namespace native
 			/**
 				Creates a Rectangle with the given size and position.
 				\param position The position of the top-left
+				\param size The size of the rectangle's dimensions.
 			 */
 			Rectangle(const Point& position, const Size& size) noexcept;
 
@@ -85,25 +86,25 @@ namespace native
 				Gets the Point at the top-left corner of this Rectangle.
 				\return The top-left corner.
 			 */
-			Point getTopLeft() const noexcept { return Point(x, y); }
+			Point getTopLeft() const noexcept { return { x, y }; }
 
 			/**
 				Gets the Point at the top-right corner of this Rectangle.
 				\return The top-right corner.
 			 */
-			Point getTopRight() const noexcept { return Point(x + width, y); }
+			Point getTopRight() const noexcept { return { x + width, y }; }
 
 			/**
 				Gets the Point at the bottom-left corner of this Rectangle.
 				\return The bottom-left corner.
 			 */
-			Point getBottomLeft() const noexcept { return Point(x, y + height); }
+			Point getBottomLeft() const noexcept { return { x, y + height }; }
 
 			/**
 				Gets the Point at the bottom-right corner of this Rectangle.
 				\return The bottom-right corner.
 			 */
-			Point getBottomRight() const noexcept { return Point(x + width, y + height); }
+			Point getBottomRight() const noexcept { return { x + width, y + height }; }
 
 			/**
 				Creates a Rectangle whose position is offset by the given width and height.
@@ -118,7 +119,7 @@ namespace native
 				Gets the current position of the top-left corner of this Rectangle.
 				\return The current position.
 			 */
-			Point getPosition() const noexcept { return Point(x, y); }
+			Point getPosition() const noexcept { return { x, y }; }
 
 			/**
 				Tells whether the given point resides within the Rectangle.

@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // Module Dependencies
 #include "../include/dialogs.h"
@@ -9,21 +9,21 @@ namespace native
 {
 	namespace ui
 	{
-		void Dialogs::messageBox(Component* component, const String& message, const String& caption)
+		void Dialogs::messageBox(Component* owner, const String& message, const String& title)
 		{
-			Component* tmp = component;
+			Component* tmp = owner;
 
 			while (tmp && !tmp->getAdapter())
 				tmp = tmp->getParent();
 
 			IComponentAdapter* adapter = tmp ? tmp->getAdapter() : nullptr;
 
-			::MessageBox(adapter ? HWND(adapter->getHandle()) : NULL, message.toArray(), caption.toArray(), MB_OK);
+			::MessageBox(adapter ? HWND(adapter->getHandle()) : NULL, message.toArray(), title.toArray(), MB_OK);
 		}
 
-		void Dialogs::messageBox(const String& message, const String& caption)
+		void Dialogs::messageBox(const String& message, const String& title)
 		{
-			::MessageBox(NULL, message.toArray(), caption.toArray(), MB_OK);
+			::MessageBox(NULL, message.toArray(), title.toArray(), MB_OK);
 		}
 	}
 }

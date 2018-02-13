@@ -16,7 +16,7 @@ public:
 
 	virtual Size getPreferredSize() const override 
 	{
-		return Size(80, 30);
+		return { 80, 30 };
 	}
 };
 

@@ -30,13 +30,12 @@ namespace native
 	void Utf8Codec::encode(byte_t* buffer, size_t& size, const wchar_t* text, size_t& length)
 	{
 		size_t b = 0, c = 0;
-		uint32_t ch;
 		byte_t defaultChar = '?';
 
 		// Encode one character at a time.
 		while (c < length)
 		{
-			ch = text[c];
+			uint32_t ch = text[c];
 
 #ifdef NATIVE_PLATFORM_WIN32
 
@@ -105,20 +104,18 @@ namespace native
 	void Utf8Codec::decode(wchar_t* buffer, size_t& size, const byte_t* data, size_t& bytes)
 	{
 		size_t b = 0, c = 0;
-		uint32_t ch;
 		wchar_t defaultChar = L'?';
-		int extra;
 
 		while (c < size)
 		{
-			extra = trailingBytes[data[b]];
+			int extra = trailingBytes[data[b]];
 
 			// Check we have enough data and space.
 			if (b + extra >= bytes || (extra > 2 && c + 1 >= size))
 				break;
 
 			// Decode into a single, 32-bit character.
-			ch = 0;
+			uint32_t ch = 0;
 			switch (extra)
 			{
 			case 5: ch += data[b++]; ch <<= 6;
@@ -163,11 +160,10 @@ namespace native
 	size_t Utf8Codec::length(const wchar_t* text, size_t length)
 	{
 		size_t b = 0, c = 0;
-		uint32_t ch;
 
 		while (c < length)
 		{
-			ch = text[c];
+			uint32_t ch = text[c];
 
 #ifdef NATIVE_PLATFORM_WIN32
 

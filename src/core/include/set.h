@@ -190,7 +190,7 @@ namespace native
 	template <class TValue>
 	Set<TValue>::~Set()
 	{
-		clear();
+		Set<TValue>::clear();
 	}
 
 	template <class TValue>

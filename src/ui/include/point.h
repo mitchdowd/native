@@ -48,7 +48,7 @@ namespace native
 				reversed.
 				\return A negated copy of the Point.
 			 */
-			Point inverse() const { return Point(-x, -y); }
+			Point inverse() const { return { -x, -y }; }
 
 			/**
 				Compares two Points.

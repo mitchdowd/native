@@ -129,14 +129,14 @@ namespace native
 				to properly reflect the desired Component behavior.
 				\return The preferred size.
 			 */
-			virtual Size getPreferredSize() const { return Size(0, 0); }
+			virtual Size getPreferredSize() const { return { 0, 0 }; }
 
 			/**
 				Override to set a minimum size which the Component requires to
 				be displayed properly.
 				\return The minimum size.
 			 */
-			virtual Size getMinimumSize() const { return Size(0, 0); }
+			virtual Size getMinimumSize() const { return { 0, 0 }; }
 
 			/**
 				Allocates a given area to the Rectangle. This area includes the

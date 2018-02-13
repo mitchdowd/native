@@ -51,11 +51,11 @@ namespace native
 				\param rgb The encoded RGB value.
 				\return The resulting Color.
 			 */
-			static Color fromRgb(uint32_t rbg);
+			static Color fromRgb(uint32_t rgb);
 
 			/**
 				Creates a Color from an ARBG quad value.
-				\param rgb The encoded ARGB value.
+				\param argb The encoded ARGB value.
 				\return The resulting Color.
 			 */
 			static Color fromArgb(uint32_t argb);

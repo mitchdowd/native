@@ -471,7 +471,7 @@ namespace native
 		public:
 			/**
 				Creates an adapter for the given GroupBox.
-				\param view The component for this adapter.
+				\param box The component for this adapter.
 			 */
 			GroupBoxAdapter(GroupBox* box);
 

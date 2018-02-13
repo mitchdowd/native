@@ -17,7 +17,7 @@ namespace native
 		set(&other);
 	}
 
-	Variant::Variant(Variant&& other)
+	Variant::Variant(Variant&& other) noexcept
 	{
 		set(&other);
 	}

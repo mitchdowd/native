@@ -26,10 +26,10 @@ namespace native
 		~SpinLock();
 
 		/** Waits for and aquires the lock on this SpinLock. */
-		void lock();
+		void lock() override;
 
 		/** Releases the current lock on this SpinLock. */
-		void release();
+		void release() override;
 
 		/**
 			Tells whether a lock is currently held on the SpinLock.

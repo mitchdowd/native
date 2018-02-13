@@ -31,7 +31,7 @@ namespace native
 			/**
 				Opens the file at the given path with the given options.
 				\param path The path of the file to open.
-				\param flags The opening flags.
+				\param state The opening flags.
 			 */
 			File(const String& path, Flags<FileState> state = FileState::Readable | FileState::Writable | FileState::Existing);
 
@@ -39,7 +39,7 @@ namespace native
 				Move constructor.
 				\param other The File to move to this one.
 			 */
-			File(File&& other);
+			File(File&& other) noexcept;
 
 			/** Ensures the File is closed. */
 			~File() { close(); }
@@ -47,7 +47,7 @@ namespace native
 			/**
 				Opens the file at the given path with the given options.
 				\param path The path of the file to open.
-				\param flags The opening flags.
+				\param state The opening flags.
 			 */
 			void open(const String& path, Flags<FileState> state = FileState::Readable | FileState::Writable | FileState::Existing);
 

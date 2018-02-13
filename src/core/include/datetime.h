@@ -56,7 +56,10 @@ namespace native
 			Copy constructor.
 			\param other The date to copy.
 		 */
-		DateTime(const DateTime& other);
+		DateTime(const DateTime& other) = default;
+
+		/** Destructor. */
+		~DateTime() = default;
 
 		/**
 			Adds the given number of days to this DateTime.

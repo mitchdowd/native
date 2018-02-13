@@ -1,6 +1,6 @@
 // System Dependencies
-#include <windows.h>
-#include <exdisp.h>
+#include <Windows.h>
+#include <ExDisp.h>
 
 // External Dependencies
 #include "../../core/include/spinlock.h"
@@ -126,7 +126,7 @@ namespace native
 			Win32WebViewAdapter Functions
 		*/
 
-		Win32WebViewAdapter::Win32WebViewAdapter(WebView* view) : WebViewAdapter(view), hwnd(HWND(getHandle()))
+		Win32WebViewAdapter::Win32WebViewAdapter(WebView* view) : WebViewAdapter(view), storage(nullptr), webObject(nullptr), hwnd(HWND(ComponentAdapter::getHandle()))
 		{
 			static bool isOleInitialized = false;
 			static SpinLock lock;
@@ -165,7 +165,7 @@ namespace native
 				throw UserInterfaceException("Failed to create ActiveX browser component.");
 
 			// Embed the ActiveX container in our Component.
-			RECT rect = { 0 };
+			RECT rect = {};
 			::OleSetContainedObject(webObject, TRUE);
 			webObject->DoVerb(OLEIVERB_INPLACEACTIVATE, NULL, this, -1, hwnd, &rect);
 		}
@@ -255,7 +255,7 @@ namespace native
 		{
 			*ppFrame = NULL;
 			*ppDoc = NULL;
-			*lprcPosRect = { 0 };
+			*lprcPosRect = {};
 			*lprcClipRect = *lprcPosRect;
 
 			lpFrameInfo->fMDIApp = FALSE;

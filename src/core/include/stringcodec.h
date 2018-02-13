@@ -21,6 +21,9 @@ namespace native
 		 */
 		StringCodec(const String& name);
 
+		/** Destructor. */
+		virtual ~StringCodec() = default;
+
 		/**
 			Encodes the text using the current codec.
 			\param buffer The location to store the encoded bytes.

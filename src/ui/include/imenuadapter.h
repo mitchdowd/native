@@ -12,7 +12,7 @@ namespace native
 		class IMenuAdapter
 		{
 		public:
-			virtual ~IMenuAdapter() {}
+			virtual ~IMenuAdapter() = default;
 
 			virtual void insert(size_t index, Action& action) = 0;
 			virtual void insertSeparator(size_t index) = 0;

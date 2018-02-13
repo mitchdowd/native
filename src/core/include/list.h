@@ -31,7 +31,7 @@ namespace native
 			its contents to this List.
 			\param other The List to move.
 		 */
-		List(List<TValue>&& other);
+		List(List<TValue>&& other) noexcept;
 
 		/**
 			Creates a List from a compiler-generated initializer_list.
@@ -174,7 +174,7 @@ namespace native
 	}
 
 	template <class TValue>
-	List<TValue>::List(List<TValue>&& other) : _array(std::move(other._array)), _length(other._length)
+	List<TValue>::List(List<TValue>&& other) noexcept : _array(std::move(other._array)), _length(other._length)
 	{
 		other._length = 0;
 	}

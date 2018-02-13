@@ -15,7 +15,7 @@ namespace native
 		{
 		public:
 			/** Virtual destructor. */
-			virtual ~IStream() {}
+			virtual ~IStream() = default;
 
 			/**
 				Reads bytes from the stream into the supplied buffer/array.

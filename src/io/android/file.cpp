@@ -13,7 +13,7 @@ namespace native
 			open(path, state);
 		}
 
-        File::File(File&& other) : _handle(other._handle)
+        File::File(File&& other) noexcept : _handle(other._handle)
         {
             other._handle = nullptr;
 		}

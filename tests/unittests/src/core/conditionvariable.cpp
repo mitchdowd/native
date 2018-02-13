@@ -45,8 +45,8 @@ TEST(ConditionVariable_signalAllReleasesAll)
 	Thread threads[10];
 	int finished = 0;
 
-	for (int i = 0; i < 10; i++)
-		threads[i].start([&]() {
+	for (auto& thread : threads)
+		thread.start([&]() {
 			lock.lock();
 
 			cond.wait();
@@ -60,8 +60,8 @@ TEST(ConditionVariable_signalAllReleasesAll)
 
 	cond.signalAll();
 
-	for (int i = 0; i < 10; i++)
-		threads[i].join();
+	for (const auto& thread : threads)
+		thread.join();
 
 	ASSERT(finished == 10);
 }

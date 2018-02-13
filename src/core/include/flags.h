@@ -19,7 +19,7 @@ namespace native
 			Creates a Flags with the given flag initially set.
 			\param flag The flag to set (defaults to zero-equivalent).
 		 */
-		inline Flags(TEnum flag = TEnum(0)) noexcept : _mask((uint32_t) flag) {}
+		inline Flags(TEnum flag = TEnum(0)) noexcept : _mask(uint32_t(flag)) {}
 
 		/**
 			Copy constructor. Makes a copy of the given Flags.
@@ -107,9 +107,9 @@ namespace native
 	}
 
 	template <class TEnum>
-	void Flags<TEnum>::set(Flags<TEnum> flag) noexcept
+	void Flags<TEnum>::set(Flags<TEnum> flags) noexcept
 	{
-		_mask |= flag._mask;
+		_mask |= flags._mask;
 	}
 
 	template <class TEnum>
@@ -154,9 +154,9 @@ namespace native
 	}
 
 	template <class TEnum>
-	bool Flags<TEnum>::isSet(Flags<TEnum> flag) const noexcept
+	bool Flags<TEnum>::isSet(Flags<TEnum> flags) const noexcept
 	{
-		return (_mask & flag._mask) == flag._mask;
+		return (_mask & flags._mask) == flags._mask;
 	}
 
 	template <class TEnum>

@@ -10,7 +10,7 @@ namespace native
 	{
 	public:
 		/** Virtual destructor. */
-		virtual ~ILockable() {}
+		virtual ~ILockable() = default;
 
 		/** Waits for and aquires the lock on this ILockable. */
 		virtual void lock() = 0;

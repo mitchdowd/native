@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 #include <gdiplus.h>
 
 // Library Dependencies

@@ -25,7 +25,7 @@ namespace native
 			Move constructor. Moves the other Mutex to this instance.
 			\param other The Mutex to move.
 		 */
-		Mutex(Mutex&& other) : _handle(other._handle) { other._handle = nullptr; }
+		Mutex(Mutex&& other) noexcept : _handle(other._handle) { other._handle = nullptr; }
 
 		/** Destructor. */
 		~Mutex();
@@ -34,7 +34,7 @@ namespace native
 			Locks the Mutex. If the Mutex is already locked, this waits until
 			it is released before claiming the lock.
 		 */
-		void lock();
+		void lock() override;
 
 		/**
 			Attempts to lock the Mutex, without waiting. If the Mutex is already
@@ -47,7 +47,7 @@ namespace native
 		/**
 			Releases the Mutex to allow other code to lock it.
 		 */
-		void release();
+		void release() override;
 
 	private:
 		// Instance Variables

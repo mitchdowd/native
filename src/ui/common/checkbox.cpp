@@ -21,10 +21,10 @@ namespace native
 
 #ifdef NATIVE_FORM_MOBILE
 			// TODO: Proper checkbox size calculation.
-			return Size(size.width + 40, size.height + 5);
+			return { size.width + 40, size.height + 5 };
 #else
             // TODO: Proper checkbox size calculation.
-			return Size(size.width + 10, size.height);
+			return { size.width + 10, size.height };
 #endif
 		}
 

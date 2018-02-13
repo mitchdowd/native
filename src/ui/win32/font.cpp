@@ -1,7 +1,7 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 #include <gdiplus.h>
-#include <versionhelpers.h>
+#include <VersionHelpers.h>
 
 // External Dependencies
 #include "../../core/include/math.h"
@@ -46,7 +46,7 @@ namespace native
 		Size Font::measureText(const String& text) const
 		{
 			if (text.getLength() == 0)
-				return Size();
+				return { 0, 0 };
 
 			Gdiplus::Graphics graphics = HWND(NULL);
 			Gdiplus::RectF rect;
@@ -54,7 +54,7 @@ namespace native
 			if (graphics.MeasureString(text.toArray(), int(text.getLength()), (Gdiplus::Font*) getHandle(), Gdiplus::PointF(0, 0), &rect) != Gdiplus::Ok)
 				throw GraphicsException("Graphics::MeasureString() failed");
 
-			return Size(coord_t(rect.Width / App::getDisplayScale()), coord_t(rect.Height / App::getDisplayScale()));
+			return { coord_t(rect.Width / App::getDisplayScale()), coord_t(rect.Height / App::getDisplayScale()) };
 		}
 
 		Font Font::getDefault()

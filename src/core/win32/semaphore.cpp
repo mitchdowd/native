@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // Module Dependencies
 #include "../include/semaphore.h"
@@ -8,11 +8,11 @@ namespace native
 {
 	Semaphore::Semaphore(uint32_t initialValue)
 	{
-		if ((_handle = ::CreateSemaphore(NULL, initialValue, LONG_MAX, NULL)) == 0)
+		if ((_handle = ::CreateSemaphore(NULL, initialValue, LONG_MAX, NULL)) == NULL)
 			throw Exception("Mutex::Mutex");
 	}
 
-	Semaphore::Semaphore(Semaphore&& other) : _handle(other._handle)
+	Semaphore::Semaphore(Semaphore&& other) noexcept : _handle(other._handle)
 	{
 		other._handle = nullptr; 
 	}

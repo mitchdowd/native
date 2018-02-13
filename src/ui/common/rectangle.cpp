@@ -48,7 +48,7 @@ namespace native
 
 		Size Rectangle::getSize() const noexcept
 		{
-			return Size(width, height);
+			return { width, height };
 		}
 
 		void Rectangle::setPosition(const Point& position) noexcept
@@ -59,7 +59,7 @@ namespace native
 
 		Rectangle Rectangle::offset(coord_t x_, coord_t y_) const noexcept
 		{
-			return Rectangle(x + x_, y + y_, width, height);
+			return { x + x_, y + y_, width, height };
 		}
 
 		bool Rectangle::containsPoint(const Point& point) const noexcept
@@ -74,17 +74,17 @@ namespace native
 
 		Rectangle Rectangle::deflate(int hamount, int vamount) const noexcept
 		{
-			return Rectangle(x + hamount, y + vamount, width - (2 * hamount), height - (2 * vamount));
+			return { x + hamount, y + vamount, width - (2 * hamount), height - (2 * vamount) };
 		}
 
 		Rectangle Rectangle::deflate(float hamount, float vamount) const noexcept
 		{
-			return Rectangle(x + coord_t(hamount), y + coord_t(vamount), width - coord_t(2 * hamount), height - coord_t(2 * vamount));
+			return { x + coord_t(hamount), y + coord_t(vamount), width - coord_t(2 * hamount), height - coord_t(2 * vamount) };
 		}
 
 		Rectangle Rectangle::scale(float factor) const noexcept
 		{
-			return Rectangle(coord_t(x * factor), coord_t(y * factor), coord_t(width * factor), coord_t(height * factor));
+			return { coord_t(x * factor), coord_t(y * factor), coord_t(width * factor), coord_t(height * factor) };
 		}
 
 		bool Rectangle::operator==(const Rectangle& other) const

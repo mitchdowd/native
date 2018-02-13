@@ -233,7 +233,7 @@ namespace native
 	template <class TKey, class TValue>
 	Map<TKey, TValue>::~Map()
 	{
-		clear();
+		Map<TKey, TValue>::clear();
 	}
 
 	template <class TKey, class TValue>

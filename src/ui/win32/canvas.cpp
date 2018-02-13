@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 #include <gdiplus.h>
 
 // External Dependencies
@@ -35,7 +35,7 @@ namespace native
 
 			if (!isRegistered)
 			{
-				Gdiplus::GdiplusStartupInput gdiplusStartupInput = { 0 };
+				Gdiplus::GdiplusStartupInput gdiplusStartupInput = {};
 
 				// Initialise the Gdi+ library.
 				Gdiplus::GdiplusStartup(&gdiPlusToken, &gdiplusStartupInput, NULL);
@@ -50,7 +50,7 @@ namespace native
 
 		static Gdiplus::Rect toGdiRect(const Rectangle& rectangle)
 		{
-			return Gdiplus::Rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+			return { rectangle.x, rectangle.y, rectangle.width, rectangle.height };
 		}
 
 		Canvas::Canvas(handle_t handle, handle_t auxHandle) : _handle(handle), _auxHandle(auxHandle)

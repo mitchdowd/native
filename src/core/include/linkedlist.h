@@ -19,11 +19,11 @@ namespace native
 	template <class TValue>
 	class LinkedList : public Collection< LinkedListIterator<TValue> >
 	{
+	public:
 		// Prevent Copying... for now
 		LinkedList(const LinkedList<TValue>& other) = delete;
 		LinkedList<TValue>& operator=(const LinkedList<TValue>& other) = delete;
 
-	public:
 		/** Creates an empty LinkedList. */
 		LinkedList();
 
@@ -32,7 +32,7 @@ namespace native
 			its contents to this List.
 			\param other The List to move.
 		 */
-		LinkedList(LinkedList<TValue>&& other);
+		LinkedList(LinkedList<TValue>&& other) noexcept;
 
 		/**
 			Creates a List from a compiler-generated initializer_list.
@@ -41,7 +41,7 @@ namespace native
 		LinkedList(std::initializer_list<TValue> init);
 
 		/** Destroys the LinkedList and the values it contains. */
-		~LinkedList() { clear(); }
+		~LinkedList() { LinkedList<TValue>::clear(); }
 
 		/**
 			Appends a single value to the end of the LinkedList.
@@ -145,7 +145,7 @@ namespace native
 	}
 
 	template <class TValue>
-	LinkedList<TValue>::LinkedList(LinkedList<TValue>&& other) : _length(other._length), _first(other._first), _last(other._last)
+	LinkedList<TValue>::LinkedList(LinkedList<TValue>&& other) noexcept : _length(other._length), _first(other._first), _last(other._last)
 	{
 		other._length = 0;
 		other._first = nullptr;
@@ -187,19 +187,19 @@ namespace native
 	}
 
 	template <class TValue>
-	void LinkedList<TValue>::insert(const LinkedListIterator<TValue>& item, const TValue& value)
+	void LinkedList<TValue>::insert(const LinkedListIterator<TValue>& insertBefore, const TValue& value)
 	{
 		if (_first == nullptr)
 			throw InvalidArgumentException();
 
-		Link* link = item._prev = new Link(value, item._link ? item._link->next : nullptr);
+		Link* link = insertBefore._prev = new Link(value, insertBefore._link ? insertBefore._link->next : nullptr);
 		
-		if (item._link)
-			item._link->next = link;
+		if (insertBefore._link)
+			insertBefore._link->next = link;
 		else
 			_last = link;
 
-		if (item._link == _first)
+		if (insertBefore._link == _first)
 			_first = link;
 
 		_length++;

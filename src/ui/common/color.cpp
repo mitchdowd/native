@@ -5,16 +5,15 @@ namespace native
 {
     namespace ui
     {
-        Color::Color() : alpha(0xFF), red(0), green(0), blue(0)
+        Color::Color() : red(0), green(0), blue(0), alpha(0xFF)
         {
         }
 
-        Color::Color(byte_t a, byte_t r, byte_t g, byte_t b)
-                : alpha(a), red(r), green(g), blue(b)
+        Color::Color(byte_t alpha, byte_t red, byte_t green, byte_t blue) : red(red), green(green), blue(blue), alpha(alpha)
         {
         }
 
-        Color::Color(byte_t r, byte_t g, byte_t b) : alpha(0xFF), red(r), green(g), blue(b)
+        Color::Color(byte_t red, byte_t green, byte_t blue) : red(red), green(green), blue(blue), alpha(0xFF)
         {
         }
 
@@ -57,10 +56,10 @@ namespace native
                 return lighten(-percentage);
 
             return Color(
-                    alpha,
-                    byte_t(red   * ((100 - percentage) / 100)),
-                    byte_t(green * ((100 - percentage) / 100)),
-                    byte_t(blue  * ((100 - percentage) / 100))
+                alpha,
+                byte_t(red   * ((100 - percentage) / 100)),
+                byte_t(green * ((100 - percentage) / 100)),
+                byte_t(blue  * ((100 - percentage) / 100))
             );
         }
 
@@ -72,10 +71,10 @@ namespace native
                 return darken(-percentage);
 
             return Color(
-                    alpha,
-                    byte_t(red   + ((max - red)   * percentage / 100)),
-                    byte_t(green + ((max - green) * percentage / 100)),
-                    byte_t(blue  + ((max - blue)  * percentage / 100))
+                alpha,
+                byte_t(red   + ((max - red)   * percentage / 100)),
+                byte_t(green + ((max - green) * percentage / 100)),
+                byte_t(blue  + ((max - blue)  * percentage / 100))
             );
         }
     }

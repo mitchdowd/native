@@ -41,7 +41,7 @@ namespace native
 			state, and will steal its reference to its contained value.
 			\param other The instance to move.
 		 */
-		Shared(Shared<TValue>&& other);
+		Shared(Shared<TValue>&& other) noexcept;
 
 		/** Destructor. Release's this reference to the shared value. */
 		virtual ~Shared() { release(); }
@@ -146,7 +146,7 @@ namespace native
 	}
 
 	template <class TValue>
-	Shared<TValue>::Shared(Shared<TValue>&& other) : _data(other._data)
+	Shared<TValue>::Shared(Shared<TValue>&& other) noexcept : _data(other._data)
 	{
 		other._data = nullptr;
 	}

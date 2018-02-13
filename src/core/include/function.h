@@ -12,7 +12,7 @@ namespace native
 		struct FunctionData
 		{
 			FunctionData() : invoker(nullptr), referenceCount(1) {}
-			virtual ~FunctionData() {}
+			virtual ~FunctionData() = default;
 
 			typedef void (*func_ptr)(void*);
 
@@ -33,7 +33,7 @@ namespace native
 		template <class TObj, class TFunc>
 		struct BoundFunctionData : public FunctionData
 		{
-			BoundFunctionData(TObj* obj, TFunc func) : func(func), obj(obj) {}
+			BoundFunctionData(TObj* obj, TFunc func) : obj(obj), func(func) {}
 
 			TObj* obj;
 			TFunc func;

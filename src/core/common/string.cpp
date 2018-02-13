@@ -22,7 +22,7 @@ namespace native
 		}
 	}
 
-	static StringCodec* utf8 = 0;
+	static StringCodec* utf8 = nullptr;
 	static SpinLock utf8Lock;
 
 	// Static Initializers
@@ -151,13 +151,6 @@ namespace native
 		other._length = 0;
 	}
 
-	String& String::operator=(const String& other)
-	{
-		_array = other._array;
-		_length = other._length;
-		return *this;
-	}
-
 	String& String::operator=(const wchar_t* other)
 	{
 		if (_array.toArray() != other)
@@ -229,7 +222,7 @@ namespace native
 		const wchar_t* data = toArray();
 		const wchar_t* result = std::wcsstr(data + startIndex, substr);
 
-		return result == 0 ? -1 : result - data;
+		return result == nullptr ? -1 : result - data;
 	}
 
 	ptrint_t String::lastIndexOf(const wchar_t* substr) const
@@ -239,7 +232,7 @@ namespace native
 
 		for (size_t i = 1; i < length; i++)
 		{
-			if (data[length - i] == *substr && std::wcsstr(data + (length - i), substr) != 0)
+			if (data[length - i] == *substr && std::wcsstr(data + (length - i), substr) != nullptr)
 				return length - i;
 
 		}
@@ -252,7 +245,7 @@ namespace native
 		const wchar_t* data = toArray();
 		const wchar_t* result = std::wcspbrk(data + startIndex, chars);
 
-		return result == 0 ? -1 : result - data;
+		return result == nullptr ? -1 : result - data;
 	}
 
 	ptrint_t String::lastIndexOfAny(const wchar_t* chars) const
@@ -275,7 +268,7 @@ namespace native
 
 	bool String::endsWith(const String& substr) const
 	{
-		return lastIndexOf(substr) == getLength() - substr.getLength();
+		return lastIndexOf(substr) == int(getLength() - substr.getLength());
 	}
 
 	bool String::endsWith(wchar_t substr) const
@@ -293,7 +286,7 @@ namespace native
 
 		length = Math::min(getLength() - start, length);
 
-		return std::move(String(toArray() + start, length));
+		return String(toArray() + start, length);
 	}
 
 	void String::clear()
@@ -311,7 +304,7 @@ namespace native
 
 		// Null-terminate.
 		str.set(getLength(), L'\0');
-		return std::move(str);
+		return str;
 	}
 
 	String String::replace(const wchar_t* oldPart, const wchar_t* newPart) const
@@ -336,7 +329,7 @@ namespace native
 
 			result.append(data + start);
 
-			return std::move(result);
+			return result;
 		}
 
 		return *this;
@@ -363,7 +356,7 @@ namespace native
 
 			result.append(data + start);
 
-			return std::move(result);
+			return result;
 		}
 
 		return *this;
@@ -373,7 +366,7 @@ namespace native
 	{
 		StringCodec* codec = StringCodec::byName(codecName);
 
-		if (codec == 0)
+		if (codec == nullptr)
 			throw InvalidArgumentException();
 
 		// Create an array and encode into it.
@@ -383,14 +376,14 @@ namespace native
 
 		// Null-terminate.
 		buffer.set(size, 0);
-		return std::move(buffer);
+		return buffer;
 	}
 
 	String String::fromBytes(const String& codecName, const byte_t* data, size_t bytes)
 	{
 		StringCodec* codec = StringCodec::byName(codecName);
 
-		if (codec == 0)
+		if (codec == nullptr)
 			throw InvalidArgumentException();
 
 		// Create an array and decode into it.
@@ -400,7 +393,7 @@ namespace native
 
 		// Null-terminate.
 		buffer.set(size, 0);
-		return std::move(String(buffer));
+		return String(buffer);
 	}
 
 	ByteArray String::toUtf8() const
@@ -419,7 +412,7 @@ namespace native
 
 		// Null-terminate.
 		buffer.set(size, 0);
-		return std::move(buffer);
+		return buffer;
 	}
 
 	String String::fromUtf8(const void* data, size_t bytes)
@@ -441,7 +434,7 @@ namespace native
 
 		// Null-terminate.
 		buffer.set(size, 0);
-		return std::move(String(buffer));
+		return String(buffer);
 	}
 
 	template <class TValue>

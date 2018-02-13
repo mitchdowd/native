@@ -15,10 +15,10 @@ namespace native
 	template <class T>
 	class Singleton
 	{
+	public:
 		// Prevent Creation
 		Singleton() = delete;
 
-	public:
 		/** Retrieves the instance held by this Singleton. */
 		static T& get();
 
@@ -41,7 +41,7 @@ namespace native
 	template <class T>
 	T& Singleton<T>::get()
 	{
-		static T* instance = 0;
+		static T* instance = nullptr;
 
 		if (!instance)
 		{

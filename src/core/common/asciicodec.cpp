@@ -22,8 +22,6 @@ namespace native
 
 	void AsciiCodec::decode(wchar_t* buffer, size_t& size, const byte_t* data, size_t& bytes)
 	{
-		size_t i = 0;
-
 		if (size < bytes)
 			bytes = size;
 		else

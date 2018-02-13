@@ -1,5 +1,5 @@
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // Local Dependencies
 #include "../include/exception.h"
@@ -9,7 +9,7 @@ namespace native
 {
 	Mutex::Mutex()
 	{
-		if ((_handle = ::CreateMutex(NULL, FALSE, NULL)) == 0)
+		if ((_handle = ::CreateMutex(NULL, FALSE, NULL)) == NULL)
 			throw Exception("Mutex::Mutex");
 	}
 

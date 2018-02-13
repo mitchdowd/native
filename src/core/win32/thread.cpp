@@ -1,7 +1,7 @@
 #define NO_STRICT 1
 
 // System Dependencies
-#include <windows.h>
+#include <Windows.h>
 
 // Module Dependencies
 #include "../include/exception.h"
@@ -64,7 +64,7 @@ namespace native
 		return ::GetCurrentThreadId();
 	}
 
-	ptrint_t Thread::entryPoint(Thread* thread)
+	ptrint_t __stdcall Thread::entryPoint(Thread* thread)
 	{
 		_current = thread;
 		thread->_started = true;
