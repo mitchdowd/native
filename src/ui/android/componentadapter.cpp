@@ -12,6 +12,7 @@
 #include "../include/numberpicker.h"
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
+#include "../include/scrollview.h"
 #include "../include/textarea.h"
 
 // Local Dependencies
@@ -396,6 +397,14 @@ namespace native
         void NumberPickerAdapter::onEvent(ComponentEvent& event)
         {
             ComponentAdapter::onEvent(event);
+        }
+
+        /*
+            ScrollViewAdapter Functions
+         */
+
+        ScrollViewAdapter::ScrollViewAdapter(ScrollView* view) : ComponentAdapter({ view, "libnative/ui/ScrollView" })
+        {
         }
 	}
 }

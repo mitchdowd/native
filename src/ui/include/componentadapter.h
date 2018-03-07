@@ -149,6 +149,7 @@ namespace native
 		class NumberPicker;
 		class ProgressBar;
 		class RadioButton;
+        class ScrollView;
 		class TextArea;
 		class TextComponent;
 		class UpDownAdapter;
@@ -368,6 +369,12 @@ namespace native
 			 */
 			void setProgress(int progress);
 		};
+
+		class ScrollViewAdapter : public ComponentAdapter
+        {
+        public:
+            ScrollViewAdapter(ScrollView* view);
+        };
 
 		/**
 			A ComponentAdapter for WebViews.

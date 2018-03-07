@@ -21,6 +21,7 @@
 #include "../include/numberpicker.h"
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
+#include "../include/scrollview.h"
 #include "../include/textarea.h"
 #include "../include/textcomponent.h"
 #include "../include/window.h"
@@ -724,6 +725,15 @@ namespace native
 		void GroupBoxAdapter::setFont(const Font& font)
 		{
 			ComponentAdapter::setFont(font);
+		}
+
+		/*
+			ScrollViewAdapter Functions
+		 */
+
+		ScrollViewAdapter::ScrollViewAdapter(ScrollView* view)
+			: ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, 0 })
+		{
 		}
 
 		/*

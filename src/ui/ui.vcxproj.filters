@@ -90,6 +90,9 @@
     <ClCompile Include="common\numberpicker.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="common\scrollview.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -195,6 +198,9 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\numberpicker.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scrollview.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
