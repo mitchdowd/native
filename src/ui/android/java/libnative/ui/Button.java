@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-public class Button extends android.widget.Button {
+public class Button extends android.widget.Button implements INativeComponent {
     public Button(Context context) {
         super(context);
     }

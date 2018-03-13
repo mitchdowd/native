@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-public class RadioButton extends android.widget.RadioButton {
+public class RadioButton extends android.widget.RadioButton implements INativeComponent {
     public RadioButton(Context context) {
         super(context);
     }

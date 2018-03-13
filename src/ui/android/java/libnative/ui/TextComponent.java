@@ -3,9 +3,8 @@ package libnative.ui;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
-import android.widget.TextView;
 
-public class TextComponent extends TextView {
+public class TextComponent extends android.widget.TextView implements INativeComponent {
     public TextComponent(Context context) {
         super(context);
     }

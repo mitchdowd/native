@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-public class ProgressBar extends android.widget.ProgressBar {
+public class ProgressBar extends android.widget.ProgressBar implements INativeComponent {
     public ProgressBar(Context context) {
         super(context, null, android.R.attr.progressBarStyleHorizontal);
     }

@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.webkit.WebViewClient;
 
-public class WebView extends android.webkit.WebView {
+public class WebView extends android.webkit.WebView implements INativeComponent {
     public WebView(Context context) {
         super(context);
 

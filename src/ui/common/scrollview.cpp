@@ -8,7 +8,12 @@ namespace native
     {
         ScrollView::ScrollView() : LayoutComponent(new ScrollViewAdapter(this))
         {
-
         }
+
+		void ScrollView::onSize(const Size& size)
+		{
+			for (auto child : getChildren())
+				child->allocateArea(child->getPreferredSize());
+		}
     }
 }

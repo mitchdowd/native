@@ -4,9 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.widget.EditText;
 
-public class TextArea extends EditText {
+public class TextArea extends android.widget.EditText implements INativeComponent {
     public TextArea(Context context) {
         super(context);
 

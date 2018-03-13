@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-public class Checkbox extends android.widget.CheckBox {
+public class Checkbox extends android.widget.CheckBox implements INativeComponent {
     public Checkbox(Context context) {
         super(context);
     }

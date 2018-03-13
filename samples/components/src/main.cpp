@@ -70,8 +70,10 @@ public:
 		_layout.addChild(_checkGroup);
 		_layout.addChild(_area1);
 		_layout.addChild(_number);
-		
-		addChild(_layout);
+
+        _scroll.addChild(_layout);
+
+        addChild(_scroll);
 	}
 
 private:
@@ -85,6 +87,7 @@ private:
 	GroupBox _checkGroup, _radioGroup;
 	NumberPicker _number;
 	VLayout _layout, _checkLayout, _radioLayout;
+    ScrollView _scroll;
 };
 
 // Entry Point

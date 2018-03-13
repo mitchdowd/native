@@ -12,6 +12,9 @@ namespace native
         {
         public:
             ScrollView();
+
+		protected:
+			virtual void onSize(const Size& size) override;
         };
     }
 }

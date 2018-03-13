@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-public class NumberPicker extends android.widget.NumberPicker {
+public class NumberPicker extends android.widget.NumberPicker implements INativeComponent {
     public NumberPicker(Context context) {
         super(context);
     }

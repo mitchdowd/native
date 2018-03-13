@@ -3,9 +3,8 @@ package libnative.ui;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
-import android.widget.EditText;
 
-public class InputComponent extends EditText {
+public class InputComponent extends android.widget.EditText implements INativeComponent {
     public InputComponent(Context context) {
         super(context);
 
