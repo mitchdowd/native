@@ -42,8 +42,14 @@ namespace native
 
 		Size NumberPicker::getPreferredSize() const
 		{
-			// TODO: Calculate this.
-			return { 60, 25 };
+#ifdef NATIVE_PLATFORM_ANDROID
+            // TODO: Calculate this.
+			return { 100, 100 };
+#else
+            // TODO: Calculate this.
+            return { 60, 25 };
+#endif
+
 		}
 	}
 }

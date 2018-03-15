@@ -7,6 +7,11 @@ import android.view.MotionEvent;
 public class NumberPicker extends android.widget.NumberPicker implements INativeComponent {
     public NumberPicker(Context context) {
         super(context);
+
+        setWrapSelectorWheel(false);
+
+        // Set default min/max values.
+        setMaxValue(Integer.MAX_VALUE);
     }
 
     @Override
