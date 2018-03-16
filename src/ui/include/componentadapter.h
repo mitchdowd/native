@@ -149,6 +149,7 @@ namespace native
 		class NumberPicker;
 		class ProgressBar;
 		class RadioButton;
+		class ScrollBarAdapter;
         class ScrollView;
 		class TextArea;
 		class TextComponent;
@@ -374,6 +375,14 @@ namespace native
         {
         public:
             ScrollViewAdapter(ScrollView* view);
+			~ScrollViewAdapter();
+
+			virtual void onEvent(ComponentEvent& event) override;
+
+		private:
+			// For Win32 only so far
+			ScrollBarAdapter* _verticalBar;
+			ScrollBarAdapter* _horizontalBar;
         };
 
 		/**

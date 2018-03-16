@@ -403,8 +403,18 @@ namespace native
             ScrollViewAdapter Functions
          */
 
-        ScrollViewAdapter::ScrollViewAdapter(ScrollView* view) : ComponentAdapter({ view, "libnative/ui/ScrollView" })
+        ScrollViewAdapter::ScrollViewAdapter(ScrollView* view)
+                : ComponentAdapter({ view, "libnative/ui/ScrollView" }), _verticalBar(nullptr), _horizontalBar(nullptr)
         {
+        }
+
+        ScrollViewAdapter::~ScrollViewAdapter()
+        {
+        }
+
+        void ScrollViewAdapter::onEvent(ComponentEvent& event)
+        {
+            ComponentAdapter::onEvent(event);
         }
 	}
 }

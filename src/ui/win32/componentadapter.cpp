@@ -91,6 +91,15 @@ namespace native
 			int getMaximum() const;
 		};
 
+		class ScrollBarAdapter : public ComponentAdapter
+		{
+		public:
+			ScrollBarAdapter(ScrollViewAdapter* view, Orientation orientation);
+
+		private:
+			Orientation _orientation;
+		};
+
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props) : _component(props.component)
 		{
 			ensureApiRegistered();
@@ -709,6 +718,15 @@ namespace native
 		}
 
 		/*
+			ScrollBarAdapter Functions
+		 */
+
+		ScrollBarAdapter::ScrollBarAdapter(ScrollViewAdapter* view, Orientation orientation)
+			: ComponentAdapter({ nullptr, L"SCROLLBAR", WS_CHILD | WS_VISIBLE | (orientation == Horizontal ? SBS_HORZ : SBS_VERT), 0 }), _orientation(orientation)
+		{
+		}
+
+		/*
 			GroupBoxAdapter Functions
 		 */
 
@@ -732,8 +750,19 @@ namespace native
 		 */
 
 		ScrollViewAdapter::ScrollViewAdapter(ScrollView* view)
-			: ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, 0 })
+			: ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, 0 }), _verticalBar(nullptr), _horizontalBar(nullptr)
 		{
+		}
+
+		ScrollViewAdapter::~ScrollViewAdapter()
+		{
+			delete _verticalBar;
+			delete _horizontalBar;
+		}
+
+		void ScrollViewAdapter::onEvent(ComponentEvent& event)
+		{
+			ComponentAdapter::onEvent(event);
 		}
 
 		/*
