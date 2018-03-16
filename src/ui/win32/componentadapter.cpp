@@ -722,7 +722,7 @@ namespace native
 		 */
 
 		ScrollBarAdapter::ScrollBarAdapter(ScrollViewAdapter* view, Orientation orientation)
-			: ComponentAdapter({ nullptr, L"SCROLLBAR", WS_CHILD | WS_VISIBLE | (orientation == Horizontal ? SBS_HORZ : SBS_VERT), 0 }), _orientation(orientation)
+			: ComponentAdapter({ nullptr, L"SCROLLBAR", WS_CHILD | WS_VISIBLE | uint32_t(orientation == Horizontal ? SBS_HORZ : SBS_VERT), 0 }), _orientation(orientation)
 		{
 		}
 
