@@ -91,15 +91,6 @@ namespace native
 			int getMaximum() const;
 		};
 
-		class ScrollBarAdapter : public ComponentAdapter
-		{
-		public:
-			ScrollBarAdapter(ScrollViewAdapter* view, Orientation orientation);
-
-		private:
-			Orientation _orientation;
-		};
-
 		ComponentAdapter::ComponentAdapter(const ComponentAdapterProperties& props) : _component(props.component)
 		{
 			ensureApiRegistered();
@@ -718,15 +709,6 @@ namespace native
 		}
 
 		/*
-			ScrollBarAdapter Functions
-		 */
-
-		ScrollBarAdapter::ScrollBarAdapter(ScrollViewAdapter* view, Orientation orientation)
-			: ComponentAdapter({ nullptr, L"SCROLLBAR", WS_CHILD | WS_VISIBLE | uint32_t(orientation == Horizontal ? SBS_HORZ : SBS_VERT), 0 }), _orientation(orientation)
-		{
-		}
-
-		/*
 			GroupBoxAdapter Functions
 		 */
 
@@ -750,18 +732,118 @@ namespace native
 		 */
 
 		ScrollViewAdapter::ScrollViewAdapter(ScrollView* view)
-			: ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, 0 }), _verticalBar(nullptr), _horizontalBar(nullptr)
+			: ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL, 0 })
 		{
-		}
-
-		ScrollViewAdapter::~ScrollViewAdapter()
-		{
-			delete _verticalBar;
-			delete _horizontalBar;
 		}
 
 		void ScrollViewAdapter::onEvent(ComponentEvent& event)
 		{
+			static const int CXVSCROLL = ::GetSystemMetrics(SM_CXVSCROLL);
+			static const int CYHSCROLL = ::GetSystemMetrics(SM_CYHSCROLL);
+
+			switch (event.msg)
+			{
+			case WM_HSCROLL:
+				{
+					SCROLLINFO si = {};
+
+					// Get current state of the scrollbar.
+					si.cbSize = sizeof(si);
+					si.fMask = SIF_POS | SIF_RANGE | SIF_PAGE;
+					::GetScrollInfo(event.hwnd, SB_HORZ, &si);
+
+					int oldPos = si.nPos;
+
+					// Detect how far we've scrolled.
+					switch (int(LOWORD(event.wparam)))
+					{
+					case SB_LEFT:  si.nPos = si.nMin; break;
+					case SB_RIGHT: si.nPos = si.nMax; break;
+					case SB_LINELEFT:  si.nPos -= 20; break;
+					case SB_LINERIGHT: si.nPos += 20; break;
+					case SB_PAGELEFT:  si.nPos -= si.nPage; break;
+					case SB_PAGERIGHT: si.nPos += si.nPage; break;
+					case SB_THUMBPOSITION:
+					case SB_THUMBTRACK:
+						si.nPos = HIWORD(event.wparam); 
+						break;
+					}
+
+					// Update the scroll bar.
+					::SetScrollPos(event.hwnd, SB_HORZ, si.nPos, TRUE);
+					si.nPos = ::GetScrollPos(event.hwnd, SB_HORZ);
+
+					// Scroll the scrollview itself.
+					::ScrollWindowEx(event.hwnd, oldPos - si.nPos, 0, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
+					break;
+				}
+
+			case WM_SIZE:
+				{
+					Size clientSize = Size(GET_X_LPARAM(event.lparam), GET_Y_LPARAM(event.lparam))
+						.scale(1.0f / App::getDisplayScale());
+
+					// Calculate the size required by the child components.
+					Size maxChildSize;
+					for (auto child : ((ScrollView*)getComponent())->getChildren())
+						maxChildSize = child->getPreferredSize().combine(maxChildSize);
+
+					SCROLLINFO si = {};
+
+					// Adjust the vertical scrollbar.
+					si.cbSize = sizeof(si);
+					si.fMask = SIF_RANGE | SIF_PAGE;
+					si.nMin = 0;
+					si.nMax = maxChildSize.height;
+					si.nPage = clientSize.height;
+					::SetScrollInfo(event.hwnd, SB_VERT, &si, TRUE);
+
+					// Adjust the horizontal scrollbar.
+					si.cbSize = sizeof(si);
+					si.fMask = SIF_RANGE | SIF_PAGE;
+					si.nMin = 0;
+					si.nMax = maxChildSize.width;
+					si.nPage = clientSize.width;
+					::SetScrollInfo(event.hwnd, SB_HORZ, &si, TRUE);
+					break;
+				}
+
+			case WM_VSCROLL:
+				{
+					SCROLLINFO si = {};
+
+					// Get current state of the scrollbar.
+					si.cbSize = sizeof(si);
+					si.fMask = SIF_POS | SIF_RANGE | SIF_PAGE;
+					::GetScrollInfo(event.hwnd, SB_VERT, &si);
+
+					int oldPos = si.nPos;
+
+					// Detect how far we've scrolled.
+					switch (int(LOWORD(event.wparam)))
+					{
+					case SB_TOP:    si.nPos = si.nMin; break;
+					case SB_BOTTOM: si.nPos = si.nMax; break;
+					case SB_LINEUP:   si.nPos -= 20; break;
+					case SB_LINEDOWN: si.nPos += 20; break;
+					case SB_PAGEUP:   si.nPos -= si.nPage; break;
+					case SB_PAGEDOWN: si.nPos += si.nPage; break;
+					case SB_THUMBPOSITION:
+					case SB_THUMBTRACK:
+						si.nPos = HIWORD(event.wparam);
+						break;
+					}
+
+					// Update the scroll barSB_VERT
+					::SetScrollPos(event.hwnd, SB_VERT, si.nPos, TRUE);
+					si.nPos = ::GetScrollPos(event.hwnd, SB_VERT);
+
+					// Scroll the scrollview itself.
+					::ScrollWindowEx(event.hwnd, 0, oldPos - si.nPos, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
+					break;
+				}
+			}
+
 			ComponentAdapter::onEvent(event);
 		}
 
