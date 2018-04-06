@@ -749,10 +749,8 @@ namespace native
 
 					// Get current state of the scrollbar.
 					si.cbSize = sizeof(si);
-					si.fMask = SIF_POS | SIF_RANGE | SIF_PAGE;
+					si.fMask = SIF_POS | SIF_RANGE | SIF_PAGE | SIF_TRACKPOS;
 					::GetScrollInfo(event.hwnd, SB_HORZ, &si);
-
-					int oldPos = si.nPos;
 
 					// Detect how far we've scrolled.
 					switch (int(LOWORD(event.wparam)))
@@ -763,18 +761,16 @@ namespace native
 					case SB_LINERIGHT: si.nPos += 20; break;
 					case SB_PAGELEFT:  si.nPos -= si.nPage; break;
 					case SB_PAGERIGHT: si.nPos += si.nPage; break;
-					case SB_THUMBPOSITION:
-					case SB_THUMBTRACK:
-						si.nPos = HIWORD(event.wparam); 
+					case SB_THUMBTRACK: si.nPos = si.nTrackPos; break;
 						break;
 					}
 
 					// Update the scroll bar.
-					::SetScrollPos(event.hwnd, SB_HORZ, si.nPos, TRUE);
-					si.nPos = ::GetScrollPos(event.hwnd, SB_HORZ);
+					int oldPos = ::SetScrollPos(event.hwnd, SB_HORZ, si.nPos, TRUE);
+					int newPos = ::GetScrollPos(event.hwnd, SB_HORZ);
 
 					// Scroll the scrollview itself.
-					::ScrollWindowEx(event.hwnd, oldPos - si.nPos, 0, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
+					::ScrollWindowEx(event.hwnd, oldPos - newPos, 0, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
 					break;
 				}
 
@@ -814,10 +810,8 @@ namespace native
 
 					// Get current state of the scrollbar.
 					si.cbSize = sizeof(si);
-					si.fMask = SIF_POS | SIF_RANGE | SIF_PAGE;
+					si.fMask = SIF_POS | SIF_RANGE | SIF_PAGE | SIF_TRACKPOS;
 					::GetScrollInfo(event.hwnd, SB_VERT, &si);
-
-					int oldPos = si.nPos;
 
 					// Detect how far we've scrolled.
 					switch (int(LOWORD(event.wparam)))
@@ -828,18 +822,15 @@ namespace native
 					case SB_LINEDOWN: si.nPos += 20; break;
 					case SB_PAGEUP:   si.nPos -= si.nPage; break;
 					case SB_PAGEDOWN: si.nPos += si.nPage; break;
-					case SB_THUMBPOSITION:
-					case SB_THUMBTRACK:
-						si.nPos = HIWORD(event.wparam);
-						break;
+					case SB_THUMBTRACK: si.nPos = si.nTrackPos; break;
 					}
 
-					// Update the scroll barSB_VERT
-					::SetScrollPos(event.hwnd, SB_VERT, si.nPos, TRUE);
-					si.nPos = ::GetScrollPos(event.hwnd, SB_VERT);
+					// Update the scroll bar
+					int oldPos = ::SetScrollPos(event.hwnd, SB_VERT, si.nPos, TRUE);
+					int newPos = ::GetScrollPos(event.hwnd, SB_VERT);
 
 					// Scroll the scrollview itself.
-					::ScrollWindowEx(event.hwnd, 0, oldPos - si.nPos, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
+					::ScrollWindowEx(event.hwnd, 0, oldPos - newPos, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
 					break;
 				}
 			}
