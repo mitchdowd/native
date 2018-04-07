@@ -329,7 +329,7 @@ namespace native
 						HDC hdc = ::BeginPaint(event.hwnd, &ps);
 
 						{
-							// TODO: Dispatch the paint messages.
+							// Dispatch the paint messages.
 							Gdiplus::Graphics graphics = hdc;
 							Canvas canvas(&graphics, hdc);
 
@@ -772,6 +772,25 @@ namespace native
 					// Scroll the scrollview itself.
 					::ScrollWindowEx(event.hwnd, oldPos - newPos, 0, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
 					break;
+				}
+
+			case WM_PAINT:
+				if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)
+				{
+					PAINTSTRUCT ps = {};
+
+					HDC hdc = ::BeginPaint(event.hwnd, &ps);
+
+					{
+						// Dispatch the paint messages.
+						Gdiplus::Graphics graphics = hdc;
+						Canvas canvas(&graphics, hdc);
+
+						getComponent()->dispatchPaintEvent(canvas);
+					}
+
+					::EndPaint(event.hwnd, &ps);
+					return;
 				}
 
 			case WM_SIZE:

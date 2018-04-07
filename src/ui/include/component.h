@@ -231,6 +231,18 @@ namespace native
 			 */
 			IComponentAdapter* getAdapter() const noexcept { return _adapter; }
 
+			/**
+				For internal use only in triggering the repaint sequence.
+				\param canvas The canvas to paint with.
+			 */
+			virtual void dispatchPaintEvent(Canvas& canvas);
+
+			/**
+				For internal use only in sending input events.
+			    \event Native input event information.
+			 */
+            virtual void dispatchInputEvent(const InputEvent& event);
+
 		protected:
 			/**
 				Called by onInput() when a press and release sequence indicates
@@ -279,18 +291,6 @@ namespace native
 
 			/** For internal use only. */
 			virtual void setParentAdapter(IComponentAdapter* parent);
-
-			/**
-				For internal use only in triggering the repaint sequence.
-				\param canvas The canvas to paint with.
-			 */
-			virtual void dispatchPaintEvent(Canvas& canvas);
-
-			/**
-				For internal use only in sending input events.
-			    \event Native input event information.
-			 */
-            virtual void dispatchInputEvent(const InputEvent& event);
 
 			/**
 				Draws the border for this Component.
