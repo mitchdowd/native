@@ -403,13 +403,13 @@ namespace native
             ScrollViewAdapter Functions
          */
 
-        ScrollViewAdapter::ScrollViewAdapter(ScrollView* view)
-                : ComponentAdapter({ view, "libnative/ui/ScrollView" }), _verticalBar(nullptr), _horizontalBar(nullptr)
+        ScrollViewAdapter::ScrollViewAdapter(ScrollView* view) : ComponentAdapter({ view, "libnative/ui/ScrollView" })
         {
         }
 
-        ScrollViewAdapter::~ScrollViewAdapter()
+        int32_t ScrollViewAdapter::getScrollPosition(Orientation orientation) const
         {
+            return HANDLE_OBJ->call<int>(orientation == Horizontal ? "getScrollX" : "getScrollY");
         }
 
         void ScrollViewAdapter::onEvent(ComponentEvent& event)

@@ -122,6 +122,12 @@ namespace native
 			virtual handle_t getHandle() const noexcept override { return _handle; }
 
 			/**
+				Gets the component attached to this adapter.
+				\return The adapter's host component.
+			 */
+			Component* getComponent() const noexcept { return _component; }
+
+			/**
 				Gets an adapter via its system resource handle.
 				\param handle The system resource handle.
 				\return The associated adapter, or nullptr if not found.
@@ -149,7 +155,6 @@ namespace native
 		class NumberPicker;
 		class ProgressBar;
 		class RadioButton;
-		class ScrollBarAdapter;
         class ScrollView;
 		class TextArea;
 		class TextComponent;
@@ -375,14 +380,14 @@ namespace native
         {
         public:
             ScrollViewAdapter(ScrollView* view);
-			~ScrollViewAdapter();
+
+			int32_t getScrollPosition(Orientation orientation) const;
 
 			virtual void onEvent(ComponentEvent& event) override;
 
 		private:
-			// For Win32 only so far
-			ScrollBarAdapter* _verticalBar;
-			ScrollBarAdapter* _horizontalBar;
+			coord_t _xpos;
+			coord_t _ypos;
         };
 
 		/**
