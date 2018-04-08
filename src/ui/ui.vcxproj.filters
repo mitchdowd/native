@@ -28,9 +28,6 @@
     <ClCompile Include="common\component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="win32\dialogs.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="common\layoutcomponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -93,6 +90,9 @@
     <ClCompile Include="common\scrollview.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="win32\alerts.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -124,9 +124,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="win32\componentevent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dialogs.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\layoutcomponent.h">
@@ -201,6 +198,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="include\scrollview.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\alerts.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

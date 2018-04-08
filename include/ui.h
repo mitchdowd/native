@@ -2,6 +2,7 @@
 #define _NATIVE_UI_H_ 1
 
 #include "../src/ui/include/action.h"
+#include "../src/ui/include/alerts.h"
 #include "../src/ui/include/app.h"
 #include "../src/ui/include/brush.h"
 #include "../src/ui/include/button.h"
@@ -10,7 +11,6 @@
 #include "../src/ui/include/color.h"
 #include "../src/ui/include/component.h"
 #include "../src/ui/include/componentadapter.h"
-#include "../src/ui/include/dialogs.h"
 #include "../src/ui/include/eventqueue.h"
 #include "../src/ui/include/font.h"
 #include "../src/ui/include/groupbox.h"

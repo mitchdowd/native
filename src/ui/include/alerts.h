@@ -12,7 +12,7 @@ namespace native
 			A set of predefined dialog popups for capturing and displaying common
 			bits of information in an application.
 		 */
-		class Dialogs
+		class Alerts
 		{
 		public:
 			/**

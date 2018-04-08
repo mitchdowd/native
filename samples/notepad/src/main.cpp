@@ -77,7 +77,7 @@ private:
         _help.addSeparator();
 
         _about.setText("About");
-        _about.connect([]() { Dialogs::messageBox(L"This is a demo replica of Microsoft's Notepad using the native C++ framework.", L"About Notepad"); });
+        _about.connect([]() { Alerts::messageBox(L"This is a demo replica of Microsoft's Notepad using the native C++ framework.", L"About Notepad"); });
         _help.add(_about);
 
 		Menu& menuBar = getMenu();

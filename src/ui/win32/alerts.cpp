@@ -2,14 +2,14 @@
 #include <Windows.h>
 
 // Module Dependencies
-#include "../include/dialogs.h"
+#include "../include/alerts.h"
 #include "../include/layoutcomponent.h"
 
 namespace native
 {
 	namespace ui
 	{
-		void Dialogs::messageBox(Component* owner, const String& message, const String& title)
+		void Alerts::messageBox(Component* owner, const String& message, const String& title)
 		{
 			Component* tmp = owner;
 
@@ -21,7 +21,7 @@ namespace native
 			::MessageBox(adapter ? HWND(adapter->getHandle()) : NULL, message.toArray(), title.toArray(), MB_OK);
 		}
 
-		void Dialogs::messageBox(const String& message, const String& title)
+		void Alerts::messageBox(const String& message, const String& title)
 		{
 			::MessageBox(NULL, message.toArray(), title.toArray(), MB_OK);
 		}

@@ -164,7 +164,7 @@
     <ClCompile Include="win32\webview.cpp" />
     <ClInclude Include="include\action.h" />
     <ClInclude Include="include\checkbox.h" />
-    <ClInclude Include="include\dialogs.h" />
+    <ClInclude Include="include\alerts.h" />
     <ClInclude Include="include\font.h" />
     <ClInclude Include="include\groupbox.h" />
     <ClInclude Include="include\bitmap.h" />
@@ -189,7 +189,7 @@
     <ClCompile Include="win32\brush.cpp" />
     <ClCompile Include="win32\canvas.cpp" />
     <ClCompile Include="win32\componentadapter.cpp" />
-    <ClCompile Include="win32\dialogs.cpp" />
+    <ClCompile Include="win32\alerts.cpp" />
     <ClCompile Include="win32\eventqueue.cpp" />
   </ItemGroup>
   <ItemGroup>
