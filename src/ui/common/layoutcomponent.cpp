@@ -91,7 +91,16 @@ namespace native
 			Size size;
 
 			for (auto child : _children)
-				size = size.combine(child->getPreferredSize());
+			{
+				auto margins = child->getMargins();
+
+				auto childSize = child->getPreferredSize();
+
+				childSize.width += margins.left + margins.right;
+				childSize.height += margins.top + margins.bottom;
+
+				size = size.combine(childSize);
+			}
 
 			return size;
 		}

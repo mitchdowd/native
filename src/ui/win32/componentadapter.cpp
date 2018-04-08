@@ -732,15 +732,17 @@ namespace native
 		 */
 
 		ScrollViewAdapter::ScrollViewAdapter(ScrollView* view)
-			: ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL, 0 })
+			: ComponentAdapter({ view, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | WS_VSCROLL | WS_HSCROLL, 0 }), _xpos(0), _ypos(0)
 		{
+		}
+
+		int32_t ScrollViewAdapter::getScrollPosition(Orientation orientation) const
+		{
+			return ::GetScrollPos(HWND(getHandle()), orientation == Horizontal ? SB_HORZ : SB_VERT);
 		}
 
 		void ScrollViewAdapter::onEvent(ComponentEvent& event)
 		{
-			static const int CXVSCROLL = ::GetSystemMetrics(SM_CXVSCROLL);
-			static const int CYHSCROLL = ::GetSystemMetrics(SM_CYHSCROLL);
-
 			switch (event.msg)
 			{
 			case WM_HSCROLL:
@@ -769,27 +771,47 @@ namespace native
 					int oldPos = ::SetScrollPos(event.hwnd, SB_HORZ, si.nPos, TRUE);
 					int newPos = ::GetScrollPos(event.hwnd, SB_HORZ);
 
-					// Scroll the scrollview itself.
-					::ScrollWindowEx(event.hwnd, oldPos - newPos, 0, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
+					_xpos = newPos;
+
+					if (oldPos != newPos)
+					{
+						// Scroll the scrollview itself.
+						::ScrollWindowEx(event.hwnd, oldPos - newPos, 0, NULL, NULL, NULL, NULL, SW_INVALIDATE | SW_SCROLLCHILDREN);
+						::UpdateWindow(event.hwnd);
+					}
 					break;
 				}
 
 			case WM_PAINT:
-				if (::GetUpdateRect(event.hwnd, NULL, FALSE) != 0)
 				{
+					RECT rect = {};
 					PAINTSTRUCT ps = {};
 
-					HDC hdc = ::BeginPaint(event.hwnd, &ps);
-
+					if (::GetUpdateRect(event.hwnd, &rect, FALSE) != 0)
 					{
-						// Dispatch the paint messages.
-						Gdiplus::Graphics graphics = hdc;
-						Canvas canvas(&graphics, hdc);
+						HDC hdc = ::BeginPaint(event.hwnd, &ps);
 
-						getComponent()->dispatchPaintEvent(canvas);
+						// Offset the paint area by the scroll position so we paint the correct part.
+						POINT origin = {};
+						::GetWindowOrgEx(hdc, &origin);
+						::SetWindowOrgEx(hdc, origin.x + _xpos, origin.y + _ypos, NULL);
+						::OffsetRect(&ps.rcPaint, _xpos, _ypos);
+
+						{
+							Gdiplus::Graphics graphics = hdc;
+							Canvas canvas(&graphics, hdc);
+
+							// Fill the background.
+							canvas.fillRectangle({ rect.left + _xpos, rect.top + _ypos, rect.right - rect.left, rect.bottom - rect.top }, getComponent()->getBackground());
+
+							// Dispatch the paint messages.
+							getComponent()->dispatchPaintEvent(canvas);
+						}
+
+						// Restore the paint offset to normal.
+						::SetWindowOrgEx(hdc, origin.x, origin.y, NULL);
+						::EndPaint(event.hwnd, &ps);
 					}
-
-					::EndPaint(event.hwnd, &ps);
 					return;
 				}
 
@@ -799,9 +821,7 @@ namespace native
 						.scale(1.0f / App::getDisplayScale());
 
 					// Calculate the size required by the child components.
-					Size maxChildSize;
-					for (auto child : ((ScrollView*)getComponent())->getChildren())
-						maxChildSize = child->getPreferredSize().combine(maxChildSize);
+					Size prefSize = getComponent()->getPreferredSize();
 
 					SCROLLINFO si = {};
 
@@ -809,7 +829,7 @@ namespace native
 					si.cbSize = sizeof(si);
 					si.fMask = SIF_RANGE | SIF_PAGE;
 					si.nMin = 0;
-					si.nMax = maxChildSize.height;
+					si.nMax = prefSize.height;
 					si.nPage = clientSize.height;
 					::SetScrollInfo(event.hwnd, SB_VERT, &si, TRUE);
 
@@ -817,10 +837,26 @@ namespace native
 					si.cbSize = sizeof(si);
 					si.fMask = SIF_RANGE | SIF_PAGE;
 					si.nMin = 0;
-					si.nMax = maxChildSize.width;
+					si.nMax = prefSize.width;
 					si.nPage = clientSize.width;
 					::SetScrollInfo(event.hwnd, SB_HORZ, &si, TRUE);
-					break;
+
+					ComponentAdapter::onEvent(event);
+
+					// Check if we've resulted in a moved scroll position.
+					coord_t dx = _xpos - ::GetScrollPos(event.hwnd, SB_HORZ);
+					coord_t dy = _ypos - ::GetScrollPos(event.hwnd, SB_VERT);
+					
+					_xpos = _xpos - dx;
+					_ypos = _ypos - dy;
+
+					if (dy != 0 || dx != 0)
+					{
+						// Scroll the view to the new position.
+						::ScrollWindowEx(event.hwnd, dx, dy, NULL, NULL, NULL, NULL, SW_INVALIDATE | SW_SCROLLCHILDREN);
+						::UpdateWindow(event.hwnd);
+					}
+					return;
 				}
 
 			case WM_VSCROLL:
@@ -848,8 +884,14 @@ namespace native
 					int oldPos = ::SetScrollPos(event.hwnd, SB_VERT, si.nPos, TRUE);
 					int newPos = ::GetScrollPos(event.hwnd, SB_VERT);
 
-					// Scroll the scrollview itself.
-					::ScrollWindowEx(event.hwnd, 0, oldPos - newPos, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
+					_ypos = newPos;
+
+					if (oldPos != newPos)
+					{
+						// Scroll the scrollview itself.
+						::ScrollWindowEx(event.hwnd, 0, oldPos - newPos, NULL, NULL, NULL, NULL, SW_INVALIDATE | SW_SCROLLCHILDREN);
+						::UpdateWindow(event.hwnd);
+					}
 					break;
 				}
 			}

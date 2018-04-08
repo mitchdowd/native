@@ -381,7 +381,13 @@ namespace native
         public:
             ScrollViewAdapter(ScrollView* view);
 
+			int32_t getScrollPosition(Orientation orientation) const;
+
 			virtual void onEvent(ComponentEvent& event) override;
+
+		private:
+			coord_t _xpos;
+			coord_t _ypos;
         };
 
 		/**
