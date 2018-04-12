@@ -156,6 +156,7 @@ namespace native
 		class ProgressBar;
 		class RadioButton;
         class ScrollView;
+		class TabView;
 		class TextArea;
 		class TextComponent;
 		class UpDownAdapter;
@@ -480,6 +481,12 @@ namespace native
 		private:
 			// Instance Variables
 			UpDownAdapter* _upDown;	//< Used in Win32 only.
+		};
+
+		class TabViewAdapter : public ComponentAdapter
+		{
+		public:
+			TabViewAdapter(TabView* view);
 		};
 
 #ifdef NATIVE_PLATFORM_WIN32

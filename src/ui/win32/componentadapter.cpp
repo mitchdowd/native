@@ -22,6 +22,7 @@
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
 #include "../include/scrollview.h"
+#include "../include/tabview.h"
 #include "../include/textarea.h"
 #include "../include/textcomponent.h"
 #include "../include/window.h"
@@ -706,6 +707,15 @@ namespace native
 			::SendMessage(HWND(getHandle()), UDM_GETRANGE32, (WPARAM) &max, 0);
 
 			return max;
+		}
+
+		/*
+			TabViewAdapter Functions
+		 */
+
+		TabViewAdapter::TabViewAdapter(TabView* view)
+			: ComponentAdapter({ view, WC_TABCONTROL, WS_CHILD | WS_VISIBLE, 0 })
+		{
 		}
 
 		/*
