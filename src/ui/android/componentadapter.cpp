@@ -13,6 +13,7 @@
 #include "../include/progressbar.h"
 #include "../include/radiobutton.h"
 #include "../include/scrollview.h"
+#include "../include/tabview.h"
 #include "../include/textarea.h"
 
 // Local Dependencies
@@ -415,6 +416,14 @@ namespace native
         void ScrollViewAdapter::onEvent(ComponentEvent& event)
         {
             ComponentAdapter::onEvent(event);
+        }
+
+        /*
+        	TabViewAdapter Functions
+         */
+
+        TabViewAdapter::TabViewAdapter(TabView* view) : ComponentAdapter({ view, "libnative/ui/TabView" })
+        {
         }
 	}
 }

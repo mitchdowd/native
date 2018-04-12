@@ -29,6 +29,7 @@
 #include "../src/ui/include/rectangle.h"
 #include "../src/ui/include/scrollview.h"
 #include "../src/ui/include/size.h"
+#include "../src/ui/include/tabview.h"
 #include "../src/ui/include/textarea.h"
 #include "../src/ui/include/textcomponent.h"
 #include "../src/ui/include/webview.h"

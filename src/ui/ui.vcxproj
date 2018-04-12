@@ -154,6 +154,7 @@
     <ClCompile Include="common\progressbar.cpp" />
     <ClCompile Include="common\radiobutton.cpp" />
     <ClCompile Include="common\scrollview.cpp" />
+    <ClCompile Include="common\tabview.cpp" />
     <ClCompile Include="common\textarea.cpp" />
     <ClCompile Include="common\action.cpp" />
     <ClCompile Include="win32\bitmap.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="include\scrollview.h" />
     <ClInclude Include="include\size.h" />
     <ClInclude Include="include\inputcomponent.h" />
+    <ClInclude Include="include\tabview.h" />
     <ClInclude Include="include\textarea.h" />
     <ClInclude Include="include\textcomponent.h" />
     <ClInclude Include="include\webview.h" />
