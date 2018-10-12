@@ -38,6 +38,14 @@ namespace native
 			 */
 			handle_t getHandle() const noexcept { return _shared->handle; }
 
+		protected:
+			/**
+				Creates a Brush with the given system handle. Good for subclasses
+				to instantiate with their own logical brush.
+				\param handle The system handle.
+			 */
+			Brush(handle_t handle) : _shared(handle) {}
+
 		private:
 			/** Self-destroying Brush handle. */
 			struct BrushHandle

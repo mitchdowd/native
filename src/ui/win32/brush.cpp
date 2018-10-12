@@ -31,12 +31,17 @@ namespace native
 		Color Brush::getPrimaryColor() const
 		{
 			Gdiplus::Color gdiColor;
+			Gdiplus::Color colors[2];
 
 			switch (((Gdiplus::Brush*) getHandle())->GetType())
 			{
 			case Gdiplus::BrushType::BrushTypeSolidColor:
 				((Gdiplus::SolidBrush*) getHandle())->GetColor(&gdiColor);
 				return Color::fromArgb(gdiColor.GetValue());
+
+			case Gdiplus::BrushType::BrushTypeLinearGradient:
+				((Gdiplus::LinearGradientBrush*) getHandle())->GetLinearColors(colors);
+				return Color::fromArgb(colors[0].GetValue());
 
 			default:
 				throw InvalidStateException("Brush not in a supported state to determine its primary color");

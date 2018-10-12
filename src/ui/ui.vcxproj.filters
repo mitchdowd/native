@@ -93,6 +93,9 @@
     <ClCompile Include="win32\alerts.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="win32\lineargradientbrush.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="include\alerts.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lineargradientbrush.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

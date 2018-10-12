@@ -159,6 +159,7 @@
     <ClCompile Include="win32\bitmap.cpp" />
     <ClCompile Include="win32\font.cpp" />
     <ClCompile Include="common\menu.cpp" />
+    <ClCompile Include="win32\lineargradientbrush.cpp" />
     <ClCompile Include="win32\menuadapter.cpp" />
     <ClCompile Include="win32\pen.cpp" />
     <ClCompile Include="win32\webview.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="include\bitmap.h" />
     <ClInclude Include="include\imenuadapter.h" />
     <ClInclude Include="include\label.h" />
+    <ClInclude Include="include\lineargradientbrush.h" />
     <ClInclude Include="include\linearlayout.h" />
     <ClInclude Include="include\menu.h" />
     <ClInclude Include="include\menuadapter.h" />
