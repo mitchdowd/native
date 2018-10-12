@@ -51,6 +51,12 @@ namespace native
 			HANDLE_OBJ->call<void>("drawRect(FFFFLandroid/graphics/Paint;)V", float(area.x), float(area.y), float(area.x + area.width), float(area.y + area.height), penObj);
 		}
 
+		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen, const Brush& brush)
+		{
+			fillRectangle(rect.deflate(pen.getThickness()), brush);
+			drawRectangle(rect, pen);
+		}
+
 		void Canvas::fillRectangle(const Rectangle& rect, const Brush& brush)
 		{
             Rectangle area = rect.offset(_offset).scale(App::getDisplayScale());

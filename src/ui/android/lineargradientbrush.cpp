@@ -22,6 +22,7 @@ namespace native
 
             jni::Object paint = jni::Class("android/graphics/Paint").newInstance();
 
+            paint.call<void>("setColor", int(c0.toArgb()));
             paint.call<jni::Object>("setShader(Landroid/graphics/Shader;)Landroid/graphics/Shader;", shader);
 
             return new jni::Object(paint);

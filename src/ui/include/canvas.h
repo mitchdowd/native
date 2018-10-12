@@ -54,6 +54,17 @@ namespace native
 			void drawRectangle(const Rectangle& rect, const Pen& pen);
 
 			/**
+				Draws a Rectangle within the given area. The outer edge of
+				the drawn rectangle's line will sit on the Rectangle 
+				co-ordinates. The pen and brush provide the border and fill
+				color respectively.
+				\param rect The outer edge of the Rectangle to draw.
+				\param pen The pen to draw the border with.
+				\param brush The brush to fill the rectangle with.
+			 */
+			void drawRectangle(const Rectangle& rect, const Pen& pen, const Brush& brush);
+
+			/**
 				Fills the specified Rectangle with the given Brush.
 				\param rect The rectangle to fill.
 				\param brush The Brush to paint the area with.

@@ -87,6 +87,12 @@ namespace native
 				throw GraphicsException("Graphics::DrawRectangle()");
 		}
 
+		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen, const Brush& brush)
+		{
+			fillRectangle(rect.deflate(pen.getThickness()), brush);
+			drawRectangle(rect, pen);
+		}
+
 		void Canvas::fillRectangle(const Rectangle& rect, const Brush& brush)
 		{
 			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;

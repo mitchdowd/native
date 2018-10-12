@@ -38,8 +38,7 @@ protected:
 		auto background = LinearGradientBrush(buttonArea.getTopLeft(), buttonArea.getBottomLeft(), 
 			Color(0xFD, 0xFD, 0xFD), Color(0xE4, 0xE4, 0xE4));
 
-		canvas.fillRectangle(buttonArea, background);
-		canvas.drawRectangle(buttonArea, Color(0x99, 0x99, 0x99));
+		canvas.drawRectangle(buttonArea, Color(0x99, 0x99, 0x99), background);
 		canvas.drawText(msg, font, msgPt);
 	}
 
