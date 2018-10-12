@@ -7,6 +7,7 @@ include ':test'
 include ':unittests'
 
 include ':components'
+include ':drawing'
 include ':helloworld'
 include ':layout'
 include ':notepad'
@@ -17,10 +18,12 @@ project(':data').projectDir = new File('src', 'data')
 project(':io').projectDir = new File('src', 'io')
 project(':jnipp').projectDir = new File('lib', 'jnipp')
 project(':ui').projectDir = new File('src', 'ui')
+
 project(':test').projectDir = new File('tests', 'test')
 project(':unittests').projectDir = new File('tests', 'unittests')
 
 project(':components').projectDir = new File('samples', 'components')
+project(':drawing').projectDir = new File('samples', 'drawing')
 project(':helloworld').projectDir = new File('samples', 'helloworld')
 project(':layout').projectDir = new File('samples', 'layout')
 project(':notepad').projectDir = new File('samples', 'notepad')
