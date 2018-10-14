@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId = 'libnative.samples.helloworld'
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -19,7 +19,16 @@ android {
 
     sourceSets {
         main {
+            java.srcDir 'src/android'
+            jni.srcDir 'src'
             manifest.srcFile 'src/android/AndroidManifest.xml'
+            res.srcDir 'src/android/res'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path 'src/android/CMakeLists.txt'
         }
     }
 }
