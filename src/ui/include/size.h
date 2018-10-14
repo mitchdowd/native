@@ -78,6 +78,15 @@ namespace native
 			Size combine(const Size& other) const noexcept;
 
 			/**
+				Gets a Size which is inflated by the given amount in horizontal
+				and vertical directions.
+				\param hamount The horizontal amount to inflate by.
+				\param vamount The vertical amount to inflate by.
+				\return The inflated Size.
+			 */
+			Size inflate(coord_t hamount, coord_t vamount) const noexcept;
+
+			/**
 				Gets a scaled copy of this Size.
 				\param factor The factor to multiply by.
 				\return The scaled version.

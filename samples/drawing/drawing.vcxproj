@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,32 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5774511E-219C-4E6B-83BC-B928A918E724}</ProjectGuid>
-    <RootNamespace>ui</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{9F84AE7A-7109-4A8F-AC84-B09B0ACEF24F}</ProjectGuid>
+    <RootNamespace>drawing</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -74,28 +75,26 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
-    <ProjectReference />
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>gdiplus.lib</AdditionalDependencies>
-    </Lib>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
-    <ProjectReference />
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>gdiplus.lib</AdditionalDependencies>
-    </Lib>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -104,18 +103,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <ProjectReference />
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>gdiplus.lib</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -124,101 +120,26 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Windows</SubSystem>
     </Link>
-    <ProjectReference />
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>gdiplus.lib</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\core\core.vcxproj">
+    <ProjectReference Include="..\..\src\core\core.vcxproj">
       <Project>{2ede4b51-9297-4bbc-b8ab-77114cdbd65f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\ui\ui.vcxproj">
+      <Project>{5774511e-219c-4e6b-83bc-b928a918e724}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="common\button.cpp" />
-    <ClCompile Include="common\checkbox.cpp" />
-    <ClCompile Include="common\color.cpp" />
-    <ClCompile Include="common\groupbox.cpp" />
-    <ClCompile Include="common\inputcomponent.cpp" />
-    <ClCompile Include="common\label.cpp" />
-    <ClCompile Include="common\linearlayout.cpp" />
-    <ClCompile Include="common\numberpicker.cpp" />
-    <ClCompile Include="common\progressbar.cpp" />
-    <ClCompile Include="common\radiobutton.cpp" />
-    <ClCompile Include="common\scrollview.cpp" />
-    <ClCompile Include="common\tabview.cpp" />
-    <ClCompile Include="common\textarea.cpp" />
-    <ClCompile Include="common\action.cpp" />
-    <ClCompile Include="win32\bitmap.cpp" />
-    <ClCompile Include="win32\font.cpp" />
-    <ClCompile Include="common\menu.cpp" />
-    <ClCompile Include="win32\lineargradientbrush.cpp" />
-    <ClCompile Include="win32\menuadapter.cpp" />
-    <ClCompile Include="win32\pen.cpp" />
-    <ClCompile Include="win32\webview.cpp" />
-    <ClInclude Include="include\action.h" />
-    <ClInclude Include="include\checkbox.h" />
-    <ClInclude Include="include\alerts.h" />
-    <ClInclude Include="include\font.h" />
-    <ClInclude Include="include\groupbox.h" />
-    <ClInclude Include="include\bitmap.h" />
-    <ClInclude Include="include\imenuadapter.h" />
-    <ClInclude Include="include\label.h" />
-    <ClInclude Include="include\lineargradientbrush.h" />
-    <ClInclude Include="include\linearlayout.h" />
-    <ClInclude Include="include\menu.h" />
-    <ClInclude Include="include\menuadapter.h" />
-    <ClInclude Include="include\numberpicker.h" />
-    <ClInclude Include="include\pen.h" />
-    <ClInclude Include="include\progressbar.h" />
-    <ClInclude Include="include\radiobutton.h" />
-    <ClInclude Include="include\rectangle.h" />
-    <ClCompile Include="common\component.cpp" />
-    <ClCompile Include="common\layoutcomponent.cpp" />
-    <ClCompile Include="common\point.cpp" />
-    <ClCompile Include="common\rectangle.cpp" />
-    <ClCompile Include="common\size.cpp" />
-    <ClCompile Include="common\textcomponent.cpp" />
-    <ClCompile Include="common\window.cpp" />
-    <ClCompile Include="win32\app.cpp" />
-    <ClCompile Include="win32\brush.cpp" />
-    <ClCompile Include="win32\canvas.cpp" />
-    <ClCompile Include="win32\componentadapter.cpp" />
-    <ClCompile Include="win32\alerts.cpp" />
-    <ClCompile Include="win32\eventqueue.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\include\ui.h" />
-    <ClInclude Include="include\app.h" />
-    <ClInclude Include="include\brush.h" />
-    <ClInclude Include="include\button.h" />
-    <ClInclude Include="include\canvas.h" />
-    <ClInclude Include="include\color.h" />
-    <ClInclude Include="include\component.h" />
-    <ClInclude Include="include\componentadapter.h" />
-    <ClInclude Include="include\eventqueue.h" />
-    <ClInclude Include="include\icomponentadapter.h" />
-    <ClInclude Include="include\inputevent.h" />
-    <ClInclude Include="include\layoutcomponent.h" />
-    <ClInclude Include="include\point.h" />
-    <ClInclude Include="include\scrollview.h" />
-    <ClInclude Include="include\size.h" />
-    <ClInclude Include="include\inputcomponent.h" />
-    <ClInclude Include="include\tabview.h" />
-    <ClInclude Include="include\textarea.h" />
-    <ClInclude Include="include\textcomponent.h" />
-    <ClInclude Include="include\webview.h" />
-    <ClInclude Include="include\window.h" />
-    <ClInclude Include="win32\componentadapterproperties.h" />
-    <ClInclude Include="win32\componentevent.h" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

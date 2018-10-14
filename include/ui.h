@@ -19,6 +19,7 @@
 #include "../src/ui/include/inputevent.h"
 #include "../src/ui/include/label.h"
 #include "../src/ui/include/layoutcomponent.h"
+#include "../src/ui/include/lineargradientbrush.h"
 #include "../src/ui/include/linearlayout.h"
 #include "../src/ui/include/menu.h"
 #include "../src/ui/include/numberpicker.h"

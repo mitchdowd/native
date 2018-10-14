@@ -93,6 +93,9 @@
     <ClCompile Include="win32\alerts.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="win32\lineargradientbrush.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
     <ClCompile Include="common\tabview.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="include\alerts.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lineargradientbrush.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\tabview.h">
       <Filter>Components</Filter>

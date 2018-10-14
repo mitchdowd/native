@@ -45,6 +45,17 @@ namespace native
 			void drawText(const String& text, const Font& font, const Point& point = Point());
 
 			/**
+				Draws a String of text using the given Font into the specified
+				area. A set of alignment flags define how the text is aligned
+				within the supplied area.
+				\param text The text to draw.
+				\param font The Font to draw the text with.
+				\param area The area to draw the text within.
+				\param align Alignment flags to align text within the area.
+			 */
+			void drawText(const String& text, const Font& font, const Rectangle& area, Flags<Align> align);
+
+			/**
 				Draws a Rectangle outline within the given rectangle. The outer
 				edge of the drawn rectangle's line will sit on the specified
 				Rectangle co-ordinates.
@@ -52,6 +63,17 @@ namespace native
 				\param pen The pen to draw the line with.
 			 */
 			void drawRectangle(const Rectangle& rect, const Pen& pen);
+
+			/**
+				Draws a Rectangle within the given area. The outer edge of
+				the drawn rectangle's line will sit on the Rectangle 
+				co-ordinates. The pen and brush provide the border and fill
+				color respectively.
+				\param rect The outer edge of the Rectangle to draw.
+				\param pen The pen to draw the border with.
+				\param brush The brush to fill the rectangle with.
+			 */
+			void drawRectangle(const Rectangle& rect, const Pen& pen, const Brush& brush);
 
 			/**
 				Fills the specified Rectangle with the given Brush.
