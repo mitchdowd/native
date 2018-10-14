@@ -42,6 +42,11 @@ namespace native
 	            HANDLE_OBJ->call<void>("drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V", text.toArray(), x, y, paint);
 	        }
         }
+		
+		void Canvas::drawText(const String& text, const Font& font, const Rectangle& area, Flags<Align> align)
+		{
+			throw NotImplementedException();
+		}
 
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{

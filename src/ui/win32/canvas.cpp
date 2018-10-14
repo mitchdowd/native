@@ -77,6 +77,57 @@ namespace native
 			}
 		}
 
+		void Canvas::drawText(const String& text, const Font& font, const Rectangle& area, Flags<Align> align)
+		{
+			if (text.getLength() > 0)
+			{
+				Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
+
+				Gdiplus::SolidBrush brush(Gdiplus::Color(0, 0, 0));	// TODO: Different colors?
+				Gdiplus::RectF rect(float(area.x), float(area.y), float(area.width), float(area.height));
+				Gdiplus::StringFormat format;
+
+				// Parse out the horizontal alignment.
+				switch (align.getData() & uint32_t(Align::Horizontal))
+				{
+				case int(Align::HCenter):
+					format.SetAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
+					break;
+
+				case int(Align::Right):
+					format.SetAlignment(Gdiplus::StringAlignment::StringAlignmentFar);
+					break;
+
+				case int(Align::Left):
+				case int(Align::HFill):
+				default:
+					format.SetAlignment(Gdiplus::StringAlignment::StringAlignmentNear);
+					break;
+				}
+
+				// Parse out the vertical alignment.
+				switch (align.getData() & uint32_t(Align::Vertical))
+				{
+				case int(Align::VCenter):
+					format.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
+					break;
+
+				case int(Align::Bottom):
+					format.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentFar);
+					break;
+
+				case int(Align::Top):
+				case int(Align::VFill):
+				default:
+					format.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentNear);
+					break;
+				}
+
+				if (graphics->DrawString(text.toArray(), int(text.getLength()), (const Gdiplus::Font*) font.getHandle(), rect, &format, &brush) != Gdiplus::Ok)
+					throw GraphicsException("Graphics::DrawString");
+			}
+		}
+
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{
 			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;

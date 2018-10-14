@@ -26,6 +26,11 @@ namespace native
 		{
 			return { Math::max(width, other.width), Math::max(height, other.height) };
 		}
+
+		Size Size::inflate(coord_t hamount, coord_t vamount) const noexcept
+		{
+			return { width + hamount, height + vamount };
+		}
 	}
 }
 
