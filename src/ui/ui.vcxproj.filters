@@ -99,6 +99,9 @@
     <ClCompile Include="win32\lineargradientbrush.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="common\tabview.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\ui.h" />
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="include\lineargradientbrush.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tabview.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
