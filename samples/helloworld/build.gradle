@@ -1,56 +1,29 @@
-apply plugin: 'com.android.model.application'
+apply plugin: 'com.android.application'
 
-model {
-    android {
-        compileSdkVersion = 24
-        buildToolsVersion = '25.0.3'
+android {
+    compileSdkVersion 24
+    buildToolsVersion '27.0.3'
 
-        defaultConfig {
-            applicationId             = 'libnative.samples.helloworld'
-            minSdkVersion.apiLevel    = 15
-            targetSdkVersion.apiLevel = 24
+    defaultConfig {
+        applicationId = 'libnative.samples.helloworld'
+        minSdkVersion 15
+        targetSdkVersion 24
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
+    }
 
-        ndk {
-            platformVersion = 15
-            moduleName      = 'helloworld'
-            toolchain       = 'clang'
-            stl             = 'c++_static'
-            cppFlags.addAll(['-std=c++11', '-fexceptions', '-I' + file('../../include').absolutePath])
-            ldLibs.addAll(['log', 'android', 'EGL', 'GLESv1_CM'])
-        }
-
-        buildTypes {
-            release {
-                minifyEnabled = false
-                proguardFiles.add(file('proguard-rules.txt'))
-            }
-        }
-
-        sources {
-            main {
-                manifest {
-                    source.srcDir '.'
-                }
-                res {
-                    source.srcDir 'src/android/res'
-                }
-                java {
-                    source.srcDir 'src/android'
-                }
-                jni {
-                    source.srcDir 'src'
-                    dependencies {
-                        project ':ui' linkage 'static'
-                        project ':core' linkage 'static'
-                        project ':jnipp' linkage 'static'
-                    }
-                }
-            }
+    sourceSets {
+        main {
+            manifest.srcFile 'src/android/AndroidManifest.xml'
         }
     }
 }
 
 dependencies {
-    compile project(':ui')
+    implementation project(':ui')
 }

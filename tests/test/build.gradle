@@ -1,49 +1,24 @@
-apply plugin: 'com.android.model.library'
+apply plugin: 'com.android.library'
 
-model {
-    android {
-        compileSdkVersion = 24
-        buildToolsVersion = '25.0.3'
+android {
+    compileSdkVersion 24
+    buildToolsVersion '27.0.3'
 
-        defaultConfig {
-            minSdkVersion.apiLevel    = 15
-            targetSdkVersion.apiLevel = 24
-        }
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 24
+    }
 
-        ndk {
-            platformVersion = 15
-            moduleName      = 'native-test'
-            toolchain       = 'clang'
-            stl             = 'c++_static'
-            cppFlags.addAll(['-std=c++11', '-fexceptions'])
-            ldLibs.addAll(['log', 'android', 'EGL', 'GLESv1_CM'])
-        }
-
-        buildTypes {
-            release {
-                minifyEnabled = false
-                proguardFiles.add(file('proguard-rules.txt'))
-            }
-        }
-
-        sources {
-            main {
-                manifest {
-                    source.srcDir '.'
-                }
-                java {
-                    source {
-                        srcDir 'src/android/java'
-                    }
-                }
-                jni {
-                    source {
-                        srcDirs 'include'
-                        srcDirs 'src/android'
-                        srcDirs 'src/common'
-                    }
-                }
-            }
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
+	
+	sourceSets {
+		main {
+			manifest.srcFile 'src/android/AndroidManifest.xml'
+		}
+	}
 }
