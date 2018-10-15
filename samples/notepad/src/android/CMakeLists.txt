@@ -1,7 +1,21 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4.1)
 
-PROJECT(native_app)
+GET_FILENAME_COMPONENT(root_dir "../../../.." ABSOLUTE)
 
-FILE(GLOB sources ../*.cpp ../**/*.cpp)
+INCLUDE_DIRECTORIES("${root_dir}/include")
+LINK_DIRECTORIES("${root_dir}/lib/${ANDROID_ABI}")
 
-ADD_LIBRARY(native_app ${sources})
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DANDROID_STL=c++_static -std=gnu++11 -fexceptions")
+
+FILE(GLOB sources ../*.cpp ../common/*.cpp ../android/*.cpp)
+
+ADD_LIBRARY(ui STATIC IMPORTED)
+ADD_LIBRARY(core STATIC IMPORTED)
+ADD_LIBRARY(jnipp STATIC IMPORTED)
+ADD_LIBRARY(notepad SHARED ${sources})
+
+SET_TARGET_PROPERTIES(ui PROPERTIES IMPORTED_LOCATION "${root_dir}/lib/${ANDROID_ABI}/libui.so")
+SET_TARGET_PROPERTIES(core PROPERTIES IMPORTED_LOCATION "${root_dir}/lib/${ANDROID_ABI}/libcore.so")
+SET_TARGET_PROPERTIES(jnipp PROPERTIES IMPORTED_LOCATION "${root_dir}/lib/${ANDROID_ABI}/libjnipp.so")
+
+TARGET_LINK_LIBRARIES(notepad ui core jnipp)

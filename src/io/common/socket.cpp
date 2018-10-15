@@ -96,18 +96,18 @@ namespace native
 			registerSocketApi();
 
 			// Allocate the system resources.
-			_handle = (handle_t) ::socket(af, socktype, proto);
+			_handle = (handle_t) (ptrint_t) ::socket(af, socktype, proto);
 
 			// Error checking.
-			if (SOCKET(_handle) == INVALID_SOCKET)
+			if (SOCKET(ptrint_t(_handle)) == INVALID_SOCKET)
 				throw SocketException("Failed to create socket");
 		}
 
 		void Socket::close() noexcept
 		{
-			if (SOCKET(_handle) != INVALID_SOCKET)
+			if (SOCKET(ptrint_t(_handle)) != INVALID_SOCKET)
 			{
-				::closesocket(SOCKET(_handle));
+				::closesocket(SOCKET(ptrint_t(_handle)));
 				_handle = handle_t(INVALID_SOCKET);
 			}
 		}

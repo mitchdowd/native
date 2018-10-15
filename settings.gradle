@@ -3,7 +3,7 @@ include ':data'
 include ':io'
 include ':jnipp'
 include ':ui'
-include ':test'
+include ':testing'
 include ':unittests'
 
 include ':components'
@@ -19,7 +19,7 @@ project(':io').projectDir = new File('src', 'io')
 project(':jnipp').projectDir = new File('lib', 'jnipp')
 project(':ui').projectDir = new File('src', 'ui')
 
-project(':test').projectDir = new File('tests', 'test')
+project(':testing').projectDir = new File('tests', 'test')
 project(':unittests').projectDir = new File('tests', 'unittests')
 
 project(':components').projectDir = new File('samples', 'components')

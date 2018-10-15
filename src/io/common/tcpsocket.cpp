@@ -62,7 +62,7 @@ namespace native
                 maxBytes = INT_MAX;
 
             // Perform the read operation.
-            int result = ::recv(SOCKET(getHandle()), (char*) buffer, int(maxBytes), 0);
+            int result = ::recv(SOCKET(ptrint_t(getHandle())), (char*) buffer, int(maxBytes), 0);
 
             // Error checking.
             if (result == SOCKET_ERROR)
@@ -88,7 +88,7 @@ namespace native
 				bytes = INT_MAX;
 
 			// Perform the write operation.
-			int result = ::send(SOCKET(getHandle()), (const char*) data, int(bytes), 0);
+			int result = ::send(SOCKET(ptrint_t(getHandle())), (const char*) data, int(bytes), 0);
 
 			if (result == SOCKET_ERROR) 
 			{

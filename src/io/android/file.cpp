@@ -27,7 +27,7 @@ namespace native
         {
             if (_handle)
             {
-                ::close(int(_handle));
+                ::close(int(ptrint_t(_handle)));
                 _handle = nullptr;
             }
         }

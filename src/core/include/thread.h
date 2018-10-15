@@ -78,7 +78,7 @@ namespace native
 
 	private:
 		/** Entry point to the Thread, as far as the OS is concerned. */
-		static ptrint_t __stdcall entryPoint(Thread*);
+		static ptrint_t entryPoint(Thread*);
 
 		// Instance Variables
 		handle_t _handle;

@@ -18,7 +18,8 @@ namespace native
 
             jni::Object shader = jni::Class("android/graphics/LinearGradient").newInstance(
                 constructor, float(p0.x), float(p0.y), float(p1.x), float(p1.y),
-                int(c0.toArgb()), int(c1.toArgb()), jni::Enum("android/graphics/Shader#TileMode").get("REPEAT"););
+                int(c0.toArgb()), int(c1.toArgb()), jni::Enum("android/graphics/Shader#TileMode").get("REPEAT")
+            );
 
             jni::Object paint = jni::Class("android/graphics/Paint").newInstance();
 

@@ -18,6 +18,8 @@ android {
 
     sourceSets {
         main {
+            java.srcDir 'android'
+            jni.srcDir 'android/java'
             manifest.srcFile 'android/AndroidManifest.xml'
         }
     }
@@ -27,4 +29,8 @@ android {
             path 'android/CMakeLists.txt'
         }
     }
+}
+
+dependencies {
+    implementation project(':jnipp')
 }

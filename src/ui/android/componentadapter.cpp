@@ -453,7 +453,7 @@ extern "C"
             adapter->onEvent(event);
     }
 
-    void Java_libnative_ui_NativeRunnable_onRun(_JNIEnv*, jni::jobject, int64_t funcPtr)
+    void Java_libnative_ui_NativeRunnable_onRun(_JNIEnv*, jni::jobject, native::int64_t funcPtr)
     {
         if (funcPtr)
         {
