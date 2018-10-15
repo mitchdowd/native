@@ -45,7 +45,34 @@ namespace native
 		
 		void Canvas::drawText(const String& text, const Font& font, const Rectangle& area, Flags<Align> align)
 		{
-			throw NotImplementedException();
+            if (text.getLength() > 0)
+            {
+                Size textSize = font.measureText(text);
+
+                // Calculate the real co-ordinates.
+                float x = float(_offset.x + area.x) * App::getDisplayScale();
+                float y = float(_offset.y + area.y + font.getSize()) * App::getDisplayScale();
+
+                // Handle horizontal alignment.
+                if (align.isSet(Align::Right))
+                    x += float(area.width - textSize.width) * App::getDisplayScale();
+                else if (align.isSet(Align::HCenter))
+                    x += float(area.width - textSize.width) * App::getDisplayScale() / 2;
+
+                // Handle vertical alignment
+                if (align.isSet(Align::Bottom))
+                    y += float(area.height - textSize.height) * App::getDisplayScale();
+                else if (align.isSet(Align::VCenter))
+                    y += float(area.height - textSize.height) * App::getDisplayScale() / 2;
+
+                // Set up the paint to draw the text with.
+                Brush brush = Color();
+                jni::Object* paint = (jni::Object*) brush.getHandle();
+                paint->call<void>("setTextSize", font.getSize() * App::getDisplayScale());
+                paint->call<jni::Object>("setTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;", (jni::Object*) font.getHandle());
+
+                HANDLE_OBJ->call<void>("drawText(Ljava/lang/String;FFLandroid/graphics/Paint;)V", text.toArray(), x, y, paint);
+            }
 		}
 
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
