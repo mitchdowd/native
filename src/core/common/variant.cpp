@@ -128,6 +128,12 @@ namespace native
 
 			// TODO: New VariantTypes MUST go here.
 
+		case VariantType::Null:
+		case VariantType::Float:
+		case VariantType::Int:
+			// Nothing to do here.
+			break;
+
         default:
             throw InvalidArgumentException("Invalid variant type supplied.");
 		}

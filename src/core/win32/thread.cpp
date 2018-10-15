@@ -64,7 +64,7 @@ namespace native
 		return ::GetCurrentThreadId();
 	}
 
-	ptrint_t __stdcall Thread::entryPoint(Thread* thread)
+	ptrint_t Thread::entryPoint(Thread* thread)
 	{
 		_current = thread;
 		thread->_started = true;
