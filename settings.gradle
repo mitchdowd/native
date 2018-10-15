@@ -1,9 +1,7 @@
-/*
 include ':core'
 include ':data'
 include ':io'
 include ':jnipp'
-*/
 include ':ui'
 include ':test'
 include ':unittests'
@@ -14,12 +12,11 @@ include ':helloworld'
 include ':layout'
 include ':notepad'
 include ':webview'
-/*
+
 project(':core').projectDir = new File('src', 'core')
 project(':data').projectDir = new File('src', 'data')
 project(':io').projectDir = new File('src', 'io')
 project(':jnipp').projectDir = new File('lib', 'jnipp')
-*/
 project(':ui').projectDir = new File('src', 'ui')
 
 project(':test').projectDir = new File('tests', 'test')
