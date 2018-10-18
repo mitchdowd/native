@@ -152,6 +152,11 @@ namespace native
             void refresh();
 
 			/**
+				Forces a repaint of the Component.
+			 */
+			void repaint();
+
+			/**
 				Gets the usable portion of this Component's area, relative to
 				the Component's top-left corner. For many Components this will
 				simply be the size of the Component, located at the origin, but
@@ -262,7 +267,9 @@ namespace native
 
 			/**
 				Occurs when a pointing-type input device performs an action on
-				this Component. By default, this will
+				this Component. By default, this will perform the logic to
+				generate onClick() and onContextClick() calls, so when overriding
+				it is important to still call the base implementation.
 				\param event Details on the input event.
 			 */
             virtual void onInput(const InputEvent& event);

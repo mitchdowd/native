@@ -109,6 +109,11 @@ namespace native
         {
             throw NotSupportedException("Only text Components can have their font set.");
         }
+		
+		void ComponentAdapter::invalidate(const Rectangle& area)
+		{
+			HANDLE_OBJ->call<void>("invalidate");
+		}
 
 		void ComponentAdapter::doInput(const InputEvent& event)
 		{

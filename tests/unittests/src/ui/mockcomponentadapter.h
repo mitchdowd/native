@@ -33,6 +33,8 @@ namespace native
 
 			virtual void setFont(const ui::Font& font) override {}
 
+			virtual void invalidate(const Rectangle& area) override {}
+
 			virtual handle_t getHandle() const noexcept override { return nullptr; }
 
 			virtual void doInput(const ui::InputEvent& event) override {}

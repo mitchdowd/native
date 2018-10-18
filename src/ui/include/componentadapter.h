@@ -97,6 +97,13 @@ namespace native
 			virtual void setFont(const Font& font) override;
 
 			/**
+				Invalidates the painted area, causing it to be scheduled to be
+				repainted.
+				\param area The area to invalidate.
+			 */
+			virtual void invalidate(const Rectangle& area) override;
+
+			/**
 				Performs default processing of an input event.
 				\param event The event to process.
 			 */

@@ -198,6 +198,16 @@ namespace native
 			::SendMessage(HWND(_handle), WM_SETFONT, WPARAM(font.getAuxHandle()), FALSE);
 		}
 
+		void ComponentAdapter::invalidate(const Rectangle& area)
+		{
+			RECT rect = {
+				area.x, area.y,
+				area.x + area.width, area.y + area.height
+			};
+
+			::InvalidateRect(HWND(_handle), &rect, TRUE);
+		}
+
 		void ComponentAdapter::doInput(const InputEvent& event)
 		{
 			if (!event.nativeEvent)

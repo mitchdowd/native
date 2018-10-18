@@ -95,6 +95,13 @@ namespace native
 			virtual handle_t getHandle() const noexcept = 0;
 
 			/**
+				Invalidates the painted area, causing it to be scheduled to be
+				repainted.
+				\param area The area to invalidate.
+			 */
+			virtual void invalidate(const Rectangle& area) = 0;
+
+			/**
 				Performs default processing of an input event.
 				\param event The event to process.
 			 */

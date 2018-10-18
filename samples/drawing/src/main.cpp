@@ -8,6 +8,11 @@ using namespace native::ui;
 class CustomButton : public TextComponent
 {
 public:
+	CustomButton()
+	{
+		_background = Color(0xFD, 0xFD, 0xFD);
+		_isHover = false;
+	}
 
 	virtual Size getPreferredSize() const override
 	{
@@ -21,14 +26,25 @@ protected:
 		String text = getText();
 		Font font = getFont();
 
-		auto background = LinearGradientBrush(
-			area.getTopLeft(), area.getBottomLeft(),
-			Color(0xFD, 0xFD, 0xFD), Color(0xE4, 0xE4, 0xE4)
-		);
-
-		canvas.drawRectangle(area, Color(0x99, 0x99, 0x99), background);
+		canvas.drawRectangle(area, Color(0x99, 0x99, 0x99), _background);
 		canvas.drawText(text, font, area, Align::Center);
 	}
+
+	virtual void onInput(const InputEvent& event) override
+	{
+		TextComponent::onInput(event);
+
+		if (event.action == InputEvent::Motion && !_isHover)
+		{
+			_isHover = true;
+			_background = Color(0x99, 0x99, 0x99);
+			repaint();
+		}
+	}
+
+private:
+	Brush _background;
+	bool _isHover;
 };
 
 class DrawingApp : public App

@@ -25,4 +25,4 @@ SET_TARGET_PROPERTIES(io PROPERTIES IMPORTED_LOCATION "${root_dir}/lib/${ANDROID
 SET_TARGET_PROPERTIES(jnipp PROPERTIES IMPORTED_LOCATION "${root_dir}/lib/${ANDROID_ABI}/libjnipp.so")
 SET_TARGET_PROPERTIES(testing PROPERTIES IMPORTED_LOCATION "${root_dir}/lib/${ANDROID_ABI}/libtesting.so")
 
-TARGET_LINK_LIBRARIES(notepad ui core data io jnipp)
+TARGET_LINK_LIBRARIES(notepad ui core data io jnipp testing)

@@ -212,6 +212,18 @@ namespace native
             _refreshing = false;
         }
 
+		void Component::repaint()
+		{
+			Component* parent = this;
+
+			// Find the adapter to pass the call to.
+			while (parent && !parent->getAdapter())
+				parent = parent->getParent();
+
+			if (parent)
+				parent->getAdapter()->invalidate(toSystemArea(this, getContentArea().getSize()).scale(App::getDisplayScale()));
+		}
+
 		Rectangle Component::getContentArea() const
 		{
 			return toContentArea(this, _adapter ? _adapter->getContentArea().scale(1 / App::getDisplayScale()) : _area.getSize());
