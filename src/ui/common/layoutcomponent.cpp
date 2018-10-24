@@ -123,6 +123,7 @@ namespace native
 				}
 			}
 
+			// No hit on child component. Dispatch to self.
 			Component::dispatchInputEvent(event);
 		}
 

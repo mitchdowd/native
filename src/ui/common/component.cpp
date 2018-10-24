@@ -308,9 +308,6 @@ namespace native
 			if (!isEnabled())
 				return;
 
-			// Send the raw input event (Press/Release/Motion).
-			onInput(event);
-
 			// TODO: Multi-touch will have an array of pressed items.
 			static struct {
 				Component*    component;
@@ -353,6 +350,9 @@ namespace native
 				{
 					Clock::tick_t duration = Clock::tick() - pressed.time;
 
+					// Sent the Release event _before_ the Click calls.
+					onInput(event);
+
 					// Check for various types of clicks.
 					if (pressed.event.source == InputEvent::LeftButton)
 						onClick({ InputEvent::Click, InputEvent::Mouse, event.x, event.y, nullptr });
@@ -360,6 +360,8 @@ namespace native
 						onClick({ InputEvent::Click, InputEvent::Touch, event.x, event.y, nullptr });
 					else if (pressed.event.source == InputEvent::RightButton)
 						onContextClick({ InputEvent::ContextClick, InputEvent::Mouse, event.x, event.y, nullptr });
+
+					return;
 				}
 				break;
 
@@ -368,9 +370,11 @@ namespace native
 				if (pressed.component && event.source == InputEvent::Touch)
 					if (Point(pressed.event.x, pressed.event.y).distanceFrom({ event.x, event.y }) > CLICK_DISTANCE_THRESHOLD)
 						pressed.component = nullptr;
-
 				break;
 			}
+
+			// Send the raw press/release/motion event.
+			onInput(event);
 		}
 
 		void Component::drawBorder(Canvas& canvas)

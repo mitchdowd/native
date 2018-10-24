@@ -38,7 +38,7 @@ protected:
 		if (event.action == InputEvent::Motion && !_isHover)
 		{
 			_isHover = true;
-			_background = Color(0x99, 0x99, 0x99);
+			_background = Color(0xC9, 0xC9, 0xC9);
 			repaint();
 		}
 	}
