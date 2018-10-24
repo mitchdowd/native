@@ -69,6 +69,15 @@ namespace native
 			LayoutComponent* getParent() const noexcept { return _parent; }
 
 			/**
+				Determines whether this Component is a hierarchical descendant of
+				the given parent component.
+				\param parent The parent to check whether this is a decendant of.
+				\return true if descendant, false if not.
+			 */
+			bool isDescendantOf(const Component* parent) const;
+			bool isDescendantOf(const Component& parent) const { return isDescendantOf(&parent); }
+
+			/**
 				Shows or hides the Component, according to the parameter. A
 				Component is visible by default, but will be hidden if its
 				parent is hidden. Top-level Components are the exception, and
@@ -250,26 +259,25 @@ namespace native
 
 		protected:
 			/**
-				Called by onInput() when a press and release sequence indicates
-				a normal click action. This is like a "tap" on touch devices, or
-				a "left click" with a mouse.
+				Called when a press and release sequence indicates a normal click
+				action. This is like a "tap" on touch devices, or a "left click" with
+				a mouse.
 				\param event Details about the click which occurred.
 			 */
 			virtual void onClick(const InputEvent& event) {}
 
 			/**
-				Called by onInput() when a press and release sequence indicates
-				a "context" click action. This is either a long press on touch
-				devices, or a right click with a mouse.
+				Called when a press and release sequence indicates a "context" 
+				click action. This is either a long press on touch devices, or 
+				a right click with a mouse.
 				\param event Contains information on the long click.
 			 */
 			virtual void onContextClick(const InputEvent& event) {}
 
 			/**
 				Occurs when a pointing-type input device performs an action on
-				this Component. By default, this will perform the logic to
-				generate onClick() and onContextClick() calls, so when overriding
-				it is important to still call the base implementation.
+				this Component. This handles most low-level input/touch related
+				events, such as press, release, motion, etc.
 				\param event Details on the input event.
 			 */
             virtual void onInput(const InputEvent& event);

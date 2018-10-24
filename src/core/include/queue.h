@@ -27,10 +27,23 @@ namespace native
 		TValue pop();
 
 		/**
+			Returns a reference to the value at the end of the Queue. This
+			does not remove the value from the Queue.
+			\return The end value on the Queue.
+		 */
+		const TValue& peek() const;
+
+		/**
 			Gets the number of values in the Queue.
 			\return The Queue size.
 		 */
 		size_t getSize() const noexcept { return _list.getLength(); }
+
+		/**
+			Tells whether the Queue is empty or not.
+			\return true if empty, false if it contains values.
+		 */
+		bool isEmpty() const noexcept { return getSize() == 0; }
 
 	private:
 		// Instance Variables
@@ -47,6 +60,15 @@ namespace native
 		TValue value = std::move(*i);
 		_list.remove(i);
 		return value;
+	}
+
+	template <class TValue>
+	const TValue& Queue<TValue>::peek() const
+	{
+		if (_list.getLength() == 0)
+			throw InvalidStateException();
+
+		return *(_list.begin());
 	}
 }
 

@@ -25,12 +25,14 @@ namespace native
                 Release,
                 Motion,
                 Click,
-                ContextClick
+                ContextClick,
+				Enter,
+				Leave
             };
 
             /** Devices or buttons which trigger the action. */
             enum Source {
-                Mouse			= 0,	///< Only causes `Motion` actions.
+                Mouse			= 0,	///< For Motion, Enter and Leave actions.
                 LeftButton,				///< For `Press` or `Release` actions.
                 MiddleButton,			///< For `Press` or `Release` actions.
                 RightButton,			///< For `Press` or `Release` actions.

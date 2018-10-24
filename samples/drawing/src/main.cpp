@@ -11,7 +11,6 @@ public:
 	CustomButton()
 	{
 		_background = Color(0xFD, 0xFD, 0xFD);
-		_isHover = false;
 	}
 
 	virtual Size getPreferredSize() const override
@@ -35,17 +34,20 @@ protected:
 
 	virtual void onInput(const InputEvent& event) override
 	{
-		if (event.action == InputEvent::Motion && !_isHover)
+		if (event.action == InputEvent::Enter)
 		{
-			_isHover = true;
 			_background = Color(0xC9, 0xC9, 0xC9);
+			repaint();
+		}
+		else if (event.action == InputEvent::Leave)
+		{
+			_background = Color(0xFD, 0xFD, 0xFD);
 			repaint();
 		}
 	}
 
 private:
 	Brush _background;
-	bool _isHover;
 	String _text;
 };
 

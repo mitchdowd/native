@@ -1,6 +1,7 @@
 // External Dependencies
 #include "../../core/include/clock.h"
 #include "../../core/include/exception.h"
+#include "../../core/include/stack.h"
 #include "../../core/include/system.h"
 #include "../../core/include/task.h"
 
@@ -96,6 +97,15 @@ namespace native
 					throw InvalidStateException();
 				}
 			}
+		}
+
+		bool Component::isDescendantOf(const Component* parent) const
+		{
+			for (const Component* i = getParent(); i; i = i->getParent())
+				if (i == parent)
+					return true;
+
+			return false;
 		}
 
 		void Component::setVisible(bool visible)
@@ -316,6 +326,9 @@ namespace native
 				uint32_t      counter;
 			} pressed;
 
+			// Stack of components which the mouse is hovering over.
+			static Stack<Component*> hovers;
+
 			switch (event.action)
 			{
 			case InputEvent::Press:
@@ -370,6 +383,39 @@ namespace native
 				if (pressed.component && event.source == InputEvent::Touch)
 					if (Point(pressed.event.x, pressed.event.y).distanceFrom({ event.x, event.y }) > CLICK_DISTANCE_THRESHOLD)
 						pressed.component = nullptr;
+
+				if (event.source == InputEvent::Mouse)
+				{
+					if (hovers.isEmpty() || hovers.peek() != this)
+					{
+						// Generate leave events.
+						while (!hovers.isEmpty() && !isDescendantOf(hovers.peek()))
+						{
+							// TODO: Sent translated co-ordinates.
+							hovers.pop()->onInput({ InputEvent::Leave, InputEvent::Mouse, 0, 0, nullptr });
+						}
+
+						Queue<Component*> reverse;
+
+						// Find all components we need to generate Enter actions for.
+						for (Component* i = this; i; i = i->getParent()) {
+							if (hovers.isEmpty() || hovers.peek() != i) {
+								reverse.push(i);
+								break;
+							}
+						}
+
+						// Send the Enter events.
+						while (!reverse.isEmpty())
+						{
+							hovers.push(reverse.peek());
+
+							// TODO: Sent translated co-ordinates.
+							reverse.pop()->onInput({ InputEvent::Enter, InputEvent::Mouse, 0, 0, nullptr });
+						}
+					}
+				}
+
 				break;
 			}
 

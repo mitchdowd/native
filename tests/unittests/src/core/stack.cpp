@@ -17,3 +17,16 @@ TEST(Stack_pushPop)
 	ASSERT(stack.pop() == 2);
 	ASSERT(stack.pop() == 1);
 }
+
+TEST(Stack_peek)
+{
+	Stack<int> stack;
+
+	stack.push(1);
+	stack.push(2);
+	stack.push(3);
+
+	ASSERT(stack.peek() == 3);
+	ASSERT(stack.peek() == 3);
+}
+
