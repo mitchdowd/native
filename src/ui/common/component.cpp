@@ -31,7 +31,7 @@ namespace native
 		{
 			Rectangle area = component->getParent() ? toContentArea(component, area_) : area_;
 
-			for (const Component* i = component; i && !i->getAdapter(); i = i->getParent())
+			for (const Component* i = component->getAdapter() ? component->getParent() : component; i && !i->getAdapter(); i = i->getParent())
 			{
 				area = area.offset(toContentArea(i, area.getSize()).getPosition());
 				area = area.offset(i->getArea().getPosition());
@@ -221,7 +221,10 @@ namespace native
 				parent = parent->getParent();
 
 			if (parent)
-				parent->getAdapter()->invalidate(toSystemArea(this, getContentArea().getSize()).scale(App::getDisplayScale()));
+			{
+				Rectangle area = toSystemArea(this, getContentArea().getSize()).scale(App::getDisplayScale());
+				parent->getAdapter()->invalidate(area);
+			}
 		}
 
 		Rectangle Component::getContentArea() const

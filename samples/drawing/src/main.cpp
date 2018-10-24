@@ -5,7 +5,7 @@
 using namespace native;
 using namespace native::ui;
 
-class CustomButton : public TextComponent
+class CustomButton : public Component
 {
 public:
 	CustomButton()
@@ -19,7 +19,8 @@ public:
 		return Font::getDefault().measureText(getText()).inflate(20, 10);
 	}
 
-
+	void setText(const String& text) { _text = text; }
+	String getText() const { return _text; }
 
 protected:
 	virtual void onPaint(Canvas& canvas) override
