@@ -16,15 +16,17 @@ public:
 
 	virtual Size getPreferredSize() const override
 	{
-		return getFont().measureText(getText()).inflate(20, 10);
+		return Font::getDefault().measureText(getText()).inflate(20, 10);
 	}
+
+
 
 protected:
 	virtual void onPaint(Canvas& canvas) override
 	{
 		Rectangle area = getContentArea();
 		String text = getText();
-		Font font = getFont();
+		Font font = Font::getDefault();
 
 		canvas.drawRectangle(area, Color(0x99, 0x99, 0x99), _background);
 		canvas.drawText(text, font, area, Align::Center);
@@ -32,8 +34,6 @@ protected:
 
 	virtual void onInput(const InputEvent& event) override
 	{
-		TextComponent::onInput(event);
-
 		if (event.action == InputEvent::Motion && !_isHover)
 		{
 			_isHover = true;
@@ -45,6 +45,7 @@ protected:
 private:
 	Brush _background;
 	bool _isHover;
+	String _text;
 };
 
 class DrawingApp : public App

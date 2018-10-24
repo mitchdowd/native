@@ -53,6 +53,11 @@ namespace native
 			return { rectangle.x, rectangle.y, rectangle.width, rectangle.height };
 		}
 
+		static Gdiplus::RectF toGdiRectF(const Rectangle& rectangle)
+		{
+			return { float(rectangle.x), float(rectangle.y), float(rectangle.width), float(rectangle.height) };
+		}
+
 		Canvas::Canvas(handle_t handle, handle_t auxHandle) : _handle(handle), _auxHandle(auxHandle)
 		{
 			if (auxHandle == nullptr)
@@ -84,7 +89,7 @@ namespace native
 				Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
 
 				Gdiplus::SolidBrush brush(Gdiplus::Color(0, 0, 0));	// TODO: Different colors?
-				Gdiplus::RectF rect(float(area.x), float(area.y), float(area.width), float(area.height));
+				Gdiplus::RectF rect = toGdiRectF(area.offset(_offset).scale(App::getDisplayScale()));
 				Gdiplus::StringFormat format;
 
 				// Parse out the horizontal alignment.
