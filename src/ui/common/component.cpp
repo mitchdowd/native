@@ -366,13 +366,19 @@ namespace native
 					// Sent the Release event _before_ the Click calls.
 					onInput(event);
 
-					// Check for various types of clicks.
-					if (pressed.event.source == InputEvent::LeftButton)
-						onClick({ InputEvent::Click, InputEvent::Mouse, event.x, event.y, nullptr });
-					if (pressed.event.source == InputEvent::Touch && Clock::toMilliSeconds(duration) < LONG_CLICK_DURATION)
-						onClick({ InputEvent::Click, InputEvent::Touch, event.x, event.y, nullptr });
-					else if (pressed.event.source == InputEvent::RightButton)
-						onContextClick({ InputEvent::ContextClick, InputEvent::Mouse, event.x, event.y, nullptr });
+					// Only generate the click events if the click remained in the bounds of the component.
+					Rectangle area = getContentArea().getSize();
+
+					if (area.containsPoint(event.x, event.y))
+					{
+						// Check for various types of clicks.
+						if (pressed.event.source == InputEvent::LeftButton)
+							onClick({ InputEvent::Click, InputEvent::Mouse, event.x, event.y, nullptr });
+						if (pressed.event.source == InputEvent::Touch && Clock::toMilliSeconds(duration) < LONG_CLICK_DURATION)
+							onClick({ InputEvent::Click, InputEvent::Touch, event.x, event.y, nullptr });
+						else if (pressed.event.source == InputEvent::RightButton)
+							onContextClick({ InputEvent::ContextClick, InputEvent::Mouse, event.x, event.y, nullptr });
+					}
 
 					return;
 				}
