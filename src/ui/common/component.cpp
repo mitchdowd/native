@@ -379,40 +379,38 @@ namespace native
 				break;
 
 			case InputEvent::Motion:
-				// Check if we should cancel the current click.
 				if (pressed.component && event.source == InputEvent::Touch)
+				{
+					// Check if we should cancel the current touch-based click.
 					if (Point(pressed.event.x, pressed.event.y).distanceFrom({ event.x, event.y }) > CLICK_DISTANCE_THRESHOLD)
 						pressed.component = nullptr;
-
-				if (event.source == InputEvent::Mouse)
+				}
+				else if (event.source == InputEvent::Mouse && (hovers.isEmpty() || hovers.peek() != this))
 				{
-					if (hovers.isEmpty() || hovers.peek() != this)
+					// Generate leave events.
+					while (!hovers.isEmpty() && !isDescendantOf(hovers.peek()))
 					{
-						// Generate leave events.
-						while (!hovers.isEmpty() && !isDescendantOf(hovers.peek()))
-						{
-							// TODO: Sent translated co-ordinates.
-							hovers.pop()->onInput({ InputEvent::Leave, InputEvent::Mouse, 0, 0, nullptr });
+						// TODO: Sent translated co-ordinates.
+						hovers.pop()->onInput({ InputEvent::Leave, InputEvent::Mouse, 0, 0, nullptr });
+					}
+
+					Queue<Component*> reverse;
+
+					// Find all components we need to generate Enter actions for.
+					for (Component* i = this; i; i = i->getParent()) {
+						if (hovers.isEmpty() || hovers.peek() != i) {
+							reverse.push(i);
+							break;
 						}
+					}
 
-						Queue<Component*> reverse;
+					// Send the Enter events up the hierarchy, in order.
+					while (!reverse.isEmpty())
+					{
+						hovers.push(reverse.peek());
 
-						// Find all components we need to generate Enter actions for.
-						for (Component* i = this; i; i = i->getParent()) {
-							if (hovers.isEmpty() || hovers.peek() != i) {
-								reverse.push(i);
-								break;
-							}
-						}
-
-						// Send the Enter events.
-						while (!reverse.isEmpty())
-						{
-							hovers.push(reverse.peek());
-
-							// TODO: Sent translated co-ordinates.
-							reverse.pop()->onInput({ InputEvent::Enter, InputEvent::Mouse, 0, 0, nullptr });
-						}
+						// TODO: Sent translated co-ordinates.
+						reverse.pop()->onInput({ InputEvent::Enter, InputEvent::Mouse, 0, 0, nullptr });
 					}
 				}
 
