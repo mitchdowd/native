@@ -34,7 +34,7 @@ protected:
 
 	virtual void onInput(const InputEvent& event) override
 	{
-		if (event.action == InputEvent::Enter)
+		if (event.action == InputEvent::Enter || event.action == InputEvent::Click)
 		{
 			_background = Color(0xC9, 0xC9, 0xC9);
 			repaint();
@@ -44,6 +44,16 @@ protected:
 			_background = Color(0xFD, 0xFD, 0xFD);
 			repaint();
 		}
+		else if (event.action == InputEvent::Press)
+		{
+			_background = Color(0xAD, 0xAD, 0xAD);
+			repaint();
+		}
+	}
+
+	virtual void onClick(const InputEvent& event) override
+	{
+		onInput(event);
 	}
 
 private:
