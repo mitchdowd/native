@@ -133,6 +133,23 @@ namespace native
 			}
 		}
 
+		void Canvas::drawLine(const Point& pt1, const Point& pt2, const Pen& pen)
+		{
+			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;
+			Gdiplus::Pen* gdiPen = (Gdiplus::Pen*) pen.getHandle();
+
+			graphics->SetSmoothingMode(Gdiplus::SmoothingMode::SmoothingModeAntiAlias);
+
+			float scale = App::getDisplayScale();
+
+			Gdiplus::PointF pf1((pt1.x + _offset.x) * scale, (pt1.y + _offset.y) * scale);
+			Gdiplus::PointF pf2((pt2.x + _offset.x) * scale, (pt2.y + _offset.y) * scale);
+
+			// Perform the draw operation.
+			if (graphics->DrawLine(gdiPen, pf1, pf2) != Gdiplus::Ok)
+				throw GraphicsException("Graphics::DrawLine()");
+		}
+
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{
 			Gdiplus::Graphics* graphics = (Gdiplus::Graphics*) _handle;

@@ -51,6 +51,22 @@ namespace native
 			Point inverse() const { return { -x, -y }; }
 
 			/**
+				Offsets the point by the given amounts in x and y axes.
+				\param xamount The horizontal amount to offset by.
+				\param yamount The vertical amount to offset by.
+				\return The offset point.
+			 */
+			Point offset(coord_t xamount, coord_t yamount) const { return { x + xamount, y + yamount }; }
+			Point offset(const Point& amounts) const { return offset(amounts.x, amounts.y); }
+
+			/**
+			    Scales the point out, multiplying its co-ordinates by the given amount.
+			    \param amount The amount to scale the point by.
+			    \return The scaled out point.
+			 */
+			Point scale(float amount) const { return { coord_t(x * amount), coord_t(y * amount) }; }
+
+			/**
 				Compares two Points.
 				\param other The Point to compare with.
 				\return `true` if equal, `false` if not.

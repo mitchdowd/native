@@ -75,6 +75,16 @@ namespace native
             }
 		}
 
+		void Canvas::drawLine(const Point& pt1, const Point& pt2, const Pen& pen)
+		{
+            jni::Object* penObj = (jni::Object*) pen.getHandle();
+
+            auto a = pt1.offset(_offset).scale(App::getDisplayScale());
+            auto b = pt2.offset(_offset).scale(App::getDisplayScale());
+
+            HANDLE_OBJ->call<void>("drawLine(FFFFLandroid/graphics/Paint;)V", float(a.x), float(a.y), float(b.x), float(b.y), penObj);
+		}
+
 		void Canvas::drawRectangle(const Rectangle& rect, const Pen& pen)
 		{
 			jni::Object* penObj = (jni::Object*) pen.getHandle();

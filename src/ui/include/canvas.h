@@ -56,6 +56,14 @@ namespace native
 			void drawText(const String& text, const Font& font, const Rectangle& area, Flags<Align> align);
 
 			/**
+				Draws a straight line between two points.
+				\param pt1 The starting point of the line.
+				\param pt2 The end point of the line.
+				\param pen The pen to draw the line with.
+			 */
+			void drawLine(const Point& pt1, const Point& pt2, const Pen& pen);
+
+			/**
 				Draws a Rectangle outline within the given rectangle. The outer
 				edge of the drawn rectangle's line will sit on the specified
 				Rectangle co-ordinates.
