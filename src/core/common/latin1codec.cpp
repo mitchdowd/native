@@ -32,7 +32,7 @@ namespace native
 			buffer[i] = wchar_t(data[i]);
 	}
 
-	size_t Latin1Codec::length(const wchar_t* text, size_t length)
+	size_t Latin1Codec::getLength(const wchar_t* text, size_t length)
 	{
 		return length;
 	}

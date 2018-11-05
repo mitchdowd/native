@@ -96,6 +96,11 @@ namespace native
 			}
 		}
 
+		bool File::isOpen() const
+		{
+			return _handle != nullptr;
+		}
+
 		size_t File::read(void* buffer, size_t maxBytes)
 		{
 			// Convert the size to the required DWORD.

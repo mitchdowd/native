@@ -37,7 +37,7 @@ namespace native
 		}
 	}
 
-	size_t AsciiCodec::length(const wchar_t* text, size_t length)
+	size_t AsciiCodec::getLength(const wchar_t* text, size_t length)
 	{
 		return length;
 	}

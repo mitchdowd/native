@@ -157,7 +157,7 @@ namespace native
 		bytes = b;
 	}
 
-	size_t Utf8Codec::length(const wchar_t* text, size_t length)
+	size_t Utf8Codec::getLength(const wchar_t* text, size_t length)
 	{
 		size_t b = 0, c = 0;
 

@@ -44,7 +44,7 @@ namespace native
 			\param length The number of characters to measure.
 			\return The number of bytes required.
 		 */
-		size_t length(const wchar_t* text, size_t length) override;
+		size_t getLength(const wchar_t* text, size_t length) override;
 
 		/**
 			Writes the Latin-1 byte order mark to the buffer. This is a three

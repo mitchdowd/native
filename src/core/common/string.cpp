@@ -388,7 +388,7 @@ namespace native
 			throw InvalidArgumentException();
 
 		// Create an array and encode into it.
-		ByteArray buffer(codec->length(toArray(), getLength()) + 1);
+		ByteArray buffer(codec->getLength(toArray(), getLength()) + 1);
 		size_t size = buffer.getLength(), length = getLength();
 		codec->encode((byte_t*) buffer.toArray(), size, toArray(), length);
 
@@ -424,7 +424,7 @@ namespace native
 		}
 
 		// Create an array and encode into it.
-		ByteArray buffer(utf8->length(toArray(), getLength()) + 1);
+		ByteArray buffer(utf8->getLength(toArray(), getLength()) + 1);
 		size_t size = buffer.getLength(), length = getLength();
 		utf8->encode((byte_t*) buffer.toArray(), size, toArray(), length);
 

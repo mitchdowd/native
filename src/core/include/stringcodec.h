@@ -49,7 +49,7 @@ namespace native
 			\param length The number of characters to measure.
 			\return The number of bytes required.
 		 */
-		virtual size_t length(const wchar_t* text, size_t length) = 0;
+		virtual size_t getLength(const wchar_t* text, size_t length) = 0;
 
 		/**
 			Writes the encoded byte order mark (BOM) for this codec to the buffer.

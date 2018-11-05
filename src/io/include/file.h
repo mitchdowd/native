@@ -57,6 +57,12 @@ namespace native
 			void close() noexcept;
 
 			/**
+				Tells whether this File is currently open.
+				\return true if open via this reference, false otherwise.
+			 */
+			bool isOpen() const;
+
+			/**
 				Reads up to `maxBytes` from the file into the buffer. A partial
 				read indicates the end of the file.
 				\param maxBytes The maximum bytes to read.

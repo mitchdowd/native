@@ -91,6 +91,13 @@ namespace native
 			 */
 			size_t getPosition() const noexcept { return _pos; }
 
+			/**
+				Gets the array which serves as the buffer, storing the stream's
+				contents.
+				\return The buffer containing the stream's contents.
+			 */
+			ByteArray getBuffer() const { return _array; }
+
 		private:
 			// Instance Variables
 			ByteArray _array;

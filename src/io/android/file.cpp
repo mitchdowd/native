@@ -32,6 +32,11 @@ namespace native
             }
         }
 
+		bool File::isOpen() const
+		{
+			return _handle != nullptr;
+		}
+
 		size_t File::read(void* buffer, size_t maxBytes)
 		{
 			throw NotImplementedException();

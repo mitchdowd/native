@@ -8,6 +8,7 @@
 #include "../src/io/include/networkaddress.h"
 #include "../src/io/include/socket.h"
 #include "../src/io/include/tcpsocket.h"
+#include "../src/io/include/textstream.h"
 #include "../src/io/include/udpsocket.h"
 
 #endif // _NATIVE_IO_H_

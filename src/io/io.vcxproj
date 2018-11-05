@@ -118,6 +118,7 @@
     <ClCompile Include="common\console.cpp" />
     <ClCompile Include="common\networkaddress.cpp" />
     <ClCompile Include="common\memorystream.cpp" />
+    <ClCompile Include="common\textstream.cpp" />
     <ClCompile Include="win32\file.cpp" />
     <ClCompile Include="common\socket.cpp" />
     <ClCompile Include="common\tcpsocket.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="include\networkaddress.h" />
     <ClInclude Include="include\socket.h" />
     <ClInclude Include="include\tcpsocket.h" />
+    <ClInclude Include="include\textstream.h" />
     <ClInclude Include="include\udpsocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
