@@ -15,6 +15,7 @@
       <Filter>net</Filter>
     </ClCompile>
     <ClCompile Include="common\memorystream.cpp" />
+    <ClCompile Include="common\console.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\io.h" />
@@ -33,6 +34,7 @@
       <Filter>net</Filter>
     </ClInclude>
     <ClInclude Include="include\memorystream.h" />
+    <ClInclude Include="include\console.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="net">

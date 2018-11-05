@@ -1,6 +1,7 @@
 #ifndef _NATIVE_IO_H_
 #define _NATIVE_IO_H_ 1
 
+#include "../src/io/include/console.h"
 #include "../src/io/include/file.h"
 #include "../src/io/include/istream.h"
 #include "../src/io/include/memorystream.h"
