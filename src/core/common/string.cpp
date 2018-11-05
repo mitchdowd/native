@@ -266,6 +266,24 @@ namespace native
 		return -1;
 	}
 
+	bool String::contains(const wchar_t* substr) const
+	{
+		return indexOf(substr) >= 0;
+	}
+
+	bool String::startsWith(const wchar_t* substr) const
+	{
+		return indexOf(substr) == 0;
+	}
+
+	bool String::startsWith(wchar_t substr) const
+	{
+		if (getLength() == 0)
+			return false;
+
+		return _array[0] == substr;
+	}
+
 	bool String::endsWith(const String& substr) const
 	{
 		return lastIndexOf(substr) == int(getLength() - substr.getLength());

@@ -221,6 +221,23 @@ namespace native
 		ptrint_t lastIndexOfAny(const wchar_t* chars) const;
 
 		/**
+			Determines whether this String contains another given string.
+			\param substr The string to search for.
+			\return `true` if the supplied text is a substring, false otherwise.
+		 */
+		bool contains(const String& substr) const { return contains(substr.toArray()); }
+		bool contains(const wchar_t* substr) const;
+
+		/**
+			Tells whether this String starts with the given substring.
+			\param substr The substring to search for.
+			\return `true` if the substring is equal to the start character, `false` otherwise.
+		 */
+		bool startsWith(const String& substr) const { return startsWith(substr.toArray()); }
+		bool startsWith(wchar_t substr) const;
+		bool startsWith(const wchar_t* substr) const;
+
+		/**
 			Tells whether this String ends with the given substring.
 			\param substr The substring to search for.
 			\return `true` if the substring is equal to the final character, `false` otherwise.
